@@ -20,7 +20,9 @@ const Dishes = ({ categories }: Props) => {
     <div className="col-span-5 ">
         {categories.map( category => (
             <div>
-                <div className="mb-10 flex flex-col justify-start items-start gap-4">
+                <div 
+                    id={`${category.id}`}
+                    className="mb-10 flex flex-col justify-start items-start gap-4">
                     <h2 className="text-4xl font-bold font-poppins">{category.name}</h2>
                     <p>{category.description}</p>
                 </div>
