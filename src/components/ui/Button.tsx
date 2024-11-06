@@ -1,12 +1,11 @@
 import { RiLoader2Fill } from "@remixicon/react"
-import { useEffect, useState } from "react"
+import { ButtonHTMLAttributes, useEffect, useState } from "react"
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     label: string
     loading?: boolean
     disable?: boolean
     color?: keyof typeof colors
-    onClick?: () => void
 }
 
 const colors = {
@@ -33,7 +32,7 @@ const Button = ({
     loading=false,
     disable=false,
     color='blue',
-    onClick
+    ...props
 }: Props) => {
 
     const [disabled, setDisabled] = useState(false)
@@ -48,10 +47,11 @@ const Button = ({
   return (
     <button 
         disabled={disabled}
-        onClick={onClick}
         className={`
             ${disabled === true ? pickedColor.disabled : pickedColor.enabled}  
-            py-2 px-4 text-sm rounded-md  mx-auto text-center mt-6`}>
+            py-2 px-4 text-sm rounded-md  mx-auto text-center mt-6`}
+        {...props}    
+        >
         {loading 
         ? 
         <div className="flex justify-center items-center gap-2">
