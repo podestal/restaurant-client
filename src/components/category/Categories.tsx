@@ -13,8 +13,8 @@ const Categories = () => {
     if (isSuccess)
 
   return (
-    <div className="grid grid-cols-6 min-h-screen mt-10 gap-16">
-        <div>
+    <div className="grid grid-cols-6 min-h-screen mt-10 gap-16 relative">
+        <div className="fixed">
             {categories.map( category => (
                 <CategoryCard 
                     key={category.id}
@@ -22,6 +22,7 @@ const Categories = () => {
                 />
             ))}
         </div>
+        <div></div>
         <Dishes 
             categories={categories}
         />

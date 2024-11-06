@@ -17,16 +17,16 @@ const Dishes = ({ categories }: Props) => {
     if (isSuccess)
 
   return (
-    <div className="col-span-5 ">
+    <div className="col-span-5">
         {categories.map( category => (
-            <div>
+            <div className="">
                 <div 
                     id={`${category.id}`}
                     className="mb-10 flex flex-col justify-start items-start gap-4">
-                    <h2 className="text-4xl font-bold font-poppins">{category.name}</h2>
+                    <h2 className="text-5xl font-bold font-poppins text-blue-700">{category.name}</h2>
                     <p>{category.description}</p>
                 </div>
-                <div className="grid grid-cols-3 gap-8">
+                <div className="grid grid-cols-3 gap-8 my-12">
                     {dishes
                         .filter( dish => dish.category === category.id)
                         .map( dish => (
