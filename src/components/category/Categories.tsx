@@ -1,4 +1,5 @@
 import useGetCategories from "../../hooks/api/category/useGetCategories"
+import Dishes from "../dish/Dishes"
 import CategoryCard from "./CategoryCard"
 
 const Categories = () => {
@@ -12,13 +13,18 @@ const Categories = () => {
     if (isSuccess)
 
   return (
-    <div>
-        {categories.map( category => (
-            <CategoryCard 
-                key={category.id}
-                category={category}
-            />
-        ))}
+    <div className="grid grid-cols-6 min-h-screen mt-10 gap-16">
+        <div>
+            {categories.map( category => (
+                <CategoryCard 
+                    key={category.id}
+                    category={category}
+                />
+            ))}
+        </div>
+        <Dishes 
+            categories={categories}
+        />
     </div>
   )
 }

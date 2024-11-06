@@ -6,6 +6,11 @@ export default {
   ],
   darkMode: 'class',
   theme: {
+    fontFamily: {
+      palanquin: ['Palanquin', 'sans-serif'],
+      montserrat: ['Montserrat', 'sans-serif'],
+      poppins: ['Poppins, sans-serif'],
+    },
     extend: {},
   },
   plugins: [],
