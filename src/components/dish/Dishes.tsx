@@ -1,4 +1,5 @@
 import useGetDishes from "../../hooks/api/dish/useGetDishes"
+import DishCard from "./DishCard"
 
 const Dishes = () => {
 
@@ -11,11 +12,12 @@ const Dishes = () => {
     if (isSuccess)
 
   return (
-    <div className="col-span-5 bg-red-200">
+    <div className="col-span-5 grid grid-cols-3 gap-8">
         {dishes.map( dish => (
-            <div key={dish.id}>
-                <p>{dish.name}</p>
-            </div>
+            <DishCard 
+                key={dish.id}
+                dish={dish}
+            />
         ))}
     </div>
   )

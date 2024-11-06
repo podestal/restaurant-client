@@ -1,4 +1,5 @@
 import useGetCategories from "../../hooks/api/category/useGetCategories"
+import CategoryCard from "./CategoryCard"
 
 const Categories = () => {
 
@@ -13,9 +14,10 @@ const Categories = () => {
   return (
     <div>
         {categories.map( category => (
-            <div key={category.id}>
-                <p>{category.name}</p>
-            </div>
+            <CategoryCard 
+                key={category.id}
+                category={category}
+            />
         ))}
     </div>
   )
