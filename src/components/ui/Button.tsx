@@ -49,7 +49,7 @@ const Button = ({
         disabled={disabled}
         className={`
             ${disabled === true ? pickedColor.disabled : pickedColor.enabled}  
-            py-2 px-4 text-sm rounded-md  mx-auto text-center mt-6`}
+            py-2 px-4 text-sm rounded-md  mx-auto text-center`}
         {...props}    
         >
         {loading 
@@ -59,7 +59,7 @@ const Button = ({
             <RiLoader2Fill className="animate-spin"/> 
         </div>
         : 
-        <p>{label}</p>
+        <p className="font-bold text-xs">{label}</p>
         }
     </button>
   )
