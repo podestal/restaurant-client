@@ -11,7 +11,7 @@ const Navigator = () => {
                 <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'menu'}>Menu</Link>
                 <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'menu'}>About Us</Link>
                 <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'menu'}>Catering</Link>
-                <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'menu'}>Cart</Link>
+                <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'cart'}>Cart</Link>
             </div>
             <div className="flex justify-center items-center gap-12">
                 <ThemeSelector />

@@ -14,13 +14,13 @@ const ItemCounter = ({ counter, setCounter }: Props) => {
 
   return (
     <div className="flex justify-center items-center gap-4">
-        <p 
-            onClick={() => setCounter( prev => prev + 1)}
-            className="cursor-pointer rounded-full text-blue-700 font-bold text-2xl">+</p>
-        <p>{counter}</p>
-        <p 
+        <div 
             onClick={handleDecrease}
-            className="cursor-pointer rounded-full text-blue-700 font-bold text-2xl">-</p>
+            className="cursor-pointer rounded-full text-blue-700 hover:text-blue-500 font-bold text-2xl">-</div>
+        <p>{counter}</p>
+        <div 
+            onClick={() => setCounter( prev => prev + 1)}
+            className="cursor-pointer rounded-full text-blue-700 hover:text-blue-500 font-bold text-2xl">+</div>
     </div>
   )
 }
