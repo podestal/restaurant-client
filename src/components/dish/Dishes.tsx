@@ -1,13 +1,15 @@
 import useGetDishes from "../../hooks/api/dish/useGetDishes"
+import { Cart } from "../../services/api/cartService"
 import { Category } from "../../services/api/categoryService"
 import DishCard from "./DishCard"
 import { motion } from "framer-motion"
 
 interface Props {
     categories: Category[]
+    cart: Cart
 }
 
-const Dishes = ({ categories }: Props) => {
+const Dishes = ({ categories, cart }: Props) => {
 
     const { data: dishes, isLoading, isError, error, isSuccess } = useGetDishes()
 
@@ -22,6 +24,7 @@ const Dishes = ({ categories }: Props) => {
         {categories.map( category => (
             <div 
                 id={`${category.id}`}
+                key={category.id}
             >
                 <div 
                     className="mb-10 flex flex-col justify-start items-start gap-4">
@@ -38,6 +41,7 @@ const Dishes = ({ categories }: Props) => {
                         <DishCard 
                             key={dish.id}
                             dish={dish}
+                            cart={cart}
                         />
                     ))}
                 </motion.div>

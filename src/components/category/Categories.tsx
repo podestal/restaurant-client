@@ -1,8 +1,13 @@
 import useGetCategories from "../../hooks/api/category/useGetCategories"
+import { Cart } from "../../services/api/cartService"
 import Dishes from "../dish/Dishes"
 import CategoryCard from "./CategoryCard"
 
-const Categories = () => {
+interface Props {
+    cart: Cart
+}
+
+const Categories = ({ cart }: Props) => {
 
     const { data: categories, isLoading, isError, error, isSuccess } = useGetCategories()
 
@@ -25,6 +30,7 @@ const Categories = () => {
         <div></div>
         <Dishes 
             categories={categories}
+            cart={cart}
         />
     </div>
   )
