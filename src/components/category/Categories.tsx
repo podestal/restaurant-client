@@ -4,7 +4,7 @@ import CategoryCard from "./CategoryCard"
 
 const Categories = () => {
 
-    const { data: categories, isLoading, isError, error, isSuccess } = useGetCategories('')
+    const { data: categories, isLoading, isError, error, isSuccess } = useGetCategories()
 
     if (isLoading) return <p>Loading ...</p>
 

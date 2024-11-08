@@ -9,7 +9,7 @@ interface Props {
 
 const Dishes = ({ categories }: Props) => {
 
-    const { data: dishes, isLoading, isError, error, isSuccess } = useGetDishes('')
+    const { data: dishes, isLoading, isError, error, isSuccess } = useGetDishes()
 
     if (isLoading) return <p>Loading ...</p>
 

@@ -13,20 +13,37 @@ class APIClient<ResponseType, RequestType = ResponseType> {
         this.endpoint = endpoint
     }
 
-    get = (access: string) => {
-        return axiosInstance
+    get = (access?: string) => {
+        return access 
+        ? 
+        axiosInstance
             .get<ResponseType>(this.endpoint, {
                 headers: { Authorization: `JWT ${access}` }
             })
             .then(res => res.data)
+        :
+        axiosInstance
+            .get<ResponseType>(this.endpoint)
+            .then(res => res.data)
     }
 
-    post = (data: RequestType, access: string) => {
-        return axiosInstance
+    post = (data: RequestType, access: string, option?: string) => {
+        return option 
+            ? 
+            axiosInstance
+                .post<ResponseType>(this.endpoint, data, 
+                    {
+                        headers: { Authorization: `JWT ${access}` },
+                        data: { option },
+                    }
+            )
+                .then(res => res.data)
+            :
+            axiosInstance
             .post<ResponseType>(this.endpoint, data, {
-                headers: { Authorization: `JWT ${access}` }
+                headers: { Authorization: `JWT ${access}` },
             })
-            .then(res => res.data)
+            .then(res => res.data)            
     }
 }
 
