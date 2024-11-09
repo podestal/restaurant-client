@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import MainPage from "../pages/MainPage";
 import ErrorPage from "../pages/ErrorPage";
 import MenuPage from "../pages/MenuPage";
-import CartPage from "../pages/CartPage";
+// import CartPage from "../pages/CartPage";
 
 const routes = createBrowserRouter([
     {
@@ -14,10 +14,10 @@ const routes = createBrowserRouter([
                 path:'menu',
                 element: <MenuPage /> // Protected dashboard route
             },
-            {
-                path:'cart',
-                element: <CartPage />
-            }
+            // {
+            //     path:'cart',
+            //     element: <CartPage />
+            // }
             // {
             //     path: 'projects',
             //     element: <PrivateRoutes><TaskManager /></PrivateRoutes>,

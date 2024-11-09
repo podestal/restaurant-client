@@ -22,9 +22,9 @@ interface Props {
     sessionId?: string
 }
 
-const getCartService = ({ access, sessionId }: Props) => {
+const getCartService = ({ access }: Props) => {
     const URL = access ? 'carts/my-cart/' : 'carts/'
-    return new APIClient<Cart>('carts/')
+    return new APIClient<Cart>(URL)
 }
 
 export default getCartService

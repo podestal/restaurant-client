@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import ThemeSelector from "../components/ui/ThemeSelector"
 import Button from "../components/ui/Button"
+import Cart from "../components/cart/Cart"
 
 const Navigator = () => {
   return (
@@ -11,13 +12,14 @@ const Navigator = () => {
                 <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'menu'}>Menu</Link>
                 <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'menu'}>About Us</Link>
                 <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'menu'}>Catering</Link>
-                <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'cart'}>Cart</Link>
             </div>
             <div className="flex justify-center items-center gap-12">
+                {/* <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'cart'}>Cart</Link> */}
                 <ThemeSelector />
                 <Button 
                     label="Login"
                 />
+                <Cart />
             </div>
         </div>
     </div>
