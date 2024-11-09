@@ -1,6 +1,18 @@
-const CartItems = () => {
+import { Item } from "../../services/api/cartService"
+import CartItemCard from "./CartItemCard"
+
+interface Props {
+    cartItems: Item[]
+}
+
+const CartItems = ({ cartItems }: Props) => {
   return (
-    <div>CartItems</div>
+    <>{cartItems.map( cartItem => (
+        <CartItemCard 
+            key={cartItem.id}
+            cartItem={cartItem}
+        />
+    ))}</>
   )
 }
 

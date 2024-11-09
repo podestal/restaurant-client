@@ -1,12 +1,15 @@
 import { motion } from "framer-motion"
 import { RiCloseCircleFill } from "@remixicon/react"
+import { Cart } from "../../services/api/cartService"
+import CartItems from "../cartItem/CartItems"
 
 interface Props {
     isOpen: boolean
     onClose: () => void
+    cart: Cart
 }
 
-const CartSlider = ({ isOpen, onClose }: Props) => {
+const CartSlider = ({ isOpen, onClose, cart }: Props) => {
   return (
     <>
         {isOpen && (
@@ -28,10 +31,9 @@ const CartSlider = ({ isOpen, onClose }: Props) => {
             >
                 <RiCloseCircleFill className="text-red-500" size={24} />
             </button>
-            <div>
-                <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
-                <div className="text-gray-500">Cart items go here...</div>
-            </div>
+            <CartItems 
+                cartItems={cart.items}
+            />
         </motion.div>
     </>
   )
