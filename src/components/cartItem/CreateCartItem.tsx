@@ -19,7 +19,7 @@ const CreateCartItem = ({ cart, dish, count }: Props) => {
         createCartItem.mutate({ cartItem: {
             quantity: count,
             dish: dish.id,
-            price: dish.cost,
+            price: dish.cost*count,
             cart: cart.id
         }}, {
             onSuccess: () => {
