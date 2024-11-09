@@ -14,8 +14,6 @@ const CreateCartItem = ({ cart, dish, count }: Props) => {
     const createCartItem = useCreateCartItem(cart.id)
 
     const handleCreateOrderItem = () => {
-        console.log('dish from create', dish)
-        console.log('cart',cart);
         createCartItem.mutate({ cartItem: {
             quantity: count,
             dish: dish.id,
