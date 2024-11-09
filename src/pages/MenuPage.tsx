@@ -9,7 +9,7 @@ const MenuPage = () => {
   return (
     <div className="2xl:max-w-[1280px] mx-auto relative">
         <Categories 
-            cart={cart}
+            cart={cart[0]}
         />
     </div>
   )

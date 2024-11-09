@@ -31,6 +31,7 @@ const DishCard = ({ dish, cart }: Props) => {
         <div className="flex justify-between items-center my-6">
             <CreateCartItem 
                 cart={cart}
+                dish={dish}
             />
             <ItemCounter 
                 counter={count}
