@@ -15,9 +15,11 @@ class APIClient<ResponseType, RequestType = ResponseType> {
     }
 
     get = (access?: string, SessionId?: string) => {
-
+// atltkbedj7s6kzbg74qaeoa91k24zlbd
+        console.log('access api client', access);
+        
         const config: any = {
-            headers: { 'Session-ID': 'atltkbedj7s6kzbg74qaeoa91k24zlbd' }
+            headers: { 'Session-ID': SessionId}
         };
         if (access) {
             config.headers = { ...config.headers, Authorization: `JWT ${access}` };

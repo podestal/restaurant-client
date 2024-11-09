@@ -17,9 +17,14 @@ export interface Cart {
     items: Item[]
 }
 
-const getCartService = (access?: string) => {
+interface Props {
+    access?: string
+    sessionId?: string
+}
+
+const getCartService = ({ access, sessionId }: Props) => {
     const URL = access ? 'carts/my-cart/' : 'carts/'
-    return new APIClient<Cart>(URL)
+    return new APIClient<Cart>('carts/')
 }
 
 export default getCartService
