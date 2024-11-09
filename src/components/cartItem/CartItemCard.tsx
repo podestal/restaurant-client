@@ -6,7 +6,14 @@ interface Props {
 
 const CartItemCard = ({ cartItem }: Props) => {
   return (
-    <div>{cartItem.name}</div>
+    <div className="grid grid-cols-6 gap-2 my-6">
+        <p>{cartItem.quantity}</p>
+        <div className="col-span-4">
+            <p className="text-xl font-palanquin">{cartItem.name}</p>
+            <p>Observations</p>
+        </div>
+        <p className="text-right">{cartItem.price}</p>
+    </div>
   )
 }
 

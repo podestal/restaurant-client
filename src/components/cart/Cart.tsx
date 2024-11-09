@@ -3,6 +3,7 @@ import { useState } from "react"
 import CartSlider from "./CartSlider"
 import useSessionIdStore from "../../hooks/store/useSessionIdStore"
 import useGetCart from "../../hooks/api/cart/useGetCart"
+import CartItemsCount from "./CartItemsCount"
 
 const Cart = () => {
 
@@ -19,11 +20,14 @@ const Cart = () => {
   return (
     <div className=" relative">
         <RiShoppingBagFill 
-            size={40}
+            size={32}
             className="text-blue-600 hover:text-blue-500 cursor-pointer"
             onClick={() => setOpen(true)}
         />
-        <div className="rounded-full bg-white font-bold text-blue-600 flex justify-center items-center text-xs absolute top-6 right-1 px-1 py-0 cursor-pointer">{cart[0].items.length}</div>
+        <CartItemsCount 
+            setOpen={setOpen}
+            itemsLength={cart[0].items.length}
+        />
         <CartSlider 
             isOpen={open}
             onClose={() => setOpen(false)}

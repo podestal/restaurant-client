@@ -7,12 +7,15 @@ interface Props {
 
 const CartItems = ({ cartItems }: Props) => {
   return (
-    <>{cartItems.map( cartItem => (
-        <CartItemCard 
-            key={cartItem.id}
-            cartItem={cartItem}
-        />
-    ))}</>
+    <div>
+        <h2 className="text-4xl font-palanquin font-semibold mb-10">My Order</h2>
+        {cartItems.map( cartItem => (
+            <CartItemCard 
+                key={cartItem.id}
+                cartItem={cartItem}
+            />
+        ))}
+    </div>
   )
 }
 

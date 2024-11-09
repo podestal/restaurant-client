@@ -1,6 +1,6 @@
 import APIClient from "./apiClient"
 
-interface CartItem {
+export interface CartItem {
     id: number
     quantity: number
     dish: number

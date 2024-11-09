@@ -13,7 +13,7 @@ class APIClient<ResponseType, RequestType = ResponseType> {
     constructor( endpoint: string) {
         this.endpoint = endpoint
     }
-
+    
     get = (access?: string, SessionId?: string) => {
 // atltkbedj7s6kzbg74qaeoa91k24zlbd
         console.log('access api client', access);
