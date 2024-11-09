@@ -15,9 +15,7 @@ class APIClient<ResponseType, RequestType = ResponseType> {
     }
     
     get = (access?: string, SessionId?: string) => {
-// atltkbedj7s6kzbg74qaeoa91k24zlbd
-        console.log('access api client', access);
-        
+
         const config: any = {
             headers: { 'Session-ID': SessionId}
         };
@@ -45,6 +43,19 @@ class APIClient<ResponseType, RequestType = ResponseType> {
         return axiosInstance
             .post<ResponseType>(this.endpoint, data, config)
             .then(res => res.data)            
+    }
+
+    delete = (access?: string) => {
+
+        const config: any = {}
+
+        if (access) {
+            config.headers = { Authorization: `JWT ${access}` }
+        }
+
+        return axiosInstance
+            .delete<ResponseType>(this.endpoint, config)
+            .then(res => res.data)
     }
 }
 
