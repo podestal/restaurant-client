@@ -3,7 +3,8 @@ import axios from "axios"
 const URL = import.meta.env.VITE_API_URL
 
 const axiosInstance = axios.create({
-    baseURL: URL
+    baseURL: URL,
+    withCredentials: true,
 })
 
 class APIClient<ResponseType, RequestType = ResponseType> {
@@ -13,17 +14,18 @@ class APIClient<ResponseType, RequestType = ResponseType> {
         this.endpoint = endpoint
     }
 
-    get = (access?: string) => {
+    get = (access?: string, SessionId?: string) => {
 
-        const config: any = {}
-
+        const config: any = {
+            headers: { 'Session-ID': 'atltkbedj7s6kzbg74qaeoa91k24zlbd' }
+        };
         if (access) {
-            config.headers = { Authorization: `JWT ${access}` }
+            config.headers = { ...config.headers, Authorization: `JWT ${access}` };
         }
-
+    
         return axiosInstance
             .get<ResponseType>(this.endpoint, config)
-            .then(res => res.data)
+            .then(res => res.data);
     }
 
     post = (data: RequestType, access?: string, option?: string) => {
