@@ -1,5 +1,7 @@
 import { Item } from "../../services/api/cartService"
+import Button from "../ui/Button"
 import CartItemCard from "./CartItemCard"
+import CartItemsTotalCost from "./CartItemsTotalCost"
 
 interface Props {
     cartItems: Item[]
@@ -10,7 +12,17 @@ const CartItems = ({ cartItems, cartId }: Props) => {
 
   return (
     <div>
-        <h2 className="text-4xl font-palanquin font-semibold mb-10">My Order</h2>
+        <div className="flex justify-between items-center mb-10">
+            <h2 className="text-4xl font-palanquin font-semibold">My Order</h2>
+            <div className="flex justify-end">
+                <Button 
+                    label="Checkout"
+                />
+            </div>
+        </div>
+        <CartItemsTotalCost 
+            cartItems={cartItems}
+        />
         {cartItems.map( cartItem => (
             <CartItemCard 
                 key={cartItem.id}
