@@ -33,6 +33,7 @@ const DishCard = ({ dish, cart }: Props) => {
                 cart={cart}
                 dish={dish}
                 count={count}
+                setCount={setCount}
             />
             <ItemCounter 
                 counter={count}

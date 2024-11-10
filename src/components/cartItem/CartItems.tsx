@@ -18,9 +18,6 @@ const CartItems = ({ cartItems, cartId }: Props) => {
                 cartId={cartId}
             />
         ))}
-        {/* <p>Sub Total: 100</p>
-        <p>Tax 19%: 23</p>
-        <p>Total: {total}</p> */}
     </div>
   )
 }

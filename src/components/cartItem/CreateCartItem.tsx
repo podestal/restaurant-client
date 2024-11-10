@@ -8,9 +8,10 @@ interface Props {
     cart: Cart
     dish: Dish
     count: number
+    setCount: React.Dispatch<React.SetStateAction<number>>
 }
 
-const CreateCartItem = ({ cart, dish, count }: Props) => {
+const CreateCartItem = ({ cart, dish, count, setCount }: Props) => {
 
     const createCartItem = useCreateCartItem(cart.id)
     const { setShow, setType, setMessage } = useNotificationsStore()
@@ -26,6 +27,7 @@ const CreateCartItem = ({ cart, dish, count }: Props) => {
                 setShow(true)
                 setType('success')
                 setMessage('Item added to cart')
+                setCount(0)
             },
             onError: (error) => {
                 setShow(true)
