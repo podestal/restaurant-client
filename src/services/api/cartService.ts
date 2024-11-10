@@ -7,6 +7,7 @@ export interface Item {
     picture: string
     price: number
     dish_id: number
+    observations: string
 }
 
 export interface Cart {
