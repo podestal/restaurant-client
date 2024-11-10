@@ -26,7 +26,7 @@ const Cart = () => {
         />
         <CartItemsCount 
             setOpen={setOpen}
-            itemsLength={cart[0].items.length}
+            items={cart[0].items}
         />
         <CartSlider 
             isOpen={open}

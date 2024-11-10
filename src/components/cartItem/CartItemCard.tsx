@@ -1,5 +1,6 @@
 import { Item } from "../../services/api/cartService"
 import RemoveCardItem from "./RemoveCardItem"
+import { motion } from "framer-motion"
 
 interface Props {
     cartItem: Item
@@ -8,8 +9,12 @@ interface Props {
 
 const CartItemCard = ({ cartItem, cartId }: Props) => {
 
+
+
   return (
-    <div className="grid grid-cols-6 gap-2 my-6">
+    <motion.div 
+        layout
+        className="grid grid-cols-6 gap-2 my-6">
         <p className="mt-1">{cartItem.quantity}</p>
         <div className="col-span-4 flex flex-col gap-6">
             <div>
@@ -17,7 +22,7 @@ const CartItemCard = ({ cartItem, cartId }: Props) => {
                 <p className="text-md">Observations</p>
             </div>
             <div className="flex justify-between items-center">
-                <p>Edit</p>
+                <p>Update</p>
                 <RemoveCardItem 
                     cartItem={cartItem}
                     cartId={cartId}
@@ -25,7 +30,7 @@ const CartItemCard = ({ cartItem, cartId }: Props) => {
             </div>
         </div>
         <p className="text-right mt-1">{cartItem.price}</p>
-    </div>
+    </motion.div>
   )
 }
 

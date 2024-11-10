@@ -23,7 +23,7 @@ const CartSlider = ({ isOpen, onClose, cart }: Props) => {
             animate={{ x: isOpen ? "0%" : "100%" }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 200, damping: 30 }}
-            className="fixed right-0 top-0 w-96 h-full dark:bg-slate-900 bg-white z-50 shadow-lg p-4 overflow-x-hidden overflow-y-scroll"
+            className="fixed right-0 top-0 w-96 h-full dark:bg-slate-950 bg-white z-50 p-4 overflow-x-hidden overflow-y-scroll shadow-xl shadow-slate-400 dark:shadow-slate-700"
         >
             <button
                 onClick={onClose}
@@ -33,6 +33,7 @@ const CartSlider = ({ isOpen, onClose, cart }: Props) => {
             </button>
             <CartItems 
                 cartItems={cart.items}
+                cartId={cart.id}
             />
         </motion.div>
     </>
