@@ -19,7 +19,7 @@ const CartItemCard = ({ cartItem, cartId }: Props) => {
         <div className="col-span-4 flex flex-col gap-6">
             <div>
                 <p className="text-xl font-bold font-palanquin mb-4">{cartItem.name}</p>
-                <p className="text-md">Observations</p>
+                <p className="text-md">{cartItem.observations ? cartItem.observations : '-'}</p>
             </div>
             <div className="flex justify-between items-center">
                 <p>Update</p>
