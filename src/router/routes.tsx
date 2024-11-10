@@ -3,6 +3,9 @@ import MainPage from "../pages/MainPage";
 import ErrorPage from "../pages/ErrorPage";
 import MenuPage from "../pages/MenuPage";
 import CheckoutPage from "../pages/CheckoutPage";
+import LoginPage from "../pages/LoginPage";
+import About from "../pages/About";
+import CateringPage from "../pages/CateringPage";
 
 const routes = createBrowserRouter([
     {
@@ -18,6 +21,19 @@ const routes = createBrowserRouter([
                 path:'checkout',
                 element: <CheckoutPage />
             },
+            { 
+                path: 'about', // Login route
+                element: <About /> 
+            },
+            { 
+                path: 'catering', // Login route
+                element: <CateringPage /> 
+            },
+            { 
+                path: 'login', // Login route
+                element: <LoginPage /> 
+            },
+
             // {
             //     path: 'projects',
             //     element: <PrivateRoutes><TaskManager /></PrivateRoutes>,
@@ -30,10 +46,7 @@ const routes = createBrowserRouter([
             //     path: 'team',
             //     element: <PrivateRoutes><TeamPage /></PrivateRoutes>
             // },
-            // { 
-            //     path: 'login', // Login route
-            //     element: <LoginPage /> 
-            // },
+
         ]
     }
 ])
