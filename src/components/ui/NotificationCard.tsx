@@ -42,7 +42,7 @@ const NotificationCard = ({ type, message, reset }: Props) => {
       <style dangerouslySetInnerHTML={{ __html: styles.notificationAnimation }} />
 
       <div
-        className={`md:ml-[-80px] fixed top-4 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-md flex items-center space-x-3 ${
+        className={`ml-[-160px] fixed top-4 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-md flex items-center space-x-3 ${
           animateOut ? "slide-up" : "slide-down"
         } ${
           type === "success" ? "bg-green-500 text-white" : "bg-red-500 text-white"
