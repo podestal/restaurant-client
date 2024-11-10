@@ -6,6 +6,7 @@ export interface CartItem {
     dish: number
     price: number
     cart: number
+    observations: string
 }
 
 export type CartItemCreate = Omit<CartItem, 'id'>

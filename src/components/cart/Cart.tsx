@@ -15,13 +15,11 @@ const Cart = () => {
 
     if (isError) return <p>Error: {error.message}</p>
 
-    if (isSuccess)
-
-  return (
+  return isSuccess ? (
     <div className=" relative">
         <RiShoppingBagFill 
             size={32}
-            className="text-blue-600 hover:text-blue-500 cursor-pointer"
+            className="text-blue-700 hover:text-blue-600 cursor-pointer"
             onClick={() => setOpen(true)}
         />
         <CartItemsCount 
@@ -30,11 +28,11 @@ const Cart = () => {
         />
         <CartSlider 
             isOpen={open}
-            onClose={() => setOpen(false)}
+            setOpen={setOpen}
             cart={cart[0]}
         />
     </div>
-  )
+  ) : null
 }
 
 export default Cart

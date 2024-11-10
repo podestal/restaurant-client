@@ -5,18 +5,18 @@ import CartItems from "../cartItem/CartItems"
 
 interface Props {
     isOpen: boolean
-    onClose: () => void
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>
     cart: Cart
 }
 
-const CartSlider = ({ isOpen, onClose, cart }: Props) => {
+const CartSlider = ({ isOpen, setOpen, cart }: Props) => {
 
   return (
     <>
         {isOpen && (
             <div
                 className="fixed inset-0 bg-black bg-opacity-50 z-40"
-                onClick={onClose}
+                onClick={() => setOpen(false)}
             ></div>
         )}
         <motion.div
@@ -27,7 +27,7 @@ const CartSlider = ({ isOpen, onClose, cart }: Props) => {
             className="fixed right-0 top-0 w-96 h-full dark:bg-slate-950 bg-white z-50 p-4 overflow-x-hidden overflow-y-scroll shadow-xl shadow-slate-400 dark:shadow-slate-700"
         >
             <button
-                onClick={onClose}
+                onClick={() => setOpen(false)}
                 className="text-gray-600 hover:text-gray-900 mb-4 text-right    "
             >
                 <RiCloseCircleFill className="text-red-500" size={24} />
@@ -35,6 +35,7 @@ const CartSlider = ({ isOpen, onClose, cart }: Props) => {
             <CartItems 
                 cartItems={cart.items}
                 cartId={cart.id}
+                setOpen={setOpen}
             />
         </motion.div>
     </>
