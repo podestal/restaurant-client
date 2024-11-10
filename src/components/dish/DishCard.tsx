@@ -16,8 +16,6 @@ const DishCard = ({ dish, cart }: Props) => {
 
   return (
     <motion.div 
-    
-        whileHover={{ scale: 1.02 }}
         // viewport={{ margin: '-50%' }}
         className="flex flex-col h-[300px] justify-end border-2 border-slate-200 dark:border-slate-900 px-4 pb-2 rounded-2xl shadow-xl shadow-slate-700 dark:shadow-slate-700">
         <div className="w-full h-[200px]">

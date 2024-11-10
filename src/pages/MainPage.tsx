@@ -19,9 +19,7 @@ const MainPage = () => {
         <div className="w-full flex justify-center bg-slate-900 z-50 pb-[100px]">
             <Navigator />
         </div>
-       <div className="">
         <Outlet />
-       </div>
     </div>
   )
 }

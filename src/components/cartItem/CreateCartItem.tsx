@@ -1,8 +1,10 @@
+import { useState } from "react"
 import useCreateCartItem from "../../hooks/api/cartItem/useCreateCartItem"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import { Cart } from "../../services/api/cartService"
 import { Dish } from "../../services/api/dishService"
 import Button from "../ui/Button"
+import Modal from "../ui/Modal"
 
 interface Props {
     cart: Cart
@@ -15,6 +17,7 @@ const CreateCartItem = ({ cart, dish, count, setCount }: Props) => {
 
     const createCartItem = useCreateCartItem(cart.id)
     const { setShow, setType, setMessage } = useNotificationsStore()
+    const [ open, setOpen ] = useState(false)
 
     const handleCreateOrderItem = () => {
         createCartItem.mutate({ cartItem: {
@@ -40,9 +43,15 @@ const CreateCartItem = ({ cart, dish, count, setCount }: Props) => {
   return (
     <div>
         <Button 
-            onClick={handleCreateOrderItem}
+            onClick={() => setOpen(true)}
             label="Add"
         />
+        <Modal
+            isOpen={open}
+            onClose={() => setOpen(false)}
+        >
+            <p>My modal</p>
+        </Modal>
     </div>
   )
 }

@@ -2,7 +2,6 @@ import useGetDishes from "../../hooks/api/dish/useGetDishes"
 import { Cart } from "../../services/api/cartService"
 import { Category } from "../../services/api/categoryService"
 import DishCard from "./DishCard"
-import { motion } from "framer-motion"
 
 interface Props {
     categories: Category[]
@@ -31,9 +30,8 @@ const Dishes = ({ categories, cart }: Props) => {
                     <h2 className="text-5xl font-bold font-poppins text-blue-700">{category.name}</h2>
                     <p>{category.description}</p>
                 </div>
-                <motion.div 
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
+                <div 
+
                     className="grid grid-cols-3 gap-8 my-12">
                     {dishes
                         .filter( dish => dish.category === category.id)
@@ -44,7 +42,7 @@ const Dishes = ({ categories, cart }: Props) => {
                             cart={cart}
                         />
                     ))}
-                </motion.div>
+                </div>
             </div>
         ))}
 

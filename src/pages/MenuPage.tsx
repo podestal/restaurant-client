@@ -16,7 +16,7 @@ const MenuPage = () => {
 
     if (isSuccess)
   return (
-    <div className="2xl:max-w-[1280px] mx-auto relative">
+    <div className="2xl:max-w-[1280px] mx-auto ">
         <Categories 
             cart={cart[0]}
         />
