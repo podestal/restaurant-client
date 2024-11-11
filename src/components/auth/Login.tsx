@@ -3,12 +3,14 @@ import useLogin from "../../hooks/auth/useLogin"
 import Button from "../ui/Button"
 import Input from "../ui/Input"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
 
     const [loading, setLoading] = useState(false)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate()
     const login = useLogin(setLoading)
     const { setShow, setType, setMessage } = useNotificationsStore()
     const [usernameError, setUsernameError] = useState('')
@@ -33,6 +35,7 @@ const Login = () => {
             { username, password },
             { onSuccess: () => {
                 setLoading(false)
+                navigate('/menu')
             },
             onError: error => {
                 setShow(true)

@@ -2,7 +2,7 @@ import Table from "../components/ui/Table"
 
 const TablesPage = () => {
   return (
-    <div className="2xl:max-w-[1280px] mx-auto mt-20">
+    <div className="2xl:max-w-[1280px] mx-auto mt-4">
         <div className="grid grid-cols-3 gap-12 p-8  min-h-screen mx-auto place-items-center">
         <Table tableNumber="1" guestName="John D" status="Occupied" seats={4} />
         <Table tableNumber="2" guestName="Emma C" status="Occupied" seats={4} />

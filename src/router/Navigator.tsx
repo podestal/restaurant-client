@@ -4,6 +4,7 @@ import Button from "../components/ui/Button"
 import Cart from "../components/cart/Cart"
 import { useNavigate } from "react-router-dom"
 import useAuthStore from "../hooks/store/useAuthStore"
+import Logout from "../components/auth/Logout"
 
 const Navigator = () => {
 
@@ -22,10 +23,14 @@ const Navigator = () => {
             </div>
             <div className="flex justify-center items-center gap-12">
                 <ThemeSelector />
+                {access 
+                ? 
+                <Logout /> 
+                : 
                 <Button 
                     label="Login"
                     onClick={() => navigate('/login')}
-                />
+                />}
                 <Cart />
             </div>
         </div>
