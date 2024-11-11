@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import useThemeStore from '../../hooks/store/useThemeStore'
+import { RiMoonFill, RiSunFill } from '@remixicon/react'
 
 const ThemeSelector = () => {
 
@@ -28,7 +29,8 @@ const ThemeSelector = () => {
     //     </button>
     // </div>
     <div className="flex justify-center items-center gap-2">
-        <p>{theme === 'dark' ? '🌜' : '🌞'}</p>
+        {/* <p>{theme === 'dark' ? '🌜' : '🌞'}</p> */}
+        {theme === 'dark' ? <RiMoonFill className='text-blue-600'/> : <RiSunFill className='text-blue-600' />}
         <div 
             className={`relative inline-block w-8 h-4 transition duration-200 ease-in 
                         ${theme !== 'dark' ? 'bg-blue-600' : 'bg-gray-300'} 

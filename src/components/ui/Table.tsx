@@ -1,11 +1,9 @@
 import React from "react"
 
-type TableStatus = "Vacant" | "Occupied" | "Reserved";
-
 interface TableProps {
   tableNumber: string;
-  guestName?: string;
-  status: TableStatus;
+  guestName?: string | null;
+  status: string;
   seats: 2 | 4 | 6 | 8;
 }
 
@@ -15,9 +13,9 @@ const Table: React.FC<TableProps> = ({ tableNumber, guestName, status, seats }) 
 
   // Status color classes
   const statusColor = {
-    Vacant: "bg-green-500",
-    Occupied: "bg-blue-500",
-    Reserved: "bg-yellow-500",
+    V: "bg-green-500",
+    O: "bg-blue-500",
+    R: "bg-yellow-500",
   }[status];
 
   // Position seats based on the number of seats

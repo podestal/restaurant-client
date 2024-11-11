@@ -5,3 +5,5 @@ export const DISHES_CACHE_KEY = ['dishes']
 export const getCacheCartKey = (access?: string) => {
     return access ? ['authenticated cart'] : ['anonymous cart']
 } 
+
+export const TABLES_CACHE_KEY = ['tables']
