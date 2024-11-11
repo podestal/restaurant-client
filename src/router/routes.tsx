@@ -6,6 +6,7 @@ import CheckoutPage from "../pages/CheckoutPage";
 import LoginPage from "../pages/LoginPage";
 import About from "../pages/About";
 import CateringPage from "../pages/CateringPage";
+import TablesPage from "../pages/TablesPage";
 
 const routes = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const routes = createBrowserRouter([
             { 
                 path: 'login', // Login route
                 element: <LoginPage /> 
+            },
+            {
+                path: 'tables',
+                element: <TablesPage />
             },
 
             // {
