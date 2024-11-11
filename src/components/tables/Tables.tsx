@@ -1,9 +1,11 @@
 import useGetTables from "../../hooks/api/tables/useGetTables"
+import useAuthStore from "../../hooks/store/useAuthStore"
 import TableCard from "./TableCard"
 
 const Tables = () => {
 
-    const { data: tables, isLoading, isError, error, isSuccess } = useGetTables()
+    const access = useAuthStore(s => s.access) || ''
+    const { data: tables, isLoading, isError, error, isSuccess } = useGetTables(access)
 
     if (isLoading) return <p>Loading ...</p>
 
