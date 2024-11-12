@@ -1,5 +1,14 @@
 import APIClient from "./apiClient"
 
+export interface SimpleOrderItem {
+    id: number
+    quantity: number
+    cost: number
+    observations: string
+    name: string
+    dish_id: number
+}
+
 export interface Order {
     id: number
     table: number
@@ -7,9 +16,10 @@ export interface Order {
     updated_at: Date
     status: string
     created_by: number
+    order_items: SimpleOrderItem[] | undefined
 }
 
-export type OrderCreate = Omit<Order, 'id' |'created_at' | 'updated_at'>
+export type OrderCreate = Omit<Order, 'id' |'created_at' | 'updated_at' | 'order_items'>
 
 interface Props {
     tableId: number

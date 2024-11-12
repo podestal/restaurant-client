@@ -6,11 +6,14 @@ interface Props {
 }
 
 const OrderCard = ({ order }: Props) => {
+
+    const orderItems = order.order_items || []
+
   return (
     <div>
         <p>Order # {order.id}</p>
         <OrderItems 
-            orderId={order.id}
+            orderItems={orderItems}
         />
     </div>
   )

@@ -1,13 +1,13 @@
-import { OrderItem } from "../../services/api/orderItemService"
+import { SimpleOrderItem } from "../../services/api/orderService"
 
 interface Props {
-    orderItem: OrderItem
+    orderItem: SimpleOrderItem
 }
 
 const OrderItemsCard = ({ orderItem }: Props) => {
   return (
     <div>
-        {orderItem.id}
+        {orderItem.name}
     </div>
   )
 }

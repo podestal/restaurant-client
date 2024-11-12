@@ -3,7 +3,6 @@ import APIClient from "./apiClient"
 export interface OrderItem {
     id: number
     order: number
-    table: number
     dish: number
     cost: number
     observations: string
@@ -19,7 +18,7 @@ interface Props {
 }
 
 const getOrderItemService = ({ orderId, orderItemId }: Props) => {
-    const URL = orderItemId ? `order-items/${orderItemId}/` : `order-items/?order=${orderId}&table=&created_at=`
+    const URL = orderItemId ? `orders/${orderId}/order-items/${orderItemId}/` : `order/${orderId}/order-items/`
     return new APIClient<OrderItem, OrderItemCreate>(URL)
 }
 

@@ -1,21 +1,11 @@
-import useGetOrderItems from "../../hooks/api/orderItem/useGetOrderItems"
-import useAuthStore from "../../hooks/store/useAuthStore"
+import { SimpleOrderItem } from "../../services/api/orderService"
 import OrderItemsCard from "./OrderItemsCard"
 
 interface Props {
-    orderId: number
+    orderItems: SimpleOrderItem[]
 }
 
-const OrderItems = ({ orderId }: Props) => {
-
-    const access = useAuthStore(s => s.access) || ''
-    const { data: orderItems, isLoading, isError, error, isSuccess } = useGetOrderItems({ orderId, access })
-
-    if (isLoading) return <p>Loading ...</p>
-
-    if (isError) return <p>Error: {error.message}</p>
-
-    if (isSuccess)
+const OrderItems = ({ orderItems }: Props) => {
 
   return (
     <div>

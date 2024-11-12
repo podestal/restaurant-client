@@ -30,7 +30,7 @@ const TableCard = ({ table }: Props) => {
             <div className="flex flex-col justify-start items-center gap-6">
                 <h2 className="text-2xl font-poppins font-semibold">Table #{table.number}</h2>
                 <Button 
-                    label="Open table"
+                    label="New Order"
                 />
             </div>
             <Orders 
