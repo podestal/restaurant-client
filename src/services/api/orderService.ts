@@ -11,8 +11,13 @@ export interface Order {
 
 export type OrderCreate = Omit<Order, 'id' |'created_at' | 'updated_at'>
 
-const getOrderService = (orderId?: number) => {
-    const URL = orderId ? `orders/${orderId}/` : 'orders/'
+interface Props {
+    tableId: number
+    orderId?: number
+}
+
+const getOrderService = ({ tableId, orderId }: Props) => {
+    const URL = orderId ? `orders/${orderId}/` : `orders/?table=${tableId}&status=`
     return new APIClient<Order, OrderCreate>(URL)
 }
 

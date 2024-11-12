@@ -3,6 +3,7 @@ import { TableType } from "../../services/api/tableService"
 import Modal from "../ui/Modal"
 import Table from "../ui/Table"
 import Button from "../ui/Button"
+import Orders from "../orders/Orders"
 
 interface Props {
     table: TableType
@@ -32,6 +33,9 @@ const TableCard = ({ table }: Props) => {
                     label="Open table"
                 />
             </div>
+            <Orders 
+                tableId={table.id}
+            />
         </Modal>
     </>
   )
