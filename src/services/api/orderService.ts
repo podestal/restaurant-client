@@ -19,7 +19,7 @@ export interface Order {
     order_items: SimpleOrderItem[] | undefined
 }
 
-export type OrderCreate = Omit<Order, 'id' |'created_at' | 'updated_at' | 'order_items'>
+export type OrderCreate = Omit<Order, 'id' |'created_at' | 'updated_at' | 'order_items' | 'status'>
 
 interface Props {
     tableId: number
