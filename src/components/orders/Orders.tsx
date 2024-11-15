@@ -23,6 +23,7 @@ const Orders = ({ tableId }: Props) => {
             <OrderCard 
                 key={order.id}
                 order={order}
+                tableId={tableId}
             />
         ))}
     </div>
