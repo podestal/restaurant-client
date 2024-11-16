@@ -6,6 +6,7 @@ import Button from "../ui/Button"
 import { UseMutationResult } from "@tanstack/react-query"
 import { OrderItem } from "../../services/api/orderItemService"
 import { CreateOrderItemData } from "../../hooks/api/orderItem/useCreateOrderItem"
+import DishLookup from "../dish/DishLookup"
 
 interface Props {
     createOrderItem:  UseMutationResult<OrderItem, Error, CreateOrderItemData>
@@ -14,6 +15,7 @@ interface Props {
 const OrderItemForm = ({ createOrderItem }: Props) => {
 
     const [counter, setCounter] = useState(0)
+    const [selectedDish, setSelectedDish] = useState(0)
 
     const handleCreateOrderItem = () => {
         createOrderItem
@@ -22,9 +24,9 @@ const OrderItemForm = ({ createOrderItem }: Props) => {
   return (
     <form className="flex flex-col items-center justify-start my-6">
         <div className="w-full grid grid-cols-4 gap-4">
-            <Input 
-                placeholder="Dish ..."
-                stylesContainer="col-span-3"
+            <DishLookup 
+                selectedDish={selectedDish}
+                setSelectedDish={setSelectedDish}
             />
             <ItemCounter 
                 counter={counter}
