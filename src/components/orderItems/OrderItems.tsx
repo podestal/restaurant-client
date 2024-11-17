@@ -3,16 +3,20 @@ import OrderItemsCard from "./OrderItemsCard"
 
 interface Props {
     orderItems: SimpleOrderItem[]
+    editable: boolean
+    tableId: number
 }
 
-const OrderItems = ({ orderItems }: Props) => {
+const OrderItems = ({ orderItems, editable, tableId }: Props) => {
 
   return (
-    <div>
+    <div className={`my-6 ${!editable && 'bg-blue-700 rounded-xl py-4'}`}>
         {orderItems.map( orderItem => (
             <OrderItemsCard 
                 key={orderItem.id}
                 orderItem={orderItem}
+                editable={editable}
+                tableId={tableId}
             />
         ))}
     </div>

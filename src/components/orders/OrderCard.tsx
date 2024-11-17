@@ -12,23 +12,27 @@ const OrderCard = ({ order, tableId }: Props) => {
 
     const orderItems = order.order_items || []
     const orderId = order.id
+    const editable = order.status === 'P' ? true : false
 
   return (
     <div>
-        <div className="flex justify-between items-start mt-6">
+        <div className={`flex ${editable ? ' justify-between' : ' justify-center'} items-start mt-6`}>
             <p className="text-2xl font-poppins font-bold">Order # {orderId}</p>
+            {editable && 
             <UpdateOrder 
                 tableId={tableId}
                 order={order}
-            />
+            />}
         </div>
-        {order.status === 'P' && 
+        {editable && 
         <CreateOrderItem 
             tableId={tableId}
             orderId={orderId}
         />}
         <OrderItems 
             orderItems={orderItems}
+            editable={editable}
+            tableId={tableId}
         />
     </div>
   )
