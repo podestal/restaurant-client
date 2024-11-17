@@ -44,6 +44,18 @@ class APIClient<ResponseType, RequestType = ResponseType> {
             .then(res => res.data)            
     }
 
+    update = (data: RequestType, access?: string) => {
+
+        const config: any = {}
+        if (access) {
+            config.headers = { Authorization: `JWT ${access}` }
+        }
+
+        return axiosInstance
+            .put<ResponseType>(this.endpoint, data, config)
+            .then(res => res.data)
+    }
+
     delete = (access?: string) => {
 
         const config: any = {}
