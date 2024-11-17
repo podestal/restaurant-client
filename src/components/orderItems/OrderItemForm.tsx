@@ -22,19 +22,42 @@ const OrderItemForm = ({ createOrderItem, orderId }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
     const [counter, setCounter] = useState(0)
-    const [selectedDish, setSelectedDish] = useState<DishInfo>({
-        dishId: 0,
-        dishCost: 0
-    })
+    const [dish, setDish] = useState(0)
+    const [cost, setCost] = useState(0)
     const [observations, setObservations] = useState('')
+    const [dishLookup, setDishLookup] = useState('')
+
+    // Error Hsndler
+    const [dishError, setDishError] = useState('')
+    const [counterError, setCounterError] = useState('')
 
     const handleCreateOrderItem = (e: React.FormEvent<HTMLFormElement>) => {
-        console.log('orderId', orderId);
-        
+
+        e.preventDefault()
+        setDishError('')
+
+        if (dishLookup.length === 0) {
+            setDishError('This field is required')
+            return
+        }
+
+        if (counter === 0) {
+            setCounterError('You forgot the quantity')
+            return
+        }
+
         e.preventDefault()
         createOrderItem.mutate({ 
-            orderItem: { dish: selectedDish.dishId, quantity: counter, order: orderId, cost: selectedDish.dishCost, observations }, 
+            orderItem: { dish, quantity: counter, order: orderId, cost, observations }, 
             access 
+        }, {
+            onSuccess: () => {
+                setDish(0)
+                setCost(0)
+                setObservations('')
+                setCounter(0)
+                setDishLookup('')
+            }
         })
     }
 
@@ -44,11 +67,18 @@ const OrderItemForm = ({ createOrderItem, orderId }: Props) => {
         className="flex flex-col items-center justify-start my-6">
         <div className="w-full grid grid-cols-4 gap-4">
             <DishLookup 
-                setSelectedDish={setSelectedDish}
+                setDish={setDish}
+                setCost={setCost}
+                dishLookup={dishLookup}
+                setDishLookup={setDishLookup}
+                dishError={dishError}
+                setDishError={setDishError}
             />
             <ItemCounter 
                 counter={counter}
                 setCounter={setCounter}
+                counterError={counterError}
+                setCounterError={setCounterError}
             />
         </div>
         <TextArea 

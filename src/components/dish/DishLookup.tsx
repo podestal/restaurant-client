@@ -2,18 +2,21 @@ import { useState } from "react"
 import Input from "../ui/Input"
 import useGetDishes from "../../hooks/api/dish/useGetDishes"
 import { motion } from "framer-motion"
-import { DishInfo } from "../orderItems/OrderItemForm"
 
 interface Props {
-    setSelectedDish: React.Dispatch<React.SetStateAction<DishInfo>>
-    
+    setDish: React.Dispatch<React.SetStateAction<number>>
+    setCost: React.Dispatch<React.SetStateAction<number>>
+    setDishLookup: React.Dispatch<React.SetStateAction<string>>
+    dishLookup: string
+    dishError: string
+    setDishError: React.Dispatch<React.SetStateAction<string>>
 }
 
-const DishLookup = ({ setSelectedDish }: Props) => {
+const DishLookup = ({ setDish, setCost, setDishLookup, dishLookup, dishError, setDishError }: Props) => {
 
-    const [dishLookup, setDishLookup] = useState('')
     const [showDishes, setShowDishes] = useState(false)
     const { data: dishes, isLoading, isError, error, isSuccess } = useGetDishes()
+    
 
     if (isLoading) return <p className="animate-pulse">Loading ...</p>
 
@@ -27,11 +30,15 @@ const DishLookup = ({ setSelectedDish }: Props) => {
             placeholder="Dish ..."
             value={dishLookup}
             onChange={e => {
+                if (dishLookup.length > 0) {
+                    setDishError('')
+                }
                 if (!showDishes && dishLookup.length > 0) {
                     setShowDishes(true)
                 }
                 setDishLookup(e.target.value)
             }}
+            error={dishError}
         />
         <motion.div
             initial={{opacity: 0, translateY: -30}}
@@ -46,10 +53,8 @@ const DishLookup = ({ setSelectedDish }: Props) => {
                         <p
                             onClick={() => {
                                 setDishLookup(dish.name)
-                                setSelectedDish({
-                                    dishCost: dish.cost,
-                                    dishId: dish.id
-                                })
+                                setDish(dish.id)
+                                setCost(dish.cost)
                                 setShowDishes(false)
                             }}
                         >{dish.name}</p>
