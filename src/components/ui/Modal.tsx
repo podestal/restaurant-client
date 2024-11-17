@@ -15,7 +15,7 @@ const styles = {
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  title?: string
+  title?: string;
   children: ReactNode;
 }
 
@@ -33,26 +33,25 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40 sm:mx-6 pt-10 overflow-y-scroll"
-      style={{marginLeft: 0, marginRight:0}}
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40"
       onClick={onClose}
     >
-      {/* Apply inline styles here */}
       <style dangerouslySetInnerHTML={{ __html: styles.modalAnimation }} />
 
       <div
-        className="relative dark:bg-slate-950 bg-white rounded-lg shadow-lg p-6 max-w-lg w-full scale-transition overflow-scroll"
+        className="relative dark:bg-slate-950 bg-white rounded-lg shadow-lg p-6 max-w-lg w-full scale-transition"
+        style={{ maxHeight: '90vh', overflowY: 'auto' }}
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="text-2xl absolute top-8 md:top-2 right-2 text-red-500 hover:text-red-700"
+          className="text-2xl absolute top-2 right-2 text-red-500 hover:text-red-700"
           onClick={onClose}
         >
           &times;
         </button>
 
-        <div className="modal-content overflow-y-scroll">
-          <h2 className='text-center text-4xl mt-4 mb-8'>{title}</h2>
+        <div className="modal-content">
+          {title && <h2 className="text-center text-4xl mt-4 mb-8">{title}</h2>}
           {children}
         </div>
       </div>
