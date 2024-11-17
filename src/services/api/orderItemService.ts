@@ -13,12 +13,11 @@ export interface OrderItem {
 export type OrderItemCreate = Omit<OrderItem, 'id'| 'created_at'>
 
 interface Props {
-    orderId: number
     orderItemId?: number
 }
 
-const getOrderItemService = ({ orderId, orderItemId }: Props) => {
-    const URL = orderItemId ? `orders/${orderId}/order-items/${orderItemId}/` : `order/${orderId}/order-items/`
+const getOrderItemService = ({ orderItemId }: Props) => {
+    const URL = orderItemId ? `order-items/${orderItemId}/` : `/order-items/`
     return new APIClient<OrderItem, OrderItemCreate>(URL)
 }
 

@@ -15,7 +15,6 @@ const OrderCard = ({ order, tableId }: Props) => {
     <div>
         <p>Order # {order.id}</p>
         <CreateOrderItem 
-            orderId={order.id}
             tableId={tableId}
         />
         <OrderItems 

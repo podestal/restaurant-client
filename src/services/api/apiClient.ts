@@ -31,7 +31,6 @@ class APIClient<ResponseType, RequestType = ResponseType> {
     post = (data: RequestType, access?: string, option?: string) => {
 
         const config: any = {}
-
         if (access) {
             config.headers = { Authorization: `JWT ${access}` }
         }

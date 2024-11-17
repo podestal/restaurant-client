@@ -8,14 +8,12 @@ export interface CreateOrderItemData {
 }
 
 interface Props {
-    orderId: number
     tableId: number
 }
 
 
-const useCreateOrderItem = ({ orderId, tableId }: Props): UseMutationResult<OrderItem, Error, CreateOrderItemData> => {
-
-    const orderItemService = getOrderItemService({ orderId })
+const useCreateOrderItem = ({ tableId }: Props): UseMutationResult<OrderItem, Error, CreateOrderItemData> => {
+    const orderItemService = getOrderItemService({ })
     const ORDER_CACHE_KEY = getOrderCacheKey(tableId)
     const queryClient = useQueryClient()
 
