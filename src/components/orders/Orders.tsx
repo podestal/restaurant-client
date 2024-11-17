@@ -26,8 +26,11 @@ const Orders = ({ tableId }: Props) => {
                 tableId={tableId}
             />
         ))}
-    </div>
+    </div> 
   )
+  else {
+    return null
+  }
 }
 
 export default Orders

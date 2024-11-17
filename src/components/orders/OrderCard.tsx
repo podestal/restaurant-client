@@ -10,12 +10,14 @@ interface Props {
 const OrderCard = ({ order, tableId }: Props) => {
 
     const orderItems = order.order_items || []
+    const orderId = order.id
 
   return (
     <div>
-        <p>Order # {order.id}</p>
+        <p>Order # {orderId}</p>
         <CreateOrderItem 
             tableId={tableId}
+            orderId={orderId}
         />
         <OrderItems 
             orderItems={orderItems}

@@ -2,9 +2,11 @@ import { useState } from "react"
 import Input from "../ui/Input"
 import useGetDishes from "../../hooks/api/dish/useGetDishes"
 import { motion } from "framer-motion"
+import { DishInfo } from "../orderItems/OrderItemForm"
 
 interface Props {
-    setSelectedDish: React.Dispatch<React.SetStateAction<number>>
+    setSelectedDish: React.Dispatch<React.SetStateAction<DishInfo>>
+    
 }
 
 const DishLookup = ({ setSelectedDish }: Props) => {
@@ -44,7 +46,10 @@ const DishLookup = ({ setSelectedDish }: Props) => {
                         <p
                             onClick={() => {
                                 setDishLookup(dish.name)
-                                setSelectedDish(dish.id)
+                                setSelectedDish({
+                                    dishCost: dish.cost,
+                                    dishId: dish.id
+                                })
                                 setShowDishes(false)
                             }}
                         >{dish.name}</p>

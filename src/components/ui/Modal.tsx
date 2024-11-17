@@ -33,7 +33,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40 sm:mx-6 pt-10"
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40 sm:mx-6 pt-10 overflow-y-scroll"
       style={{marginLeft: 0, marginRight:0}}
       onClick={onClose}
     >
@@ -51,7 +51,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
           &times;
         </button>
 
-        <div className="modal-content">
+        <div className="modal-content overflow-y-scroll">
           <h2 className='text-center text-4xl mt-4 mb-8'>{title}</h2>
           {children}
         </div>

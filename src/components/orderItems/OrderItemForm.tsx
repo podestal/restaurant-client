@@ -10,18 +10,30 @@ import useAuthStore from "../../hooks/store/useAuthStore"
 
 interface Props {
     createOrderItem:  UseMutationResult<OrderItem, Error, CreateOrderItemData>
+    orderId: number
 }
 
-const OrderItemForm = ({ createOrderItem }: Props) => {
+export interface DishInfo {
+    dishId: number
+    dishCost: number
+}
 
-    const access = useAuthStore(s => s.access)
+const OrderItemForm = ({ createOrderItem, orderId }: Props) => {
+
+    const access = useAuthStore(s => s.access) || ''
     const [counter, setCounter] = useState(0)
-    const [selectedDish, setSelectedDish] = useState(0)
+    const [selectedDish, setSelectedDish] = useState<DishInfo>({
+        dishId: 0,
+        dishCost: 0
+    })
+    const [observations, setObservations] = useState('')
 
     const handleCreateOrderItem = (e: React.FormEvent<HTMLFormElement>) => {
+        console.log('orderId', orderId);
+        
         e.preventDefault()
         createOrderItem.mutate({ 
-            orderItem: { dish: selectedDish, quantity: counter, order: 1, cost: 10, observations: ''  }, 
+            orderItem: { dish: selectedDish.dishId, quantity: counter, order: orderId, cost: selectedDish.dishCost, observations }, 
             access 
         })
     }
@@ -41,6 +53,8 @@ const OrderItemForm = ({ createOrderItem }: Props) => {
         </div>
         <TextArea 
             placeholder="Observations ..."
+            value={observations}
+            onChange={e => setObservations(e.target.value)}
         />
         <Button 
             label="Add Dish"
