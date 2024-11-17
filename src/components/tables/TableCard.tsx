@@ -12,6 +12,7 @@ interface Props {
 const TableCard = ({ table }: Props) => {
     
     const [open, setOpen] = useState(false)
+    const [enableCreateOrder, setEnableCreateOrder] = useState(true)
 
   return (
     <>
@@ -29,12 +30,13 @@ const TableCard = ({ table }: Props) => {
         >
             <div className="flex flex-col justify-start items-center gap-6">
                 <h2 className="text-2xl font-poppins font-semibold">Table #{table.number}</h2>
-                <CreateOrder 
+                {enableCreateOrder && <CreateOrder 
                     tableId={table.id}
-                />
+                />}
             </div>
             <Orders 
                 tableId={table.id}
+                setEnableCreateOrder={setEnableCreateOrder}
             />
         </Modal>
     </>

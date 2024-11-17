@@ -6,9 +6,10 @@ import UpdateOrder from "./UpdateOrder"
 interface Props {
     order: Order
     tableId: number
+    setEnableCreateOrder: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const OrderCard = ({ order, tableId }: Props) => {
+const OrderCard = ({ order, tableId, setEnableCreateOrder }: Props) => {
 
     const orderItems = order.order_items || []
     const orderId = order.id
@@ -22,6 +23,7 @@ const OrderCard = ({ order, tableId }: Props) => {
             <UpdateOrder 
                 tableId={tableId}
                 order={order}
+                setEnableCreateOrder={setEnableCreateOrder}
             />}
         </div>
         {editable && 
