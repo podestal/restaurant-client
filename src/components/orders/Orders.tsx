@@ -30,7 +30,7 @@ const Orders = ({ tableId, setEnableCreateOrder }: Props) => {
     if (isSuccess)
 
   return (
-    <div>
+    <div className="w-full">
         {orders.map( order => (
             <OrderCard 
                 key={order.id}

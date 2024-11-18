@@ -15,3 +15,7 @@ export const getOrderCacheKey = (tableId: number) => {
 export const getOrderItemCacheKey = (orderId: number) => {
     return [`orderItem ${orderId}`]
 }
+
+export const getBillCacheKey = (tableId: number) => {
+    return [`bill ${tableId}`]
+}
