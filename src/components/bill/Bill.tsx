@@ -5,6 +5,7 @@ import { TableType } from "../../services/api/tableService"
 import CreateBill from "./CreateBill"
 import Orders from "../orders/Orders"
 import CreateOrder from "../orders/CreateOrder"
+import RemoveBill from "./RemoveBill"
 
 interface Props {
     table: TableType
@@ -37,24 +38,28 @@ const Bill = ({ table, enable }: Props) => {
     <>
         <div className="flex flex-col justify-start items-center gap-6">
 
-        <h2 className="text-2xl font-poppins font-semibold">Table #{table.number}</h2>
-        {enableCreateBill 
-        ? 
-        <CreateBill 
-            tableId={table.id}
-            setEnableCreateOrder={setEnableCreateOrder}
-        />
-        : 
-        <>
-        {enableCreateOrder && 
-        <CreateOrder 
-            tableId={table.id}
-        />}
-        <Orders 
-            tableId={table.id}
-            setEnableCreateOrder={setEnableCreateOrder}
-        />
-        </>}
+            <h2 className="text-2xl font-poppins font-semibold">Table #{table.number}</h2>
+            {enableCreateBill 
+            ? 
+            <CreateBill 
+                tableId={table.id}
+                setEnableCreateOrder={setEnableCreateOrder}
+            />
+            : 
+            <>
+            <RemoveBill 
+                tableId={tableId}
+                billId={bill[0]?.id}
+            />
+            {enableCreateOrder && 
+            <CreateOrder 
+                tableId={table.id}
+            />}
+            <Orders 
+                tableId={table.id}
+                setEnableCreateOrder={setEnableCreateOrder}
+            />
+            </>}
         </div>
 
     </>
