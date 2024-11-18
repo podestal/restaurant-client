@@ -13,7 +13,7 @@ interface Props {
 
 const Bill = ({ table, enable }: Props) => {
 
-    const [enableCreateOrder, setEnableCreateOrder] = useState(false)
+    const [enableCreateOrder, setEnableCreateOrder] = useState(true)
     const [enableCreateBill, setEnableCreateBill] = useState(false)
     const tableId = table.id || 0
     const access = useAuthStore(s => s.access) || ''
