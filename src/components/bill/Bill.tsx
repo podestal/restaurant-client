@@ -20,12 +20,10 @@ const Bill = ({ table, enable }: Props) => {
     const {data: bill, isLoading, isError, error, isSuccess} = useGetBill({ access, tableId: table.id, enable })
 
     useEffect(() => {
-        console.log(' bill[0].table', bill &&  bill[0]?.table);
-        
         if (bill && bill[0]?.table === tableId) {
-            setEnableCreateBill(true)
-        } else {
             setEnableCreateBill(false)
+        } else {
+            setEnableCreateBill(true)
         }
     }, [bill])
 
@@ -40,11 +38,11 @@ const Bill = ({ table, enable }: Props) => {
         <div className="flex flex-col justify-start items-center gap-6">
 
         <h2 className="text-2xl font-poppins font-semibold">Table #{table.number}</h2>
-        <>{console.log('bills', bill)}</>
         {enableCreateBill 
         ? 
         <CreateBill 
             tableId={table.id}
+            setEnableCreateOrder={setEnableCreateOrder}
         />
         : 
         <>
