@@ -16,6 +16,7 @@ const Bill = ({ table, enable }: Props) => {
 
     const [enableCreateOrder, setEnableCreateOrder] = useState(true)
     const [enableCreateBill, setEnableCreateBill] = useState(false)
+    const [allowRemoveBill, setAllowRemoveBill] = useState(false)
     const tableId = table.id || 0
     const access = useAuthStore(s => s.access) || ''
     const {data: bill, isLoading, isError, error, isSuccess} = useGetBill({ access, tableId: table.id, enable })
@@ -50,6 +51,7 @@ const Bill = ({ table, enable }: Props) => {
             <RemoveBill 
                 tableId={tableId}
                 billId={bill[0]?.id}
+                allowRemoveBill={allowRemoveBill}
             />
             {enableCreateOrder && 
             <CreateOrder 
@@ -58,6 +60,7 @@ const Bill = ({ table, enable }: Props) => {
             <Orders 
                 tableId={table.id}
                 setEnableCreateOrder={setEnableCreateOrder}
+                setAllowRemoveBill={setAllowRemoveBill}
             />
             </>}
         </div>

@@ -6,20 +6,24 @@ import OrderCard from "./OrderCard"
 interface Props {
     tableId: number
     setEnableCreateOrder: React.Dispatch<React.SetStateAction<boolean>>
+    setAllowRemoveBill: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Orders = ({ tableId, setEnableCreateOrder }: Props) => {
+const Orders = ({ tableId, setEnableCreateOrder, setAllowRemoveBill }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
     const {data: orders, isLoading, isError, error, isSuccess} = useGetOrders({ access, tableId })
 
     useEffect(() => {
         if (orders) {
+            setAllowRemoveBill(false)
             orders.forEach(order => {
                 if (order.status === 'P') {
                     setEnableCreateOrder(false)
                 }
             })
+        } else {
+            setAllowRemoveBill(true)
         }
     }, [orders])
 
