@@ -16,14 +16,14 @@ const Orders = ({ tableId, setEnableCreateOrder, setAllowRemoveBill }: Props) =>
 
     useEffect(() => {
         if (orders) {
-            setAllowRemoveBill(false)
+            console.log('orders',orders);
+            
+            orders.length === 0 ? setAllowRemoveBill(false) : setAllowRemoveBill(true)
             orders.forEach(order => {
                 if (order.status === 'P') {
                     setEnableCreateOrder(false)
                 }
             })
-        } else {
-            setAllowRemoveBill(true)
         }
     }, [orders])
 

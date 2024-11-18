@@ -19,7 +19,7 @@ const RemoveBill = ({ tableId, billId, allowRemoveBill }: Props) => {
     const { setShow, setType, setMessage } = useNotificationsStore()
     
     const handleRemove = () => {
-        if (!allowRemoveBill) {
+        if (allowRemoveBill) {
             setShow(true)
             setType('error')
             setMessage('You still have orders in the kitchen')

@@ -17,12 +17,12 @@ const CreateBill = ({ tableId, setEnableCreateOrder }: Props) => {
     }
 
   return (
-    <>
+    <div className="w-full flex justify-center">
         <Button 
             label='Open Table'
             onClick={handleCreate}
         />
-    </>
+    </div>
   )
 }
 
