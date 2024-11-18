@@ -6,7 +6,6 @@ export interface SimpleOrderItem {
     cost: number
     observations: string
     name: string
-    dish_id: number
 }
 
 export interface Order {

@@ -7,9 +7,10 @@ interface Props {
     order: Order
     tableId: number
     setEnableCreateOrder: React.Dispatch<React.SetStateAction<boolean>>
+    billId: number
 }
 
-const OrderCard = ({ order, tableId, setEnableCreateOrder }: Props) => {
+const OrderCard = ({ order, tableId, setEnableCreateOrder, billId }: Props) => {
 
     const orderItems = order.order_items || []
     const orderId = order.id
@@ -30,6 +31,7 @@ const OrderCard = ({ order, tableId, setEnableCreateOrder }: Props) => {
         <CreateOrderItem 
             tableId={tableId}
             orderId={orderId}
+            billId={billId}
         />}
         <OrderItems 
             orderItems={orderItems}

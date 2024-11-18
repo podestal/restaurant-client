@@ -11,6 +11,7 @@ import useAuthStore from "../../hooks/store/useAuthStore"
 interface Props {
     createOrderItem:  UseMutationResult<OrderItem, Error, CreateOrderItemData>
     orderId: number
+    billId: number
 }
 
 export interface DishInfo {
@@ -18,7 +19,7 @@ export interface DishInfo {
     dishCost: number
 }
 
-const OrderItemForm = ({ createOrderItem, orderId }: Props) => {
+const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
     const [counter, setCounter] = useState(0)
@@ -48,7 +49,7 @@ const OrderItemForm = ({ createOrderItem, orderId }: Props) => {
 
         e.preventDefault()
         createOrderItem.mutate({ 
-            orderItem: { dish, quantity: counter, order: orderId, cost, observations }, 
+            orderItem: { dish, quantity: counter, order: orderId, cost, observations, bill: billId }, 
             access 
         }, {
             onSuccess: () => {

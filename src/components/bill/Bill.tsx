@@ -7,6 +7,8 @@ import Orders from "../orders/Orders"
 import CreateOrder from "../orders/CreateOrder"
 import RemoveBill from "./RemoveBill"
 import Tabs from "../ui/Tabs"
+import BillTotal from "./BillTotal"
+import BillItemCard from "./BillItemCard"
 
 interface Props {
     table: TableType
@@ -67,6 +69,7 @@ const Bill = ({ table, enable }: Props) => {
                             tableId={table.id}
                             setEnableCreateOrder={setEnableCreateOrder}
                             setAllowRemoveBill={setAllowRemoveBill}
+                            billId={bill[0].id}
                         />
                 </div>,
             },
@@ -82,7 +85,17 @@ const Bill = ({ table, enable }: Props) => {
                                 allowRemoveBill={allowRemoveBill}
                             />
                         </div>
-                        
+                        <div className="w-full flex flex-col justify-start items-center gap-4 my-6">
+                            {bill[0].order_items.map( orderItem => (
+                                <BillItemCard 
+                                    key={orderItem.id}
+                                    orderItem={orderItem}
+                                />
+                            ))}
+                            <BillTotal 
+                                orderItems={bill[0].order_items}
+                            />
+                        </div>
                 </div>,
             },
             ]}

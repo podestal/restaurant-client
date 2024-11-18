@@ -4,9 +4,10 @@ import OrderItemForm from "./OrderItemForm"
 interface Props {
     tableId: number
     orderId: number
+    billId: number
 }
 
-const CreateOrderItem = ({ tableId, orderId }: Props) => {
+const CreateOrderItem = ({ tableId, orderId, billId }: Props) => {
 
     const createOrderItem = useCreateOrderItem({ tableId })
     console.log('orderId in create order item', orderId);
@@ -16,6 +17,7 @@ const CreateOrderItem = ({ tableId, orderId }: Props) => {
     <OrderItemForm 
         createOrderItem={createOrderItem}
         orderId={orderId}
+        billId={billId}
     />
   )
 }

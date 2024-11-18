@@ -7,9 +7,10 @@ interface Props {
     tableId: number
     setEnableCreateOrder: React.Dispatch<React.SetStateAction<boolean>>
     setAllowRemoveBill: React.Dispatch<React.SetStateAction<boolean>>
+    billId: number
 }
 
-const Orders = ({ tableId, setEnableCreateOrder, setAllowRemoveBill }: Props) => {
+const Orders = ({ tableId, setEnableCreateOrder, setAllowRemoveBill, billId }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
     const {data: orders, isLoading, isError, error, isSuccess} = useGetOrders({ access, tableId })
@@ -41,6 +42,7 @@ const Orders = ({ tableId, setEnableCreateOrder, setAllowRemoveBill }: Props) =>
                 order={order}
                 tableId={tableId}
                 setEnableCreateOrder={setEnableCreateOrder}
+                billId={billId}
             />
         ))}
     </div> 

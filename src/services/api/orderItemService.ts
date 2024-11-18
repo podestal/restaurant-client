@@ -3,6 +3,7 @@ import APIClient from "./apiClient"
 export interface OrderItem {
     id: number
     order: number
+    bill: number
     dish: number
     cost: number
     observations: string
