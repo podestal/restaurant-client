@@ -11,12 +11,14 @@ interface Props {
 
 
 const RemoveBill = ({ tableId, billId, allowRemoveBill }: Props) => {
-    
+
     const access = useAuthStore(s => s.access) || ''
     const removeBill = useRemoveBill({ tableId, billId })
     const { setShow, setType, setMessage } = useNotificationsStore()
     
     const handleRemove = () => {
+        console.log('removing bill');
+        
         if (allowRemoveBill) {
             setShow(true)
             setType('error')

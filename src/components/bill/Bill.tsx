@@ -18,19 +18,10 @@ interface Props {
 const Bill = ({ table, enable }: Props) => {
 
     const [enableCreateOrder, setEnableCreateOrder] = useState(true)
-    const [enableCreateBill, setEnableCreateBill] = useState(false)
     const [allowRemoveBill, setAllowRemoveBill] = useState(false)
     const tableId = table.id || 0
     const access = useAuthStore(s => s.access) || ''
     const {data: bill, isLoading, isError, error, isSuccess} = useGetBill({ access, tableId: table.id, enable })
-
-    useEffect(() => {
-        if (bill && bill[0]?.table === tableId) {
-            setEnableCreateBill(false)
-        } else {
-            setEnableCreateBill(true)
-        }
-    }, [bill])
 
     if (isLoading) return <p>Loading</p>
 
@@ -40,7 +31,7 @@ const Bill = ({ table, enable }: Props) => {
 
   return (
     <>
-        {enableCreateBill 
+        {table.status === 'V' 
         ?
         <CreateBill 
             tableId={table.id}
