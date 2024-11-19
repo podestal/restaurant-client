@@ -17,7 +17,7 @@ const OrderCard = ({ order, tableId, setEnableCreateOrder, billId }: Props) => {
     const editable = order.status === 'P' ? true : false
 
   return (
-    <div>
+    <div className={`${!editable && 'bg-blue-700 rounded-xl py-4'}`}>
         <div className={`flex ${editable ? ' justify-between' : ' justify-center'} items-start mt-6`}>
             <p className="text-2xl font-poppins font-bold">Order # {orderId}</p>
             {editable && 

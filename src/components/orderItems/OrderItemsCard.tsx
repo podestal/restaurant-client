@@ -18,7 +18,7 @@ const OrderItemsCard = ({ orderItem, editable, tableId }: Props) => {
             orderItemId={orderItem.id}
             tableId={tableId}
         />}
-        <div className="w-full flex flex-col justify-start items-start gap-2 px-8 my-2">
+        <div className="w-full flex flex-col justify-start items-start gap-2 px-4 my-2">
             <div className="w-full flex justify-between items-center mx-auto">
                 <p className="font-bold font-poppins">{orderItem.name}</p>
                 <p>{orderItem.quantity}</p>

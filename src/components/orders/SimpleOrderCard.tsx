@@ -13,6 +13,9 @@ const SimpleOrderCard = ({ order }: Props) => {
     const access = useAuthStore(s => s.access) || ''
     const removeOrder = useRemoveOrder({ orderId: order.id, status: 'S' })
 
+    console.log('order', order);
+    
+
     const handleRemove = () => {
         removeOrder.mutate({ access })
     }
@@ -21,7 +24,7 @@ const SimpleOrderCard = ({ order }: Props) => {
     <motion.div 
         layout
         onDoubleClick={handleRemove}
-        className="w-full flex flex-col justify-start items-start gap-2 px-8 my-2">
+        className="w-full flex flex-col justify-start items-start gap-2 px-8 my-2 bg-blue-700 rounded-xl py-4">
         <OrderItems 
             orderItems={order.order_items}
             editable={false}
