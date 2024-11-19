@@ -14,13 +14,12 @@ interface Props {
 const useCreateOrder = ({ tableId }: Props): UseMutationResult<Order, Error, CreateOrderData> => {
 
     const orderService = getOrderService({tableId})
-    const ORDER_CACHE_KEY = getOrderCacheKey(tableId)
+    const ORDER_CACHE_KEY = getOrderCacheKey({tableId})
     const queryClient = useQueryClient()
 
     return useMutation({
         mutationFn: (data: CreateOrderData) => orderService.post(data.order, data.access),
-        onSuccess: res => {
-            console.log('order', res)
+        onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ORDER_CACHE_KEY })
         },
         onError: err => {

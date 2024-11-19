@@ -17,8 +17,7 @@ const useRemoveBill = ({ billId, tableId }: Props): UseMutationResult<Bill, Erro
     const queryClient = useQueryClient()
     return useMutation({
         mutationFn: (data: RemoveBillData) => billService.delete(data.access),
-        onSuccess: res => {
-            console.log(res)
+        onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: BILL_CACHE_KEY })
         }, 
         onError: err => console.log(err)

@@ -8,7 +8,7 @@ export const getCacheCartKey = (access?: string) => {
 
 export const TABLES_CACHE_KEY = ['tables']
 
-export const getOrderCacheKey = (tableId?: number, status?: string) => {
+export const getOrderCacheKey = ({ tableId, status }:{tableId?: number, status?: string}) => {
     return tableId ? [`orders ${tableId}`] : [`orders ${status}`]
 }
 

@@ -19,8 +19,7 @@ const useCreateBill = ({ tableId }: Props): UseMutationResult<Bill, Error, Creat
 
     return useMutation({
         mutationFn: (data: CreateBillData) => billService.post(data.bill, data.access),
-        onSuccess: res => {
-            console.log(res)
+        onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: BILL_QUERY_CACHE })
         },
         onError: err => console.log(err)

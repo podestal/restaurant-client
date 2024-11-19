@@ -12,13 +12,12 @@ interface Props {
 
 const UpdateOrder = ({ tableId, order, setEnableCreateOrder }: Props) => {
 
-    const updateOrder = useUpdateOrder({ orderId: order.id })
+    const updateOrder = useUpdateOrder({ tableId, orderId: order.id })
     const { setShow, setType, setMessage } = useNotificationsStore()
     const access = useAuthStore(s => s.access) || ''
     const userId = useAuthStore(S => S.userId)
 
     const handleUpdate = () => {
-        console.log('order', order.order_items?.length);
 
         if (order.order_items?.length === 0) {
             setShow(true)
