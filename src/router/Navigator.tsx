@@ -20,6 +20,7 @@ const Navigator = () => {
                 <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'about'}>About Us</Link>
                 <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'catering'}>Catering</Link>
                 {access && <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'tables'}>Tables</Link>}
+                {access && <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'kitchen'}>Kitchen</Link>}
             </div>
             <div className="flex justify-center items-center gap-12">
                 <ThemeSelector />

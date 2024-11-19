@@ -14,7 +14,7 @@ interface Props {
 
 const useUpdateOrder = ({ tableId, orderId }: Props): UseMutationResult<Order, Error, UpdateOrderData> => {
 
-    const orderService = getOrderService({tableId, orderId})
+    const orderService = getOrderService({ orderId})
     const ORDER_CACHE_KEY = getOrderCacheKey(tableId)
     const queryClient = useQueryClient()
 

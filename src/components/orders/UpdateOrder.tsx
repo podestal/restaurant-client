@@ -12,7 +12,7 @@ interface Props {
 
 const UpdateOrder = ({ tableId, order, setEnableCreateOrder }: Props) => {
 
-    const updateOrder = useUpdateOrder({ tableId, orderId: order.id })
+    const updateOrder = useUpdateOrder({ orderId: order.id })
     const { setShow, setType, setMessage } = useNotificationsStore()
     const access = useAuthStore(s => s.access) || ''
     const userId = useAuthStore(S => S.userId)

@@ -15,19 +15,29 @@ export interface Order {
     updated_at: Date
     status: string
     created_by: number
-    order_items: SimpleOrderItem[] | undefined
+    order_items: SimpleOrderItem[]
 }
 
 export type OrderCreate = Omit<Order, 'id' |'created_at' | 'updated_at' | 'order_items'>
 
 interface Props {
-    tableId: number
+    tableId?: number
+    status?: string
     orderId?: number
 }
 
-const getOrderService = ({ tableId, orderId }: Props) => {
-    const URL = orderId ? `orders/${orderId}/` : `orders/?table=${tableId}&status=`
-    return new APIClient<Order, OrderCreate>(URL)
+const getOrderService = ({ tableId, orderId, status }: Props) => {
+    let url = ''
+    if (tableId !== undefined) {
+        url = `orders/?table=${tableId}&status=`
+        // url = orderId ? `orders/${orderId}/` : `orders/?table=${tableId}&status=`
+    } else if (status !== undefined) {
+        url = `orders/?table=&status=${status}`
+    } else {
+        url = `orders/${orderId}/`
+    }
+
+    return new APIClient<Order, OrderCreate>(url)
 }
 
 export default getOrderService

@@ -10,7 +10,7 @@ interface Props {
 const OrderItems = ({ orderItems, editable, tableId }: Props) => {
 
   return (
-    <div className={`my-6 ${!editable && 'bg-blue-700 rounded-xl py-4'}`}>
+    <div className={`my-6 w-full ${!editable && 'bg-blue-700 rounded-xl py-4'}`}>
         {orderItems.map( orderItem => (
             <OrderItemsCard 
                 key={orderItem.id}

@@ -8,8 +8,8 @@ export const getCacheCartKey = (access?: string) => {
 
 export const TABLES_CACHE_KEY = ['tables']
 
-export const getOrderCacheKey = (tableId: number) => {
-    return [`orders ${tableId}`]
+export const getOrderCacheKey = (tableId?: number, status?: string) => {
+    return tableId ? [`orders ${tableId}`] : [`orders ${status}`]
 }
 
 export const getOrderItemCacheKey = (orderId: number) => {

@@ -69,7 +69,7 @@ const Bill = ({ table, enable }: Props) => {
                             tableId={table.id}
                             setEnableCreateOrder={setEnableCreateOrder}
                             setAllowRemoveBill={setAllowRemoveBill}
-                            billId={bill[0].id}
+                            billId={bill[0]?.id}
                         />
                 </div>,
             },
@@ -86,14 +86,14 @@ const Bill = ({ table, enable }: Props) => {
                             />
                         </div>
                         <div className="w-full flex flex-col justify-start items-center gap-4 my-6">
-                            {bill[0].order_items.map( orderItem => (
+                            {bill[0]?.order_items.map( orderItem => (
                                 <BillItemCard 
                                     key={orderItem.id}
                                     orderItem={orderItem}
                                 />
                             ))}
                             <BillTotal 
-                                orderItems={bill[0].order_items}
+                                orderItems={bill[0]?.order_items}
                             />
                         </div>
                 </div>,
