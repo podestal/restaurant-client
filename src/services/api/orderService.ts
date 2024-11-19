@@ -15,10 +15,11 @@ export interface Order {
     updated_at: Date
     status: string
     created_by: number
+    waiter: string
     order_items: SimpleOrderItem[]
 }
 
-export type OrderCreate = Omit<Order, 'id' |'created_at' | 'updated_at' | 'order_items'>
+export type OrderCreate = Omit<Order, 'id' |'created_at' | 'updated_at' | 'order_items' | 'waiter'>
 
 interface Props {
     tableId?: number

@@ -26,6 +26,7 @@ const SimpleOrderCard = ({ order }: Props) => {
             orderItems={order.order_items}
             editable={false}
             tableId={0}
+            waiter={order.waiter}
         />
     </motion.div>
   )
