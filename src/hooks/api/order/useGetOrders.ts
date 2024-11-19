@@ -10,7 +10,7 @@ interface Props {
 
 const useGetOrders = ({ access, tableId, status }: Props): UseQueryResult<Order[], Error> => {
     const orderService = tableId ? getOrderService({ tableId }) : getOrderService({status})
-    const ORDER_CACHE_KEY = tableId && getOrderCacheKey({tableId}) || ['']
+    const ORDER_CACHE_KEY = tableId && getOrderCacheKey({tableId}) || getOrderCacheKey({status}) 
     return useQuery({
         queryKey: ORDER_CACHE_KEY,
         queryFn: () => orderService.get(access),
