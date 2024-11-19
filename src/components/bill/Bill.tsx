@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import useGetBill from "../../hooks/api/bill/useGetBill"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import { TableType } from "../../services/api/tableService"
