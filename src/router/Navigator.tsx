@@ -16,11 +16,16 @@ const Navigator = () => {
         <div className="w-full flex justify-between items-center h-[100px] 2xl:max-w-[1280px] mx-auto">
             <Link to='menu'><h2 className="text-5xl font-bold">loGO</h2></Link>
             <div className="flex justify-center items-center gap-24 font-montserrat">
+                {!access && 
+                <>
                 <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'menu'}>Menu</Link>
                 <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'about'}>About Us</Link>
                 <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'catering'}>Catering</Link>
+                </>
+                }
                 {access && <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'tables'}>Tables</Link>}
                 {access && <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'kitchen'}>Kitchen</Link>}
+                {access && <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'dashboard'}>Dashboard</Link>}
             </div>
             <div className="flex justify-center items-center gap-12">
                 <ThemeSelector />

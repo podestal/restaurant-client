@@ -8,6 +8,7 @@ import About from "../pages/About";
 import CateringPage from "../pages/CateringPage";
 import TablesPage from "../pages/TablesPage";
 import KitchenPage from "../pages/KitchenPage";
+import DashboardPage from "../pages/DashboardPage";
 
 const routes = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ const routes = createBrowserRouter([
             {
                 path: 'kitchen',
                 element: <KitchenPage />
+            },
+            {
+                path: 'dashboard',
+                element: <DashboardPage />
             },
 
             // {
