@@ -4,13 +4,13 @@ import { getOrderItemCacheKey } from "../../../utils/keys"
 
 interface Props {
     access: string
-    orderId: number
+    orderId?: number
 }
 
 const useGetOrderItems = ({ access, orderId }: Props): UseQueryResult<OrderItem[], Error> => {
 
     const orderItemService = getOrderItemService({  })
-    const ORDER_ITEM_CACHE_KEY = getOrderItemCacheKey(orderId)
+    const ORDER_ITEM_CACHE_KEY = orderId ? getOrderItemCacheKey(orderId) : ['orders']
     return useQuery({
         queryKey: ORDER_ITEM_CACHE_KEY,
         queryFn: () => orderItemService.get(access),
