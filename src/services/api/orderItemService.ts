@@ -16,11 +16,18 @@ export type OrderItemCreate = Omit<OrderItem, 'id'| 'created_at' | 'name'>
 
 interface Props {
     orderItemId?: number
+    date?: string
 }
 
-const getOrderItemService = ({ orderItemId }: Props) => {
-    const URL = orderItemId ? `order-items/${orderItemId}/` : `/order-items/by_month/`
-    return new APIClient<OrderItem, OrderItemCreate>(URL)
+const getOrderItemService = ({ orderItemId, date }: Props) => {
+    let url = '/order-items/'
+    if (date !== undefined) {
+        url = `/order-items/by_month/`
+    } else if (orderItemId !== undefined) {
+        url = `order-items/${orderItemId}/`
+    }
+
+    return new APIClient<OrderItem, OrderItemCreate>(url)
 }
 
 export default getOrderItemService

@@ -1,3 +1,4 @@
+import OrderItemsDashboard from "../components/dashboard/OrderItemsDashboard"
 import useGetOrderItems from "../hooks/api/orderItem/useGetOrderItems"
 import useAuthStore from "../hooks/store/useAuthStore"
 
@@ -14,13 +15,9 @@ const DashboardPage = () => {
 
   return (
     <div className="2xl:max-w-[1280px] mx-auto mt-4">
-        {orderItems.map( orderItem => (
-            <div
-                key={orderItem.id}
-            >
-                <p>{orderItem.name}</p>
-            </div>
-        ))}
+        <OrderItemsDashboard 
+            orderItems={orderItems}
+        />
     </div>
   )
 }
