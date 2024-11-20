@@ -25,15 +25,17 @@ const SimpleOrderCard = ({ order }: Props) => {
         layout
         onDoubleClick={handleRemove}
         className={`w-full flex flex-col justify-start items-start gap-2 px-8 my-2 ${background} rounded-xl py-4`}>
-        <OrderTimer 
-            order={order}
-            setBackground={setBackground}
-        />
+        <div className="w-full flex justify-center items-start mt-2 gap-12">
+            {order.waiter && <h2 className="text-center text-4xl mb-4 font-poppins font-semibold">{order.waiter}</h2>}
+            <OrderTimer 
+                order={order}
+                setBackground={setBackground}
+            />
+        </div>
         <OrderItems 
             orderItems={order.order_items}
             editable={false}
             tableId={0}
-            waiter={order.waiter}
         />
     </motion.div>
   )
