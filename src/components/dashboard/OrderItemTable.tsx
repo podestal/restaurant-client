@@ -27,7 +27,7 @@ const OrderItemTable = ({ orderItems }: Props) => {
             value={filterByName}
             onChange={e => setFilterByName(e.target.value)}
         />
-        <div className="w-full grid grid-cols-7 dark:bg-slate-900 bg-gray-200 font-bold p-2">
+        <div className="w-full grid grid-cols-7 dark:bg-slate-900 bg-gray-200 font-bold p-2 mt-6">
             <button onClick={() => handleSort("id")} className="py-1 text-left">
             ID
             </button>
@@ -48,7 +48,7 @@ const OrderItemTable = ({ orderItems }: Props) => {
             </button>
         </div>
         {filteredOrderItems.map( orderItem => (
-            <div key={orderItem.id} className="w-full grid grid-cols-7 px-2 py-4 text-left hover:bg-slate-900">
+            <div key={orderItem.id} className="w-full grid grid-cols-7 px-2 py-4 text-left hover:bg-slate-100 dark:hover:bg-slate-900">
                 <p>{orderItem.id}</p>
                 <p className="col-span-2">{orderItem.name}</p>
                 <p>{moment(orderItem.created_at).format('DD MMM YYYY')}</p>
