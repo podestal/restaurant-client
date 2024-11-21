@@ -14,11 +14,14 @@ class APIClient<ResponseType, RequestType = ResponseType> {
         this.endpoint = endpoint
     }
     
-    get = (access?: string, SessionId?: string) => {
+    get = (access?: string, SessionId?: string, year?: number, month?: number) => {
 
         const config: any = {
             headers: { 'Session-ID': SessionId}
         };
+        if (year && month) {
+            config.params = { month, year }
+        }
         if (access) {
             config.headers = { ...config.headers, Authorization: `JWT ${access}` };
         }

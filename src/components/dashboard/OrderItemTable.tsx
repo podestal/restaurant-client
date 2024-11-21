@@ -2,15 +2,18 @@ import moment from "moment"
 import { OrderItem } from "../../services/api/orderItemService"
 import Input from "../ui/Input"
 import { useState } from "react"
+import Button from "../ui/Button"
 
 
 interface Props {
     orderItems: OrderItem[]
+    month: number
+    setMonth: React.Dispatch<React.SetStateAction<number>>
+    year: number
+    setYear: React.Dispatch<React.SetStateAction<number>>
 }
 
-const OrderItemTable = ({ orderItems }: Props) => {
-
-    // const orderItems = orderItems
+const OrderItemTable = ({ orderItems, month, setMonth, year, setYear }: Props) => {
 
     const [filterByName, setFilterByName] = useState('')
     const filteredOrderItems = orderItems.filter( orderItem => orderItem.name.toLowerCase().includes(filterByName.toLowerCase()))
@@ -20,13 +23,41 @@ const OrderItemTable = ({ orderItems }: Props) => {
         
     }   
 
+    const handleNextDate = () => {
+        if (month === 12) {
+            setMonth(1)
+            setYear(prev => prev + 1)
+            return
+        }
+        setMonth( prev => prev + 1)
+    }
+
+    const handlePrevDate = () => {
+        if (month === 1) {
+            setMonth(12)
+            setYear(prev => prev -1)
+            return
+        }
+        setMonth( prev => prev - 1)
+    }
+
   return (
     <div className="mt-16">
-        <Input 
-            placeholder="Look by dish ..."
-            value={filterByName}
-            onChange={e => setFilterByName(e.target.value)}
-        />
+        <div className=" grid grid-cols-3">
+            <Input 
+                placeholder="Look by dish ..."
+                value={filterByName}
+                onChange={e => setFilterByName(e.target.value)}
+            />
+            <Button 
+                label="+"
+                onClick={handleNextDate}
+            />
+            <Button 
+                label="-"
+                onClick={handlePrevDate}
+            />
+        </div>
         <div className="w-full grid grid-cols-7 dark:bg-slate-900 bg-gray-200 font-bold p-2 mt-6">
             <button onClick={() => handleSort("id")} className="py-1 text-left">
             ID
@@ -48,7 +79,7 @@ const OrderItemTable = ({ orderItems }: Props) => {
             </button>
         </div>
         {filteredOrderItems.map( orderItem => (
-            <div key={orderItem.id} className="w-full grid grid-cols-7 px-2 py-4 text-left hover:bg-slate-100 dark:hover:bg-slate-900">
+            <div key={orderItem.id} className="w-full grid grid-cols-7 px-2 py-4 font-palanquin text-left hover:bg-slate-100 dark:hover:bg-slate-900">
                 <p>{orderItem.id}</p>
                 <p className="col-span-2">{orderItem.name}</p>
                 <p>{moment(orderItem.created_at).format('DD MMM YYYY')}</p>

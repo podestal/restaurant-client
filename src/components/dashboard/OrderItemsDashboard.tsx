@@ -6,9 +6,13 @@ import TotalSale from "./TotalSale"
 
 interface Props {
     orderItems: OrderItem[]
+    month: number
+    setMonth: React.Dispatch<React.SetStateAction<number>>
+    year: number
+    setYear: React.Dispatch<React.SetStateAction<number>>
 }
 
-const OrderItemsDashboard = ({ orderItems }: Props) => {
+const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Props) => {
 
     const total = orderItems.reduce(( total, orderItem ) => {
         return total += (orderItem.cost * orderItem.quantity)
@@ -34,6 +38,10 @@ const OrderItemsDashboard = ({ orderItems }: Props) => {
         </div>
         <OrderItemTable 
             orderItems={orderItems}
+            month={month}
+            setMonth={setMonth}
+            year={year}
+            setYear={setYear}
         />
         {/* <div className="flex flex-col justify-start gap-6 dark:bg-slate-900 bg-slate-100 mt-10 py-10 px-10 rounded-3xl">
             {orderItems.map(orderItem => (
