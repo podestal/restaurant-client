@@ -26,7 +26,8 @@ const getOrderItemService = ({ orderItemId, date }: Props) => {
     } else if (orderItemId !== undefined) {
         url = `order-items/${orderItemId}/`
     }
-
+    console.log('URL:',url);
+    
     return new APIClient<OrderItem, OrderItemCreate>(url)
 }
 

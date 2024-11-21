@@ -5,7 +5,7 @@ import useAuthStore from "../hooks/store/useAuthStore"
 const DashboardPage = () => {
 
     const access = useAuthStore(s => s.access) || ''
-    const {data: orderItems, isLoading, isError, error, isSuccess} = useGetOrderItems({ access })
+    const {data: orderItems, isLoading, isError, error, isSuccess} = useGetOrderItems({ access, date: 'yes' })
 
     if (isLoading) return <p>Loading ...</p>
 
