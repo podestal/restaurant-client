@@ -1,7 +1,6 @@
 import { OrderItem } from "../../services/api/orderItemService"
 import MostSold from "./MostSold"
-import OrderItemsTable from "./OrderItemsTable"
-import SingleOrderItem from "./SingleOrderItem"
+import OrderItemTable from "./OrderItemTable"
 import TotalDishes from "./TotalDishes"
 import TotalSale from "./TotalSale"
 
@@ -21,7 +20,7 @@ const OrderItemsDashboard = ({ orderItems }: Props) => {
     
 
   return (
-    <div>
+    <div className="pb-20">
         <div className="w-full grid grid-cols-3 gap-12 mt-12">
             <TotalSale 
                 totalSales={total}
@@ -33,8 +32,8 @@ const OrderItemsDashboard = ({ orderItems }: Props) => {
 
             />
         </div>
-        <OrderItemsTable 
-            data={orderItems}
+        <OrderItemTable 
+            orderItems={orderItems}
         />
         {/* <div className="flex flex-col justify-start gap-6 dark:bg-slate-900 bg-slate-100 mt-10 py-10 px-10 rounded-3xl">
             {orderItems.map(orderItem => (
