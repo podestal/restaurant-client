@@ -43,20 +43,23 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear }: Props) =
 
   return (
     <div className="mt-16">
-        <div className=" grid grid-cols-3">
+        <div className=" grid grid-cols-4">
             <Input 
                 placeholder="Look by dish ..."
                 value={filterByName}
                 onChange={e => setFilterByName(e.target.value)}
             />
-            <Button 
-                label="+"
-                onClick={handleNextDate}
-            />
-            <Button 
-                label="-"
-                onClick={handlePrevDate}
-            />
+            <div className="flex justify-evenly items-center">
+                <Button 
+                    label="<"
+                    onClick={handlePrevDate}
+                />
+                <p className="text-xl font-poppins">{month}/{year}</p>
+                <Button 
+                    label=">"
+                    onClick={handleNextDate}
+                />
+            </div>
         </div>
         <div className="w-full grid grid-cols-7 dark:bg-slate-900 bg-gray-200 font-bold p-2 mt-6">
             <button onClick={() => handleSort("id")} className="py-1 text-left">

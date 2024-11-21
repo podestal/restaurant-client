@@ -10,7 +10,7 @@ const TotalDishes = ({ totalDishes }: Props) => {
         <RiRestaurant2Fill size={50}/>
         <div className="flex flex-col h-full gap-4 items-center justify-between">
             <h2 className="text-4xl font-poppins  font-bold">{totalDishes}</h2>
-            <p className="text-1xl font-palanquin">Today's Dishes Sold</p>
+            <p className="text-xl font-palanquin">Today's Dishes Sold</p>
         </div>
     </div>
   )

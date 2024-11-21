@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { OrderItem } from "../../services/api/orderItemService"
 import MostSold from "./MostSold"
 import OrderItemTable from "./OrderItemTable"
@@ -14,11 +15,19 @@ interface Props {
 
 const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Props) => {
 
-    const total = orderItems.reduce(( total, orderItem ) => {
+    const today = new Date()
+    console.log('today', today.getDate());
+    console.log('orderItems', (orderItems[0].created_at).toString().split('-')[2]);
+    const [dayFilter, setDayFilter] = useState(today.getDate())
+    const filteredOrderItems = orderItems.filter( orderItem => orderItem.created_at.toString().split('-')[2] === dayFilter.toString())
+    
+    // const filteredOrderItems = orderItems.filter( orderItem => )
+
+    const total = filteredOrderItems.reduce(( total, orderItem ) => {
         return total += (orderItem.cost * orderItem.quantity)
     }, 0)
 
-    const totalDishes = orderItems.reduce(( total, orderItem) => {
+    const totalDishes = filteredOrderItems.reduce(( total, orderItem) => {
         return total += orderItem.quantity
     }, 0)
     

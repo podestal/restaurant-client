@@ -20,7 +20,7 @@ class APIClient<ResponseType, RequestType = ResponseType> {
             headers: { 'Session-ID': SessionId}
         };
         if (year && month) {
-            config.params = { month, year }
+            config.params = { month, year, day: 21 }
         }
         if (access) {
             config.headers = { ...config.headers, Authorization: `JWT ${access}` };

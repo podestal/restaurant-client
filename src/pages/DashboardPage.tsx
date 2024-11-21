@@ -27,7 +27,7 @@ const DashboardPage = () => {
             setYear={setYear}
         />
     </div>
-  )
+  ) 
 }
 
 export default DashboardPage
