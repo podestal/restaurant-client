@@ -1,5 +1,6 @@
 import { OrderItem } from "../../services/api/orderItemService"
 import MostSold from "./MostSold"
+import OrderItemsTable from "./OrderItemsTable"
 import SingleOrderItem from "./SingleOrderItem"
 import TotalDishes from "./TotalDishes"
 import TotalSale from "./TotalSale"
@@ -17,8 +18,6 @@ const OrderItemsDashboard = ({ orderItems }: Props) => {
     const totalDishes = orderItems.reduce(( total, orderItem) => {
         return total += orderItem.quantity
     }, 0)
-
-    console.log('orderItems', orderItems)
     
 
   return (
@@ -34,12 +33,18 @@ const OrderItemsDashboard = ({ orderItems }: Props) => {
 
             />
         </div>
-        {orderItems.map(orderItem => (
-            <SingleOrderItem 
-                key={orderItem.id}
-                orderItem={orderItem}
-            />
-        ))}
+        <OrderItemsTable 
+            data={orderItems}
+        />
+        {/* <div className="flex flex-col justify-start gap-6 dark:bg-slate-900 bg-slate-100 mt-10 py-10 px-10 rounded-3xl">
+            {orderItems.map(orderItem => (
+                <SingleOrderItem 
+                    key={orderItem.id}
+                    orderItem={orderItem}
+                />
+            ))}
+        </div> */}
+
     </div>
   )
 }
