@@ -9,22 +9,25 @@ import Button from "../ui/Button"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import CategorySelector from "../category/CategorySelector"
 import Modal from "../ui/Modal"
+import { UpdateDishData } from "../../hooks/api/dish/useUpdateDish"
 
 interface Props {
     open: boolean
     setOpen: React.Dispatch<React.SetStateAction<boolean>>
     dish?:Dish
     createDish?: UseMutationResult<Dish, Error, DishCreateData>
+    updateDish?: UseMutationResult<Dish, Error, UpdateDishData>
 }
 
-const DishForm = ({ open, setOpen, dish, createDish }: Props) => {
+const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
     const { setShow, setType, setMessage } = useNotificationsStore()
 
+    const [disabled, setDisabled] = useState(false)
+
     const [name, setName] = useState(dish ? dish.name : '')
     const [description, setDescription] = useState(dish ? dish.description : '')
-    console.log(dish?.cost);
     const [cost, setCost] = useState(dish ? String(dish.cost ): '')
     const [picture, setPicture] = useState(dish ? dish.picture : '')
     const [category, setCategory] = useState(dish ? dish.category : 0)
@@ -92,8 +95,36 @@ const DishForm = ({ open, setOpen, dish, createDish }: Props) => {
                 setShow(true)
                 setType('error')
                 setMessage(`Error: ${err}`)
+                setDisabled(true)
             }
         })
+
+        if (dish) {
+            updateDish && updateDish.mutate({
+                dish: {
+                    ...dish,
+                    name,
+                    description,
+                    cost: parseInt(cost),
+                    picture,
+                    category
+                },
+                access
+            }, {
+                onSuccess: () => {
+                    setShow(true)
+                    setType('success')
+                    setMessage('Dish updated')
+                    setDisabled(true)
+                },
+                onError: err => {
+                    setShow(true)
+                    setType('error')
+                    setMessage(`Error: ${err}`)
+                    setDisabled(true)
+                }
+            })
+        }
     }
 
   return (
@@ -102,7 +133,7 @@ const DishForm = ({ open, setOpen, dish, createDish }: Props) => {
         onClose={() => setOpen(false)}
     >
         <form 
-            className="flex flex-col justify-center items-center mx-auto gap-4 w-[60%] my-6"
+            className="flex flex-col justify-center items-center mx-auto gap-6 w-[60%] my-6"
             onSubmit={handleSubmit}>
             <h2 className="text-2xl font-poppins font-bold">{dish ? 'Update Dish' : 'New Dish'}</h2>
             <Input 
@@ -146,7 +177,8 @@ const DishForm = ({ open, setOpen, dish, createDish }: Props) => {
                 error={categoryError}
             />
             <Button 
-                label="Create"
+                label={dish ? 'Update' : 'Create'}
+                disable={disabled}
             />
         </form>
     </Modal>
