@@ -3,8 +3,8 @@ import useGetDishes from "../../hooks/api/dish/useGetDishes"
 import CreateDish from "./CreateDish"
 import DishCardAdmin from "./DishCardAdmin"
 import Input from "../ui/Input"
-import Button from "../ui/Button"
 import CategoreisAdmin from "../category/CategoreisAdmin"
+import Tabs from "../ui/Tabs"
 
 const DishesAdmin = () => {
 
@@ -19,25 +19,42 @@ const DishesAdmin = () => {
 
   return (
     <div className="w-full mt-10 py-10">
-        <div className="w-full flex justify-evenly items-center gap-12 mb-6">
-            <CreateDish />
-            <Input 
-                placeholder="Filter by name ..."
-                value={dishFilter}
-                onChange={e => setDishFilter(e.target.value)}
-            />
-            <CategoreisAdmin />
-        </div>
-        <div className="flex flex-col gap-2">
-            {dishes
-                .filter( dish => dish.name.toLowerCase().includes(dishFilter.toLowerCase()))
-                .map(dish => (
-                <DishCardAdmin 
-                    key={dish.id}
-                    dish={dish}
-                />
-            ))}
-        </div>
+        <Tabs
+            tabs={[
+                {
+                    label: 'Dishes',
+                    content:         
+                    <>
+                        <div className="w-full flex justify-evenly items-center gap-12 mb-6">
+                            <CreateDish />
+                            <Input 
+                                placeholder="Filter by name ..."
+                                value={dishFilter}
+                                onChange={e => setDishFilter(e.target.value)}
+                            />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            {dishes
+                                .filter( dish => dish.name.toLowerCase().includes(dishFilter.toLowerCase()))
+                                .map(dish => (
+                                <DishCardAdmin 
+                                    key={dish.id}
+                                    dish={dish}
+                                />
+                            ))}
+                        </div>
+                    </>
+                },
+                {
+                    label: 'Categories',
+                    content:         
+                    <>
+                        <CategoreisAdmin />
+                    </>
+                },
+
+            ]}
+        />
     </div>
 
   )
