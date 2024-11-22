@@ -28,6 +28,7 @@ const DishForm = ({ createDish }: Props) => {
     const [descriptionError, setDescriptionError] = useState('')
     const [costError, setCostError] = useState('')
     const [pictureError, setPictureError] = useState('')
+    const [categoryError, setCategoryError] = useState('')
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
@@ -58,9 +59,10 @@ const DishForm = ({ createDish }: Props) => {
             return
         }
 
-        // if (!category) {
-            
-        // }
+        if (!category) {
+            setCategoryError('Category is required')
+            return
+        }
 
         createDish.mutate({
             dish: {
@@ -131,6 +133,7 @@ const DishForm = ({ createDish }: Props) => {
         />
         <CategorySelector 
             setSelectedCategory={setCategory}
+            error={categoryError}
         />
         <Button 
             label="Create"

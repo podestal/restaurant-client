@@ -3,7 +3,6 @@ import { OrderItem } from "../../services/api/orderItemService"
 import Input from "../ui/Input"
 import { useState } from "react"
 import Button from "../ui/Button"
-import DateSelector from "../ui/DateSelector"
 import Selector from "../ui/Selector"
 
 

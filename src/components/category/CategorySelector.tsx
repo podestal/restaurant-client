@@ -5,16 +5,17 @@ interface Props {
     setSelectedCategory: (categoryId: number) => void 
     categoryId?: number 
     all?: boolean 
+    error?: string
 }
 
-const CategorySelector = ({ setSelectedCategory, categoryId, all }: Props) => {
+const CategorySelector = ({ setSelectedCategory, categoryId, all, error }: Props) => {
 
     const defaultValue = categoryId || 0 
-    const { data: categories, isLoading, isError, error, isSuccess } = useGetCategories() 
+    const { data: categories, isLoading, isError, error: errorCat, isSuccess } = useGetCategories() 
 
     if (isLoading) return <p>Loading ...</p>
 
-    if (isError) return <p>Error: {error.message}</p>
+    if (isError) return <p>Error: {errorCat.message}</p>
 
     if (isSuccess)
         return (
@@ -24,6 +25,7 @@ const CategorySelector = ({ setSelectedCategory, categoryId, all }: Props) => {
                 setter={setSelectedCategory} 
                 label="Categories" 
                 all={all} 
+                error={error}
             />
         )
 

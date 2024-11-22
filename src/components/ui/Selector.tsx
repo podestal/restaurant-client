@@ -12,20 +12,53 @@ interface Props<T extends Item> {
     setter: (value: number) => void // Function to update the selected value
     label: string // Text that indicate the type of the selector
     all?: boolean // Boolean that conditionally renders all values
+    error?: string
+}
+
+const styles = {
+    animation: `
+    @keyframes bounce {
+      0% {
+        transform: translateX(-8%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+      }
+      25% {
+        transform: translateX(8%);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      }
+      50% {
+        transform: translateX(-8%);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      }
+      75% {
+        transform: translateX(8%);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      }
+      100% {
+        transform: none;
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      }
+    }
+  
+    .shake {
+      animation: bounce 0.4s;
+    }
+  `
 }
 
 // Selector component that uses a generic type T, extending the Item interface
-const Selector = <T extends Item>({ values, defaultValue, setter, label, all }: Props<T>) => {
+const Selector = <T extends Item>({ values, defaultValue, setter, label, all, error }: Props<T>) => {
   
     return (
         <div className="lg:w-full w-[60%] flex flex-col mx-auto justify-center items-center gap-4">
             {/* Label for the selector */}
             <p className="text-slate-50">{label}</p>
             {/* Dropdown (select) element */}
+            <style dangerouslySetInnerHTML={{ __html: styles.animation }} />
             <select
                 defaultValue={defaultValue} // Set the default selected value
                 onChange={e => setter(parseInt(e.target.value))} // Call setter with selected value
-                className="bg-gray-950 rounded-lg w-full text-xs text-slate-50 py-[8px] border-2 dark:border-gray-800 border-neutral-400"
+                className={`bg-gray-950 rounded-lg w-full dark:text-slate-50 text-xs pl-2 py-[8px] border-2 ${error ? 'border-red-600 shake' : ' dark:border-gray-800 border-neutral-40'}`}
             >
                 {all 
                 ?
