@@ -7,7 +7,7 @@ export interface Category {
     time_perios: string
 }
 
-export type CreateCategory = Omit<Category, 'id'>
+export type CreateCategory = Omit<Category, 'id' | 'time_perios'>
 
 const getCategoryService = (categoryId?: number) => {
     const URL = categoryId ? `categories/${categoryId}/` : 'categories/'
