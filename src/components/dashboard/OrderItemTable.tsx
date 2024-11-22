@@ -3,6 +3,8 @@ import { OrderItem } from "../../services/api/orderItemService"
 import Input from "../ui/Input"
 import { useState } from "react"
 import Button from "../ui/Button"
+import DateSelector from "../ui/DateSelector"
+import Selector from "../ui/Selector"
 
 
 interface Props {
@@ -49,6 +51,12 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear }: Props) =
                 value={filterByName}
                 onChange={e => setFilterByName(e.target.value)}
             />
+            <Selector 
+                values={[{ id: 1, name:'Filter by Month' }, {id: 2, name: 'Filter by Day'}]}
+                defaultValue={1}
+                label=""
+                setter={() => {}}
+            />
             <div className="flex justify-evenly items-center">
                 <Button 
                     label="<"
@@ -60,6 +68,9 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear }: Props) =
                     onClick={handleNextDate}
                 />
             </div>
+            {/* <DateSelector 
+                
+            /> */}
         </div>
         <div className="w-full grid grid-cols-7 dark:bg-slate-900 bg-gray-200 font-bold p-2 mt-6">
             <button onClick={() => handleSort("id")} className="py-1 text-left">
