@@ -4,6 +4,7 @@ import CreateDish from "./CreateDish"
 import DishCardAdmin from "./DishCardAdmin"
 import Input from "../ui/Input"
 import Button from "../ui/Button"
+import CategoreisAdmin from "../category/CategoreisAdmin"
 
 const DishesAdmin = () => {
 
@@ -25,9 +26,7 @@ const DishesAdmin = () => {
                 value={dishFilter}
                 onChange={e => setDishFilter(e.target.value)}
             />
-            <Button 
-                label="Categories"
-            />
+            <CategoreisAdmin />
         </div>
         <div className="flex flex-col gap-2">
             {dishes
