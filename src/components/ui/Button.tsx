@@ -30,7 +30,7 @@ const colors = {
 const Button = ({
     label,
     loading=false,
-    disable=true,
+    disable=false,
     color='blue',
     ...props
 }: Props) => {

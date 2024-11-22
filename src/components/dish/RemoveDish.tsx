@@ -23,7 +23,7 @@ const RemoveDish = ({ dishId }: Props) => {
     <>
         <RiDeleteBin2Fill 
             onClick={() => setOpen(true)}
-            className="text-red-600 hover:text-red-800"/>
+            className="text-red-600 hover:text-red-800 cursor-pointer"/>
         <Modal
             isOpen={open}
             onClose={() => setOpen(false)}

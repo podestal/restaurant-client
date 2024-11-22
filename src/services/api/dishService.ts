@@ -11,7 +11,7 @@ export interface Dish {
     category: number
 }
 
-export type DishCreate = Omit<Dish, 'id'| 'created_at' | 'available'>
+export type DishCreate = Omit<Dish, 'id'| 'created_at'>
 
 const getDishService = (dishId?: number) => {
     const URL = dishId ? `dishes/${dishId}/` : 'dishes/'

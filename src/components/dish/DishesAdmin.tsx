@@ -1,9 +1,13 @@
+import { useState } from "react"
 import useGetDishes from "../../hooks/api/dish/useGetDishes"
 import CreateDish from "./CreateDish"
 import DishCardAdmin from "./DishCardAdmin"
+import Input from "../ui/Input"
+import Button from "../ui/Button"
 
 const DishesAdmin = () => {
 
+    const [dishFilter, setDishFilter] = useState('')
     const {data: dishes, isLoading, isError, error, isSuccess} = useGetDishes()
 
     if (isLoading) return <p>Loading ...</p>
@@ -14,17 +18,21 @@ const DishesAdmin = () => {
 
   return (
     <div className="w-full mt-10 py-10">
-        <CreateDish />
-        <div className="w-full grid grid-cols-8 gap-6 text-md font-bold mb-6 dark:bg-slate-900 bg-slate-200 p-4">
-            <p>Action</p>
-            <p>Image</p>
-            <p className="col-span-2">Name</p>
-            <p className="col-span-2">Description</p>
-            <p>Cost</p>
-            <p>Status</p>
+        <div className="w-full flex justify-evenly items-center gap-12 mb-6">
+            <CreateDish />
+            <Input 
+                placeholder="Filter by name ..."
+                value={dishFilter}
+                onChange={e => setDishFilter(e.target.value)}
+            />
+            <Button 
+                label="Categories"
+            />
         </div>
         <div className="flex flex-col gap-2">
-            {dishes.map(dish => (
+            {dishes
+                .filter( dish => dish.name.toLowerCase().includes(dishFilter.toLowerCase()))
+                .map(dish => (
                 <DishCardAdmin 
                     key={dish.id}
                     dish={dish}

@@ -10,6 +10,7 @@ import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import CategorySelector from "../category/CategorySelector"
 import Modal from "../ui/Modal"
 import { UpdateDishData } from "../../hooks/api/dish/useUpdateDish"
+import Switch from "../ui/Switch"
 
 interface Props {
     open: boolean
@@ -26,6 +27,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
 
     const [disabled, setDisabled] = useState(false)
 
+    const [available, setAvailable] = useState(dish ? dish.available : true)
     const [name, setName] = useState(dish ? dish.name : '')
     const [description, setDescription] = useState(dish ? dish.description : '')
     const [cost, setCost] = useState(dish ? String(dish.cost ): '')
@@ -41,7 +43,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault()
-
+        setDisabled(false)
         setNameError('')
         setDescriptionError('')
         setCostError('')
@@ -74,6 +76,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
 
         createDish && createDish.mutate({
             dish: {
+                available,
                 name,
                 description,
                 cost: parseInt(cost),
@@ -103,6 +106,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
             updateDish && updateDish.mutate({
                 dish: {
                     ...dish,
+                    available,
                     name,
                     description,
                     cost: parseInt(cost),
@@ -130,12 +134,20 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
   return (
     <Modal
         isOpen={open}
-        onClose={() => setOpen(false)}
+        onClose={() => {
+            setOpen(false)
+            setDisabled(false)
+        }}
     >
         <form 
             className="flex flex-col justify-center items-center mx-auto gap-6 w-[60%] my-6"
             onSubmit={handleSubmit}>
             <h2 className="text-2xl font-poppins font-bold">{dish ? 'Update Dish' : 'New Dish'}</h2>
+            <Switch 
+                value={available}
+                setter={setAvailable}
+                label="Available"
+            />
             <Input 
                 placeholder="Name"
                 value={name}
