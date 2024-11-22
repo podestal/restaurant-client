@@ -9,6 +9,7 @@ import CateringPage from "../pages/CateringPage";
 import TablesPage from "../pages/TablesPage";
 import KitchenPage from "../pages/KitchenPage";
 import DashboardPage from "../pages/DashboardPage";
+import DishesPage from "../pages/DishesPage";
 
 const routes = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ const routes = createBrowserRouter([
             { 
                 path: 'login', // Login route
                 element: <LoginPage /> 
+            },
+            {
+                path: 'dishes',
+                element: <DishesPage />
             },
             {
                 path: 'tables',

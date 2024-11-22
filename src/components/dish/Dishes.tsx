@@ -20,7 +20,7 @@ const Dishes = ({ categories, cart }: Props) => {
 
   return (
     <div className="col-span-5">
-        {categories.map( category => (
+        {categories && categories.map( category => (
             <div 
                 id={`${category.id}`}
                 key={category.id}
@@ -33,7 +33,7 @@ const Dishes = ({ categories, cart }: Props) => {
                 <div 
 
                     className="grid grid-cols-3 gap-8 my-12">
-                    {dishes
+                    {cart && dishes
                         .filter( dish => dish.category === category.id)
                         .map( dish => (
                         <DishCard 
@@ -45,8 +45,7 @@ const Dishes = ({ categories, cart }: Props) => {
                 </div>
             </div>
         ))}
-
-    </div>
+    </div> 
   )
 }
 

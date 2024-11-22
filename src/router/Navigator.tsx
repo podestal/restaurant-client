@@ -23,6 +23,7 @@ const Navigator = () => {
                 <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'catering'}>Catering</Link>
                 </>
                 }
+                {access && <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'dishes'}>Dishes</Link>}
                 {access && <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'tables'}>Tables</Link>}
                 {access && <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'kitchen'}>Kitchen</Link>}
                 {access && <Link className="hover:dark:text-slate-300 hover:text-slate-600 text-sm" to={'dashboard'}>Dashboard</Link>}
