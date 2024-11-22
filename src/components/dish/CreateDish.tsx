@@ -1,8 +1,7 @@
 import { useState } from "react"
 import useCreateDish from "../../hooks/api/dish/useCreateDish"
-import Button from "../ui/Button"
-import Modal from "../ui/Modal"
 import DishForm from "./DishForm"
+import Button from "../ui/Button"
 
 const CreateDish = () => {
 
@@ -10,20 +9,17 @@ const CreateDish = () => {
     const createDish = useCreateDish()
 
   return (
-    <div>
+    <>
         <Button 
             label="New Dish"
             onClick={() => setOpen(true)}
         />
-        <Modal
-            isOpen={open}
-            onClose={() => setOpen(false)}
-        >
-            <DishForm 
-                createDish={createDish}
-            />
-        </Modal>
-    </div>
+        <DishForm 
+            open={open}
+            setOpen={setOpen}
+            createDish={createDish}
+        />
+    </>
   )
 }
 
