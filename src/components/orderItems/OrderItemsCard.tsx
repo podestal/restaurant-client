@@ -19,11 +19,11 @@ const OrderItemsCard = ({ orderItem, editable, tableId }: Props) => {
             tableId={tableId}
         />}
         <div className="w-full flex flex-col justify-start items-start gap-2 px-4 my-2">
-            <div className="w-full flex justify-between items-center mx-auto">
-                <p className="font-bold font-poppins">{orderItem.name}</p>
+            <div className="w-full flex justify-between items-center mx-auto font-bold font-poppins text-2xl">
+                <p>{orderItem.name}</p>
                 <p>{orderItem.quantity}</p>
             </div>
-            <p className="text-slate-100">- {orderItem.observations}</p>
+            <p className="text-slate-100 text-xl">- {orderItem.observations}</p>
         </div>
     </motion.div>
   )

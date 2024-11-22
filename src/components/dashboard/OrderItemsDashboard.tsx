@@ -16,10 +16,8 @@ interface Props {
 const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Props) => {
 
     const today = new Date()
-    console.log('today', today.getDate());
-    console.log('orderItems', (orderItems[0].created_at).toString().split('-')[2]);
     const [dayFilter, setDayFilter] = useState(today.getDate())
-    const filteredOrderItems = orderItems.filter( orderItem => orderItem.created_at.toString().split('-')[2] === dayFilter.toString())
+    const filteredOrderItems = orderItems && orderItems.filter( orderItem => orderItem.created_at.toString().split('-')[2] === dayFilter.toString())
     
     // const filteredOrderItems = orderItems.filter( orderItem => )
 
