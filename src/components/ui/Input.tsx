@@ -89,7 +89,7 @@ const Input = forwardRef<HTMLInputElement, Props>(({
     }
 
     return (
-        <div className={`max-w-[300px] flex flex-col justify-center items-center gap-4 relative my-2 ${stylesContainer}`}>
+        <div className={`w-full flex flex-col justify-center items-center gap-4 relative my-2 ${stylesContainer}`}>
             <div className="relative w-full">
                 <style dangerouslySetInnerHTML={{ __html: styles.animation }} />
                 <input

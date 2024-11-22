@@ -2,7 +2,7 @@ import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-
 import getDishService, { Dish, DishCreate }  from "../../../services/api/dishService"
 import { DISHES_CACHE_KEY } from "../../../utils/keys"
 
-interface DishCreateData {
+export interface DishCreateData {
     access: string
     dish: DishCreate
 }

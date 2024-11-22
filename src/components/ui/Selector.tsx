@@ -25,7 +25,7 @@ const Selector = <T extends Item>({ values, defaultValue, setter, label, all }: 
             <select
                 defaultValue={defaultValue} // Set the default selected value
                 onChange={e => setter(parseInt(e.target.value))} // Call setter with selected value
-                className="bg-gray-950 border-gray-800 rounded-lg w-full text-sm text-slate-50"
+                className="bg-gray-950 rounded-lg w-full text-xs text-slate-50 py-[8px] border-2 dark:border-gray-800 border-neutral-400"
             >
                 {all 
                 ?
