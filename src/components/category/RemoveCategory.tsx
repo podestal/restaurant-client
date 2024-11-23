@@ -5,6 +5,7 @@ import Modal from "../ui/Modal"
 import Button from "../ui/Button"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import useRemoveCategory from "../../hooks/api/category/useRemoveCategory"
+import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 
 interface Props {
     category: Category
@@ -15,9 +16,22 @@ const RemoveCategory = ({ category }: Props) => {
     const [open, setOpen] = useState(false)
     const access = useAuthStore(s => s.access) || ''
     const removeCategory = useRemoveCategory({ categoryId: category.id })
+    const { setShow, setType, setMessage } = useNotificationsStore()
 
     const handleRemove = () => {
-        removeCategory.mutate({ access })
+        removeCategory.mutate({ access }, {
+            onSuccess: () => {
+                setShow(true)
+                setType('success')
+                setMessage('Category removed')
+            },
+            onError: (err) => {
+                setShow(true)
+                setType('error')
+                const errorMsg = err.response?.status === 500 ? 'This Category have some dishes linked to it' : `Error: ${err.message}`
+                setMessage(errorMsg)
+            }
+        })
     }
 
   return (
