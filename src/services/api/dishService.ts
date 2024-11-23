@@ -7,7 +7,7 @@ export interface Dish {
     cost: number
     created_at: Date
     available: boolean
-    picture: string
+    picture_url: string
     category: number
 }
 

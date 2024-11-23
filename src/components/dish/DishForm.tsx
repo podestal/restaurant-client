@@ -31,7 +31,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const [name, setName] = useState(dish ? dish.name : '')
     const [description, setDescription] = useState(dish ? dish.description : '')
     const [cost, setCost] = useState(dish ? String(dish.cost ): '')
-    const [picture, setPicture] = useState(dish ? dish.picture : '')
+    const [picture_url, setPicture] = useState(dish ? dish.picture_url : '')
     const [category, setCategory] = useState(dish ? dish.category : 0)
 
     const [nameError, setNameError] = useState('')
@@ -64,7 +64,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
             return
         }
 
-        if (!picture) {
+        if (!picture_url) {
             setPictureError('Picture is required')
             return
         }
@@ -80,7 +80,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 name,
                 description,
                 cost: parseInt(cost),
-                picture,
+                picture_url,
                 category
             },
             access
@@ -110,7 +110,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                     name,
                     description,
                     cost: parseInt(cost),
-                    picture,
+                    picture_url,
                     category
                 },
                 access
@@ -176,9 +176,9 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
             />
             <Input 
                 placeholder="Picture"
-                value={picture}
+                value={picture_url}
                 onChange={e =>{
-                    picture && setPictureError('')
+                    picture_url && setPictureError('')
                     setPicture(e.target.value)
                 }}
                 error={pictureError}
