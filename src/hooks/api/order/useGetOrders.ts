@@ -14,7 +14,7 @@ const useGetOrders = ({ access, tableId, status }: Props): UseQueryResult<Order[
     return useQuery({
         queryKey: ORDER_CACHE_KEY,
         queryFn: () => orderService.get(access),
-        staleTime: 1 * 60 * 1000
+        staleTime: 1 * 60 * 1000,
     })
 }
 
