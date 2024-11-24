@@ -11,6 +11,7 @@ import CategorySelector from "../category/CategorySelector"
 import Modal from "../ui/Modal"
 import { UpdateDishData } from "../../hooks/api/dish/useUpdateDish"
 import Switch from "../ui/Switch"
+import ImageUploader from "../ui/ImageUploader"
 
 interface Props {
     open: boolean
@@ -174,7 +175,10 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 }}
                 error={costError}
             />
-            <Input 
+            <ImageUploader 
+            
+            />
+            {/* <Input 
                 placeholder="Picture"
                 value={picture_url}
                 onChange={e =>{
@@ -182,7 +186,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                     setPicture(e.target.value)
                 }}
                 error={pictureError}
-            />
+            /> */}
             <CategorySelector 
                 setSelectedCategory={setCategory}
                 categoryId={dish?.category}

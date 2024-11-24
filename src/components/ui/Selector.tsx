@@ -52,13 +52,13 @@ const Selector = <T extends Item>({ values, defaultValue, setter, label, all, er
     return (
         <div className="lg:w-full w-[60%] flex flex-col mx-auto justify-center items-center gap-4">
             {/* Label for the selector */}
-            <p className="text-slate-50">{label}</p>
+            <p className="dark:text-slate-50">{label}</p>
             {/* Dropdown (select) element */}
             <style dangerouslySetInnerHTML={{ __html: styles.animation }} />
             <select
                 defaultValue={defaultValue} // Set the default selected value
                 onChange={e => setter(parseInt(e.target.value))} // Call setter with selected value
-                className={`dark:bg-gray-950 bg-slate-100  rounded-lg w-full dark:text-slate-50 text-xs pl-2 py-[8px] border-2 ${error ? 'border-red-600 shake' : ' dark:border-gray-800 border-neutral-200'}`}
+                className={`dark:bg-gray-950 bg-slate-100  rounded-lg w-full dark:text-slate-50 text-xs pl-2 py-[8px] border-2 ${error ? 'border-red-600 shake' : ' border-neutral-400 dark:border-gray-800'}`}
             >
                 {all 
                 ?
