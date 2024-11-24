@@ -1,6 +1,7 @@
 import { Order } from "../../services/api/orderService"
 import CreateOrderItem from "../orderItems/CreateOrderItem"
 import OrderItems from "../orderItems/OrderItems"
+import RemoveOrder from "./RemoveOrder"
 import UpdateOrder from "./UpdateOrder"
 
 interface Props {
@@ -15,11 +16,18 @@ const OrderCard = ({ order, tableId, setEnableCreateOrder, billId }: Props) => {
     const orderItems = order.order_items || []
     const orderId = order.id
     const editable = order.status === 'P' ? true : false
+    const canRemoveOrder = orderItems.length > 0 ? true : false
 
   return (
     <div className={`${!editable && 'bg-blue-700 rounded-xl py-4'}`}>
         <div className={`flex ${editable ? ' justify-between' : ' justify-center'} items-start mt-6`}>
             <p className="text-2xl font-poppins font-bold">Order # {orderId}</p>
+            <RemoveOrder 
+                canRemoveOrder={canRemoveOrder}
+                orderId={order.id}
+                tableId={tableId}
+                setEnableCreateOrder={setEnableCreateOrder}
+            />
             {editable && 
             <UpdateOrder 
                 tableId={tableId}

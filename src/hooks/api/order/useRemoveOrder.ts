@@ -8,13 +8,14 @@ interface RemoveOrderData {
 
 interface Props {
     orderId: number
-    status: string
+    status?: string
+    tableId?: number
 }
 
-const useRemoveOrder = ({ orderId, status }: Props): UseMutationResult<Order, Error, RemoveOrderData> => {
+const useRemoveOrder = ({ orderId, status, tableId }: Props): UseMutationResult<Order, Error, RemoveOrderData> => {
     
     const orderService = getOrderService({ orderId })
-    const ORDER_CACHE_KEY = getOrderCacheKey({ status })
+    const ORDER_CACHE_KEY = tableId ? getOrderCacheKey({ tableId }) : getOrderCacheKey({ status })
     const queryClient = useQueryClient()
 
     return useMutation({
