@@ -47,7 +47,7 @@ const Login = () => {
     }
 
   return (
-    <>
+    <div className="w-[20%] mx-auto">
         <h2 className="text-4xl font-bold font-palanquin text-center mb-12 mt-36">Login</h2>
         <form 
             onSubmit={handleLogin}
@@ -71,7 +71,7 @@ const Login = () => {
                 loading={loading}
             />
         </form>
-    </>
+    </div>
   )
 }
 

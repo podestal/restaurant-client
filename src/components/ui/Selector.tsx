@@ -58,7 +58,7 @@ const Selector = <T extends Item>({ values, defaultValue, setter, label, all, er
             <select
                 defaultValue={defaultValue} // Set the default selected value
                 onChange={e => setter(parseInt(e.target.value))} // Call setter with selected value
-                className={`bg-gray-950 rounded-lg w-full dark:text-slate-50 text-xs pl-2 py-[8px] border-2 ${error ? 'border-red-600 shake' : ' dark:border-gray-800 border-neutral-40'}`}
+                className={`dark:bg-gray-950 bg-slate-100  rounded-lg w-full dark:text-slate-50 text-xs pl-2 py-[8px] border-2 ${error ? 'border-red-600 shake' : ' dark:border-gray-800 border-neutral-200'}`}
             >
                 {all 
                 ?

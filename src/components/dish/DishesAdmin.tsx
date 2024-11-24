@@ -25,7 +25,7 @@ const DishesAdmin = () => {
                     label: 'Dishes',
                     content:         
                     <>
-                        <div className="w-full flex justify-evenly items-center gap-12 mb-6">
+                        <div className="w-full flex justify-evenly items-center gap-12 mb-6 pl-4">
                             <CreateDish />
                             <Input 
                                 placeholder="Filter by name ..."

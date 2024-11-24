@@ -14,7 +14,7 @@ const Switch = ({ value, setter, label }: Props) => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-4">
-        {label && <p className="text-lg lg:text-xl text-slate-50 text-center">{label}</p>}
+        {label && <p className="text-lg lg:text-xl dark:text-slate-50 text-center">{label}</p>}
         <div 
             className={`relative inline-block w-12 h-6 transition duration-200 ease-in 
                         ${value ? 'bg-blue-600' : 'bg-gray-300'} 

@@ -95,7 +95,7 @@ const Input = forwardRef<HTMLInputElement, Props>(({
                 <input
                     ref={ref}
                     className={`bg-slate-100 dark:bg-gray-950 border-neutral-400 dark:border-gray-800 border-2 rounded-lg w-full dark:text-slate-50 text-xs px-2 py-2 focus:border-blue-700 focus:outline-none
-                                ${showError ? 'border-red-500 dark:border-red-600 shake' : 'dark:border-gray-800 border-neutral-400'}
+                                ${showError ? 'border-red-500 dark:border-red-600 shake' : 'dark:border-gray-800 border-neutral-200'}
                             `}
                     placeholder={placeholder ? placeholder : 'Input ...'}
                     type={showPassword && type === 'password' ? 'text' : type} // Use showPassword to toggle visibility

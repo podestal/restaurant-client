@@ -14,6 +14,7 @@ const CategoryCardAdmin = ({ category }: Props) => {
         <RemoveCategory 
             category={category}
         />
+        
         <p>{category.name}</p>
     </motion.div>
   )

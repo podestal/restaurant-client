@@ -68,8 +68,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(({
                 <style dangerouslySetInnerHTML={{ __html: styles.animation }} />
                 <textarea
                     ref={ref} 
-                    className={`h-[100px] bg-white dark:bg-gray-950  border-2  rounded-lg w-full dark:text-slate-50 text-gray-900 text-xs px-2 py-2 focus:border-blue-700 focus:outline-none
-                                ${error ? 'border-red-500 shake' : 'border-gray-300 dark:border-gray-800'}
+                    className={`h-[100px] bg-slate-100 dark:bg-gray-950  border-2  rounded-lg w-full dark:text-slate-50 text-gray-900 text-xs px-2 py-2 focus:border-blue-700 focus:outline-none
+                                ${error ? 'border-red-500 shake' : 'border-gray-300 dark:border-gray-200'}
                             `}
                     placeholder={placeholder ? placeholder : 'Text ...'}
                     value={value}
