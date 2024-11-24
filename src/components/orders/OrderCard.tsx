@@ -19,15 +19,15 @@ const OrderCard = ({ order, tableId, setEnableCreateOrder, billId }: Props) => {
     const canRemoveOrder = orderItems.length > 0 ? true : false
 
   return (
-    <div className={`${!editable && 'bg-blue-700 rounded-xl py-4'}`}>
+    <div className={`${!editable && 'bg-blue-700 rounded-xl py-4 my-6'}`}>
         <div className={`flex ${editable ? ' justify-between' : ' justify-center'} items-start mt-6`}>
             <p className="text-2xl font-poppins font-bold">Order # {orderId}</p>
-            <RemoveOrder 
+            {editable && <RemoveOrder 
                 canRemoveOrder={canRemoveOrder}
                 orderId={order.id}
                 tableId={tableId}
                 setEnableCreateOrder={setEnableCreateOrder}
-            />
+            />}
             {editable && 
             <UpdateOrder 
                 tableId={tableId}
