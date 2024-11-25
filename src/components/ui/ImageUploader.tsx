@@ -1,14 +1,16 @@
 interface Props {
     image: File | null
-    setImage:   React.Dispatch<React.SetStateAction<File | null>>
+    setImage: React.Dispatch<React.SetStateAction<File | null>>
+    setPreview: React.Dispatch<React.SetStateAction<string>>
 }
 
-const ImageUploader = ({ image, setImage }: Props) => {
+const ImageUploader = ({ image, setImage, setPreview }: Props) => {
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
     if (file) {
-      setImage(file);
+      setImage(file)
+      e.target.files && setPreview(URL.createObjectURL(e.target.files[0]))
     }
   };
 

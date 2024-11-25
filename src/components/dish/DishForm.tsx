@@ -33,8 +33,9 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const [description, setDescription] = useState(dish ? dish.description : '')
     const [cost, setCost] = useState(dish ? String(dish.cost ): '')
     const [picture, setPicture] = useState<File | null>(null);
-    // const [image, setImage] = useState<string | null>(null)
     const [category, setCategory] = useState(dish ? dish.category : 0)
+
+    const [preview, setPreview] = useState(dish?.picture_url ? dish.picture_url : '')
 
     const [nameError, setNameError] = useState('')
     const [descriptionError, setDescriptionError] = useState('')
@@ -42,8 +43,21 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const [pictureError, setPictureError] = useState('')
     const [categoryError, setCategoryError] = useState('')
 
-    console.log('picture',dish?.picture_url)
-    console.log('picture',picture)
+    console.log('picture', picture);
+    
+
+    const handleCloseModal = () => {
+        if (!dish) {
+            
+            setName('')
+            setDescription('')
+            setCost('')
+            setPicture(null)
+        }
+        setDisabled(false)
+        setOpen(false)
+        setPreview(dish?.picture_url ? dish.picture_url : '')
+    }
     
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -135,10 +149,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
   return (
     <Modal
         isOpen={open}
-        onClose={() => {
-            setOpen(false)
-            setDisabled(false)
-        }}
+        onClose={handleCloseModal}
     >
         <form 
             className="flex flex-col justify-center items-center mx-auto gap-6 w-[60%] my-6"
@@ -175,17 +186,11 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 }}
                 error={costError}
             />
-            {/* {dish?.picture_url 
-            ? 
-            <img src={dish.picture_url} alt={dish.picture_url} className="w-[200px] h-[100px] object-cover cursor-pointer hover:opacity-80" />
-            : 
+            {preview && <img src={preview} alt={preview} className="w-[200px] h-[100px] object-cover cursor-pointer" />}
             <ImageUploader  
                 image={picture}
                 setImage={setPicture}
-            />} */}
-            <ImageUploader  
-                image={picture}
-                setImage={setPicture}
+                setPreview={setPreview}
             />
             <CategorySelector 
                 setSelectedCategory={setCategory}
