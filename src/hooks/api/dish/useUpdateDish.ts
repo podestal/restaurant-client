@@ -4,7 +4,7 @@ import { DISHES_CACHE_KEY } from "../../../utils/keys"
 
 export interface UpdateDishData {
     access: string
-    dish: Dish
+    dish: FormData
 }
 
 interface Props {

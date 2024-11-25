@@ -55,7 +55,7 @@ class APIClient<ResponseType, RequestType = ResponseType> {
         }
 
         return axiosInstance
-            .put<ResponseType>(this.endpoint, data, config)
+            .patch<ResponseType>(this.endpoint, data, config)
             .then(res => res.data)
     }
 

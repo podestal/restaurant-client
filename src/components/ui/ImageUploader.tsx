@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface Props {
     image: File | null
     setImage:   React.Dispatch<React.SetStateAction<File | null>>

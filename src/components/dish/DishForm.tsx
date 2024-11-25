@@ -42,6 +42,10 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const [pictureError, setPictureError] = useState('')
     const [categoryError, setCategoryError] = useState('')
 
+    console.log('picture',dish?.picture_url)
+    console.log('picture',picture)
+    
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault()        
@@ -109,7 +113,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
 
         if (dish) {
             updateDish && updateDish.mutate({
-                dish: {...dish, ...formData},
+                dish:formData,
                 access
             }, {
                 onSuccess: () => {
@@ -171,6 +175,14 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 }}
                 error={costError}
             />
+            {/* {dish?.picture_url 
+            ? 
+            <img src={dish.picture_url} alt={dish.picture_url} className="w-[200px] h-[100px] object-cover cursor-pointer hover:opacity-80" />
+            : 
+            <ImageUploader  
+                image={picture}
+                setImage={setPicture}
+            />} */}
             <ImageUploader  
                 image={picture}
                 setImage={setPicture}
