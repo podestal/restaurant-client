@@ -13,7 +13,7 @@ const CreateOrder = ({ tableId }: Props) => {
     const createOrder = useCreateOrder({ tableId })
 
     const handleCreateOrder = () => {
-        createOrder.mutate({ order: { created_by: userId, table: tableId, status: 'P'
+        createOrder.mutate({ order: { created_by: userId, table: tableId, status: 'P', order_type:'I'
          }, access })
     }
 

@@ -32,7 +32,12 @@ const Orders = ({ tableId, setEnableCreateOrder, setAllowRemoveBill, billId }: P
     useEffect(() => {
         if (orders) {
             
-            orders.length === 0 ? setAllowRemoveBill(false) : setAllowRemoveBill(true)
+            orders.map( order => {
+                if (order.status === 'S' || order.status === 'P') {
+                    setAllowRemoveBill(true)
+                    return 
+                }
+            })
             orders.forEach(order => {
                 if (order.status === 'P') {
                     setEnableCreateOrder(false)

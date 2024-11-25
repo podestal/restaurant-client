@@ -26,7 +26,7 @@ const UpdateOrder = ({ tableId, order, setEnableCreateOrder }: Props) => {
             return
         }
         
-        updateOrder.mutate({ updates: { table: tableId, status: 'S', created_by: userId }, access }, {
+        updateOrder.mutate({ updates: { table: tableId, status: 'S', created_by: userId, order_type:'I' }, access }, {
             onSuccess: () => {
                 setEnableCreateOrder(true)
             }

@@ -6,8 +6,8 @@ import { motion } from "framer-motion"
 import OrderTimer from "./OrderTimer"
 import Modal from "../ui/Modal"
 import Button from "../ui/Button"
-import { RiRestaurantFill } from "@remixicon/react"
 import useUpdateOrder from "../../hooks/api/order/useUpdateOrder"
+import OrderType from "./OrderType"
 
 interface Props {
     order: Order
@@ -30,9 +30,11 @@ const SimpleOrderCard = ({ order }: Props) => {
             layout
             onDoubleClick={() => setOpen(true)}
             className={`w-full flex flex-col justify-start items-start gap-2 px-8 my-2 ${background} rounded-xl py-4`}>
-
+            <>{console.log('order', order)}</>
             <div className="w-full flex justify-center items-start mt-2 gap-12">
-                <RiRestaurantFill size={36}/>
+                <OrderType 
+                    orderType={order.order_type}
+                />
                 {order.waiter && <h2 className="text-center text-4xl mb-4 font-poppins font-semibold">{order.waiter}</h2>}
             </div>
             <OrderTimer 

@@ -16,6 +16,7 @@ export interface Order {
     status: string
     created_by: number
     waiter: string
+    order_type: string
     order_items: SimpleOrderItem[]
 }
 
