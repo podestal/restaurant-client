@@ -2,6 +2,8 @@ import { useEffect } from "react"
 import useGetOrders from "../../hooks/api/order/useGetOrders"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import OrderCard from "./OrderCard"
+import { useQueryClient } from "@tanstack/react-query"
+import { getOrderCacheKey } from "../../utils/keys"
 
 interface Props {
     tableId: number
@@ -14,10 +16,21 @@ const Orders = ({ tableId, setEnableCreateOrder, setAllowRemoveBill, billId }: P
 
     const access = useAuthStore(s => s.access) || ''
     const {data: orders, isLoading, isError, error, isSuccess} = useGetOrders({ access, tableId })
+    const ORDER_CACHE_KEY = getOrderCacheKey({ tableId })
+    const queryClient = useQueryClient()
+
+    useEffect(() => {
+        const socket = new WebSocket(import.meta.env.VITE_WS_ORDERS_URL);
+    
+        socket.onmessage = () => {
+          queryClient.invalidateQueries({ queryKey: ORDER_CACHE_KEY })
+        };
+    
+        return () => socket.close();
+      }, [queryClient]);
 
     useEffect(() => {
         if (orders) {
-            console.log('orders',orders);
             
             orders.length === 0 ? setAllowRemoveBill(false) : setAllowRemoveBill(true)
             orders.forEach(order => {
@@ -36,7 +49,9 @@ const Orders = ({ tableId, setEnableCreateOrder, setAllowRemoveBill, billId }: P
 
   return (
     <div className="w-full">
-        {orders.map( order => (
+        {orders
+        .filter( order => order.status === 'P' || order.status === 'S')
+        .map( order => (
             <OrderCard 
                 key={order.id}
                 order={order}

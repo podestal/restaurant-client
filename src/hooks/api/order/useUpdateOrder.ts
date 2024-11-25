@@ -8,22 +8,23 @@ interface UpdateOrderData {
 }
 
 interface Props {
-    tableId: number
+    tableId?: number
     orderId: number
+    status?:string
 }
 
-const useUpdateOrder = ({ tableId, orderId }: Props): UseMutationResult<Order, Error, UpdateOrderData> => {
+const useUpdateOrder = ({ tableId, orderId, status }: Props): UseMutationResult<Order, Error, UpdateOrderData> => {
 
     const orderService = getOrderService({ orderId})
-    const ORDER_CACHE_KEY = getOrderCacheKey({tableId})
-    const BILL_CACHE_KEY = getBillCacheKey(tableId)
+    const ORDER_CACHE_KEY = tableId ? getOrderCacheKey({tableId}) : getOrderCacheKey({status})
+    const BILL_CACHE_KEY = tableId && getBillCacheKey(tableId)
     const queryClient = useQueryClient()
 
     return useMutation({
         mutationFn: (data: UpdateOrderData) => orderService.update(data.updates, data.access),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ORDER_CACHE_KEY })
-            queryClient.invalidateQueries({ queryKey: BILL_CACHE_KEY })
+            BILL_CACHE_KEY && queryClient.invalidateQueries({ queryKey: BILL_CACHE_KEY })
         },
         onError: err => {
             console.log(err)

@@ -1,5 +1,4 @@
 import { useState } from "react"
-import useRemoveOrder from "../../hooks/api/order/useRemoveOrder"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import { Order } from "../../services/api/orderService"
 import OrderItems from "../orderItems/OrderItems"
@@ -7,6 +6,8 @@ import { motion } from "framer-motion"
 import OrderTimer from "./OrderTimer"
 import Modal from "../ui/Modal"
 import Button from "../ui/Button"
+import { RiRestaurantFill } from "@remixicon/react"
+import useUpdateOrder from "../../hooks/api/order/useUpdateOrder"
 
 interface Props {
     order: Order
@@ -15,12 +16,12 @@ interface Props {
 const SimpleOrderCard = ({ order }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
-    const removeOrder = useRemoveOrder({ orderId: order.id, status: 'S' })
     const [background, setBackground] = useState('bg-green-600')
     const [open, setOpen] = useState(false)
+    const updateOrder = useUpdateOrder({ orderId: order.id, status: 'S' })
 
     const handleRemove = () => {
-        removeOrder.mutate({ access })
+        updateOrder.mutate({updates: {...order, status: 'C'}, access })
     }
 
   return (
@@ -29,13 +30,15 @@ const SimpleOrderCard = ({ order }: Props) => {
             layout
             onDoubleClick={() => setOpen(true)}
             className={`w-full flex flex-col justify-start items-start gap-2 px-8 my-2 ${background} rounded-xl py-4`}>
+
             <div className="w-full flex justify-center items-start mt-2 gap-12">
+                <RiRestaurantFill size={36}/>
                 {order.waiter && <h2 className="text-center text-4xl mb-4 font-poppins font-semibold">{order.waiter}</h2>}
-                <OrderTimer 
-                    order={order}
-                    setBackground={setBackground}
-                />
             </div>
+            <OrderTimer 
+                order={order}
+                setBackground={setBackground}
+            />
             <OrderItems 
                 orderItems={order.order_items}
                 editable={false}

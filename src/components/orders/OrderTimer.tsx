@@ -64,7 +64,9 @@ const OrderTimer = ({ order, setBackground }: Props) => {
     }, [time.minutes])
 
   return (
-    <p className="text-4xl font-bold font-poppins">{time.summary}</p>
+    <div className="w-full flex justify-center">
+        <p className="text-4xl font-bold font-poppins">{time.summary}</p>   
+    </div>
   )
 }
 

@@ -28,7 +28,7 @@ interface Props {
 }
 
 const getOrderService = ({ tableId, orderId, status }: Props) => {
-    let url = ''
+    let url = 'orders/'
     if (tableId !== undefined) {
         url = `orders/?table=${tableId}&status=`
         // url = orderId ? `orders/${orderId}/` : `orders/?table=${tableId}&status=`
