@@ -20,7 +20,9 @@ export interface Order {
     order_items: SimpleOrderItem[]
 }
 
-export type OrderCreate = Omit<Order, 'id' |'created_at' | 'updated_at' | 'order_items' | 'waiter'>
+export type OrderCreate = Omit<Order, 'id' |'created_at' | 'updated_at' | 'order_items' | 'waiter' | 'table'> & {
+    table: number | null
+}
 
 interface Props {
     tableId?: number
@@ -32,10 +34,9 @@ const getOrderService = ({ tableId, orderId, status }: Props) => {
     let url = 'orders/'
     if (tableId !== undefined) {
         url = `orders/?table=${tableId}&status=`
-        // url = orderId ? `orders/${orderId}/` : `orders/?table=${tableId}&status=`
     } else if (status !== undefined) {
         url = `orders/?table=&status=${status}`
-    } else {
+    } else if (orderId) {
         url = `orders/${orderId}/`
     }
 

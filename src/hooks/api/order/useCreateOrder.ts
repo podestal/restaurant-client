@@ -8,7 +8,7 @@ export interface CreateOrderData {
 }
 
 interface Props {
-    tableId: number
+    tableId?: number
 }
 
 const useCreateOrder = ({ tableId }: Props): UseMutationResult<Order, Error, CreateOrderData> => {

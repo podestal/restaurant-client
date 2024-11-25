@@ -1,3 +1,4 @@
+import CreateOrder from "../components/orders/CreateOrder"
 import useGetCart from "../hooks/api/cart/useGetCart"
 import useSessionIdStore from "../hooks/store/useSessionIdStore"
 
@@ -16,6 +17,9 @@ const CheckoutPage = () => {
     <div className="2xl:max-w-[1280px] mx-auto">
         <>{console.log('cart', cart)}</>
         <h2 className="mt-10 text-4xl">Checkout ...</h2>
+        <CreateOrder
+          orderType="T" 
+        />
     </div>
   )
 }
