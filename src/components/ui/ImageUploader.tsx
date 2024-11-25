@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
-const ImageUploader: React.FC = () => {
-  const [fileName, setFileName] = useState<string | null>(null);
+interface Props {
+    image: File | null
+    setImage:   React.Dispatch<React.SetStateAction<File | null>>
+}
+
+const ImageUploader = ({ image, setImage }: Props) => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setFileName(file.name);
+      setImage(file);
     }
   };
 
@@ -44,9 +48,9 @@ const ImageUploader: React.FC = () => {
       />
 
       {/* Display Selected File Name */}
-      {fileName && (
+      {image && (
         <p className="text-sm text-gray-600">
-          Selected File: <span className="font-medium">{fileName}</span>
+          Selected File: <span className="font-medium">{image.name}</span>
         </p>
       )}
     </div>

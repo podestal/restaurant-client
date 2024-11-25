@@ -1,10 +1,10 @@
 import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query"
-import getDishService, { Dish, DishCreate }  from "../../../services/api/dishService"
+import getDishService, { Dish }  from "../../../services/api/dishService"
 import { DISHES_CACHE_KEY } from "../../../utils/keys"
 
 export interface DishCreateData {
     access: string
-    dish: DishCreate
+    dish: FormData
 }
 
 const useCreateDish = (): UseMutationResult<Dish, Error, DishCreateData> => {

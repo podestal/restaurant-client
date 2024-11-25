@@ -11,11 +11,13 @@ export interface Dish {
     category: number
 }
 
-export type DishCreate = Omit<Dish, 'id'| 'created_at'>
+export type DishCreate = Omit<Dish, 'id'| 'created_at' | 'picture_url'> & {
+    picture: File
+}
 
 const getDishService = (dishId?: number) => {
     const URL = dishId ? `dishes/${dishId}/` : 'dishes/'
-    return new APIClient<Dish, DishCreate>(URL)
+    return new APIClient<Dish, FormData>(URL)
 }
 
 export default getDishService

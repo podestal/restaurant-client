@@ -32,7 +32,8 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const [name, setName] = useState(dish ? dish.name : '')
     const [description, setDescription] = useState(dish ? dish.description : '')
     const [cost, setCost] = useState(dish ? String(dish.cost ): '')
-    const [picture_url, setPicture] = useState(dish ? dish.picture_url : '')
+    const [picture, setPicture] = useState<File | null>(null);
+    // const [image, setImage] = useState<string | null>(null)
     const [category, setCategory] = useState(dish ? dish.category : 0)
 
     const [nameError, setNameError] = useState('')
@@ -43,7 +44,8 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
-        e.preventDefault()
+        e.preventDefault()        
+
         setDisabled(false)
         setNameError('')
         setDescriptionError('')
@@ -65,8 +67,9 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
             return
         }
 
-        if (!picture_url) {
+        if (picture === null) {
             setPictureError('Picture is required')
+            console.log('pictureError', pictureError);
             return
         }
 
@@ -75,15 +78,16 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
             return
         }
 
+        const formData = new FormData
+        formData.append('available', available.toString())
+        formData.append('name', name)
+        formData.append('description', description)
+        formData.append('cost', cost)
+        picture && formData.append("picture", picture)
+        formData.append('category', category.toString())
+
         createDish && createDish.mutate({
-            dish: {
-                available,
-                name,
-                description,
-                cost: parseInt(cost),
-                picture_url,
-                category
-            },
+            dish: formData,
             access
         }, {
             onSuccess: () => {
@@ -93,7 +97,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 setName('')
                 setDescription('')
                 setCost('')
-                setPicture('')
+                setPicture(null)
             },
             onError: err => {
                 setShow(true)
@@ -105,15 +109,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
 
         if (dish) {
             updateDish && updateDish.mutate({
-                dish: {
-                    ...dish,
-                    available,
-                    name,
-                    description,
-                    cost: parseInt(cost),
-                    picture_url,
-                    category
-                },
+                dish: {...dish, ...formData},
                 access
             }, {
                 onSuccess: () => {
@@ -175,18 +171,10 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 }}
                 error={costError}
             />
-            <ImageUploader 
-            
+            <ImageUploader  
+                image={picture}
+                setImage={setPicture}
             />
-            {/* <Input 
-                placeholder="Picture"
-                value={picture_url}
-                onChange={e =>{
-                    picture_url && setPictureError('')
-                    setPicture(e.target.value)
-                }}
-                error={pictureError}
-            /> */}
             <CategorySelector 
                 setSelectedCategory={setCategory}
                 categoryId={dish?.category}
