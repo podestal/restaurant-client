@@ -5,18 +5,20 @@ import Button from "../ui/Button"
 interface Props {
     tableId?: number
     orderType?: string
+    status?: string
+    cart?: number
 }
 
-const CreateOrder = ({ tableId, orderType='I' }: Props) => {
+const CreateOrder = ({ tableId, orderType='I', status='P', cart }: Props) => {
 
     const userId = useAuthStore(s => s.userId)
     const access = useAuthStore(s => s.access) || ''
-    const createOrder = useCreateOrder({ tableId })
+    const createOrder = useCreateOrder({ tableId, cart })
     const table = tableId ? tableId : null
     const buttonLabel = orderType === 'I' ? 'New Order' : 'Place Order'
 
     const handleCreateOrder = () => {
-        createOrder.mutate({ order: { created_by: userId, table, status: 'P', order_type:orderType
+        createOrder.mutate({ order: { created_by: userId, table, status, order_type:orderType
          }, access })
     }
 

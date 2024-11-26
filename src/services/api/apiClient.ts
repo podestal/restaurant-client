@@ -31,11 +31,15 @@ class APIClient<ResponseType, RequestType = ResponseType> {
             .then(res => res.data);
     }
 
-    post = (data: RequestType, access?: string, option?: string) => {
+    post = (data: RequestType, access?: string, option?: string, cart?: number) => {
 
         const config: any = {}
         if (access) {
             config.headers = { Authorization: `JWT ${access}` }
+        }
+
+        if (cart) {
+            config.params = { cart }
         }
 
         if (option) {
