@@ -1,4 +1,5 @@
 import AnonymousUserForm from "../components/checkout/AnonymousUserForm"
+import OrderTotal from "../components/checkout/OrderTotal"
 import useGetCart from "../hooks/api/cart/useGetCart"
 import useSessionIdStore from "../hooks/store/useSessionIdStore"
 
@@ -15,14 +16,12 @@ const CheckoutPage = () => {
 
   return (
     <div className="2xl:max-w-[1280px] mx-auto">
-        <h2 className="mt-10 text-4xl">Checkout ...</h2>
-        <AnonymousUserForm 
-          cartId={cart[0].id}
-        />
-        {/* <CreateOrder
-          orderType="T"
-
-        /> */}
+        <div className="w-full grid grid-cols-3 h-full mt-24">
+            <AnonymousUserForm 
+              cartId={cart[0].id}
+            />
+            <OrderTotal />
+        </div>
     </div>
   )
 }
