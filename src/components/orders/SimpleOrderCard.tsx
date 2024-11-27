@@ -21,7 +21,8 @@ const SimpleOrderCard = ({ order }: Props) => {
     const updateOrder = useUpdateOrder({ orderId: order.id, status: 'S' })
 
     const handleRemove = () => {
-        updateOrder.mutate({updates: {...order, status: 'C'}, access })
+        const table = order.table ? order.table : null
+        updateOrder.mutate({updates: {...order, table, status: 'C'}, access })
     }
 
   return (
@@ -35,7 +36,7 @@ const SimpleOrderCard = ({ order }: Props) => {
                 <OrderType 
                     orderType={order.order_type}
                 />
-                {order.waiter && <h2 className="text-center text-4xl mb-4 font-poppins font-semibold">{order.waiter}</h2>}
+                <h2 className="text-center text-4xl mb-4 font-poppins font-semibold">{order.waiter ? order.waiter : order.customer_name}</h2>
             </div>
             <OrderTimer 
                 order={order}
