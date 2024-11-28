@@ -2,10 +2,8 @@ import { useState } from "react"
 import { Item } from "../../services/api/cartService"
 import RemoveCardItem from "./RemoveCardItem"
 import { motion } from "framer-motion"
-import ItemCounter from "../cart/ItemCounter"
 import Button from "../ui/Button"
-import TextArea from "../ui/TextArea"
-import useUpdateCartItem from "../../hooks/api/cartItem/useUpdateCartItem"
+import UpdateCartItem from "./UpdateCartItem"
 
 interface Props {
     cartItem: Item
@@ -15,44 +13,17 @@ interface Props {
 const CartItemCard = ({ cartItem, cartId }: Props) => {
 
     const [update, setUpdate] = useState(false)
-    const [counter, setCounter] = useState(cartItem.quantity)
-    const [observations, setObservations] = useState(cartItem.observations)
-    const updateCartItem = useUpdateCartItem({ cartId, cartItemId: cartItem.id })
-
-    const handleUpdate = () => {
-        updateCartItem.mutate({
-            updates: {...cartItem, dish:cartItem.dish_id, cart: cartId, observations, quantity: counter},
-            access: ''
-        }, {
-            onSuccess: () => {
-                setUpdate(false)
-            }
-        })
-    }
 
 
   return (
     <>
         {update 
         ? 
-        <div>
-            <div className="w-full grid grid-cols-3 gap-12 my-6 place-items-center">
-                <ItemCounter 
-                    counter={counter}
-                    setCounter={setCounter}
-                />
-                <p className="text-xl font-bold font-palanquin col-span-2">{cartItem.name}</p>
-            </div>
-            <TextArea 
-                placeholder="Observations ..."
-                value={observations}
-                onChange={e => setObservations(e.target.value)}
-            />
-            <Button 
-                label="Save"
-                onClick={handleUpdate}
-            />
-        </div> 
+        <UpdateCartItem 
+            cartId={cartId}
+            cartItem={cartItem}
+            setUpdate={setUpdate}
+        />
         : 
         <motion.div 
             layout
