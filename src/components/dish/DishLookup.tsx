@@ -44,12 +44,12 @@ const DishLookup = ({ setDish, setCost, setDishLookup, dishLookup, dishError, se
             initial={{opacity: 0, translateY: -30}}
             whileInView={{opacity: 1, translateY: 0}}
             transition={{duration: 0.5}}
-            className="bg-slate-800 rounded-3xl w-full"
+            className="dark:bg-slate-800 bg-slate-200 rounded-3xl w-full"
         >
             {showDishes && dishLookup.length > 0 && dishes
                 .filter(dish => dish.name.toLowerCase().includes(dishLookup.toLowerCase()))
                 .map( dish => (
-                    <div key={dish.id} className="px-6 py-2 hover:bg-blue-700 rounded-3xl">
+                    <div key={dish.id} className="px-6 py-2 hover:bg-blue-700 rounded-3xl hover:text-slate-50 my-2">
                         <p
                             onClick={() => {
                                 setDishLookup(dish.name)

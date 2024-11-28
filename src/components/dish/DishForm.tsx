@@ -85,12 +85,6 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
             return
         }
 
-        if (picture === null) {
-            setPictureError('Picture is required')
-            console.log('pictureError', pictureError);
-            return
-        }
-
         if (!category) {
             setCategoryError('Category is required')
             return
@@ -104,26 +98,35 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
         picture && formData.append("picture", picture)
         formData.append('category', category.toString())
 
-        createDish && createDish.mutate({
-            dish: formData,
-            access
-        }, {
-            onSuccess: () => {
-                setShow(true)
-                setType('success')
-                setMessage('Dish created')
-                setName('')
-                setDescription('')
-                setCost('')
-                setPicture(null)
-            },
-            onError: err => {
-                setShow(true)
-                setType('error')
-                setMessage(`Error: ${err}`)
-                setDisabled(true)
+        if (createDish) {
+
+            if (picture === null) {
+                setPictureError('Picture is required')
+                console.log('pictureError', pictureError);
+                return
             }
-        })
+
+            createDish.mutate({
+                dish: formData,
+                access
+            }, {
+                onSuccess: () => {
+                    setShow(true)
+                    setType('success')
+                    setMessage('Dish created')
+                    setName('')
+                    setDescription('')
+                    setCost('')
+                    setPicture(null)
+                },
+                onError: err => {
+                    setShow(true)
+                    setType('error')
+                    setMessage(`Error: ${err}`)
+                    setDisabled(true)
+                }
+            })
+        }
 
         if (dish) {
             updateDish && updateDish.mutate({

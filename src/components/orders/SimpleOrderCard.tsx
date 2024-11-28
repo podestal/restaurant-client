@@ -30,7 +30,7 @@ const SimpleOrderCard = ({ order }: Props) => {
         <motion.div 
             layout
             onDoubleClick={() => setOpen(true)}
-            className={`w-full flex flex-col justify-start items-start gap-2 px-8 my-2 ${background} rounded-xl py-4`}>
+            className={`w-full flex flex-col justify-start items-start gap-2 px-8 my-2 ${background} rounded-xl py-4 text-slate-50`}>
             <>{console.log('order', order)}</>
             <div className="w-full flex justify-center items-start mt-2 gap-12">
                 <OrderType 

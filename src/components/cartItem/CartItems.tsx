@@ -1,3 +1,4 @@
+import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import { Item } from "../../services/api/cartService"
 import Button from "../ui/Button"
 import CartItemCard from "./CartItemCard"
@@ -13,8 +14,15 @@ interface Props {
 const CartItems = ({ cartItems, cartId, setOpen }: Props) => {
 
     const navigate = useNavigate()
+    const { setShow, setType, setMessage } = useNotificationsStore()
 
     const handleCheckout = () => {
+        if (cartItems.length === 0) {
+            setShow(true)
+            setType('error')
+            setMessage(`No items to checkout`)
+            return
+        }
         navigate('checkout')
         setOpen(false)
     }

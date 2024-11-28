@@ -23,7 +23,7 @@ const OrderItemsCard = ({ orderItem, editable, tableId }: Props) => {
                 <p>{orderItem.name}</p>
                 <p>{orderItem.quantity}</p>
             </div>
-            <p className="text-slate-100 text-xl">- {orderItem.observations}</p>
+            <p className="dark:text-slate-100 text-xl">- {orderItem.observations}</p>
         </div>
     </motion.div>
   )
