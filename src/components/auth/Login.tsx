@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 const Login = () => {
 
     const [loading, setLoading] = useState(false)
-    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
     const login = useLogin(setLoading)
@@ -21,7 +21,7 @@ const Login = () => {
         setUsernameError('')
         setPasswordError('')
 
-        if (!username) {
+        if (!email) {
             setUsernameError('Username is required')
             return
         }
@@ -32,7 +32,7 @@ const Login = () => {
         }
 
         login.mutate(
-            { username, password },
+            { credentials: { email, password } },
             { onSuccess: () => {
                 setLoading(false)
                 navigate('/menu')
@@ -53,9 +53,9 @@ const Login = () => {
             onSubmit={handleLogin}
             className="w-full h-[60%] flex flex-col justify-start items-center gap-6">
             <Input 
-                placeholder="Username"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
+                placeholder="Email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 error={usernameError}
                 
             />

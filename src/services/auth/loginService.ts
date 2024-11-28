@@ -5,6 +5,11 @@ export interface JWT {
     refresh: string 
 }
 
-const loginService = new APIClient<JWT>('jwt/create/')
+export interface JWTCredentials {
+    email: string
+    password: string 
+}
+
+const loginService = new APIClient<JWT, JWTCredentials>('jwt/create/')
 
 export default loginService

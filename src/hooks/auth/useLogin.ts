@@ -1,21 +1,24 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query'
-import { JWTCredentials } from '../../services/auth/authClient'
-import loginService, { JWT } from '../../services/auth/loginService'
+import loginService, { JWT, JWTCredentials } from '../../services/auth/loginService'
 import useAuthStore from '../store/useAuthStore'
 
 import { jwtDecode } from 'jwt-decode'
+
+interface LoginData {
+    credentials: JWTCredentials
+}
 
 interface DecodedToken {
     user_id: number
   }
 
-const useLogin = (setLoading: (val: boolean) => void): UseMutationResult<JWT, Error, JWTCredentials> => {
+const useLogin = (setLoading: (val: boolean) => void): UseMutationResult<JWT, Error, LoginData> => {
     const {setTokens, setUserId} = useAuthStore() 
 
     return useMutation({
 
         onMutate: () => setLoading(true), 
-        mutationFn: (data: JWTCredentials) => loginService.post(data), 
+        mutationFn: (data: LoginData) => loginService.post(data.credentials), 
         onSuccess: (jwtData: JWT) => {
             const decoded = jwtDecode<DecodedToken>(jwtData.access)
             

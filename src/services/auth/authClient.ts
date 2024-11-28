@@ -2,32 +2,28 @@ import axios from "axios"
 
 const URL = import.meta.env.VITE_AUTH_URL;
 
-export interface JWTCredentials {
-    username: string // User's username
-    password: string // User's password
-}
 const axiosInstance = axios.create({
     baseURL: URL, 
 });
 
-class AuthClient<T> {
+class AuthClient<ResponseType, RequestType = ResponseType> {
     endpoint: string
 
     constructor(endpoint: string) {
         this.endpoint = endpoint; 
     }
 
-    get = (access: string) => {
-        return axiosInstance
-            .get<T>(this.endpoint, {
-                headers: { Authorization: `JWT ${access}` }, 
-            })
-            .then(res => res.data); 
-    }
+    // get = (access: string) => {
+    //     return axiosInstance
+    //         .get<ResponseType>(this.endpoint, {
+    //             headers: { Authorization: `JWT ${access}` }, 
+    //         })
+    //         .then(res => res.data); 
+    // }
 
-    post = (data: JWTCredentials) => {
+    post = (data: RequestType) => {
         return axiosInstance
-            .post<T>(this.endpoint, data)
+            .post<ResponseType>(this.endpoint, data)
             .then(res => res.data)
     }
 }
