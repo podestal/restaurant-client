@@ -5,6 +5,7 @@ import Selector from "../ui/Selector"
 import useCreateOrder from "../../hooks/api/order/useCreateOrder"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import { useNavigate } from "react-router-dom"
+import PickupAddress from "./PickupAddress"
 
 interface Props {
     cartId: number
@@ -87,6 +88,9 @@ const AnonymousUserForm = ({ cartId }: Props) => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center col-span-2">
+        <PickupAddress 
+        
+        />
         <h2 className="text-2xl font-poppins font-bold mb-6">Your details</h2>
         <form 
             onSubmit={handleCreateOrder}
