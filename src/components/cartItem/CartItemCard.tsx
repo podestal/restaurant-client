@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import ItemCounter from "../cart/ItemCounter"
 import Button from "../ui/Button"
 import TextArea from "../ui/TextArea"
+import useUpdateCartItem from "../../hooks/api/cartItem/useUpdateCartItem"
 
 interface Props {
     cartItem: Item
@@ -16,6 +17,19 @@ const CartItemCard = ({ cartItem, cartId }: Props) => {
     const [update, setUpdate] = useState(false)
     const [counter, setCounter] = useState(cartItem.quantity)
     const [observations, setObservations] = useState(cartItem.observations)
+    const updateCartItem = useUpdateCartItem({ cartId, cartItemId: cartItem.id })
+
+    const handleUpdate = () => {
+        updateCartItem.mutate({
+            updates: {...cartItem, dish:cartItem.dish_id, cart: cartId, observations, quantity: counter},
+            access: ''
+        }, {
+            onSuccess: () => {
+                setUpdate(false)
+            }
+        })
+    }
+
 
   return (
     <>
@@ -36,7 +50,7 @@ const CartItemCard = ({ cartItem, cartId }: Props) => {
             />
             <Button 
                 label="Save"
-                onClick={() => setUpdate(false)}
+                onClick={handleUpdate}
             />
         </div> 
         : 
@@ -63,18 +77,6 @@ const CartItemCard = ({ cartItem, cartId }: Props) => {
             <p className="text-right mt-1">{cartItem.price}</p>
         </motion.div>
         }
-        {/* <CartItemForm 
-
-        /> */}
-
-        {/* dish?: Dish
-    open: boolean
-    cartId: number
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>
-    createCartItem?: UseMutationResult<CartItem, Error, CreateCartItemData>
-    count?: number
-    setCount?: React.Dispatch<React.SetStateAction<number>>
-    cartItem?: CartItem   */}
     </>
   )
 }
