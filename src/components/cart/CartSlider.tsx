@@ -16,7 +16,7 @@ const CartSlider = ({ isOpen, setOpen, cart }: Props) => {
         {isOpen && (
             <div
                 className="fixed inset-0 bg-black bg-opacity-50 z-40"
-                onClick={() => setOpen(false)}
+                onClick={() => {setOpen(false)}}
             ></div>
         )}
         <motion.div
@@ -38,6 +38,7 @@ const CartSlider = ({ isOpen, setOpen, cart }: Props) => {
                 setOpen={setOpen}
             />
         </motion.div>
+
     </>
   )
 }
