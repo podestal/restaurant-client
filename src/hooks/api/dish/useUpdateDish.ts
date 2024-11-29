@@ -1,6 +1,6 @@
 import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query"
 import getDishService, { Dish } from "../../../services/api/dishService"
-import { DISHES_CACHE_KEY } from "../../../utils/keys"
+import { DISHES_CACHE_KEY, CATEGORIES_CACHE_KEY } from "../../../utils/keys"
 
 export interface UpdateDishData {
     access: string
@@ -20,6 +20,7 @@ const useUpdateDish = ({ dishId }: Props): UseMutationResult<Dish, Error, Update
         onSuccess: res => {
             console.log(res)
             queryClient.invalidateQueries({ queryKey: DISHES_CACHE_KEY })
+            queryClient.invalidateQueries({ queryKey: CATEGORIES_CACHE_KEY })
         },
         onError: err => console.log(err)
     })

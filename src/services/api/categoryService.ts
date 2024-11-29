@@ -5,9 +5,10 @@ export interface Category {
     name: string
     description: string
     time_perios: string
+    available: boolean
 }
 
-export type CreateCategory = Omit<Category, 'id' | 'time_perios'>
+export type CreateCategory = Omit<Category, 'id' | 'time_perios' | 'available'>
 
 const getCategoryService = (categoryId?: number) => {
     const URL = categoryId ? `categories/${categoryId}/` : 'categories/'
