@@ -13,13 +13,13 @@ class AuthClient<ResponseType, RequestType = ResponseType> {
         this.endpoint = endpoint; 
     }
 
-    // get = (access: string) => {
-    //     return axiosInstance
-    //         .get<ResponseType>(this.endpoint, {
-    //             headers: { Authorization: `JWT ${access}` }, 
-    //         })
-    //         .then(res => res.data); 
-    // }
+    get = (access: string) => {
+        return axiosInstance
+            .get<ResponseType>(this.endpoint, {
+                headers: { Authorization: `JWT ${access}` }, 
+            })
+            .then(res => res.data); 
+    }
 
     post = (data: RequestType) => {
         return axiosInstance

@@ -6,9 +6,12 @@ import useCreateOrder from "../../hooks/api/order/useCreateOrder"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import { useNavigate } from "react-router-dom"
 import PickupAddress from "./PickupAddress"
+import useAuthStore from "../../hooks/store/useAuthStore"
+import { User } from "../../services/auth/signupService"
 
 interface Props {
     cartId: number
+    user?: User
 }
 
 const orderTypes = [
@@ -22,15 +25,16 @@ const orderTypes = [
     },
 ]
 
-const AnonymousUserForm = ({ cartId }: Props) => {
+const AnonymousUserForm = ({ cartId, user }: Props) => {
 
     const { setShow, setType, setMessage } = useNotificationsStore()
     const navigate = useNavigate()
+    const access = useAuthStore(s => s.access) || ''
 
     const createOrder = useCreateOrder({ cart: cartId })
 
-    const [name, setName] = useState('')
-    const [phone, setPhone] = useState('')
+    const [name, setName] = useState(user ? `${user.first_name} ${user.last_name}` : '')
+    const [phone, setPhone] = useState(user ? user.phone : '')
     const [orderType, setOrderType] = useState(1)
     const [address, setAddress] = useState('')
 
@@ -66,7 +70,7 @@ const AnonymousUserForm = ({ cartId }: Props) => {
                 customer_name: name,
                 customer_phone: phone,
                 customer_address: address,
-        }, access: '' }, {
+        }, access }, {
             onSuccess: () => {
                 setName('')
                 setPhone('')
