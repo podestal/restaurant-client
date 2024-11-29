@@ -4,6 +4,7 @@ import Button from "../ui/Button"
 import Input from "../ui/Input"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const Login = () => {
 
@@ -11,7 +12,7 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
-    const login = useLogin(setLoading)
+    const login = useLogin()
     const { setShow, setType, setMessage } = useNotificationsStore()
     const [usernameError, setUsernameError] = useState('')
     const [passwordError, setPasswordError] = useState('')
@@ -31,10 +32,14 @@ const Login = () => {
             return
         }
 
+        setLoading(true)
         login.mutate(
             { credentials: { email, password } },
-            { onSuccess: () => {
+            { 
+            onSettled: () => {  
                 setLoading(false)
+            },
+            onSuccess: () => {
                 navigate('/menu')
             },
             onError: error => {
@@ -71,6 +76,7 @@ const Login = () => {
                 loading={loading}
             />
         </form>
+        <p className="text-sm mt-6">Do not have an account? <Link className="dark:text-blue-600 text-blue-700 font-semibold hover:text-blue-500" to='/signup'>Register</Link></p>
     </div>
   )
 }
