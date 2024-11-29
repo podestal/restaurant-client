@@ -18,7 +18,7 @@ const SimpleOrderCard = ({ order }: Props) => {
     const access = useAuthStore(s => s.access) || ''
     const [background, setBackground] = useState('bg-green-600')
     const [open, setOpen] = useState(false)
-    const updateOrder = useUpdateOrder({ orderId: order.id, status: 'S' })
+    const updateOrder = useUpdateOrder({ orderId: order.id, status: 'S', email: order.customer_email })
 
     const handleRemove = () => {
         const table = order.table ? order.table : null

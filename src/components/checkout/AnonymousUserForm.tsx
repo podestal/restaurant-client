@@ -35,11 +35,13 @@ const AnonymousUserForm = ({ cartId, user }: Props) => {
 
     const [name, setName] = useState(user ? `${user.first_name} ${user.last_name}` : '')
     const [phone, setPhone] = useState(user ? user.phone : '')
+    const [email, setEmail] = useState(user ? user.email : '')
     const [orderType, setOrderType] = useState(1)
     const [address, setAddress] = useState('')
 
     const [nameError, setNameError] = useState('')
     const [phoneError, setPhoneError] = useState('')
+    const [emailError, setEmailError] = useState('')
     const [addressError, setAddressError] = useState('')
 
     const handleCreateOrder = (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,6 +54,11 @@ const AnonymousUserForm = ({ cartId, user }: Props) => {
 
         if (!phone) {
             setPhoneError('We need your phone number')
+            return
+        }
+
+        if (!email) {
+            setEmail('We need your email')
             return
         }
 
@@ -69,6 +76,7 @@ const AnonymousUserForm = ({ cartId, user }: Props) => {
                 table: null,
                 customer_name: name,
                 customer_phone: phone,
+                customer_email: email,
                 customer_address: address,
         }, access }, {
             onSuccess: () => {
@@ -99,15 +107,24 @@ const AnonymousUserForm = ({ cartId, user }: Props) => {
         <form 
             onSubmit={handleCreateOrder}
             className="w-[50%] flex flex-col justify-start items-center gap-6">
+            <Input 
+                placeholder="Your name ..."
+                value={name}
+                onChange={e => {
+                    name && setNameError('')
+                    setName(e.target.value)
+                }}
+                error={nameError}
+            />
             <div className="w-full flex justify-center items-center gap-6">
                 <Input 
-                    placeholder="Your name ..."
-                    value={name}
+                    placeholder="Your email ..."
+                    value={email}
                     onChange={e => {
-                        name && setNameError('')
-                        setName(e.target.value)
+                        email && setEmailError('')
+                        setEmail(e.target.value)
                     }}
-                    error={nameError}
+                    error={emailError}
                 />
                 <Input 
                     placeholder="Your Phone ..."
