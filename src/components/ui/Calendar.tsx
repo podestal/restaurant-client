@@ -3,7 +3,7 @@ import { DayPicker } from 'react-day-picker';
 import { motion, AnimatePresence } from 'framer-motion';
 import moment from 'moment';
 import 'react-day-picker/dist/style.css';
-import { RiCalendar2Fill, RiCalendarFill } from '@remixicon/react';
+import { RiCalendar2Fill } from '@remixicon/react';
 
 interface Props {
   selectedDate: Date | undefined;

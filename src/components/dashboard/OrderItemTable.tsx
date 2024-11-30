@@ -17,13 +17,15 @@ interface Props {
     setMonth: React.Dispatch<React.SetStateAction<number>>
     year: number
     setYear: React.Dispatch<React.SetStateAction<number>>
+    timeFilter: number
+    setTimeFilter: React.Dispatch<React.SetStateAction<number>>
+    selectedDate: Date | undefined
+    setSelectedDate:  React.Dispatch<React.SetStateAction<Date | undefined>>
 }
 
-const OrderItemTable = ({ orderItems, month, setMonth, year, setYear }: Props) => {
+const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter, setTimeFilter, selectedDate, setSelectedDate }: Props) => {
 
     const [filterByName, setFilterByName] = useState('')
-    const [timeFilter, setTimeFilter] = useState(1)
-    const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
     const filteredOrderItems = orderItems
         .filter( orderItem => timeFilter === 2 ? (orderItem.created_at).toString() === moment(selectedDate).format('YYYY-MM-DD') : orderItem)
         .filter( orderItem => orderItem.name.toLowerCase().includes(filterByName.toLowerCase()))

@@ -4,8 +4,7 @@ import MostSold from "./MostSold"
 import OrderItemTable from "./OrderItemTable"
 import TotalDishes from "./TotalDishes"
 import TotalSale from "./TotalSale"
-import FilterToolbar from "../ui/FilterToolbar"
-import SingleOrderItem from "./SingleOrderItem"
+import moment from "moment"
 
 interface Props {
     orderItems: OrderItem[]
@@ -17,10 +16,10 @@ interface Props {
 
 const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Props) => {
 
-    const today = new Date()
-    const [dayFilter, setDayFilter] = useState(today.getDate())
-    const filteredOrderItems = orderItems && orderItems.filter( orderItem => orderItem.created_at.toString().split('-')[2] === dayFilter.toString())
-    
+    const [timeFilter, setTimeFilter] = useState(1)
+    const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
+    // const filteredOrderItems = orderItems && orderItems.filter( orderItem => orderItem.created_at.toString().split('-')[2] === dayFilter.toString())
+    const filteredOrderItems = orderItems.filter( orderItem => timeFilter === 2 ? (orderItem.created_at).toString() === moment(selectedDate).format('YYYY-MM-DD') : orderItem)
     // const filteredOrderItems = orderItems.filter( orderItem => )
 
     const total = filteredOrderItems.reduce(( total, orderItem ) => {
@@ -37,31 +36,27 @@ const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Pro
         <div className="w-full grid grid-cols-3 gap-12 mt-12">
             <TotalSale 
                 totalSales={total}
+                timeFilter={timeFilter}
             />
             <TotalDishes 
                 totalDishes={totalDishes}
+                timeFilter={timeFilter}
             />
             <MostSold 
 
             />
         </div>
-        {/* <FilterToolbar /> */}
         <OrderItemTable 
             orderItems={orderItems}
             month={month}
             setMonth={setMonth}
             year={year}
             setYear={setYear}
+            timeFilter={timeFilter}
+            setTimeFilter={setTimeFilter}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
         />
-        {/* <div className="flex flex-col justify-start gap-6 dark:bg-slate-900 bg-slate-100 mt-10 py-10 px-10 rounded-3xl">
-            {orderItems.map(orderItem => (
-                <SingleOrderItem 
-                    key={orderItem.id}
-                    orderItem={orderItem}
-                />
-            ))}
-        </div> */}
-
     </div>
   )
 }
