@@ -47,6 +47,7 @@ const DishLookup = ({ setDish, setCost, setDishLookup, dishLookup, dishError, se
             className="dark:bg-slate-800 bg-slate-200 rounded-3xl w-full"
         >
             {showDishes && dishLookup.length > 0 && dishes
+                .filter(dish => dish.available)
                 .filter(dish => dish.name.toLowerCase().includes(dishLookup.toLowerCase()))
                 .map( dish => (
                     <div key={dish.id} className="px-6 py-2 hover:bg-blue-700 rounded-3xl hover:text-slate-50 my-2">

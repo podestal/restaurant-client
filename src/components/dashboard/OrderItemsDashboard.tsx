@@ -5,6 +5,7 @@ import OrderItemTable from "./OrderItemTable"
 import TotalDishes from "./TotalDishes"
 import TotalSale from "./TotalSale"
 import moment from "moment"
+import { OrdersChart } from "../ui/Charts"
 
 interface Props {
     orderItems: OrderItem[]
@@ -46,6 +47,7 @@ const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Pro
 
             />
         </div>
+        <OrdersChart />
         <OrderItemTable 
             orderItems={orderItems}
             month={month}
