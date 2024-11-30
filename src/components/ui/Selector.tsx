@@ -52,7 +52,7 @@ const Selector = <T extends Item>({ values, defaultValue, setter, label, all, er
     return (
         <div className="lg:w-full w-[60%] flex flex-col mx-auto justify-center items-center gap-4">
             {/* Label for the selector */}
-            <p className="dark:text-slate-50">{label}</p>
+            {label && <p className="dark:text-slate-50">{label}</p>}
             {/* Dropdown (select) element */}
             <style dangerouslySetInnerHTML={{ __html: styles.animation }} />
             <select

@@ -56,7 +56,7 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear }: Props) =
 
   return (
     <div className="mt-16">
-        <div className=" grid grid-cols-4">
+        <div className=" flex justify-start items-center gap-12">
             <Input 
                 placeholder="Look by dish ..."
                 value={filterByName}
@@ -75,7 +75,7 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear }: Props) =
                 setSelectedDate={setSelectedDate}
             />
             :
-            <div className="flex justify-evenly items-center">
+            <div className="flex justify-evenly items-center w-full">
                 <Button 
                     label="<"
                     onClick={handlePrevDate}
