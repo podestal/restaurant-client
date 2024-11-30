@@ -14,13 +14,15 @@ const CategoreisAdmin = () => {
 
   return (
     <div>
-        {categories?.map( category => (
-            <CategoryCardAdmin 
-                key={category.id}
-                category={category}
-            />
-        ))}
         <CreateCategory />
+        <div className="grid grid-cols-3 w-full gap-12 mt-12">
+            {categories?.map( category => (
+                <CategoryCardAdmin 
+                    key={category.id}
+                    category={category}
+                />
+            ))}
+        </div>
     </div>
   )
 }
