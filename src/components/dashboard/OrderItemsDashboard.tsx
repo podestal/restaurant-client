@@ -4,6 +4,8 @@ import MostSold from "./MostSold"
 import OrderItemTable from "./OrderItemTable"
 import TotalDishes from "./TotalDishes"
 import TotalSale from "./TotalSale"
+import FilterToolbar from "../ui/FilterToolbar"
+import SingleOrderItem from "./SingleOrderItem"
 
 interface Props {
     orderItems: OrderItem[]
@@ -43,6 +45,7 @@ const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Pro
 
             />
         </div>
+        {/* <FilterToolbar /> */}
         <OrderItemTable 
             orderItems={orderItems}
             month={month}

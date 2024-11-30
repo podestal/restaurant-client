@@ -4,7 +4,12 @@ import Input from "../ui/Input"
 import { useState } from "react"
 import Button from "../ui/Button"
 import Selector from "../ui/Selector"
+import Calendar from "../ui/Calendar"
 
+const timeFilters = [
+    { id: 1, name:'Filter by Month' }, 
+    {id: 2, name: 'Filter by Day'}
+]
 
 interface Props {
     orderItems: OrderItem[]
@@ -17,7 +22,14 @@ interface Props {
 const OrderItemTable = ({ orderItems, month, setMonth, year, setYear }: Props) => {
 
     const [filterByName, setFilterByName] = useState('')
-    const filteredOrderItems = orderItems.filter( orderItem => orderItem.name.toLowerCase().includes(filterByName.toLowerCase()))
+    const [timeFilter, setTimeFilter] = useState(1)
+    const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
+    const filteredOrderItems = orderItems
+        .filter( orderItem => timeFilter === 2 ? (orderItem.created_at).toString() === moment(selectedDate).format('YYYY-MM-DD') : orderItem)
+        .filter( orderItem => orderItem.name.toLowerCase().includes(filterByName.toLowerCase()))
+
+    console.log(orderItems);
+    
 
     const handleSort = (key: keyof OrderItem) => {
         console.log(key);
@@ -51,11 +63,18 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear }: Props) =
                 onChange={e => setFilterByName(e.target.value)}
             />
             <Selector 
-                values={[{ id: 1, name:'Filter by Month' }, {id: 2, name: 'Filter by Day'}]}
+                values={timeFilters}
                 defaultValue={1}
                 label=""
-                setter={() => {}}
+                setter={setTimeFilter}
             />
+
+            {timeFilter === 2 ? 
+            <Calendar 
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+            />
+            :
             <div className="flex justify-evenly items-center">
                 <Button 
                     label="<"
@@ -67,9 +86,7 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear }: Props) =
                     onClick={handleNextDate}
                 />
             </div>
-            {/* <DateSelector 
-                
-            /> */}
+            }
         </div>
         <div className="w-full grid grid-cols-7 dark:bg-slate-900 bg-gray-200 font-bold p-2 mt-6">
             <button onClick={() => handleSort("id")} className="py-1 text-left">
