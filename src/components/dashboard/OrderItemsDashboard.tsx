@@ -5,8 +5,9 @@ import OrderItemTable from "./OrderItemTable"
 import TotalDishes from "./TotalDishes"
 import TotalSale from "./TotalSale"
 import moment from "moment"
-import { OrdersChart } from "../ui/Charts"
-import { transformOrderItems } from "../../utils/utilities"
+import { OrdersChart, SalesByCategoryBarChart } from "../ui/Charts"
+import { orderItemsSalesByCategory, transformOrderItems } from "../../utils/utilities"
+import useThemeStore from "../../hooks/store/useThemeStore"
 
 interface Props {
     orderItems: OrderItem[]
@@ -19,10 +20,10 @@ interface Props {
 const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Props) => {
 
     const [timeFilter, setTimeFilter] = useState(1)
+    const currentMonth = moment(month, "M").format("MMMM")
+    const theme = useThemeStore(s => s.theme)
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
-    // const filteredOrderItems = orderItems && orderItems.filter( orderItem => orderItem.created_at.toString().split('-')[2] === dayFilter.toString())
     const filteredOrderItems = orderItems.filter( orderItem => timeFilter === 2 ? (orderItem.created_at).toString() === moment(selectedDate).format('YYYY-MM-DD') : orderItem)
-    // const filteredOrderItems = orderItems.filter( orderItem => )
 
     const total = filteredOrderItems.reduce(( total, orderItem ) => {
         return total += (orderItem.cost * orderItem.quantity)
@@ -31,7 +32,8 @@ const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Pro
     const totalDishes = filteredOrderItems.reduce(( total, orderItem) => {
         return total += orderItem.quantity
     }, 0)
-    const data = transformOrderItems(orderItems)
+    const data = transformOrderItems(filteredOrderItems)
+    const catsData = orderItemsSalesByCategory(filteredOrderItems)
 
   return (
     <div className="pb-20">
@@ -48,14 +50,22 @@ const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Pro
 
             />
         </div>
-        <>{console.log('data', data)}</>
-        {data.length > 0 && 
-        <div className="w-full h-64 my-20 flex flex-col justify-center items-center gap-12">
-            <h2>Sales</h2>
-            <OrdersChart 
-                data={data}
+        {catsData.length > 0 && <div className="w-full h-64 my-20 flex flex-col justify-center items-center gap-12">
+            <h2 className="text-xl">Sales by Category</h2>
+            <SalesByCategoryBarChart 
+                data={catsData}
+                theme={theme}
             />
         </div>}
+        {data.length > 0 && timeFilter === 1 && 
+        <div className="w-full h-64 my-20 flex flex-col justify-center items-center gap-12">
+            <h2 className="text-xl">{currentMonth}'s Sales</h2>
+            <OrdersChart 
+                data={data}
+                theme={theme}
+            />
+        </div>}
+
         <OrderItemTable 
             orderItems={orderItems}
             month={month}

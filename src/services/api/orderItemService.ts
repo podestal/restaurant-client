@@ -10,9 +10,10 @@ export interface OrderItem {
     quantity: number
     created_at: Date
     name: string
+    category_name: string
 }
 
-export type OrderItemCreate = Omit<OrderItem, 'id'| 'created_at' | 'name'>
+export type OrderItemCreate = Omit<OrderItem, 'id'| 'created_at' | 'name' | 'category_name'>
 
 interface Props {
     orderItemId?: number

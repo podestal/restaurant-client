@@ -82,7 +82,7 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter
                     label="<"
                     onClick={handlePrevDate}
                 />
-                <p className="text-xl font-poppins">{month}/{year}</p>
+                <p className="text-sm font-poppins">{month}/{year}</p>
                 <Button 
                     label=">"
                     onClick={handleNextDate}
