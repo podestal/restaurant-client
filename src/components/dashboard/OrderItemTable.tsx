@@ -91,11 +91,11 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter
             }
         </div>
         <div className="w-full grid grid-cols-7 dark:bg-slate-900 bg-gray-200 font-bold p-2 mt-6">
-            <button onClick={() => handleSort("id")} className="py-1 text-left">
-            ID
-            </button>
-            <button onClick={() => handleSort("name")} className=" py-1 col-span-2 text-left ">
+            <button onClick={() => handleSort("id")} className="py-1 col-span-2 text-left">
             Name
+            </button>
+            <button onClick={() => handleSort("name")} className=" py-1 text-left ">
+            Category
             </button>
             <button onClick={() => handleSort("created_at")} className=" py-1 text-left">
             Created At
@@ -112,8 +112,8 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter
         </div>
         {filteredOrderItems.map( orderItem => (
             <div key={orderItem.id} className="w-full grid grid-cols-7 px-2 py-4 font-palanquin text-left hover:bg-slate-100 dark:hover:bg-slate-900">
-                <p>{orderItem.id}</p>
                 <p className="col-span-2">{orderItem.name}</p>
+                <p>{orderItem.category_name}</p>
                 <p>{moment(orderItem.created_at).format('DD MMM YYYY')}</p>
                 <p>{orderItem.quantity}</p>
                 <p>{orderItem.cost}</p>
