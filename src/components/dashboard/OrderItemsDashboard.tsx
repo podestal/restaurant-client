@@ -6,6 +6,7 @@ import TotalDishes from "./TotalDishes"
 import TotalSale from "./TotalSale"
 import moment from "moment"
 import { OrdersChart } from "../ui/Charts"
+import { transformOrderItems } from "../../utils/utilities"
 
 interface Props {
     orderItems: OrderItem[]
@@ -30,7 +31,7 @@ const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Pro
     const totalDishes = filteredOrderItems.reduce(( total, orderItem) => {
         return total += orderItem.quantity
     }, 0)
-    
+    const data = transformOrderItems(orderItems)
 
   return (
     <div className="pb-20">
@@ -47,7 +48,14 @@ const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Pro
 
             />
         </div>
-        <OrdersChart />
+        <>{console.log('data', data)}</>
+        {data.length > 0 && 
+        <div className="w-full h-64 my-20 flex flex-col justify-center items-center gap-12">
+            <h2>Sales</h2>
+            <OrdersChart 
+                data={data}
+            />
+        </div>}
         <OrderItemTable 
             orderItems={orderItems}
             month={month}
