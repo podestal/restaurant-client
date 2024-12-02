@@ -44,7 +44,7 @@ const CreateCategory = () => {
   return (
     <form 
         onSubmit={handleSubmit}
-        className="w-full flex justify-start items-start gap-12 mt-10">
+        className="w-full flex justify-center items-start gap-12 mt-10">
         <div className="w-[30%]">
             <Input 
                 placeholder="New Category ..."
