@@ -3,15 +3,14 @@ import Button from "../ui/Button"
 import Input from "../ui/Input"
 import Selector from "../ui/Selector"
 import useCreateOrder from "../../hooks/api/order/useCreateOrder"
-import useNotificationsStore from "../../hooks/store/useNotificationsStore"
-import { useNavigate } from "react-router-dom"
 import PickupAddress from "./PickupAddress"
-import useAuthStore from "../../hooks/store/useAuthStore"
 import { User } from "../../services/auth/signupService"
+import CheckoutForm from "../ui/CheckoutForm"
 
 interface Props {
     cartId: number
     user?: User
+    totalAmount: number
 }
 
 const orderTypes = [
@@ -25,13 +24,10 @@ const orderTypes = [
     },
 ]
 
-const AnonymousUserForm = ({ cartId, user }: Props) => {
-
-    const { setShow, setType, setMessage } = useNotificationsStore()
-    const navigate = useNavigate()
-    const access = useAuthStore(s => s.access) || ''
+const AnonymousUserForm = ({ cartId, user, totalAmount }: Props) => {
 
     const createOrder = useCreateOrder({ cart: cartId })
+    const [showPayment, setShowPayment] = useState(false)
 
     const [name, setName] = useState(user ? `${user.first_name} ${user.last_name}` : '')
     const [phone, setPhone] = useState(user ? user.phone : '')
@@ -43,6 +39,7 @@ const AnonymousUserForm = ({ cartId, user }: Props) => {
     const [phoneError, setPhoneError] = useState('')
     const [emailError, setEmailError] = useState('')
     const [addressError, setAddressError] = useState('')
+    
 
     const handleCreateOrder = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -67,38 +64,43 @@ const AnonymousUserForm = ({ cartId, user }: Props) => {
             return
         }
 
-        const order_type = orderType === 1 ? 'T' : 'D'
+        setShowPayment(true)
 
-        createOrder.mutate({ 
-            order: { 
-                status: 'S', 
-                order_type, 
-                table: null,
-                customer_name: name,
-                customer_phone: phone,
-                customer_email: email,
-                customer_address: address,
-        }, access }, {
-            onSuccess: () => {
-                setName('')
-                setPhone('')
-                setAddress('')
-                setShow(true)
-                setType('success')
-                setMessage(`Order submmited`)
-                setTimeout(() => {
-                    navigate('/menu')
-                }, 2000)
-            }, 
-            onError: error => {
-                setShow(true)
-                setType('error')
-                setMessage(`Error: ${error.message}`)
-            }
-        })
+        // const order_type = orderType === 1 ? 'T' : 'D'
+
+        // createOrder.mutate({ 
+        //     order: { 
+        //         status: 'S', 
+        //         order_type, 
+        //         table: null,
+        //         customer_name: name,
+        //         customer_phone: phone,
+        //         customer_email: email,
+        //         customer_address: address,
+        // }, access }, {
+        //     onSuccess: () => {
+        //         setName('')
+        //         setPhone('')
+        //         setAddress('')
+        //         setShow(true)
+        //         setType('success')
+        //         setMessage(`Order submmited`)
+        //         setTimeout(() => {
+        //             navigate('/menu')
+        //         }, 2000)
+        //     }, 
+        //     onError: error => {
+        //         setShow(true)
+        //         setType('error')
+        //         setMessage(`Error: ${error.message}`)
+        //     }
+        // })
     }
 
   return (
+    <>
+    {!showPayment 
+    ? 
     <div className="w-full flex flex-col justify-center items-center col-span-2">
         <PickupAddress 
         
@@ -151,10 +153,24 @@ const AnonymousUserForm = ({ cartId, user }: Props) => {
                 error={addressError}
             />}
             <Button 
-                label="Place Order"
+                label="Next"
             />
         </form>
+    </div> 
+    : 
+    <div className="w-full col-span-2">
+        <CheckoutForm 
+            amount={totalAmount} 
+            createOrder={createOrder}
+            orderType={orderType}
+            name={name}
+            phone={phone}
+            email={email}
+            address={address}
+        /> 
     </div>
+    }
+    </>
   )
 }
 

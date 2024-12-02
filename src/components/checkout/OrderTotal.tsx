@@ -5,7 +5,11 @@ import CartSlider from "../cart/CartSlider"
 import Button from "../ui/Button"
 import SubTotal from "./SubTotal"
 
-const OrderTotal = () => {
+interface Props {
+    setTotalAmount: React.Dispatch<React.SetStateAction<number>>
+}
+
+const OrderTotal = ({ setTotalAmount }: Props) => {
 
     const [open, setOpen] = useState(false)
     const sessionId = useSessionIdStore(s => s.sessionId) || ''
@@ -27,6 +31,7 @@ const OrderTotal = () => {
         </div>
         <SubTotal 
             cartItems={cart[0].items}
+            setTotalAmount={setTotalAmount}
         />
         <CartSlider 
             isOpen={open}

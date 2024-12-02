@@ -3,6 +3,7 @@ import useGetUser from '../../hooks/auth/useGetUser'
 import AnonymousUserForm from './AnonymousUserForm'
 import OrderTotal from './OrderTotal'
 import { Cart } from '../../services/api/cartService'
+import { useState } from 'react'
 
 interface Props {
     cart: Cart
@@ -11,6 +12,7 @@ interface Props {
 const Checkout = ({ cart }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
+    const [totalAmount, setTotalAmount] = useState(0)
     const {data: user, isLoading, isError, error, isSuccess} = useGetUser({access})
 
     if (isLoading) return <p>Loading ...</p>
@@ -24,8 +26,11 @@ const Checkout = ({ cart }: Props) => {
         <AnonymousUserForm 
             cartId={cart.id}
             user={user}
+            totalAmount={totalAmount}
         />
-        <OrderTotal />
+        <OrderTotal 
+          setTotalAmount={setTotalAmount}
+        />
     </div>
   )
 }

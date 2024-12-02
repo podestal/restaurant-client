@@ -1,15 +1,25 @@
+import { useEffect } from "react"
 import { Item } from "../../services/api/cartService"
 import { getSubTotalCost } from "../../utils/utilities"
 
 interface Props {
     cartItems: Item[]
+    setTotalAmount: React.Dispatch<React.SetStateAction<number>>
 }
 
-const SubTotal = ({ cartItems }: Props) => {
+const SubTotal = ({ cartItems, setTotalAmount }: Props) => {
 
     const subTotal = getSubTotalCost(cartItems)
     const taxes = 0.19 * subTotal
     const total = subTotal + taxes
+
+    useEffect(() => {
+        if (subTotal > 0) {
+            const totalRounded = total.toFixed(2)
+            const totalCents = parseFloat(totalRounded) * 100
+            setTotalAmount(totalCents)
+        }
+    }, [])
 
   return (
     <div className="w-full grid grid-cols-3">

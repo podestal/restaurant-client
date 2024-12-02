@@ -22,7 +22,9 @@ const useCreateOrder = ({ tableId, cart }: Props): UseMutationResult<Order, Erro
 
     return useMutation({
         mutationFn: (data: CreateOrderData) => orderService.post(data.order, data.access, '', cart),
-        onSuccess: () => {
+        onSuccess: res => {
+            console.log('new order:', res);
+            
             queryClient.invalidateQueries({ queryKey: ORDER_CACHE_KEY })
             cart && queryClient.invalidateQueries({ queryKey: CART_CACHE_KEY })
         },

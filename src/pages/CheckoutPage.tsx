@@ -23,7 +23,6 @@ const CheckoutPage = () => {
       {/* <PaymentElement 
         
       /> */}
-      <CheckoutForm amount={5000} /> 
 
     </>
   )

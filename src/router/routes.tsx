@@ -11,6 +11,7 @@ import KitchenPage from "../pages/KitchenPage";
 import DashboardPage from "../pages/DashboardPage";
 import DishesPage from "../pages/DishesPage";
 import SignupPage from "../pages/SignupPage";
+import OrderSuccesspage from "../pages/OrderSuccesspage";
 
 const routes = createBrowserRouter([
     {
@@ -58,6 +59,10 @@ const routes = createBrowserRouter([
                 path: 'dashboard',
                 element: <DashboardPage />
             },
+            {
+                path: 'success',
+                element: <OrderSuccesspage />
+            }
 
             // {
             //     path: 'projects',
