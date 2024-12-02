@@ -10,6 +10,7 @@ import useNotificationsStore from '../../hooks/store/useNotificationsStore';
 
 type CheckoutFormProps = {
   amount: number
+  subTotal: number
   createOrder: UseMutationResult<Order, Error, CreateOrderData>
   orderType: number
   name: string
@@ -20,6 +21,7 @@ type CheckoutFormProps = {
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({ 
   amount, 
+  subTotal,
   createOrder, 
   orderType, 
   name,
@@ -52,8 +54,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 customer_email: email,
                 customer_address: address,
         }, access }, {
-            onSuccess: () => {
-                navigate('/success')
+            onSuccess: res => {
+                navigate('/success', { state: {order: res, amount, subTotal } })
             }, 
             onError: error => {
                 setShow(true)

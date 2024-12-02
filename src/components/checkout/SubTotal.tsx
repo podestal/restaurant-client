@@ -5,9 +5,10 @@ import { getSubTotalCost } from "../../utils/utilities"
 interface Props {
     cartItems: Item[]
     setTotalAmount: React.Dispatch<React.SetStateAction<number>>
+    setSubTotal: React.Dispatch<React.SetStateAction<number>>
 }
 
-const SubTotal = ({ cartItems, setTotalAmount }: Props) => {
+const SubTotal = ({ cartItems, setTotalAmount, setSubTotal }: Props) => {
 
     const subTotal = getSubTotalCost(cartItems)
     const taxes = 0.19 * subTotal
@@ -18,6 +19,7 @@ const SubTotal = ({ cartItems, setTotalAmount }: Props) => {
             const totalRounded = total.toFixed(2)
             const totalCents = parseFloat(totalRounded) * 100
             setTotalAmount(totalCents)
+            setSubTotal(subTotal)
         }
     }, [])
 

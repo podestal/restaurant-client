@@ -7,9 +7,10 @@ import SubTotal from "./SubTotal"
 
 interface Props {
     setTotalAmount: React.Dispatch<React.SetStateAction<number>>
+    setSubTotal: React.Dispatch<React.SetStateAction<number>>
 }
 
-const OrderTotal = ({ setTotalAmount }: Props) => {
+const OrderTotal = ({ setTotalAmount, setSubTotal }: Props) => {
 
     const [open, setOpen] = useState(false)
     const sessionId = useSessionIdStore(s => s.sessionId) || ''
@@ -32,6 +33,7 @@ const OrderTotal = ({ setTotalAmount }: Props) => {
         <SubTotal 
             cartItems={cart[0].items}
             setTotalAmount={setTotalAmount}
+            setSubTotal={setSubTotal}
         />
         <CartSlider 
             isOpen={open}

@@ -11,6 +11,7 @@ interface Props {
     cartId: number
     user?: User
     totalAmount: number
+    subTotal: number
 }
 
 const orderTypes = [
@@ -24,7 +25,7 @@ const orderTypes = [
     },
 ]
 
-const AnonymousUserForm = ({ cartId, user, totalAmount }: Props) => {
+const AnonymousUserForm = ({ cartId, user, totalAmount, subTotal }: Props) => {
 
     const createOrder = useCreateOrder({ cart: cartId })
     const [showPayment, setShowPayment] = useState(false)
@@ -161,6 +162,7 @@ const AnonymousUserForm = ({ cartId, user, totalAmount }: Props) => {
     <div className="w-full col-span-2">
         <CheckoutForm 
             amount={totalAmount} 
+            subTotal={subTotal}
             createOrder={createOrder}
             orderType={orderType}
             name={name}

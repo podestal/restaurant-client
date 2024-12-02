@@ -13,6 +13,7 @@ const Checkout = ({ cart }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
     const [totalAmount, setTotalAmount] = useState(0)
+    const [subTotal, setSubTotal] = useState(0)
     const {data: user, isLoading, isError, error, isSuccess} = useGetUser({access})
 
     if (isLoading) return <p>Loading ...</p>
@@ -27,9 +28,11 @@ const Checkout = ({ cart }: Props) => {
             cartId={cart.id}
             user={user}
             totalAmount={totalAmount}
+            subTotal={subTotal}
         />
         <OrderTotal 
           setTotalAmount={setTotalAmount}
+          setSubTotal={setSubTotal}
         />
     </div>
   )
