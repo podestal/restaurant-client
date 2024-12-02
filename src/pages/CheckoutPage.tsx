@@ -16,7 +16,7 @@ const CheckoutPage = () => {
     if (isSuccess)
 
   return (
-    <div className="2xl:max-w-[1280px] mx-auto">
+    <>
       <Checkout 
         cart={cart[0]}
       />
@@ -25,7 +25,7 @@ const CheckoutPage = () => {
       /> */}
       <CheckoutForm amount={5000} /> 
 
-    </div>
+    </>
   )
 }
 

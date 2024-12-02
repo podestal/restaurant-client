@@ -13,7 +13,7 @@ const CartPage = () => {
     if (isSuccess)
 
   return (
-    <div className="2xl:max-w-[1280px] mx-auto relative">
+    <div className="relative">
         {cart[0].items.map( item => (
             <p>{item.name}</p>
         ))}

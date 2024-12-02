@@ -30,7 +30,7 @@ const KitchenPage = () => {
   if (isError) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="2xl:max-w-[1280px] mx-auto mt-4">
+    <div className="mt-4">
       {orders && orders.length === 0 ? (
         <div
           style={{ minHeight: "calc(100vh - 100px)" }}
