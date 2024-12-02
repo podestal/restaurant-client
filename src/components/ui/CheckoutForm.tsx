@@ -17,38 +17,49 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ amount }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
+  
     if (!stripe || !elements) {
       setError("Stripe has not loaded yet.");
       setLoading(false);
       return;
     }
-
+  
     try {
-      const { data } = await axios.post('/api/payment-intent', { amount });
-
+      // Step 1: Create PaymentIntent
+      const { data } = await axios.post('http://127.0.0.1:8000/api/process-payment/', { 
+        amount,
+        payment_method_id: "pm_card_visa"
+      });
+  
+      const clientSecret = data.client_secret;
+  
+      // Step 2: Confirm PaymentIntent
       const cardElement = elements.getElement(CardElement);
       if (!cardElement) {
         throw new Error("Card element not found");
       }
-
-      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(data.client_secret, {
+  
+      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: cardElement,
         },
       });
-
+  
       if (stripeError) {
         setError(stripeError.message || "An error occurred.");
-      } else if (paymentIntent) {
+      } else if (paymentIntent?.status === "succeeded") {
         setSuccess(true);
+      } else {
+        setError("Payment was not successful. Please try again.");
       }
     } catch (err: any) {
-      setError(err.message || "An error occurred.");
+      console.log(err);
+      setError(err.response?.data?.error || "An error occurred.");
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="max-w-md mx-auto">
