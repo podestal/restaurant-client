@@ -2,6 +2,7 @@ import moment from "moment";
 import { ChartData } from "../components/ui/Charts";
 import { Item } from "../services/api/cartService";
 import { OrderItem } from "../services/api/orderItemService";
+import { jwtDecode } from "jwt-decode";
 
 export const getSubTotalCost = (cartItems: Item[]) => {
     return cartItems.reduce((accumulator, item) => {
@@ -35,4 +36,18 @@ export const orderItemsSalesByCategory = (orderItems: OrderItem[]): ChartData[] 
     }, {})
 
     return Object.values(data)
+}
+
+interface Payload {
+    exp: number
+}
+
+export const isTokenExpired = (token: string) => {
+    try {
+        const { exp } = jwtDecode<Payload>(token)
+        const currentTime = Math.floor(Date.now() / 1000)
+        return exp < currentTime
+    } catch (error) {
+        return true
+    }
 }

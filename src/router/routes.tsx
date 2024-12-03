@@ -12,6 +12,7 @@ import DashboardPage from "../pages/DashboardPage";
 import DishesPage from "../pages/DishesPage";
 import SignupPage from "../pages/SignupPage";
 import OrderSuccesspage from "../pages/OrderSuccesspage";
+import PrivateRoutes from "../components/auth/PrivateRoutes";
 
 const routes = createBrowserRouter([
     {
@@ -21,43 +22,43 @@ const routes = createBrowserRouter([
         children: [
             { 
                 path:'menu',
-                element: <MenuPage /> // Protected dashboard route
+                element: <MenuPage /> 
             },
             {
                 path:'checkout',
                 element: <CheckoutPage />
             },
             { 
-                path: 'about', // Login route
+                path: 'about', 
                 element: <About /> 
             },
             { 
-                path: 'catering', // Login route
+                path: 'catering', 
                 element: <CateringPage /> 
             },
             { 
-                path: 'login', // Login route
+                path: 'login', 
                 element: <LoginPage /> 
             },
             {
-                path: 'signup', // Login route
+                path: 'signup', 
                 element: <SignupPage /> 
             },
             {
                 path: 'dishes',
-                element: <DishesPage />
+                element: <PrivateRoutes><DishesPage /></PrivateRoutes>
             },
             {
                 path: 'tables',
-                element: <TablesPage />
+                element: <PrivateRoutes><TablesPage /></PrivateRoutes>
             },
             {
                 path: 'kitchen',
-                element: <KitchenPage />
+                element: <PrivateRoutes><KitchenPage /></PrivateRoutes>
             },
             {
                 path: 'dashboard',
-                element: <DashboardPage />
+                element: <PrivateRoutes><DashboardPage /></PrivateRoutes>
             },
             {
                 path: 'success',
