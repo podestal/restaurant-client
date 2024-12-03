@@ -50,18 +50,18 @@ const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Pro
 
             />
         </div>
-        {catsData.length > 0 && <div className="w-full h-64 my-20 flex flex-col justify-center items-center gap-12">
-            <h2 className="text-xl">Sales by Category</h2>
-            <SalesByCategoryBarChart 
-                data={catsData}
-                theme={theme}
-            />
-        </div>}
         {data.length > 0 && timeFilter === 1 && 
         <div className="w-full h-64 my-20 flex flex-col justify-center items-center gap-12">
             <h2 className="text-xl">{currentMonth}'s Sales</h2>
             <OrdersChart 
                 data={data}
+                theme={theme}
+            />
+        </div>}
+        {catsData.length > 0 && <div className="w-full h-64 my-20 flex flex-col justify-center items-center gap-12">
+            <h2 className="text-xl">Sales by Category</h2>
+            <SalesByCategoryBarChart 
+                data={catsData}
                 theme={theme}
             />
         </div>}
