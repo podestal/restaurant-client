@@ -116,6 +116,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
 
     return (
       <div className="max-w-md mx-auto">
+        <h2 className='text-2xl font-bold mb-6'>Payment Details</h2>
         {success ? (
           <p className="text-green-500 text-center">Payment Successful!</p>
         ) : (
@@ -140,7 +141,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
             <button
               type="submit"
               disabled={!stripe || loading}
-              className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700"
+              className="w-full bg-blue-700 text-white p-2 rounded-md hover:bg-blue-600"
             >
               {loading ? 'Processing...' : 'Pay'}
             </button>

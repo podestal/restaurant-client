@@ -4,6 +4,7 @@ import useSessionIdStore from "../../hooks/store/useSessionIdStore"
 import CartSlider from "../cart/CartSlider"
 import Button from "../ui/Button"
 import SubTotal from "./SubTotal"
+import PickupAddress from "./PickupAddress"
 
 interface Props {
     setTotalAmount: React.Dispatch<React.SetStateAction<number>>
@@ -24,6 +25,7 @@ const OrderTotal = ({ setTotalAmount, setSubTotal }: Props) => {
 
   return (
     <div>
+        <PickupAddress />
         <div className="mb-6">
             <Button 
                 label="Items"
