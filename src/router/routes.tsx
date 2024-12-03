@@ -13,6 +13,7 @@ import DishesPage from "../pages/DishesPage";
 import SignupPage from "../pages/SignupPage";
 import OrderSuccesspage from "../pages/OrderSuccesspage";
 import PrivateRoutes from "../components/auth/PrivateRoutes";
+import LandingPage from "../pages/LandingPage";
 
 const routes = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const routes = createBrowserRouter([
         element: <MainPage />,
         errorElement: <ErrorPage />, 
         children: [
+            {
+                path:'/',
+                element: <LandingPage />
+            },
             { 
                 path:'menu',
                 element: <MenuPage /> 
