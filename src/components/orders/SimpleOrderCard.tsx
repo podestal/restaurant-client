@@ -8,6 +8,7 @@ import Modal from "../ui/Modal"
 import Button from "../ui/Button"
 import useUpdateOrder from "../../hooks/api/order/useUpdateOrder"
 import OrderType from "./OrderType"
+import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 
 interface Props {
     order: Order
@@ -17,12 +18,25 @@ const SimpleOrderCard = ({ order }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
     const [background, setBackground] = useState('bg-green-600')
+    const { setShow, setType, setMessage } = useNotificationsStore()
+    const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
     const updateOrder = useUpdateOrder({ orderId: order.id, status: 'S', email: order.customer_email })
 
     const handleRemove = () => {
         const table = order.table ? order.table : null
-        updateOrder.mutate({updates: {...order, table, status: 'C'}, access })
+        setLoading(true)
+        updateOrder.mutate({updates: {...order, table, status: 'C'}, access }, {
+            onError: error => {
+                setShow(true)
+                setType('error')
+                setMessage(`Error: ${error.message}`)
+            },
+            onSettled: () => {
+                setLoading(false)
+                setOpen(false)
+            }
+        })
     }
 
   return (
@@ -52,6 +66,12 @@ const SimpleOrderCard = ({ order }: Props) => {
             isOpen={open}
             onClose={() => setOpen(false)}
         >
+            {loading 
+            ? 
+            <div className="w-full flex justify-center items-center p-6">
+                <h2 className="text-3xl font-bold animate-pulse">Completing Order ...</h2>
+            </div> 
+            : 
             <div className="w-full flex flex-col justify-start items-center gap-10">
                 <h2 className="text-3xl font-bold font-poppins">Are you sure?</h2>
                 <div className="w-full flex justify-evenly items-center">
@@ -66,6 +86,7 @@ const SimpleOrderCard = ({ order }: Props) => {
                     />
                 </div>
             </div>
+            }
         </Modal>
     </>
   )
