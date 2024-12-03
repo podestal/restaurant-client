@@ -22,7 +22,7 @@ const CategoryCard = ({ category }: Props) => {
     <div 
         onClick={handleClick}
         className="hover:dark:text-slate-300 hover:text-slate-600 cursor-pointer mb-4">
-        <p className="text-3xl pb-10">{category.name}</p>
+        <h2 className="md:text-xl lg:text-3xl max-lg:bg-blue-700 max-lg:py-2 max-lg:px-4 rounded-3xl">{category.name}</h2>
     </div>
   )
 }

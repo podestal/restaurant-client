@@ -19,7 +19,7 @@ const Dishes = ({ categories, cart }: Props) => {
     if (isSuccess)
 
   return (
-    <div className="col-span-5">
+    <div className="col-span-5 max-lg:mt-[120px]">
         {categories && 
             categories
             .filter( category => category.available)
@@ -29,13 +29,13 @@ const Dishes = ({ categories, cart }: Props) => {
                 key={category.id}
             >
                 <div 
-                    className="mb-10 flex flex-col justify-start items-start gap-4">
+                    className="mb-10 flex flex-col justify-start items-center md:items-start gap-4">
                     <h2 className="text-5xl font-bold font-poppins text-blue-700">{category.name}</h2>
                     <p>{category.description}</p>
                 </div>
                 <div 
 
-                    className="grid grid-cols-3 gap-8 my-12">
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-12">
                     {cart && dishes
                         .filter( dish => dish.category === category.id)
                         .filter( dish => dish.available)

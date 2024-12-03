@@ -18,8 +18,8 @@ const Categories = ({ cart }: Props) => {
     if (isSuccess)
 
   return (
-    <div className="grid grid-cols-6 min-h-screen mt-10 gap-16 relative">
-        <div className="fixed">
+    <div className="w-full lg:grid lg:grid-cols-6 min-h-screen lg:mt-10 gap-16 relative lg:mx-0">
+        <div className="w-full fixed max-lg:top-0 max-lg:left-0 max-lg:flex max-lg:justify-start max-lg:items-center max-lg:gap-6 overflow-scroll max-lg:backdrop-blur-md max-lg:px-4 max-lg:py-6">
             {categories.map( category => (
                 <CategoryCard 
                     key={category.id}
