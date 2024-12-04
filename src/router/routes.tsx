@@ -63,7 +63,7 @@ const routes = createBrowserRouter([
                 element: <PrivateRoutes><KitchenPage /></PrivateRoutes>
             },
             {
-                path: 'dashboard',
+                path: 'sales',
                 element: <PrivateRoutes><DashboardPage /></PrivateRoutes>
             },
             {

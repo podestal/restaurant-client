@@ -13,10 +13,10 @@ export interface Order {
     table: number
     created_at: Date
     updated_at: Date
-    status: string
+    status: 'P' | 'S' | 'C'
     created_by: number
     waiter: string
-    order_type: string
+    order_type: 'I' | 'D' | 'T'
     order_items: SimpleOrderItem[]
     customer_name?: string
     customer_phone?: string

@@ -1,6 +1,10 @@
+import OrdersAdmin from "../components/orders/OrdersAdmin"
+
 const OrderPage = () => {
   return (
-    <div>OrderPage</div>
+    <div>
+        <OrdersAdmin />
+    </div>
   )
 }
 

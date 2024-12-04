@@ -37,7 +37,7 @@ const Navigator = () => {
         <NavLink key="dishes" to="dishes" label="Dishes" />,
         <NavLink key="kitchen" to="kitchen" label="Kitchen" />,
         <NavLink key="tables" to="tables" label="Tables" />,
-        <NavLink key="dashboard" to="dashboard" label="Dashboard" />,
+        <NavLink key="sales" to="sales" label="Sales" />,
         <NavLink key="orders" to="orders" label="Orders" />,
       ],
     };
