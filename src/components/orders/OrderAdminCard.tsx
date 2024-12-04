@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import OrderType from "./OrderType"
 import Modal from "../ui/Modal"
 import { useState } from "react"
+import RemoveOrderAdmin from "./RemoveOrderAdmin"
 
 interface Props {
     order: Order
@@ -30,11 +31,11 @@ const OrderAdminCard = ({ order }: Props) => {
     }, 0)
 
   return (
-    <>
+    <div className="w-full flex justify-start items-center gap-12">
         <motion.div 
             onClick={() => setOpen(true)}
-            className="w-full grid grid-cols-6 gap-6 px-2 py-4 font-palanquin text-left hover:bg-slate-100 dark:hover:bg-slate-900 cursor-pointer">
-            <p>{order.id}</p>
+            className="w-full grid grid-cols-6 gap-6 px-2 py-4 font-poppins text-left hover:bg-slate-100 dark:hover:bg-slate-900 cursor-pointer">
+            <p className="flex items-center">{order.id}</p>
             <div className="w-full flex justify-start items-center gap-6">
                 <OrderType 
                     orderType={order.order_type}
@@ -52,8 +53,9 @@ const OrderAdminCard = ({ order }: Props) => {
                 {order.waiter  && <RiIdCardFill size={18} className="text-blue-600"/>}
                 <p>{order.waiter ? `${order.waiter }` : `${order.customer_name}`}</p>
             </div>
-            <p>{dishes}</p>
+            <p className="flex items-center">{dishes}</p>
         </motion.div>
+        <RemoveOrderAdmin orderId={order.id} />
         <Modal 
             isOpen={open}
             onClose={() => setOpen(false)}
@@ -62,7 +64,7 @@ const OrderAdminCard = ({ order }: Props) => {
                 <h2 className="font-bold text-2xl">Order {order.id}</h2>
             </div>
         </Modal>
-    </>
+    </div>
   )
 }
 

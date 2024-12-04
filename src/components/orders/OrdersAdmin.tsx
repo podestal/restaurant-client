@@ -14,13 +14,16 @@ const OrdersAdmin = () => {
     if (isSuccess)
 
   return (
-    <div className="py-20">
-        <div className="w-full grid grid-cols-6 gap-6 dark:bg-slate-900 bg-gray-200 font-bold p-2 mt-6">
-            <p>Id</p>
-            <p>Type</p>
-            <p>Status</p>
-            <p className="col-span-2">Created by</p>
-            <p>Dishes</p>
+    <div className="py-20 ">
+        <div className="w-full flex justify-start items-center gap-12">
+            <div className="w-full grid grid-cols-6 gap-6 dark:bg-slate-900 bg-gray-200 font-bold p-2 mt-6">
+                <p>Id</p>
+                <p>Type</p>
+                <p>Status</p>
+                <p className="col-span-2">Created by</p>
+                <p>Dishes</p>
+            </div>
+            <div className="w-[24px] h-[24px]"/>
         </div>
         {orders.map( order => (
             <OrderAdminCard 
