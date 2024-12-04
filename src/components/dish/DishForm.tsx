@@ -43,9 +43,6 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const [pictureError, setPictureError] = useState('')
     const [categoryError, setCategoryError] = useState('')
 
-    console.log('picture', picture);
-    
-
     const handleCloseModal = () => {
         if (!dish) {
             

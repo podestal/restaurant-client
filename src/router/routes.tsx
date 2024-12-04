@@ -14,6 +14,7 @@ import SignupPage from "../pages/SignupPage";
 import OrderSuccesspage from "../pages/OrderSuccesspage";
 import PrivateRoutes from "../components/auth/PrivateRoutes";
 import LandingPage from "../pages/LandingPage";
+import OrderPage from "../pages/OrderPage";
 
 const routes = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ const routes = createBrowserRouter([
             {
                 path: 'dashboard',
                 element: <PrivateRoutes><DashboardPage /></PrivateRoutes>
+            },
+            {
+                path: 'orders',
+                element: <PrivateRoutes><OrderPage /></PrivateRoutes>
             },
             {
                 path: 'success',
