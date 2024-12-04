@@ -5,6 +5,7 @@ import DishCardAdmin from "./DishCardAdmin"
 import Input from "../ui/Input"
 import CategoreisAdmin from "../category/CategoreisAdmin"
 import Tabs from "../ui/Tabs"
+import { motion } from "framer-motion"
 
 const DishesAdmin = () => {
 
@@ -25,15 +26,23 @@ const DishesAdmin = () => {
                     label: 'Dishes',
                     content:         
                     <>
-                        <div className="w-full flex max-lg:flex-col max-lg:mt-12 justify-evenly items-center gap-12 mb-6 pl-4">
+                        <motion.div 
+                            initial={{ opacity: 0, x: -100 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="w-full flex max-lg:flex-col max-lg:mt-12 justify-evenly items-center gap-12 mb-6 pl-4">
                             <CreateDish />
                             <Input 
                                 placeholder="Filter by name ..."
                                 value={dishFilter}
                                 onChange={e => setDishFilter(e.target.value)}
                             />
-                        </div>
-                        <div className="flex flex-col gap-2">
+                        </motion.div>
+                        <motion.div 
+                            initial={{ opacity: 0, y: 100 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="flex flex-col gap-2">
                             {dishes
                                 .filter( dish => dish.name.toLowerCase().includes(dishFilter.toLowerCase()))
                                 .map(dish => (
@@ -42,7 +51,7 @@ const DishesAdmin = () => {
                                     dish={dish}
                                 />
                             ))}
-                        </div>
+                        </motion.div>
                     </>
                 },
                 {

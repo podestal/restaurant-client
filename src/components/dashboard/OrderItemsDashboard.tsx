@@ -8,6 +8,7 @@ import moment from "moment"
 import { OrdersChart, SalesByCategoryBarChart } from "../ui/Charts"
 import { orderItemsSalesByCategory, transformOrderItems } from "../../utils/utilities"
 import useThemeStore from "../../hooks/store/useThemeStore"
+import { motion } from "framer-motion"
 
 interface Props {
     orderItems: OrderItem[]
@@ -37,7 +38,11 @@ const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Pro
 
   return (
     <div className="pb-20">
-        <div className="w-full grid grid-cols-3 gap-12 mt-12">
+        <motion.div 
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full grid grid-cols-3 gap-12 mt-12">
             <TotalSale 
                 totalSales={total}
                 timeFilter={timeFilter}
@@ -49,7 +54,7 @@ const OrderItemsDashboard = ({ orderItems, month, setMonth, year, setYear }: Pro
             <MostSold 
 
             />
-        </div>
+        </motion.div>
         {data.length > 0 && timeFilter === 1 && 
         <div className="w-full h-64 my-20 flex flex-col justify-center items-center gap-12">
             <h2 className="text-xl">{currentMonth}'s Sales</h2>

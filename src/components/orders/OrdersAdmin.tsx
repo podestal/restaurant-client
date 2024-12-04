@@ -1,6 +1,7 @@
 import useGetOrders from "../../hooks/api/order/useGetOrders"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import OrderAdminCard from "./OrderAdminCard"
+import { motion } from 'framer-motion'
 
 const OrdersAdmin = () => {
 
@@ -14,7 +15,11 @@ const OrdersAdmin = () => {
     if (isSuccess)
 
   return (
-    <div className="py-20 ">
+    <motion.div 
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="py-20 ">
         <div className="w-full flex justify-start items-center gap-12">
             <div className="w-full grid grid-cols-6 gap-6 dark:bg-slate-900 bg-gray-200 font-bold p-2 mt-6">
                 <p>Id</p>
@@ -31,7 +36,7 @@ const OrdersAdmin = () => {
                 order={order}
             />
         ))}
-    </div>
+    </motion.div>
   )
 }
 

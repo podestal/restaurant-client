@@ -1,6 +1,7 @@
 import useGetTables from "../../hooks/api/tables/useGetTables"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import TableCard from "./TableCard"
+import { motion } from 'framer-motion'
 
 const Tables = () => {
 
@@ -14,14 +15,18 @@ const Tables = () => {
     if (isSuccess)
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 p-8 min-h-screen mx-auto place-items-center">
+    <motion.div 
+    initial={{ opacity: 0, y: 100 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 p-8 min-h-screen mx-auto place-items-center">
         {tables.map( table => (
             <TableCard 
                 key={table.id}
                 table={table}
             />
         ))}
-    </div>
+    </motion.div>
   )
 }
 

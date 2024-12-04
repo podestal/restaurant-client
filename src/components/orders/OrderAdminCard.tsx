@@ -70,7 +70,7 @@ const OrderAdminCard = ({ order }: Props) => {
                             key={orderItem.id}
                             orderItem={orderItem}
                             tableId={0}
-                            editable={true}
+                            editable={false}
                         />
                     ))}
                 </div>

@@ -2,6 +2,7 @@ import useGetDishes from "../../hooks/api/dish/useGetDishes"
 import { Cart } from "../../services/api/cartService"
 import { Category } from "../../services/api/categoryService"
 import DishCard from "./DishCard"
+import { motion } from 'framer-motion'
 
 interface Props {
     categories: Category[]
@@ -28,13 +29,18 @@ const Dishes = ({ categories, cart }: Props) => {
                 id={`${category.id}`}
                 key={category.id}
             >
-                <div 
+                <motion.div 
+                    initial={{ opacity: 0, y: 100 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
                     className="mb-10 flex flex-col justify-start items-center md:items-start gap-4">
                     <h2 className="text-5xl font-bold font-poppins text-blue-700">{category.name}</h2>
                     <p>{category.description}</p>
-                </div>
-                <div 
-
+                </motion.div>
+                <motion.div 
+                    initial={{ opacity: 0, y: 100 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-12">
                     {cart && dishes
                         .filter( dish => dish.category === category.id)
@@ -46,7 +52,7 @@ const Dishes = ({ categories, cart }: Props) => {
                             cart={cart}
                         />
                     ))}
-                </div>
+                </motion.div>
             </div>
         ))}
     </div> 
