@@ -182,7 +182,7 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter
                 <p>{orderItem.category_name}</p>
                 <p>{moment(orderItem.created_at).format('DD MMM YYYY')}</p>
                 <p>{orderItem.quantity}</p>
-                <p>{orderItem.cost / orderItem.quantity}</p>
+                <p>{(orderItem.cost / orderItem.quantity).toFixed(2)}</p>
                 <p>{orderItem.cost}</p>
             </motion.div>
         ))}

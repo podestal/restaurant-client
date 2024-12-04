@@ -14,8 +14,8 @@ const OrdersAdmin = () => {
     if (isSuccess)
 
   return (
-    <div className="mt-20">
-        <div className="w-full grid grid-cols-6 dark:bg-slate-900 bg-gray-200 font-bold p-2 mt-6">
+    <div className="py-20">
+        <div className="w-full grid grid-cols-6 gap-6 dark:bg-slate-900 bg-gray-200 font-bold p-2 mt-6">
             <p>Id</p>
             <p>Type</p>
             <p>Status</p>
