@@ -13,7 +13,7 @@ const OrderItemsCard = ({ orderItem, editable, tableId }: Props) => {
     <motion.div 
         layout
         className="flex justify-center items-start">
-        {editable && 
+        {editable &&
         <RemoveOrderItem 
             orderItemId={orderItem.id}
             tableId={tableId}

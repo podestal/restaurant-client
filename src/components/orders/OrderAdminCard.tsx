@@ -5,6 +5,7 @@ import OrderType from "./OrderType"
 import Modal from "../ui/Modal"
 import { useState } from "react"
 import RemoveOrderAdmin from "./RemoveOrderAdmin"
+import OrderItemsCard from "../orderItems/OrderItemsCard"
 
 interface Props {
     order: Order
@@ -62,6 +63,17 @@ const OrderAdminCard = ({ order }: Props) => {
         >
             <div className="w-full flex flex-col items-center justify-start">
                 <h2 className="font-bold text-2xl">Order {order.id}</h2>
+                <>{console.log('order.order_items', order.order_items)}</>
+                <div className="w-full mt-6">
+                    {order.order_items.map( orderItem => (
+                        <OrderItemsCard 
+                            key={orderItem.id}
+                            orderItem={orderItem}
+                            tableId={0}
+                            editable={true}
+                        />
+                    ))}
+                </div>
             </div>
         </Modal>
     </div>
