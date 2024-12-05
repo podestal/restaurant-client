@@ -2,11 +2,14 @@ import Loader from "../components/ui/Loader"
 import NotificationCard from "../components/ui/NotificationCard"
 import useLoadingStore from "../hooks/store/useLoadingStore"
 import useNotificationsStore from "../hooks/store/useNotificationsStore"
+import useAssetLoader from "../hooks/ui/useAssetsLoader"
 import Navigator from "../router/Navigator"
 import { Outlet } from "react-router-dom"
 
 const MainPage = () => {
 
+
+    useAssetLoader()
     const { type, message, reset, show } = useNotificationsStore()
     const isLoading = useLoadingStore(s => s.isLoading)
 
