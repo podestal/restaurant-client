@@ -15,8 +15,6 @@ const DishesAdmin = () => {
 
     useLoader(isLoading)
 
-    if (isLoading) return <p>Loading ...</p>
-
     if (isError) return <p>Error: {error.message}</p>
 
     if (isSuccess)

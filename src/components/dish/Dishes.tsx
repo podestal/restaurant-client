@@ -1,4 +1,5 @@
 import useGetDishes from "../../hooks/api/dish/useGetDishes"
+import useLoader from "../../hooks/ui/useLoader"
 import { Cart } from "../../services/api/cartService"
 import { Category } from "../../services/api/categoryService"
 import DishCard from "./DishCard"
@@ -13,7 +14,7 @@ const Dishes = ({ categories, cart }: Props) => {
 
     const { data: dishes, isLoading, isError, error, isSuccess } = useGetDishes()
 
-    if (isLoading) return <p>Loading ...</p>
+    useLoader(isLoading)
 
     if (isError) return <p>Error: {error.message}</p>
 

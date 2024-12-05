@@ -1,5 +1,6 @@
 import useGetOrders from "../../hooks/api/order/useGetOrders"
 import useAuthStore from "../../hooks/store/useAuthStore"
+import useLoader from "../../hooks/ui/useLoader"
 import OrderAdminCard from "./OrderAdminCard"
 import { motion } from 'framer-motion'
 
@@ -8,7 +9,7 @@ const OrdersAdmin = () => {
     const access = useAuthStore(s => s.access) || ''
     const {data: orders, isLoading, isError, error, isSuccess} = useGetOrders({ access })
 
-    if (isLoading) return <p>Loading ...</p>
+    useLoader(isLoading)
 
     if (isError) return <p>Error: {error.message}</p>
 

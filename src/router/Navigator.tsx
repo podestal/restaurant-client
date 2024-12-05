@@ -34,6 +34,7 @@ const Navigator = () => {
         <NavLink key="kitchen" to="kitchen" label="Kitchen" />,
       ],
       podestal: [
+        <NavLink to="menu" label="Menu" />,
         <NavLink key="dishes" to="dishes" label="Dishes" />,
         <NavLink key="kitchen" to="kitchen" label="Kitchen" />,
         <NavLink key="tables" to="tables" label="Tables" />,

@@ -46,7 +46,7 @@ const Orders = ({ tableId, setEnableCreateOrder, setAllowRemoveBill, billId }: P
         }
     }, [orders])
 
-    if (isLoading) return <p>Loading ...</p>
+    if (isLoading) return <p className="animate-pulse">Loading ...</p>
 
     if (isError) return <p>Error: {error.message}</p>
 

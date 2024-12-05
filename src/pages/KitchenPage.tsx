@@ -4,6 +4,8 @@ import SimpleOrderCard from "../components/orders/SimpleOrderCard";
 import useGetOrders from "../hooks/api/order/useGetOrders";
 import useAuthStore from "../hooks/store/useAuthStore";
 import { getOrderCacheKey } from "../utils/keys";
+import useLoader from "../hooks/ui/useLoader";
+import { motion } from 'framer-motion'
 
 const KitchenPage = () => {
   const access = useAuthStore((s) => s.access) || "";
@@ -15,6 +17,8 @@ const KitchenPage = () => {
     status: "S",
   });
 
+  useLoader(isLoading)
+
   useEffect(() => {
     const socket = new WebSocket(import.meta.env.VITE_WS_ORDERS_URL);
 
@@ -25,12 +29,14 @@ const KitchenPage = () => {
     return () => socket.close();
   }, [queryClient]);
 
-  if (isLoading) return <p>Loading ...</p>;
-
   if (isError) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="mt-4">
+    <motion.div 
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="mt-20">
       {orders && orders.length === 0 ? (
         <div
           style={{ minHeight: "calc(100vh - 100px)" }}
@@ -45,7 +51,7 @@ const KitchenPage = () => {
           ))}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
