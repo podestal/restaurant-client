@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import useGetDishes from "../../hooks/api/dish/useGetDishes"
 import CreateDish from "./CreateDish"
 import DishCardAdmin from "./DishCardAdmin"
@@ -6,17 +6,14 @@ import Input from "../ui/Input"
 import CategoreisAdmin from "../category/CategoreisAdmin"
 import Tabs from "../ui/Tabs"
 import { motion } from "framer-motion"
-import useLoadingStore from "../../hooks/store/useLoadingStore"
+import useLoader from "../../hooks/ui/useLoader"
 
 const DishesAdmin = () => {
 
     const [dishFilter, setDishFilter] = useState('')
     const {data: dishes, isLoading, isError, error, isSuccess } = useGetDishes()
-    const setIsLoading = useLoadingStore(s => s.setIsLoading)
 
-    useEffect(() => {
-        isLoading ? setIsLoading(true) : setIsLoading(false)
-    }, [isLoading])
+    useLoader(isLoading)
 
     if (isLoading) return <p>Loading ...</p>
 

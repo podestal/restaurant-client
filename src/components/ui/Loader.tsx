@@ -1,11 +1,11 @@
 const Loader = () => {
-  return (
-    <>
-        <div className="bg-black text-white absolute top-0 left-0 w-full h-screen flex justify-center items-center z-50">
-            <h2 className="text-4xl">Loading ...</h2>
-        </div>
-    </>
-  )
-}
-
-export default Loader
+    return (
+      <div className="dark:bg-slate-950 text-white absolute top-0 left-0 w-full min-h-screen flex flex-col justify-center items-center z-50">
+        <div className="w-16 h-16 border-4 border-t-transparent border-white rounded-full animate-spin"></div>
+        <h2 className="text-3xl mt-6 animate-pulse">Loading...</h2>
+      </div>
+    );
+  };
+  
+  export default Loader;
+  

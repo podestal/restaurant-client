@@ -2,13 +2,14 @@ import useGetTables from "../../hooks/api/tables/useGetTables"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import TableCard from "./TableCard"
 import { motion } from 'framer-motion'
+import useLoader from "../../hooks/ui/useLoader"
 
 const Tables = () => {
 
     const access = useAuthStore(s => s.access) || ''
     const { data: tables, isLoading, isError, error, isSuccess } = useGetTables(access)
 
-    if (isLoading) return <p>Loading ...</p>
+    useLoader(isLoading)
 
     if (isError) return <p>Error: {error.message}</p>
 
