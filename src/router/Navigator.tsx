@@ -6,11 +6,15 @@ import { useNavigate } from "react-router-dom";
 import useAuthStore from "../hooks/store/useAuthStore";
 import Logout from "../components/auth/Logout";
 import useGetUser from "../hooks/auth/useGetUser";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { RiCloseCircleLine, RiMenu2Fill } from "@remixicon/react";
 
 const Navigator = () => {
   const navigate = useNavigate();
   const access = useAuthStore((s) => s.access) || "";
   const { data: user, isLoading } = useGetUser({ access });
+  const [show, setShow] = useState(false)
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -47,23 +51,53 @@ const Navigator = () => {
   };
 
   return (
-    <div className="w-full dark:bg-slate-950 bg-white fixed z-40 shadow-lg shadow-slate-400 dark:shadow-slate-700 max-lg:hidden">
-      <div className="w-full flex justify-between items-center h-[100px] 2xl:max-w-[1280px] mx-auto">
-        <Link to="/">
-          <h2 className="text-5xl font-bold">loGO</h2>
-        </Link>
+    <>
+        <div className="w-full dark:bg-slate-950 bg-white fixed z-40 shadow-lg shadow-slate-400 dark:shadow-slate-700 max-lg:hidden">
+          <div className="w-full flex justify-between items-center h-[100px] 2xl:max-w-[1280px] mx-auto">
+            <Link to="/">
+              <h2 className="text-5xl font-bold">loGO</h2>
+            </Link>
 
-        <div className="flex justify-center items-center gap-24 font-montserrat">
-          {renderLinks()}
-        </div>
+            <div className="flex justify-center items-center gap-24 font-montserrat">
+              {renderLinks()}
+            </div>
 
-        <div className="flex justify-center items-center gap-12">
-          <ThemeSelector />
-          {access ? <Logout /> : <Button label="Login" onClick={() => navigate("/login")} />}
-          {(user?.groups.length === 0 || !user) && <Cart />}
+            <div className="flex justify-center items-center gap-12">
+              <ThemeSelector />
+              {access ? <Logout /> : <Button label="Login" onClick={() => navigate("/login")} />}
+              {(user?.groups.length === 0 || !user) && <Cart />}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+        {/* <Icon onClick={() => setShow(true)} className="hover:text-blue-700 cursor-pointer fixed top-0 right-0 m-6 z-40" icon={RiMenu2Fill} color='blue'/> */}
+        <div className="lg:hidden w-full">
+          <RiMenu2Fill 
+            onClick={() => setShow(true)}
+            className="hover:text-blue-700 cursor-pointer fixed top-0 right-0 m-6 z-40"/>
+          <AnimatePresence>
+            {
+              show && 
+              <motion.div 
+                initial={{opacity: 0, translateY: -200}}
+                whileInView={{opacity: 1, translateY: 0}}
+                exit={{opacity: 0, translateY: 200}}
+                transition={{duration: 0.8}}
+                className="text-xl fixed h-screen z-50 w-full flex flex-col justify-center items-center gap-12 bg-transparent backdrop-blur-xl overflow-scroll">
+                  {/* <Icon onClick={() => setShow(false)}  className="cursor-pointer hover:text-red-700" icon={RiCloseCircleLine} size="xl" color='red'/> */}
+                  <RiCloseCircleLine 
+                    className="cursor-pointer hover:text-red-700"
+                    onClick={() => setShow(false)}
+                  />
+                  {/* <Link onClick={() => setShow(false)} to='/'><p className="hover:text-slate-400">Home</p></Link> */}
+                  <div className="flex flex-col justify-center gap-20 h-full" onClick={() => setShow(false)}>
+                    {renderLinks()}
+                  </div>
+                  {/* <Logout setShow={setShow}/> */}
+              </motion.div>
+            }
+          </AnimatePresence>
+        </div>
+    </>
   );
 };
 
