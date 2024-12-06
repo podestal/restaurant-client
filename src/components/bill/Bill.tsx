@@ -23,7 +23,7 @@ const Bill = ({ table, enable }: Props) => {
     const access = useAuthStore(s => s.access) || ''
     const {data: bill, isLoading, isError, error, isSuccess} = useGetBill({ access, tableId: table.id, enable })
 
-    if (isLoading) return <p>Loading</p>
+    if (isLoading) return <p className="w-full flex justify-center items-center animate-pulse">Loading ...</p>
 
     if (isError) return <p>Error {error.message}</p>
 
