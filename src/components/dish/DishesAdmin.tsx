@@ -7,6 +7,7 @@ import CategoreisAdmin from "../category/CategoreisAdmin"
 import Tabs from "../ui/Tabs"
 import { motion } from "framer-motion"
 import useLoader from "../../hooks/ui/useLoader"
+import Promotions from "../promotion/Promotions"
 
 const DishesAdmin = () => {
 
@@ -60,6 +61,13 @@ const DishesAdmin = () => {
                     content:         
                     <>
                         <CategoreisAdmin />
+                    </>
+                },
+                {
+                    label: 'Promotions',
+                    content:         
+                    <>
+                       <Promotions />
                     </>
                 },
 

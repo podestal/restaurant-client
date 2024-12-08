@@ -3,7 +3,6 @@ import { ChartData } from "../components/ui/Charts";
 import { Item } from "../services/api/cartService";
 import { OrderItem } from "../services/api/orderItemService";
 import { jwtDecode } from "jwt-decode";
-import { useEffect } from "react";
 
 export const getSubTotalCost = (cartItems: Item[]) => {
     return cartItems.reduce((accumulator, item) => {
