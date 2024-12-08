@@ -1,5 +1,6 @@
 import useGetPromotion from "../../hooks/api/promotion/useGetPromotions"
 import useLoader from "../../hooks/ui/useLoader"
+import CreatePromotion from "./CreatePromotion"
 
 
 const Promotions = () => {
@@ -13,9 +14,12 @@ const Promotions = () => {
     if (isSuccess)
 
   return (
-    <div>{promotions.map( promotion => (
-        <p>{promotion.name}</p>
-    ))}</div>
+    <div>
+        <CreatePromotion />
+        {promotions.map( promotion => (
+            <p>{promotion.name}</p>
+        ))}
+    </div>
   )
 }
 
