@@ -9,10 +9,13 @@ import useGetUser from "../hooks/auth/useGetUser";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { RiCloseCircleLine, RiMenu2Fill } from "@remixicon/react";
+import { isTokenExpired } from "../utils/utilities";
 
 const Navigator = () => {
   const navigate = useNavigate();
-  const access = useAuthStore((s) => s.access) || "";
+  let access = useAuthStore((s) => s.access) || "";
+  const isExpired = isTokenExpired(access)
+  access = isExpired ? '' : access
   const { data: user, isLoading } = useGetUser({ access });
   const [show, setShow] = useState(false)
 
