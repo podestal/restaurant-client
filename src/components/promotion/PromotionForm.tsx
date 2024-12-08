@@ -7,6 +7,7 @@ import { Promotion } from "../../services/api/promotionService"
 import { CreatePromotionData } from "../../hooks/api/promotion/useCreatePromotion"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import Button from "../ui/Button"
+import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 
 interface Props {
     createPromotion: UseMutationResult<Promotion, Error, CreatePromotionData>
@@ -15,17 +16,43 @@ interface Props {
 const PromotionForm = ({ createPromotion }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
+    const { setShow, setType, setMessage } = useNotificationsStore()
 
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [amount, setAmount] = useState('')
     const [active, setActive] = useState(true)
 
+    const [nameError, setNameError] = useState('')
+    const [amountError, setAmountError] = useState('')
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        if (!name) {
+            setNameError('Name field is required')
+            return
+        }
+
+        if (!amount) {
+            setAmountError('Amount is required')
+            return
+        }
+
         createPromotion.mutate({ 
             promotion: {name, description, amount: parseFloat(amount), is_active: active }, 
             access 
+        }, {
+            onSuccess: () => {
+                setShow(true)
+                setType('success')
+                setMessage('Dish updated')
+            }, 
+            onError: err => {
+                setShow(true)
+                setType('error')
+                setMessage(`Error: ${err.message}`)
+            }
         })
     }
 
@@ -37,7 +64,10 @@ const PromotionForm = ({ createPromotion }: Props) => {
         <Input 
             placeholder="Name ..."
             value={name}
-            onChange={e => setName(e.target.value)}
+            onChange={e => {
+                name && setNameError('')
+                setName(e.target.value)}}
+            error={nameError}
         />
         <TextArea 
             placeholder="Description ..."
@@ -47,7 +77,10 @@ const PromotionForm = ({ createPromotion }: Props) => {
         <Input 
             placeholder="Amount ..."
             value={amount}
-            onChange={e => setAmount(e.target.value)}
+            onChange={e => {
+                amount && setAmountError('')
+                setAmount(e.target.value)}}
+            error={amountError}
         />
         <Switch 
             value={active}
