@@ -6,8 +6,9 @@ export interface PromotionItem {
     name: string
 }
 
-export type PromotionItemCreate = Omit<PromotionItem, 'id'> & {
+export type PromotionItemCreate = Omit<PromotionItem, 'id' | 'name'> & {
     dish: number
+    promotion: number
 }
 
 interface Props {

@@ -10,6 +10,7 @@ const CreatePromotion = () => {
     const [open, setOpen] = useState(false)
     const createPromotion = useCreatePromotion()
     const [promotionId, setPromotionId] = useState(1)
+    const showForm = true
 
   return (
     <>
@@ -29,6 +30,7 @@ const CreatePromotion = () => {
         :
         <PromotionItems 
             promotionId={promotionId}
+            showForm={showForm}
         />}
         </Modal>
     </>

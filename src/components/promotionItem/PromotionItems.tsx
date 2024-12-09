@@ -1,10 +1,12 @@
 import useGetPromotionItems from "../../hooks/api/promotionItem/useGetPromotionItems"
+import PromotionItemsForm from "./PromotionItemsForm"
 
 interface Props {
     promotionId: number
+    showForm?: boolean
 }
 
-const PromotionItems = ({ promotionId }: Props) => {
+const PromotionItems = ({ promotionId, showForm }: Props) => {
 
     const {data: promotionItems, isLoading, isError, error, isSuccess } = useGetPromotionItems({ promotionId })
 
@@ -19,6 +21,10 @@ const PromotionItems = ({ promotionId }: Props) => {
         {promotionItems.length > 0 && promotionItems.map( item => (
             <p>{item.name}</p>
         ))}
+        {showForm && 
+        <PromotionItemsForm 
+            promotionId={promotionId}
+        />}
     </div>
   )
 }

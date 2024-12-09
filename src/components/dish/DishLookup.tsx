@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 
 interface Props {
     setDish: React.Dispatch<React.SetStateAction<number>>
-    setCost: React.Dispatch<React.SetStateAction<number>>
+    setCost?: React.Dispatch<React.SetStateAction<number>>
     setDishLookup: React.Dispatch<React.SetStateAction<string>>
     dishLookup: string
     dishError: string
@@ -55,7 +55,7 @@ const DishLookup = ({ setDish, setCost, setDishLookup, dishLookup, dishError, se
                             onClick={() => {
                                 setDishLookup(dish.name)
                                 setDish(dish.id)
-                                setCost(dish.cost)
+                                setCost && setCost(dish.cost)
                                 setShowDishes(false)
                             }}
                         >{dish.name}</p>

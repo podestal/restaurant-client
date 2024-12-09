@@ -45,11 +45,6 @@ const PromotionForm = ({ createPromotion, setPromotionId }: Props) => {
             access 
         }, {
             onSuccess: res => {
-                setShow(true)
-                setType('success')
-                setMessage('Dish updated')
-                console.log('new promotion', res);
-                
                 setPromotionId(res.id)
             }, 
             onError: err => {
