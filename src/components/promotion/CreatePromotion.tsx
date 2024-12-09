@@ -4,12 +4,14 @@ import Modal from "../ui/Modal"
 import PromotionForm from "./PromotionForm"
 import useCreatePromotion from "../../hooks/api/promotion/useCreatePromotion"
 import PromotionItems from "../promotionItem/PromotionItems"
+import { Promotion } from "../../services/api/promotionService"
+import PromotionInfo from "./PromotionInfo"
 
 const CreatePromotion = () => {
 
     const [open, setOpen] = useState(false)
     const createPromotion = useCreatePromotion()
-    const [promotionId, setPromotionId] = useState(1)
+    const [promotion, setPromotion] = useState<Promotion | null>(null)
     const showForm = true
 
   return (
@@ -22,16 +24,24 @@ const CreatePromotion = () => {
             isOpen={open}
             onClose={() => setOpen(false)}
         >
-        {promotionId === 0 ? 
+
+        {!promotion 
+        ?
         <PromotionForm 
             createPromotion={createPromotion}
-            setPromotionId={setPromotionId}
+            setPromotion={setPromotion}
         />
         :
+        <>
+        <PromotionInfo 
+            promotion={promotion}
+        />
         <PromotionItems 
-            promotionId={promotionId}
+            promotionId={promotion.id}
             showForm={showForm}
-        />}
+        />
+        </>
+        }
         </Modal>
     </>
   )

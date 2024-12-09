@@ -11,10 +11,10 @@ import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 
 interface Props {
     createPromotion: UseMutationResult<Promotion, Error, CreatePromotionData>
-    setPromotionId: React.Dispatch<React.SetStateAction<number>>
+    setPromotion:  React.Dispatch<React.SetStateAction<Promotion | null>>
 }
 
-const PromotionForm = ({ createPromotion, setPromotionId }: Props) => {
+const PromotionForm = ({ createPromotion, setPromotion }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
     const { setShow, setType, setMessage } = useNotificationsStore()
@@ -45,7 +45,7 @@ const PromotionForm = ({ createPromotion, setPromotionId }: Props) => {
             access 
         }, {
             onSuccess: res => {
-                setPromotionId(res.id)
+                setPromotion(res)
             }, 
             onError: err => {
                 setShow(true)
