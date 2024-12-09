@@ -1,4 +1,5 @@
 import APIClient from "./apiClient"
+import { PromotionItem } from "./promotionItemService"
 
 export interface Promotion {
     id: number
@@ -6,7 +7,7 @@ export interface Promotion {
     description: string
     amount: number
     is_active: boolean
-    items: any[]
+    items: PromotionItem[]
 }
 
 export type PromotionCreate = Omit<Promotion, 'id' | 'items'>

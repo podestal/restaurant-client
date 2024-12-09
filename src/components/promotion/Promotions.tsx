@@ -1,6 +1,7 @@
 import useGetPromotion from "../../hooks/api/promotion/useGetPromotions"
 import useLoader from "../../hooks/ui/useLoader"
 import CreatePromotion from "./CreatePromotion"
+import PromotionCard from "./PromotionCard"
 
 
 const Promotions = () => {
@@ -17,7 +18,10 @@ const Promotions = () => {
     <div>
         <CreatePromotion />
         {promotions.map( promotion => (
-            <p>{promotion.name}</p>
+            <PromotionCard 
+                key={promotion.id}
+                promotion={promotion}
+            />
         ))}
     </div>
   )
