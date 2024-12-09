@@ -1,6 +1,9 @@
 import { useState } from "react"
 import DishLookup from "../dish/DishLookup"
 import ItemCounter from "../cart/ItemCounter"
+import useAuthStore from "../../hooks/store/useAuthStore"
+import useCreatePromotionItem from "../../hooks/api/promotionItem/useCreatePromotionItem"
+import Button from "../ui/Button"
 
 interface Props {
     promotionId: number 
@@ -15,8 +18,15 @@ const PromotionItemsForm = ({ promotionId }: Props) => {
     const [dishError, setDishError] = useState('')
     const [quantityError, setQuantityError] = useState('')
 
+    const access = useAuthStore(s => s.access) || ''
+    const createPromotionItem = useCreatePromotionItem({ promotionId })
+
     const handleCreate = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        createPromotionItem.mutate({ 
+            promotion: { dish, quantity, promotion: promotionId }, access 
+        })
     }
 
   return (
@@ -35,6 +45,9 @@ const PromotionItemsForm = ({ promotionId }: Props) => {
             setCounter={setQuantity}
             counterError={quantityError}
             setCounterError={setQuantityError}
+        />
+        <Button 
+            label="add"
         />
     </form>
   )
