@@ -24,6 +24,7 @@ const PromotionItems = ({ promotionId, showForm }: Props) => {
             <PromotionItemCard 
                 key={item.id}
                 promotionItem={item}
+                promotionId={promotionId}
             />
         ))}
         {showForm && 
