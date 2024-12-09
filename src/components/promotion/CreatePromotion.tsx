@@ -1,18 +1,12 @@
 import { useState } from "react"
 import Button from "../ui/Button"
-import Modal from "../ui/Modal"
-import PromotionForm from "./PromotionForm"
 import useCreatePromotion from "../../hooks/api/promotion/useCreatePromotion"
-import PromotionItems from "../promotionItem/PromotionItems"
-import { Promotion } from "../../services/api/promotionService"
-import PromotionInfo from "./PromotionInfo"
+import PromotionModal from "./PromotionModal"
 
 const CreatePromotion = () => {
 
     const [open, setOpen] = useState(false)
     const createPromotion = useCreatePromotion()
-    const [promotion, setPromotion] = useState<Promotion | null>(null)
-    const showForm = true
 
   return (
     <>
@@ -20,29 +14,11 @@ const CreatePromotion = () => {
             label="New Promotion"
             onClick={() => setOpen(true)}
         />
-        <Modal
-            isOpen={open}
-            onClose={() => setOpen(false)}
-        >
-
-        {!promotion 
-        ?
-        <PromotionForm 
+        <PromotionModal 
+            open={open}
+            setOpen={setOpen}
             createPromotion={createPromotion}
-            setPromotion={setPromotion}
         />
-        :
-        <>
-        <PromotionInfo 
-            promotion={promotion}
-        />
-        <PromotionItems 
-            promotionId={promotion.id}
-            showForm={showForm}
-        />
-        </>
-        }
-        </Modal>
     </>
   )
 }

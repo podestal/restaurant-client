@@ -19,7 +19,7 @@ const PromotionItems = ({ promotionId, showForm }: Props) => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center border-t-2 border-t-slate-700 mt-10">
-        <h2 className="text-xl font-poppins font-bold py-6">Promotion's Dishes</h2>
+        {/* <h2 className="text-xl font-poppins font-bold py-6">Promotion's Dishes</h2> */}
         {promotionItems.length > 0 && promotionItems.map( item => (
             <PromotionItemCard 
                 key={item.id}

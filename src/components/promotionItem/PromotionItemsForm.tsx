@@ -50,7 +50,7 @@ const PromotionItemsForm = ({ promotionId }: Props) => {
 
   return (
     <form 
-        className="w-full grid grid-cols-4 gap-4 my-6"
+        className="w-full grid grid-cols-5 gap-4 my-6"
         onSubmit={handleCreate}>
         <DishLookup 
             setDish={setDish}

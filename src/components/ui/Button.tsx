@@ -42,7 +42,7 @@ const Button = ({
         disabled={disable}
         className={`
             ${disable ? pickedColor.disabled : pickedColor.enabled}  
-            py-2 px-4 text-sm rounded-md text-center`}
+            py-2 px-4 text-sm rounded-md text-center my-auto`}
         {...props}    
         >
         {loading 

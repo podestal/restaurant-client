@@ -10,22 +10,27 @@ import Button from "../ui/Button"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 
 interface Props {
-    createPromotion: UseMutationResult<Promotion, Error, CreatePromotionData>
+    createPromotion?: UseMutationResult<Promotion, Error, CreatePromotionData>
+    updatePromotion?: UseMutationResult<Promotion, Error, CreatePromotionData>
+    promotion?: Promotion
     setPromotion:  React.Dispatch<React.SetStateAction<Promotion | null>>
+
 }
 
-const PromotionForm = ({ createPromotion, setPromotion }: Props) => {
+const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromotion }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
     const { setShow, setType, setMessage } = useNotificationsStore()
 
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [amount, setAmount] = useState('')
-    const [active, setActive] = useState(true)
+    const [name, setName] = useState(promotion ? promotion.name : '')
+    const [description, setDescription] = useState(promotion ? promotion.description : '')
+    const [amount, setAmount] = useState(promotion ? '' : '')
+    const [active, setActive] = useState(promotion ? promotion.is_active : true)
 
     const [nameError, setNameError] = useState('')
     const [amountError, setAmountError] = useState('')
+
+    const buttonLabel = promotion ? 'Update' : 'Add Dishes' 
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -40,7 +45,7 @@ const PromotionForm = ({ createPromotion, setPromotion }: Props) => {
             return
         }
 
-        createPromotion.mutate({ 
+        createPromotion && createPromotion.mutate({ 
             promotion: {name, description, amount: parseFloat(amount), is_active: active }, 
             access 
         }, {
@@ -52,6 +57,11 @@ const PromotionForm = ({ createPromotion, setPromotion }: Props) => {
                 setType('error')
                 setMessage(`Error: ${err.message}`)
             }
+        })
+
+        updatePromotion && updatePromotion.mutate({
+            promotion: {name, description, amount: parseFloat(amount), is_active: active },
+            access
         })
     }
 
@@ -87,7 +97,7 @@ const PromotionForm = ({ createPromotion, setPromotion }: Props) => {
             label="Is Active"
         />
         <Button 
-            label="Next"
+            label={buttonLabel}
         />
     </form>
   )
