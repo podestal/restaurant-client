@@ -24,14 +24,33 @@ const PromotionItemsForm = ({ promotionId }: Props) => {
     const handleCreate = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        setQuantityError('')
+        setDishError('')
+
+        if (dish === 0) {
+            setDishError('Dish is necessary')
+            return
+        }
+
+        if (quantity === 0) {
+            setQuantityError('Quantity must be greater that 0')
+            return
+        }
+
         createPromotionItem.mutate({ 
             promotion: { dish, quantity, promotion: promotionId }, access 
+        }, {
+            onSuccess: () => {
+                setDish(0)
+                setQuantity(0)
+                setDishLookup('')
+            }
         })
     }
 
   return (
     <form 
-        className="w-full grid grid-cols-4 gap-4"
+        className="w-full grid grid-cols-4 gap-4 my-6"
         onSubmit={handleCreate}>
         <DishLookup 
             setDish={setDish}

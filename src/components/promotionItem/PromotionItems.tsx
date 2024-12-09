@@ -1,4 +1,5 @@
 import useGetPromotionItems from "../../hooks/api/promotionItem/useGetPromotionItems"
+import PromotionItemCard from "./PromotionItemCard"
 import PromotionItemsForm from "./PromotionItemsForm"
 
 interface Props {
@@ -17,9 +18,13 @@ const PromotionItems = ({ promotionId, showForm }: Props) => {
     if (isSuccess)
 
   return (
-    <div>
+    <div className="w-full flex flex-col justify-center items-center">
+        <h2 className="text-2xl font-poppins font-bold py-6">Promotion's Dishes</h2>
         {promotionItems.length > 0 && promotionItems.map( item => (
-            <p>{item.name}</p>
+            <PromotionItemCard 
+                key={item.id}
+                promotionItem={item}
+            />
         ))}
         {showForm && 
         <PromotionItemsForm 
