@@ -2,7 +2,7 @@ import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-
 import getPromotionService, { Promotion, PromotionCreate } from "../../../services/api/promotionService"
 import { PROMOTIONS_CACHE_KEY } from "../../../utils/keys"
 
-interface CreatePromotionData {
+export interface CreatePromotionData {
     access: string
     promotion: PromotionCreate
 }

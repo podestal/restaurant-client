@@ -1,13 +1,22 @@
-import { PromotionItem } from "../../services/api/promotionItemService"
+import useGetPromotionItems from "../../hooks/api/promotionItem/useGetPromotionItems"
 
 interface Props {
-    promotionItems: PromotionItem[]
+    promotionId: number
 }
 
-const PromotionItems = ({ promotionItems }: Props) => {
+const PromotionItems = ({ promotionId }: Props) => {
+
+    const {data: promotionItems, isLoading, isError, error, isSuccess } = useGetPromotionItems({ promotionId })
+
+    if (isLoading) return <p>Loading ...</p>
+
+    if (isError) return <p>Error: {error.message}</p>
+
+    if (isSuccess)
+
   return (
     <div>
-        {promotionItems.map( item => (
+        {promotionItems.length > 0 && promotionItems.map( item => (
             <p>{item.name}</p>
         ))}
     </div>

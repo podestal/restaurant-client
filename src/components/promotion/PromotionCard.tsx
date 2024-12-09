@@ -7,10 +7,10 @@ interface Props {
 
 const PromotionCard = ({ promotion }: Props) => {
   return (
-    <div>
+    <div className="w-full">
         <h2 className="text-2xl">{promotion.name}</h2>
         <PromotionItems 
-            promotionItems={promotion.items}
+            promotionId={promotion.id}
         />
     </div>
   )

@@ -4,8 +4,8 @@ import Button from "../ui/Button"
 
 interface Props {
     tableId?: number
-    orderType?: string
-    status?: string
+    orderType?: "I" | "D" | "T"
+    status?: "P" | "S" | "C"
     cart?: number
 }
 

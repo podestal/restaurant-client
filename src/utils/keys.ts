@@ -21,3 +21,7 @@ export const getBillCacheKey = (tableId: number) => {
 }
 
 export const PROMOTIONS_CACHE_KEY = ['promotions']
+
+export const getPromotionItemCacheKey = (promotionId: number) => {
+    return [`promotionItems ${promotionId}`]
+}
