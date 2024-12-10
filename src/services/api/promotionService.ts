@@ -5,7 +5,7 @@ export interface Promotion {
     id: number
     name: string
     description: string
-    amount: number
+    amount: string
     is_active: boolean
     items: PromotionItem[]
 }
@@ -14,11 +14,11 @@ export type PromotionCreate = Omit<Promotion, 'id' | 'items'>
 
 
 interface Props {
-    prmotionId?: number
+    promotionId?: number
 }
 
-const getPromotionService = ({ prmotionId }: Props) => {
-    const URL = prmotionId ? `promotions/${prmotionId}/` : `promotions/`
+const getPromotionService = ({ promotionId }: Props) => {
+    const URL = promotionId ? `promotions/${promotionId}/` : `promotions/`
     return new APIClient<Promotion, PromotionCreate>(URL)
 }
 

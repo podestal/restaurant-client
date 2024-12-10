@@ -6,16 +6,17 @@ import { UseMutationResult } from "@tanstack/react-query"
 import PromotionForm from "./PromotionForm"
 import PromotionItems from "../promotionItem/PromotionItems"
 import Button from "../ui/Button"
+import { UpdatePromotionData } from "../../hooks/api/promotion/useUpdatePromotion"
 
 interface Props {
     open: boolean
     setOpen: React.Dispatch<React.SetStateAction<boolean>>
     promotion?: Promotion
     createPromotion?: UseMutationResult<Promotion, Error, CreatePromotionData>
-    updatePromotion?: UseMutationResult<Promotion, Error, CreatePromotionData>
+    updatePromotion?: UseMutationResult<Promotion, Error, UpdatePromotionData>
 }
 
-const PromotionModal = ({ open, setOpen, promotion, createPromotion }: Props) => {
+const PromotionModal = ({ open, setOpen, promotion, createPromotion, updatePromotion }: Props) => {
 
     const [prom, setProm] = useState<Promotion | null>(promotion ? promotion :  null)
     const showForm = true
@@ -35,12 +36,14 @@ const PromotionModal = ({ open, setOpen, promotion, createPromotion }: Props) =>
         ?
         <PromotionForm 
             createPromotion={createPromotion}
+            updatePromotion={updatePromotion}
             setPromotion={setProm}
         />
         :
         <>
         <PromotionForm 
             createPromotion={createPromotion}
+            updatePromotion={updatePromotion}
             setPromotion={setProm}
             promotion={prom}
         />

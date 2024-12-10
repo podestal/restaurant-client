@@ -8,10 +8,11 @@ import { CreatePromotionData } from "../../hooks/api/promotion/useCreatePromotio
 import useAuthStore from "../../hooks/store/useAuthStore"
 import Button from "../ui/Button"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
+import { UpdatePromotionData } from "../../hooks/api/promotion/useUpdatePromotion"
 
 interface Props {
     createPromotion?: UseMutationResult<Promotion, Error, CreatePromotionData>
-    updatePromotion?: UseMutationResult<Promotion, Error, CreatePromotionData>
+    updatePromotion?: UseMutationResult<Promotion, Error, UpdatePromotionData>
     promotion?: Promotion
     setPromotion:  React.Dispatch<React.SetStateAction<Promotion | null>>
 
@@ -24,7 +25,7 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
 
     const [name, setName] = useState(promotion ? promotion.name : '')
     const [description, setDescription] = useState(promotion ? promotion.description : '')
-    const [amount, setAmount] = useState(promotion ? '' : '')
+    const [amount, setAmount] = useState(promotion ? promotion.amount : '')
     const [active, setActive] = useState(promotion ? promotion.is_active : true)
 
     const [nameError, setNameError] = useState('')
@@ -46,7 +47,8 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
         }
 
         createPromotion && createPromotion.mutate({ 
-            promotion: {name, description, amount: parseFloat(amount), is_active: active }, 
+
+            promotion: {name, description, amount, is_active: active }, 
             access 
         }, {
             onSuccess: res => {
@@ -59,8 +61,14 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
             }
         })
 
+
+        if (updatePromotion) {
+            console.log('updating form');
+        }
+        
+
         updatePromotion && updatePromotion.mutate({
-            promotion: {name, description, amount: parseFloat(amount), is_active: active },
+            updates: { name, description, amount, is_active: active },
             access
         })
     }
