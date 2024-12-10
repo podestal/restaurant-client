@@ -21,7 +21,7 @@ const DishCard = ({ dish, cart }: Props) => {
         <img src={dish.picture_url} alt={dish.picture_url} className="w-full h-[160px] object-cover mb-4" />
         <div className="flex justify-between items-start mb-4 md:h-[80px] gap-6">
             <h2 className="text-3xl font-semibold font-palanquin">{dish.name}</h2>
-            <p className="font-bold mt-2">{dish.cost}</p>
+            <p className="font-bold mt-2">{dish.final_price}</p>
         </div>
         <p className="text-xs dark:text-slate-400 text-slate-700">{dish.description}</p>
         <div className="w-full flex justify-between items-center mx-auto max-lg:my-10 lg:py-6">

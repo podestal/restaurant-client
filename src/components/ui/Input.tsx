@@ -8,6 +8,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
     value?: string | number
     setValue?: Dispatch<SetStateAction<string>>
     stylesContainer?: string
+    label?: string
 }
 
 const styles = {
@@ -48,6 +49,7 @@ const Input = forwardRef<HTMLInputElement, Props>(({
     value,
     setValue,
     stylesContainer,
+    label,
     ...props 
 }, ref) => {
     const [showPassword, setShowPassword] = useState(type !== 'password');
@@ -91,6 +93,7 @@ const Input = forwardRef<HTMLInputElement, Props>(({
     return (
         <div className={`w-full flex flex-col justify-center items-center gap-4 relative ${stylesContainer}`}>
             <div className="relative w-full">
+                {label && <p className="text-lg lg:text-xl dark:text-slate-50 text-center mb-4">{label}</p>}
                 <style dangerouslySetInnerHTML={{ __html: styles.animation }} />
                 <input
                     ref={ref}

@@ -34,6 +34,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const [cost, setCost] = useState(dish ? String(dish.cost ): '')
     const [picture, setPicture] = useState<File | null>(null);
     const [category, setCategory] = useState(dish ? dish.category : 0)
+    const [discount, setDiscount] = useState(dish ? dish.discount : 0)
 
     const [preview, setPreview] = useState(dish?.picture_url ? dish.picture_url : '')
 
@@ -185,6 +186,12 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                     setCost(e.target.value)
                 }}
                 error={costError}
+            />
+            <Input 
+                placeholder="Discount"
+                value={discount}
+                onChange={e => setDiscount(parseFloat(e.target.value))}
+                label="Discount"
             />
             {preview && <img src={preview} alt={preview} className="w-[200px] h-[100px] object-cover cursor-pointer" />}
             <ImageUploader  

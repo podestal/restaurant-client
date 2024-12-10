@@ -9,10 +9,13 @@ export interface Dish {
     available: boolean
     picture_url: string
     category: number
+    discount: number
+    final_price: number
 }
 
-export type DishCreate = Omit<Dish, 'id'| 'created_at' | 'picture_url'> & {
+export type DishCreate = Omit<Dish, 'id'| 'created_at' | 'picture_url' | 'final_price'> & {
     picture: File
+    discount?: number
 }
 
 const getDishService = (dishId?: number) => {
