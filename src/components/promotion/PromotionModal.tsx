@@ -22,7 +22,9 @@ const PromotionModal = ({ open, setOpen, promotion, createPromotion, updatePromo
     const showForm = true
 
     const handleClose = () => {
-        setProm(null)
+        if (!updatePromotion) {
+            setProm(null)
+        }
         setOpen(false)
     }
 
@@ -36,7 +38,6 @@ const PromotionModal = ({ open, setOpen, promotion, createPromotion, updatePromo
         ?
         <PromotionForm 
             createPromotion={createPromotion}
-            updatePromotion={updatePromotion}
             setPromotion={setProm}
         />
         :
