@@ -93,6 +93,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
         formData.append('name', name)
         formData.append('description', description)
         formData.append('cost', cost)
+        formData.append('discount', discount.toString())
         picture && formData.append("picture", picture)
         formData.append('category', category.toString())
 
