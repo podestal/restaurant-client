@@ -12,6 +12,7 @@ import Modal from "../ui/Modal"
 import { UpdateDishData } from "../../hooks/api/dish/useUpdateDish"
 import Switch from "../ui/Switch"
 import ImageUploader from "../ui/ImageUploader"
+import DiscountSetter from "../ui/DiscountSetter"
 
 interface Props {
     open: boolean
@@ -37,12 +38,14 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const [discount, setDiscount] = useState(dish ? dish.discount : 0)
 
     const [preview, setPreview] = useState(dish?.picture_url ? dish.picture_url : '')
+    const [discountType, setDiscountType] = useState<"fixed" | "percentage">("fixed")
 
     const [nameError, setNameError] = useState('')
     const [descriptionError, setDescriptionError] = useState('')
     const [costError, setCostError] = useState('')
     const [pictureError, setPictureError] = useState('')
     const [categoryError, setCategoryError] = useState('')
+    const [discountError, setDiscountError] = useState('')
 
     const handleCloseModal = () => {
         if (!dish) {
@@ -68,6 +71,8 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
         setCostError('')
         setPictureError('')
 
+        let finalDiscount = 0
+
         if (!name) {
             setNameError('Name is required')
             return
@@ -83,6 +88,23 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
             return
         }
 
+        console.log('discount', discount);
+        
+
+        if (discount >= 100) {
+            setDiscountError('Discount cannot be greater than 100')
+            return
+        }
+
+        if (discount !== 0) {
+            if (discountType === 'fixed' ) {
+                finalDiscount = discount
+            } else {
+                finalDiscount = discount > 0 ? parseFloat(cost) * (discount / 100) : parseFloat(cost) * discount
+            }
+
+        }
+
         if (!category) {
             setCategoryError('Category is required')
             return
@@ -93,7 +115,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
         formData.append('name', name)
         formData.append('description', description)
         formData.append('cost', cost)
-        formData.append('discount', discount.toString())
+        formData.append('discount', finalDiscount.toFixed(2))
         picture && formData.append("picture", picture)
         formData.append('category', category.toString())
 
@@ -188,11 +210,13 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 }}
                 error={costError}
             />
-            <Input 
-                placeholder="Discount"
-                value={discount}
-                onChange={e => setDiscount(parseFloat(e.target.value))}
-                label="Discount"
+            <DiscountSetter 
+                discountType={discountType}
+                setDiscountType={setDiscountType}
+                discount={discount}
+                setDiscount={setDiscount}
+                error={discountError}
+                setError={setDiscountError}
             />
             {preview && <img src={preview} alt={preview} className="w-[200px] h-[100px] object-cover cursor-pointer" />}
             <ImageUploader  
