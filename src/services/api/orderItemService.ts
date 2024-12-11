@@ -5,6 +5,7 @@ export interface OrderItem {
     order: number
     bill: number
     dish: number
+    promotion: number
     cost: number
     observations: string
     quantity: number
@@ -13,7 +14,10 @@ export interface OrderItem {
     category_name: string
 }
 
-export type OrderItemCreate = Omit<OrderItem, 'id'| 'created_at' | 'name' | 'category_name'>
+export type OrderItemCreate = Omit<OrderItem, 'id'| 'created_at' | 'name' | 'category_name' | 'promotion' | 'dish'> & {
+    dish?: number
+    promotion?: number
+}
 
 interface Props {
     orderItemId?: number

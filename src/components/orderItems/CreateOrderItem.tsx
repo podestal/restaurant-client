@@ -10,8 +10,7 @@ interface Props {
 const CreateOrderItem = ({ tableId, orderId, billId }: Props) => {
 
     const createOrderItem = useCreateOrderItem({ tableId })
-    console.log('orderId in create order item', orderId);
-    
+
 
   return (
     <OrderItemForm 
