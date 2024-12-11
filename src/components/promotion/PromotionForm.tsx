@@ -70,6 +70,17 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
         updatePromotion && updatePromotion.mutate({
             updates: { name, description, amount, is_active: active },
             access
+        }, {
+            onSuccess: () => {
+                setShow(true)
+                setType('success')
+                setMessage('Promotion updated')
+            },
+            onError: err => {
+                setShow(true)
+                setType('error')
+                setMessage(`Error: ${err.message}`)
+            }
         })
     }
 
