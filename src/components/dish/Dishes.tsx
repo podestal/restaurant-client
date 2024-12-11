@@ -21,7 +21,7 @@ const Dishes = ({ categories, cart }: Props) => {
     if (isSuccess)
 
   return (
-    <div className="col-span-5 max-lg:mt-[120px]">
+    <>
         {categories && 
             categories
             .filter( category => category.available)
@@ -56,7 +56,7 @@ const Dishes = ({ categories, cart }: Props) => {
                 </motion.div>
             </div>
         ))}
-    </div> 
+    </> 
   )
 }
 

@@ -16,7 +16,6 @@ const DishCard = ({ dish, cart }: Props) => {
 
   return (
     <motion.div 
-        // viewport={{ margin: '-50%' }}
         className="flex flex-col max-md:mx-6 justify-start border-2 border-slate-200 dark:border-slate-900 px-4 rounded-2xl shadow-xl shadow-slate-700 dark:shadow-slate-700">
         <div className="relative mb-4">
         {dish.discount > 0 && <div className="absolute top-0 left-0 w-full h-full">
