@@ -5,9 +5,8 @@ import { useState } from "react"
 
 interface Props {
     setShowPromos: React.Dispatch<React.SetStateAction<boolean>>
-    promoLookup: string
     setPromoLookup: React.Dispatch<React.SetStateAction<string>>
-
+    setPromotion: React.Dispatch<React.SetStateAction<number>>
     // setPromo: React.Dispatch<React.SetStateAction<number>>
     // setCost?: React.Dispatch<React.SetStateAction<number>>
     // setPromoLookup: React.Dispatch<React.SetStateAction<string>>
@@ -24,7 +23,8 @@ const PromoLookup = ({
     // promoError,
     // setPromoError
     setPromoLookup,
-    setShowPromos
+    setShowPromos,
+    setPromotion,
 }: Props) => {
 
     const {data: promotions, isLoading, isError, error, isSuccess} = useGetPromotion()
@@ -80,7 +80,9 @@ const PromoLookup = ({
             <p 
             onClick={() => {
                 setPromoLookup(promotion.name)
-                setShowPromos(false)}}
+                setShowPromos(false)
+                setPromotion(promotion.id)
+            }}
             className="py-2 px-4 bg-slate-800 hover:bg-slate-700 cursor-pointer rounded-3xl"
             key={promotion.id}>
                 {promotion.name}

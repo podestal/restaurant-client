@@ -26,6 +26,7 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
     const access = useAuthStore(s => s.access) || ''
     const [counter, setCounter] = useState(0)
     const [dish, setDish] = useState(0)
+    const [promotion, setPromotion] = useState(0)
     const [cost, setCost] = useState(0)
     const [observations, setObservations] = useState('')
     const [dishLookup, setDishLookup] = useState('')
@@ -41,9 +42,17 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
         e.preventDefault()
         setDishError('')
 
-        if (dishLookup.length === 0) {
-            setDishError('This field is required')
-            return
+        if (showPromos === false) {
+            if (promoLookup.length === 0) {
+                console.log('This field is required');
+                
+                return
+            }
+        } else {
+            if (dishLookup.length === 0) {
+                setDishError('This field is required')
+                return
+            }
         }
 
         if (counter === 0) {
@@ -51,9 +60,21 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
             return
         }
 
-        e.preventDefault()
-        createOrderItem.mutate({ 
+        dish && createOrderItem.mutate({ 
             orderItem: { dish, quantity: counter, order: orderId, cost, observations, bill: billId }, 
+            access 
+        }, {
+            onSuccess: () => {
+                setDish(0)
+                setCost(0)
+                setObservations('')
+                setCounter(0)
+                setDishLookup('')
+            }
+        })
+
+        promotion && createOrderItem.mutate({ 
+            orderItem: { promotion, quantity: counter, order: orderId, cost, observations, bill: billId }, 
             access 
         }, {
             onSuccess: () => {
@@ -109,11 +130,13 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
                     ? 
                     <PromoLookup 
                         setShowPromos={setShowPromos}
-                        promoLookup={promoLookup}
                         setPromoLookup={setPromoLookup}
+                        setPromotion={setPromotion}
                     /> 
                     : 
-                    <form>
+                    <form
+                        onSubmit={handleCreateOrderItem}
+                    >
                         <div className="w-full grid grid-cols-4 gap-4">
                         <p className="col-span-3">{promoLookup && promoLookup}</p>
                         <ItemCounter 
