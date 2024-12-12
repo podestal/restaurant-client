@@ -4,6 +4,10 @@ import Input from "../ui/Input"
 import { useState } from "react"
 
 interface Props {
+    setShowPromos: React.Dispatch<React.SetStateAction<boolean>>
+    promoLookup: string
+    setPromoLookup: React.Dispatch<React.SetStateAction<string>>
+
     // setPromo: React.Dispatch<React.SetStateAction<number>>
     // setCost?: React.Dispatch<React.SetStateAction<number>>
     // setPromoLookup: React.Dispatch<React.SetStateAction<string>>
@@ -19,9 +23,10 @@ const PromoLookup = ({
     // promoLookup,
     // promoError,
     // setPromoError
+    setPromoLookup,
+    setShowPromos
 }: Props) => {
 
-    const [showPromos, setShowPromos] = useState(false)
     const {data: promotions, isLoading, isError, error, isSuccess} = useGetPromotion()
 
     if (isLoading) return <p>Loading ...</p>
@@ -70,9 +75,14 @@ const PromoLookup = ({
     //         }
     //     </motion.div>
     // </div>
-    <div>
+    <div className="flex flex-col gap-4">
         {promotions.map( promotion => (
-            <p key={promotion.id}>
+            <p 
+            onClick={() => {
+                setPromoLookup(promotion.name)
+                setShowPromos(false)}}
+            className="py-2 px-4 bg-slate-800 hover:bg-slate-700 cursor-pointer rounded-3xl"
+            key={promotion.id}>
                 {promotion.name}
             </p>
         ))}

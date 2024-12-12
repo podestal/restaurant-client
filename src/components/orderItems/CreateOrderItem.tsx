@@ -1,6 +1,4 @@
 import useCreateOrderItem from "../../hooks/api/orderItem/useCreateOrderItem"
-import PromoLookup from "../promotion/PromoLookup"
-import Tabs from "../ui/Tabs"
 import OrderItemForm from "./OrderItemForm"
 
 interface Props {
@@ -15,29 +13,11 @@ const CreateOrderItem = ({ tableId, orderId, billId }: Props) => {
 
 
   return (
-    // <OrderItemForm 
-    //     createOrderItem={createOrderItem}
-    //     orderId={orderId}
-    //     billId={billId}
-    // />
-    <Tabs
-    tabs={[
-    {
-        label: 'Dishes',
-        content: 
-                <OrderItemForm 
-                    createOrderItem={createOrderItem}
-                    orderId={orderId}
-                    billId={billId}
-                />,
-    },
-    {
-        label: 'Promos',
-        content:
-            <PromoLookup />,
-    },
-    ]}
-/>
+    <OrderItemForm 
+        createOrderItem={createOrderItem}
+        orderId={orderId}
+        billId={billId}
+    />
   )
 }
 

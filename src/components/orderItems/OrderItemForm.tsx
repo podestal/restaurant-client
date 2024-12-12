@@ -7,6 +7,8 @@ import { OrderItem } from "../../services/api/orderItemService"
 import { CreateOrderItemData } from "../../hooks/api/orderItem/useCreateOrderItem"
 import DishLookup from "../dish/DishLookup"
 import useAuthStore from "../../hooks/store/useAuthStore"
+import PromoLookup from "../promotion/PromoLookup"
+import Tabs from "../ui/Tabs"
 
 interface Props {
     createOrderItem:  UseMutationResult<OrderItem, Error, CreateOrderItemData>
@@ -27,6 +29,8 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
     const [cost, setCost] = useState(0)
     const [observations, setObservations] = useState('')
     const [dishLookup, setDishLookup] = useState('')
+    const [showPromos, setShowPromos] = useState(true)
+    const [promoLookup, setPromoLookup] = useState('')
 
     // Error Hsndler
     const [dishError, setDishError] = useState('')
@@ -63,34 +67,85 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
     }
 
   return (
-    <form 
-        onSubmit={handleCreateOrderItem}
-        className="flex flex-col items-center justify-start my-6">
-        <div className="w-full grid grid-cols-4 gap-4">
-            <DishLookup 
-                setDish={setDish}
-                setCost={setCost}
-                dishLookup={dishLookup}
-                setDishLookup={setDishLookup}
-                dishError={dishError}
-                setDishError={setDishError}
-            />
-            <ItemCounter 
-                counter={counter}
-                setCounter={setCounter}
-                counterError={counterError}
-                setCounterError={setCounterError}
-            />
-        </div>
-        <TextArea 
-            placeholder="Observations ..."
-            value={observations}
-            onChange={e => setObservations(e.target.value)}
-        />
-        <Button 
-            label="Add Dish"
-        />
-    </form>
+    <Tabs
+        tabs={[
+        {
+            label: 'Dishes',
+            content: 
+            <form 
+                onSubmit={handleCreateOrderItem}
+                className="flex flex-col items-center justify-start my-6">
+                <div className="w-full grid grid-cols-4 gap-4">
+                    <DishLookup 
+                        setDish={setDish}
+                        setCost={setCost}
+                        dishLookup={dishLookup}
+                        setDishLookup={setDishLookup}
+                        dishError={dishError}
+                        setDishError={setDishError}
+                    />
+                    <ItemCounter 
+                        counter={counter}
+                        setCounter={setCounter}
+                        counterError={counterError}
+                        setCounterError={setCounterError}
+                    />
+                </div>
+                <TextArea 
+                    placeholder="Observations ..."
+                    value={observations}
+                    onChange={e => setObservations(e.target.value)}
+                />
+                <Button 
+                    label="Add Dish"
+                />
+            </form>,
+        },
+        {
+            label: 'Promos',
+            content:
+                <div>
+                    {showPromos 
+                    ? 
+                    <PromoLookup 
+                        setShowPromos={setShowPromos}
+                        promoLookup={promoLookup}
+                        setPromoLookup={setPromoLookup}
+                    /> 
+                    : 
+                    <form>
+                        <div className="w-full grid grid-cols-4 gap-4">
+                        <p className="col-span-3">{promoLookup && promoLookup}</p>
+                        <ItemCounter 
+                            counter={counter}
+                            setCounter={setCounter}
+                            counterError={counterError}
+                            setCounterError={setCounterError}
+                        />
+                        </div>
+                        <TextArea 
+                            placeholder="Observations ..."
+                            value={observations}
+                            onChange={e => setObservations(e.target.value)}
+                        />
+                        <div className="w-full flex justify-between">
+                            <Button 
+                                label="Add Promo"
+                            />
+                            <Button 
+                                label="Go Back"
+                                onClick={() => {
+                                    setPromoLookup('')
+                                    setShowPromos(true)
+                                }}
+                            />
+                        </div>
+                    </form>
+                    }
+                </div>,
+        },
+        ]}
+    />
   )
 }
 
