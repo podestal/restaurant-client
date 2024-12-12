@@ -56,6 +56,7 @@ const SimpleOrderCard = ({ order }: Props) => {
                 order={order}
                 setBackground={setBackground}
             />
+            <>{console.log('order kitchen', order)}</>
             <OrderItems 
                 orderItems={order.order_items}
                 editable={false}
