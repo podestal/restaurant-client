@@ -76,7 +76,9 @@ const PromoLookup = ({
     //     </motion.div>
     // </div>
     <div className="flex flex-col gap-4">
-        {promotions.map( promotion => (
+        {promotions
+            .filter( promotion => promotion.is_active)
+            .map( promotion => (
             <p 
             onClick={() => {
                 setPromoLookup(promotion.name)

@@ -69,7 +69,6 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
                 setCost(0)
                 setObservations('')
                 setCounter(0)
-                setDishLookup('')
             }
         })
 
@@ -82,7 +81,8 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
                 setCost(0)
                 setObservations('')
                 setCounter(0)
-                setDishLookup('')
+                setShowPromos(true)
+                setPromoLookup('')
             }
         })
     }
