@@ -9,6 +9,10 @@ interface Props {
 }
 
 const OrderItemsCard = ({ orderItem, editable, tableId }: Props) => {
+
+    console.log('orderItem card', orderItem);
+    
+
   return (
     <motion.div 
         layout
