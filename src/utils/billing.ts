@@ -1,4 +1,27 @@
+import axios from "axios"
 import moment from "moment"
+
+interface CorrelativeProps {
+    setCorrelative:  React.Dispatch<React.SetStateAction<string>>
+}
+
+export const getCorrelative = ({ setCorrelative }: CorrelativeProps) => {
+    const data = {
+        personaId: import.meta.env.VITE_PERSONAL_ID,
+        personaToken: import.meta.env.VITE_PERSONAL_TOKEN,
+        type:'03',
+        serie: 'B001'
+    }
+
+    axios.post('https://back.apisunat.com/personas/lastDocument/', data, {
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+    .then(response => setCorrelative(response.data.suggestedNumber))
+    .catch(err => console.log(err))
+    
+}
 
 const numberToWords = (amount: number) => {
     const units = [
@@ -42,10 +65,12 @@ const numberToWords = (amount: number) => {
 
 interface TicketProps {
     amount: number
+    correlative: string
 }
 
 export const generateTicketData = ({
     amount,
+    correlative,
 }: TicketProps) => {
 
     const taxes = parseFloat((amount*0.18).toFixed(2))
@@ -54,11 +79,11 @@ export const generateTicketData = ({
     const ticket = {
         personaId: import.meta.env.VITE_PERSONAL_ID,
         personaToken: import.meta.env.VITE_PERSONAL_TOKEN,
-        fileName: "20482674828-03-B001-00000004",
+        fileName: `20482674828-03-B001-${correlative}`,
         documentBody: {
           "cbc:UBLVersionID": { _text: "2.1" },
           "cbc:CustomizationID": { _text: "2.0" },
-          "cbc:ID": { _text: "B001-00000004" },
+          "cbc:ID": { _text: `B001-${correlative}` },
           "cbc:IssueDate": { _text:  moment().format("YYYY-MM-DD") },
           "cbc:IssueTime": { _text: moment().format("HH:mm:ss") },
           "cbc:InvoiceTypeCode": {

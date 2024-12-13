@@ -1,6 +1,7 @@
 import axios from "axios"
 import Button from "../ui/Button"
-import { generateTicketData } from "../../utils/billing"
+import { generateTicketData, getCorrelative } from "../../utils/billing"
+import { useEffect, useState } from "react"
 
 const Playground = () => {
 
@@ -256,12 +257,21 @@ const Playground = () => {
             ]
         }
     }`
-        
-    const ticket = generateTicketData({ amount: 100 })
       
     const invoiceObj = JSON.parse(invoice)
 
+    const [correlative, setCorrelative] = useState('')
+
+    const ticket = generateTicketData({ amount: 100, correlative })
+
+    useEffect(() => {
+        getCorrelative({ setCorrelative })
+    }, [])
+
+
     const handleSunat = () => {
+
+        
         axios.post('https://back.apisunat.com/personas/v1/sendBill', ticket, {
             headers: {
             //   Authorization: `JWT DEV_ARMXKt1dLYTkhbI6bhp1ErGVimApMLB8CayiMsvjDulEWYFK7lUpLIKN4kAdWHsX`,
@@ -271,6 +281,8 @@ const Playground = () => {
         .then(response => console.log(response.data))
         .catch(err => console.log(err))
     }
+
+
 
   return (
     <div>
