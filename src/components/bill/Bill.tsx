@@ -9,6 +9,8 @@ import RemoveBill from "./RemoveBill"
 import Tabs from "../ui/Tabs"
 import BillTotal from "./BillTotal"
 import BillItemCard from "./BillItemCard"
+import Button from "../ui/Button"
+import Playground from "./Playground"
 
 interface Props {
     table: TableType
@@ -75,6 +77,18 @@ const Bill = ({ table, enable }: Props) => {
                                 billId={bill[0]?.id}
                                 allowRemoveBill={allowRemoveBill}
                             />
+                        </div>
+                        <div className="my-6 w-full flex justify-between items-center">
+                            <Button 
+                                label='Ticket'
+                            />
+                            <Button 
+                                label="Invoice"
+                            />
+                            {/* <Button 
+                                label='Just Print'
+                            /> */}
+                            <Playground />
                         </div>
                         <div className="w-full flex flex-col justify-start items-center gap-4 my-6">
                             {bill[0]?.order_items.map( orderItem => (
