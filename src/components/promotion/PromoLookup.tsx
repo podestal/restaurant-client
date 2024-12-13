@@ -1,27 +1,12 @@
-import { motion } from "framer-motion"
 import useGetPromotion from "../../hooks/api/promotion/useGetPromotions"
-import Input from "../ui/Input"
-import { useState } from "react"
 
 interface Props {
     setShowPromos: React.Dispatch<React.SetStateAction<boolean>>
     setPromoLookup: React.Dispatch<React.SetStateAction<string>>
     setPromotion: React.Dispatch<React.SetStateAction<number>>
-    // setPromo: React.Dispatch<React.SetStateAction<number>>
-    // setCost?: React.Dispatch<React.SetStateAction<number>>
-    // setPromoLookup: React.Dispatch<React.SetStateAction<string>>
-    // promoLookup: string
-    // promoError: string
-    // setPromoError: React.Dispatch<React.SetStateAction<string>>
 }
 
 const PromoLookup = ({
-    // setPromo,
-    // setCost,
-    // setPromoLookup,
-    // promoLookup,
-    // promoError,
-    // setPromoError
     setPromoLookup,
     setShowPromos,
     setPromotion,

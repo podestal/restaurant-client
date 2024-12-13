@@ -9,6 +9,7 @@ import Button from "../ui/Button"
 import useUpdateOrder from "../../hooks/api/order/useUpdateOrder"
 import OrderType from "./OrderType"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
+import { joinDishesAndPromotions } from "../../utils/utilities"
 
 interface Props {
     order: Order
@@ -22,6 +23,8 @@ const SimpleOrderCard = ({ order }: Props) => {
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
     const updateOrder = useUpdateOrder({ orderId: order.id, status: 'S', email: order.customer_email })
+
+    const sanitizedOrderItems = joinDishesAndPromotions(order.order_items)
 
     const handleRemove = () => {
         const table = order.table ? order.table : null
@@ -58,7 +61,7 @@ const SimpleOrderCard = ({ order }: Props) => {
             />
             <>{console.log('order kitchen', order)}</>
             <OrderItems 
-                orderItems={order.order_items}
+                orderItems={sanitizedOrderItems}
                 editable={false}
                 tableId={0}
             />

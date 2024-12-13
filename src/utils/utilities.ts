@@ -3,6 +3,7 @@ import { ChartData } from "../components/ui/Charts";
 import { Item } from "../services/api/cartService";
 import { OrderItem } from "../services/api/orderItemService";
 import { jwtDecode } from "jwt-decode";
+import { SimpleOrderItem } from "../services/api/orderService";
 
 export const getSubTotalCost = (cartItems: Item[]) => {
     return cartItems.reduce((accumulator, item) => {
@@ -50,4 +51,26 @@ export const isTokenExpired = (token: string) => {
     } catch (error) {
         return true
     }
+}
+
+export const joinDishesAndPromotions = (orderItems: SimpleOrderItem[]) => {
+
+    const items = orderItems.flatMap( orderItem => 
+        orderItem.promotion === null 
+          ? [orderItem]
+          : orderItem.promotion.items
+      )
+    
+      const uniqueItems = Object.values(
+        items.reduce((acc, item) => {
+          if (!acc[item.name]) {
+            acc[item.name] = { ...item }
+          } else {
+            acc[item.name].quantity += item.quantity 
+          }
+          return acc
+        }, {} as Record<string, any>)
+      )
+
+      return uniqueItems
 }

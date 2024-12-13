@@ -1,4 +1,5 @@
 import APIClient from "./apiClient"
+import { Promotion } from "./promotionService"
 
 export interface SimpleOrderItem {
     id: number
@@ -6,6 +7,7 @@ export interface SimpleOrderItem {
     cost: number
     observations: string
     name: string
+    promotion: Promotion
 }
 
 export interface Order {
