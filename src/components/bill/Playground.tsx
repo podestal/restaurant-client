@@ -2,8 +2,13 @@ import axios from "axios"
 import Button from "../ui/Button"
 import { generateTicketData, getCorrelative } from "../../utils/billing"
 import { useEffect, useState } from "react"
+import { SimpleOrderItem } from "../../services/api/orderService"
 
-const Playground = () => {
+interface Props {
+    orderItems:  SimpleOrderItem[]
+}
+
+const Playground = ({ orderItems }: Props) => {
 
     const invoice = 
 
@@ -262,7 +267,7 @@ const Playground = () => {
 
     const [correlative, setCorrelative] = useState('')
 
-    const ticket = generateTicketData({ correlative })
+    const ticket = generateTicketData({ correlative, orderItems })
 
     useEffect(() => {
         getCorrelative({ setCorrelative })

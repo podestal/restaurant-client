@@ -88,7 +88,9 @@ const Bill = ({ table, enable }: Props) => {
                             {/* <Button 
                                 label='Just Print'
                             /> */}
-                            <Playground />
+                            <Playground 
+                                orderItems={bill[0]?.order_items}
+                            />
                         </div>
                         <div className="w-full flex flex-col justify-start items-center gap-4 my-6">
                             {bill[0]?.order_items.map( orderItem => (

@@ -1,5 +1,6 @@
 import axios from "axios"
 import moment from "moment"
+import { SimpleOrderItem } from "../services/api/orderService"
 
 interface CorrelativeProps {
     setCorrelative:  React.Dispatch<React.SetStateAction<string>>
@@ -57,34 +58,28 @@ const numberToWords = (amount: number) => {
     return words
 }
 
-// console.log(numberToWords(123456.78));
-// // Output: "CIENTO VEINTITRÉS MIL CUATROCIENTOS CINCUENTA Y SEIS CON 78/100 SOLES"
-
-// console.log(numberToWords(66.08));
-// // Output: "SESENTA Y SEIS CON 08/100 SOLES"
-
 const items = [
     {
         id: 1,
-        description: 'Item 1',
+        name: 'Item 1',
         quantity: 3,
         cost: 10,
     },
     {
         id: 2,
-        description: 'Item 2',
+        name: 'Item 2',
         quantity: 1,
         cost: 14,
     },
     {
         id: 3,
-        description: 'Third one',
+        name: 'Third one',
         quantity: 10,
         cost: 4,
     },
     {
         id: 4,
-        description: 'La cuarta',
+        name: 'La cuarta',
         quantity: 2,
         cost: 50,
     },
@@ -92,20 +87,23 @@ const items = [
 
 interface TicketProps {
     correlative: string
+    orderItems:  SimpleOrderItem[]
 }
 
 export const generateTicketData = ({
     correlative,
+    orderItems
 }: TicketProps) => {
+    
 
-    const subTotal = items.reduce((acc, item) => {
+    const subTotal = orderItems.reduce((acc, item) => {
         return acc += parseFloat((item.cost * item.quantity).toFixed(2))
     }, 0)
 
     const taxes = parseFloat((subTotal*0.18).toFixed(2))
     const total = parseFloat((subTotal + taxes).toFixed(2))
 
-    const itemListTwo = items.map( item => (
+    const itemList = orderItems.map( item => (
         {
             "cbc:ID": {
                 "_text": item.id
@@ -180,7 +178,7 @@ export const generateTicketData = ({
             },
             "cac:Item": {
                 "cbc:Description": {
-                    "_text": item.description
+                    "_text": item.name
                 }
             },
             "cac:Price": {
@@ -268,176 +266,7 @@ export const generateTicketData = ({
               _text: total,
             },
           },
-          "cac:InvoiceLine": itemListTwo
-            //             {
-            //   "cbc:ID": { _text: 1 },
-            //   "cbc:InvoicedQuantity": {
-            //     _attributes: { unitCode: "NIU" },
-            //     _text: 1,
-            //   },
-            //   "cbc:LineExtensionAmount": {
-            //     _attributes: { currencyID: "PEN" },
-            //     _text: amount,
-            //   },
-            //   "cac:PricingReference": {
-            //     "cac:AlternativeConditionPrice": {
-            //       "cbc:PriceAmount": {
-            //         _attributes: { currencyID: "PEN" },
-            //         _text: total,
-            //       },
-            //       "cbc:PriceTypeCode": { _text: "01" },
-            //     },
-            //   },
-            //   "cac:TaxTotal": {
-            //     "cbc:TaxAmount": {
-            //       _attributes: { currencyID: "PEN" },
-            //       _text: taxes,
-            //     },
-            //     "cac:TaxSubtotal": [
-            //       {
-            //         "cbc:TaxableAmount": {
-            //           _attributes: { currencyID: "PEN" },
-            //           _text: amount,
-            //         },
-            //         "cbc:TaxAmount": {
-            //           _attributes: { currencyID: "PEN" },
-            //           _text: taxes,
-            //         },
-            //         "cac:TaxCategory": {
-            //           "cbc:Percent": { _text: 18 },
-            //           "cbc:TaxExemptionReasonCode": { _text: "10" },
-            //           "cac:TaxScheme": {
-            //             "cbc:ID": { _text: "1000" },
-            //             "cbc:Name": { _text: "IGV" },
-            //             "cbc:TaxTypeCode": { _text: "VAT" },
-            //           },
-            //         },
-            //       },
-            //     ],
-            //   },
-          
-        //   [
-
-            //   "cac:Item": { "cbc:Description": { _text: "From billing util" } },
-            //   "cac:Price": {
-            //     "cbc:PriceAmount": {
-            //       _attributes: { currencyID: "PEN" },
-            //       _text: amount,
-            //     },
-            //   },
-              
-            // },
-            // {
-            //     "cbc:ID": { _text: 2 },
-            //     "cbc:InvoicedQuantity": {
-            //       _attributes: { unitCode: "NIU" },
-            //       _text: 1,
-            //     },
-            //     "cbc:LineExtensionAmount": {
-            //       _attributes: { currencyID: "PEN" },
-            //       _text: amount,
-            //     },
-            //     "cac:PricingReference": {
-            //       "cac:AlternativeConditionPrice": {
-            //         "cbc:PriceAmount": {
-            //           _attributes: { currencyID: "PEN" },
-            //           _text: total,
-            //         },
-            //         "cbc:PriceTypeCode": { _text: "01" },
-            //       },
-            //     },
-            //     "cac:TaxTotal": {
-            //       "cbc:TaxAmount": {
-            //         _attributes: { currencyID: "PEN" },
-            //         _text: taxes,
-            //       },
-            //       "cac:TaxSubtotal": [
-            //         {
-            //           "cbc:TaxableAmount": {
-            //             _attributes: { currencyID: "PEN" },
-            //             _text: amount,
-            //           },
-            //           "cbc:TaxAmount": {
-            //             _attributes: { currencyID: "PEN" },
-            //             _text: taxes,
-            //           },
-            //           "cac:TaxCategory": {
-            //             "cbc:Percent": { _text: 18 },
-            //             "cbc:TaxExemptionReasonCode": { _text: "10" },
-            //             "cac:TaxScheme": {
-            //               "cbc:ID": { _text: "1000" },
-            //               "cbc:Name": { _text: "IGV" },
-            //               "cbc:TaxTypeCode": { _text: "VAT" },
-            //             },
-            //           },
-            //         },
-            //       ],
-            //     },
-            // "cac:Item": { "cbc:Description": { _text: "Another unit" } },
-            // "cac:Price": {
-            //   "cbc:PriceAmount": {
-            //     _attributes: { currencyID: "PEN" },
-            //     _text: amount,
-            //   },
-            // },
-                
-            //   },
-            //   {
-            //     "cbc:ID": { _text: 3 },
-            //     "cbc:InvoicedQuantity": {
-            //       _attributes: { unitCode: "NIU" },
-            //       _text: 3,
-            //     },
-            //     "cbc:LineExtensionAmount": {
-            //       _attributes: { currencyID: "PEN" },
-            //       _text: 5,
-            //     },
-            //     "cac:PricingReference": {
-            //       "cac:AlternativeConditionPrice": {
-            //         "cbc:PriceAmount": {
-            //           _attributes: { currencyID: "PEN" },
-            //           _text: 5,
-            //         },
-            //         "cbc:PriceTypeCode": { _text: "01" },
-            //       },
-            //     },
-            //     "cac:TaxTotal": {
-            //       "cbc:TaxAmount": {
-            //         _attributes: { currencyID: "PEN" },
-            //         _text: taxes,
-            //       },
-            //       "cac:TaxSubtotal": [
-            //         {
-            //           "cbc:TaxableAmount": {
-            //             _attributes: { currencyID: "PEN" },
-            //             _text: amount,
-            //           },
-            //           "cbc:TaxAmount": {
-            //             _attributes: { currencyID: "PEN" },
-            //             _text: taxes,
-            //           },
-            //           "cac:TaxCategory": {
-            //             "cbc:Percent": { _text: 18 },
-            //             "cbc:TaxExemptionReasonCode": { _text: "10" },
-            //             "cac:TaxScheme": {
-            //               "cbc:ID": { _text: "1000" },
-            //               "cbc:Name": { _text: "IGV" },
-            //               "cbc:TaxTypeCode": { _text: "VAT" },
-            //             },
-            //           },
-            //         },
-            //       ],
-            //     },
-            //     "cac:Item": { "cbc:Description": { _text: "third one" } },
-            //     "cac:Price": {
-            //       "cbc:PriceAmount": {
-            //         _attributes: { currencyID: "PEN" },
-            //         _text: amount,
-            //       },
-            //     },
-                
-            //   },
-        //   ],
+          "cac:InvoiceLine": itemList
         },
       }
 
