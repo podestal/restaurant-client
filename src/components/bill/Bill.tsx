@@ -11,6 +11,7 @@ import BillTotal from "./BillTotal"
 import BillItemCard from "./BillItemCard"
 import Button from "../ui/Button"
 import Playground from "./Playground"
+import Ticket from "./Ticket"
 
 interface Props {
     table: TableType
@@ -79,18 +80,18 @@ const Bill = ({ table, enable }: Props) => {
                             />
                         </div>
                         <div className="my-6 w-full flex justify-between items-center">
-                            <Button 
-                                label='Ticket'
+                            <Ticket 
+                                orderItems={bill[0]?.order_items}
                             />
                             <Button 
                                 label="Invoice"
                             />
-                            {/* <Button 
+                            <Button 
                                 label='Just Print'
-                            /> */}
-                            <Playground 
-                                orderItems={bill[0]?.order_items}
                             />
+                            {/* <Playground 
+                                orderItems={bill[0]?.order_items}
+                            /> */}
                         </div>
                         <div className="w-full flex flex-col justify-start items-center gap-4 my-6">
                             {bill[0]?.order_items.map( orderItem => (

@@ -21,13 +21,11 @@ const Playground = ({ orderItems }: Props) => {
     const invoice = generateInvoiceData({ correlative, orderItems, ruc, address })
 
     useEffect(() => {
-        getCorrelative({ setCorrelative, documentType: 'I' })
+        getCorrelative({ setCorrelative, documentType: 'T' })
     }, [])
 
 
     const handleSunat = () => {
-
-        
         axios.post('https://back.apisunat.com/personas/v1/sendBill', invoice, {
             headers: {
               "Content-Type": "application/json",
