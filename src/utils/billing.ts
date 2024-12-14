@@ -69,15 +69,25 @@ const items = [
         description: 'Item 1',
         quantity: 3,
         cost: 10,
-        total: 30,
     },
-    // {
-    //     id: 2,
-    //     description: 'Item 2',
-    //     quantity: 1,
-    //     cost: 14,
-    //     total: 14,
-    // }
+    {
+        id: 2,
+        description: 'Item 2',
+        quantity: 1,
+        cost: 14,
+    },
+    {
+        id: 3,
+        description: 'Third one',
+        quantity: 10,
+        cost: 4,
+    },
+    {
+        id: 4,
+        description: 'La cuarta',
+        quantity: 2,
+        cost: 50,
+    },
 ]
 
 interface TicketProps {
@@ -89,7 +99,7 @@ export const generateTicketData = ({
 }: TicketProps) => {
 
     const subTotal = items.reduce((acc, item) => {
-        return acc += item.total
+        return acc += parseFloat((item.cost * item.quantity).toFixed(2))
     }, 0)
 
     const taxes = parseFloat((subTotal*0.18).toFixed(2))
@@ -183,65 +193,7 @@ export const generateTicketData = ({
             }
         }
     ))
-       
-    
-
-    const itemsList = items.map((item) => ({
-        "cbc:ID": { _text: item.id },
-        "cbc:InvoicedQuantity": {
-          _attributes: { unitCode: "NIU" },
-          _text: item.quantity,
-        },
-        "cbc:LineExtensionAmount": {
-          _attributes: { currencyID: "PEN" },
-          _text: item.cost,
-        },
-        "cac:PricingReference": {
-          "cac:AlternativeConditionPrice": {
-            "cbc:PriceAmount": {
-              _attributes: { currencyID: "PEN" },
-              _text: item.cost,
-            },
-            "cbc:PriceTypeCode": { _text: "01" },
-          },
-        },
-        "cac:TaxTotal": {
-          "cbc:TaxAmount": {
-            _attributes: { currencyID: "PEN" },
-            _text: parseFloat((item.total * 0.18).toFixed(2)),
-          },
-          "cac:TaxSubtotal": [
-            {
-              "cbc:TaxableAmount": {
-                _attributes: { currencyID: "PEN" },
-                _text: 30,
-              },
-              "cbc:TaxAmount": {
-                _attributes: { currencyID: "PEN" },
-                _text: parseFloat((item.total * 0.18).toFixed(2)),
-              },
-              "cac:TaxCategory": {
-                "cbc:Percent": { _text: 18 },
-                "cbc:TaxExemptionReasonCode": { _text: "10" },
-                "cac:TaxScheme": {
-                  "cbc:ID": { _text: "1000" },
-                  "cbc:Name": { _text: "IGV" },
-                  "cbc:TaxTypeCode": { _text: "VAT" },
-                },
-              },
-            },
-          ],
-        },
-        "cac:Item": { "cbc:Description": { _text: item.description } },
-        "cac:Price": {
-          "cbc:PriceAmount": {
-            _attributes: { currencyID: "PEN" },
-            _text: item.cost,
-          },
-        },
-      }))
       
-
     const ticket = {
         personaId: import.meta.env.VITE_PERSONAL_ID,
         personaToken: import.meta.env.VITE_PERSONAL_TOKEN,
