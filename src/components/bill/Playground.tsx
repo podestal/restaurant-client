@@ -262,7 +262,7 @@ const Playground = () => {
 
     const [correlative, setCorrelative] = useState('')
 
-    const ticket = generateTicketData({ amount: 100, correlative })
+    const ticket = generateTicketData({ correlative })
 
     useEffect(() => {
         getCorrelative({ setCorrelative })
