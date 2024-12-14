@@ -70,25 +70,8 @@ interface TicketProps {
     orderItems:  SimpleOrderItem[]
 }
 
-export const generateInvoiceData = () => {
-
-}
-
-export const generateTicketData = ({
-    correlative,
-    orderItems
-}: TicketProps) => {
-    
-    console.log('orderItems', orderItems);
-    
-    const subTotal = orderItems.reduce((acc, item) => {
-        return acc += parseFloat((item.cost * item.quantity).toFixed(2))
-    }, 0)
-
-    const taxes = parseFloat((subTotal*0.18).toFixed(2))
-    const total = parseFloat((subTotal + taxes).toFixed(2))
-
-    const itemList = orderItems.map( item => (
+const getItemList = (orderItems: SimpleOrderItem[]) => {
+    return orderItems.map( item => (
         {
             "cbc:ID": {
                 "_text": item.id
@@ -176,6 +159,25 @@ export const generateTicketData = ({
             }
         }
     ))
+}
+
+export const generateInvoiceData = () => {
+
+}
+
+export const generateTicketData = ({
+    correlative,
+    orderItems
+}: TicketProps) => {
+    
+    const subTotal = orderItems.reduce((acc, item) => {
+        return acc += parseFloat((item.cost * item.quantity).toFixed(2))
+    }, 0)
+
+    const taxes = parseFloat((subTotal*0.18).toFixed(2))
+    const total = parseFloat((subTotal + taxes).toFixed(2))
+
+    const itemList = getItemList(orderItems)
       
     const ticket = {
         personaId: import.meta.env.VITE_PERSONAL_ID,
