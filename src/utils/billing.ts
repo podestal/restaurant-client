@@ -161,8 +161,126 @@ const getItemList = (orderItems: SimpleOrderItem[]) => {
     ))
 }
 
-export const generateInvoiceData = () => {
+export const generateInvoiceData = ({
+    correlative,
+    orderItems
+}: TicketProps) => {
 
+    const subTotal = orderItems.reduce((acc, item) => {
+        return acc += parseFloat((item.cost * item.quantity).toFixed(2))
+    }, 0)
+
+    const taxes = parseFloat((subTotal*0.18).toFixed(2))
+    const total = parseFloat((subTotal + taxes).toFixed(2))
+    
+    const itemList = getItemList(orderItems)
+
+    const invoice = {
+        personaId: import.meta.env.VITE_PERSONAL_ID,
+        personaToken: import.meta.env.VITE_PERSONAL_TOKEN,
+        fileName: `20482674828-01-F001-${correlative}`,
+        documentBody: {
+          "cbc:UBLVersionID": { _text: "2.1" },
+          "cbc:CustomizationID": { _text: "2.0" },
+          "cbc:ID": { _text: `F001-${correlative}` },
+          "cbc:IssueDate": { _text:  moment().format("YYYY-MM-DD") },
+          "cbc:IssueTime": { _text: moment().format("HH:mm:ss") },
+          "cbc:InvoiceTypeCode": {
+            _attributes: { listID: "0101" },
+            _text: "01",
+          },
+          "cbc:Note": [
+            {
+                _text: numberToWords(total),
+                _attributes: { languageLocaleID: "1000" },
+            },
+          ],
+          "cbc:DocumentCurrencyCode": { _text: "PEN" },
+          "cac:AccountingSupplierParty": {
+            "cac:Party": {
+              "cac:PartyIdentification": {
+                "cbc:ID": {
+                  _attributes: { schemeID: "6" },
+                  _text: "20482674828",
+                },
+              },
+              "cac:PartyName": { "cbc:Name": { _text: "Axios" } },
+              "cac:PartyLegalEntity": {
+                "cbc:RegistrationName": { _text: "Axios" },
+                "cac:RegistrationAddress": {
+                  "cbc:AddressTypeCode": { _text: "0000" },
+                  "cac:AddressLine": { "cbc:Line": { _text: "217 primera" } },
+                },
+              },
+            },
+          },
+          "cac:AccountingCustomerParty": {
+            "cac:Party": {
+              "cac:PartyIdentification": {
+                "cbc:ID": {
+                  _attributes: { schemeID: "6" },
+                  _text: "20482674821",
+                },
+              },
+              "cac:PartyLegalEntity": {
+                "cbc:RegistrationName": { _text: "Factura" },
+                "cac:RegistrationAddress": {
+                  "cac:AddressLine": { "cbc:Line": { _text: "1020 madison av" } },
+                },
+              },
+            },
+          },
+          "cac:TaxTotal": {
+            "cbc:TaxAmount": {
+              _attributes: { currencyID: "PEN" },
+              _text: taxes,
+            },
+            "cac:TaxSubtotal": [
+              {
+                "cbc:TaxableAmount": {
+                  _attributes: { currencyID: "PEN" },
+                  _text: subTotal,
+                },
+                "cbc:TaxAmount": {
+                  _attributes: { currencyID: "PEN" },
+                  _text: taxes,
+                },
+                "cac:TaxCategory": {
+                  "cac:TaxScheme": {
+                    "cbc:ID": { _text: "1000" },
+                    "cbc:Name": { _text: "IGV" },
+                    "cbc:TaxTypeCode": { _text: "VAT" },
+                  },
+                },
+              },
+            ],
+          },
+          "cac:LegalMonetaryTotal": {
+            "cbc:LineExtensionAmount": {
+              _attributes: { currencyID: "PEN" },
+              _text: subTotal,
+            },
+            "cbc:TaxInclusiveAmount": {
+              _attributes: { currencyID: "PEN" },
+              _text: total,
+            },
+            "cbc:PayableAmount": {
+              _attributes: { currencyID: "PEN" },
+              _text: total,
+            },
+          },
+          "cac:PaymentTerms": [
+            {
+              "cbc:ID": { _text: "FormaPago" },
+              "cbc:PaymentMeansID": { _text: "Contado" },
+            },
+          ],
+          "cac:InvoiceLine": itemList
+        },
+      }
+
+      return invoice
+    
 }
 
 export const generateTicketData = ({
