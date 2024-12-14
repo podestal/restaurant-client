@@ -4,14 +4,19 @@ import { SimpleOrderItem } from "../services/api/orderService"
 
 interface CorrelativeProps {
     setCorrelative:  React.Dispatch<React.SetStateAction<string>>
+    documentType: 'I' | 'T'
 }
 
-export const getCorrelative = ({ setCorrelative }: CorrelativeProps) => {
+export const getCorrelative = ({ setCorrelative, documentType }: CorrelativeProps) => {
+
+    const docType = documentType === 'T' ? '03' : '01'
+    const docSerie = documentType === 'T' ? 'B001' : 'F001'
+
     const data = {
         personaId: import.meta.env.VITE_PERSONAL_ID,
         personaToken: import.meta.env.VITE_PERSONAL_TOKEN,
-        type:'03',
-        serie: 'B001'
+        type: docType,
+        serie: docSerie,
     }
 
     axios.post('https://back.apisunat.com/personas/lastDocument/', data, {
@@ -19,7 +24,9 @@ export const getCorrelative = ({ setCorrelative }: CorrelativeProps) => {
             "Content-Type": "application/json",
         }
     })
-    .then(response => setCorrelative(response.data.suggestedNumber))
+    .then(response => {
+        console.log(response.data)
+        setCorrelative(response.data.suggestedNumber)})
     .catch(err => console.log(err))
     
 }
@@ -58,36 +65,13 @@ const numberToWords = (amount: number) => {
     return words
 }
 
-const items = [
-    {
-        id: 1,
-        name: 'Item 1',
-        quantity: 3,
-        cost: 10,
-    },
-    {
-        id: 2,
-        name: 'Item 2',
-        quantity: 1,
-        cost: 14,
-    },
-    {
-        id: 3,
-        name: 'Third one',
-        quantity: 10,
-        cost: 4,
-    },
-    {
-        id: 4,
-        name: 'La cuarta',
-        quantity: 2,
-        cost: 50,
-    },
-]
-
 interface TicketProps {
     correlative: string
     orderItems:  SimpleOrderItem[]
+}
+
+export const generateInvoiceData = () => {
+
 }
 
 export const generateTicketData = ({
@@ -95,7 +79,8 @@ export const generateTicketData = ({
     orderItems
 }: TicketProps) => {
     
-
+    console.log('orderItems', orderItems);
+    
     const subTotal = orderItems.reduce((acc, item) => {
         return acc += parseFloat((item.cost * item.quantity).toFixed(2))
     }, 0)

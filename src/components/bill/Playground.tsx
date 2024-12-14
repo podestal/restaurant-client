@@ -270,7 +270,7 @@ const Playground = ({ orderItems }: Props) => {
     const ticket = generateTicketData({ correlative, orderItems })
 
     useEffect(() => {
-        getCorrelative({ setCorrelative })
+        getCorrelative({ setCorrelative, documentType: 'T' })
     }, [])
 
 
