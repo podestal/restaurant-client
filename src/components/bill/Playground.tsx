@@ -15,7 +15,10 @@ const Playground = ({ orderItems }: Props) => {
 
     // const ticket = generateTicketData({ correlative, orderItems })
 
-    const invoice = generateInvoiceData({ correlative, orderItems })
+    const ruc = '20000000051'
+    const address = '272 Chestnut street'
+
+    const invoice = generateInvoiceData({ correlative, orderItems, ruc, address })
 
     useEffect(() => {
         getCorrelative({ setCorrelative, documentType: 'I' })
@@ -27,7 +30,6 @@ const Playground = ({ orderItems }: Props) => {
         
         axios.post('https://back.apisunat.com/personas/v1/sendBill', invoice, {
             headers: {
-            //   Authorization: `JWT DEV_ARMXKt1dLYTkhbI6bhp1ErGVimApMLB8CayiMsvjDulEWYFK7lUpLIKN4kAdWHsX`,
               "Content-Type": "application/json",
             },
           })

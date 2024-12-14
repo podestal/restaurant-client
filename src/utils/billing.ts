@@ -68,6 +68,8 @@ const numberToWords = (amount: number) => {
 interface TicketProps {
     correlative: string
     orderItems:  SimpleOrderItem[]
+    ruc?: string
+    address?: string
 }
 
 const getItemList = (orderItems: SimpleOrderItem[]) => {
@@ -163,7 +165,9 @@ const getItemList = (orderItems: SimpleOrderItem[]) => {
 
 export const generateInvoiceData = ({
     correlative,
-    orderItems
+    orderItems,
+    ruc,
+    address,
 }: TicketProps) => {
 
     const subTotal = orderItems.reduce((acc, item) => {
@@ -219,13 +223,13 @@ export const generateInvoiceData = ({
               "cac:PartyIdentification": {
                 "cbc:ID": {
                   _attributes: { schemeID: "6" },
-                  _text: "20482674821",
+                  _text: ruc,
                 },
               },
               "cac:PartyLegalEntity": {
                 "cbc:RegistrationName": { _text: "Factura" },
                 "cac:RegistrationAddress": {
-                  "cac:AddressLine": { "cbc:Line": { _text: "1020 madison av" } },
+                  "cac:AddressLine": { "cbc:Line": { _text: address } },
                 },
               },
             },
