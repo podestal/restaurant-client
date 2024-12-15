@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import useGetBill from "../../hooks/api/bill/useGetBill"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import { TableType } from "../../services/api/tableService"
@@ -12,6 +12,7 @@ import BillItemCard from "./BillItemCard"
 import Button from "../ui/Button"
 import Ticket from "./Ticket"
 import Invoice from "./Invoice"
+import { getCorrelative } from "../../utils/billing"
 
 interface Props {
     table: TableType
@@ -25,6 +26,14 @@ const Bill = ({ table, enable }: Props) => {
     const tableId = table.id || 0
     const access = useAuthStore(s => s.access) || ''
     const {data: bill, isLoading, isError, error, isSuccess} = useGetBill({ access, tableId: table.id, enable })
+    const [correlative, setCorrelative] = useState('')
+    const [doctype, setDoctype] = useState<'T' | 'I'>('T')
+
+    useEffect(() => {
+        console.log('doctype', doctype);
+        
+        getCorrelative({ setCorrelative, documentType: doctype })
+    }, [doctype])
 
     if (isLoading) return <p className="w-full flex justify-center items-center animate-pulse">Loading ...</p>
 
@@ -80,15 +89,18 @@ const Bill = ({ table, enable }: Props) => {
                             />
                         </div>
                         <div className="my-6 w-full flex justify-between items-center">
-                            <Ticket 
+                            {/* <Ticket 
                                 orderItems={bill[0]?.order_items}
-                            />
+                                correlative={correlative}
+                            /> */}
                             <Invoice 
                                 orderItems={bill[0]?.order_items}
+                                setDoctype={setDoctype}
+                                correlative={correlative}
                             />
-                            <Button 
+                            {/* <Button 
                                 label='Just Print'
-                            />
+                            /> */}
                         </div>
                         <div className="w-full flex flex-col justify-start items-center gap-4 my-6">
                             {bill[0]?.order_items.map( orderItem => (

@@ -1,21 +1,16 @@
-import { useEffect, useState } from "react"
-import { generateTicketData, getCorrelative } from "../../utils/billing"
+import { generateTicketData } from "../../utils/billing"
 import Button from "../ui/Button"
 import { SimpleOrderItem } from "../../services/api/orderService"
 import axios from "axios"
 
 interface Props {
     orderItems:  SimpleOrderItem[]
+    correlative: string
 }
 
-const Ticket = ({ orderItems }: Props) => {
+const Ticket = ({ orderItems, correlative }: Props) => {
 
-    const [correlative, setCorrelative] = useState('')
     const ticket = generateTicketData({ correlative, orderItems })
-
-    useEffect(() => {
-        getCorrelative({ setCorrelative, documentType: 'T' })
-    }, [])
 
     const handleSunat = () => {
         axios.post('https://back.apisunat.com/personas/v1/sendBill', ticket, {
