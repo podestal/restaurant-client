@@ -16,6 +16,8 @@ const Invoice = ({ orderItems, setDoctype, correlative }: Props) => {
     const [show, setShow] = useState(false)
     const [ruc, setRuc] = useState('')
     const [address, setAddress] = useState('')
+
+    const [rucError, setRucError] = useState('')
     // const ruc = '20000000051'
     // const address = '272 Chestnut street'
 
@@ -26,12 +28,28 @@ const Invoice = ({ orderItems, setDoctype, correlative }: Props) => {
         e.preventDefault()
         const invoice = generateInvoiceData({ correlative, orderItems, ruc, address })
 
+        if (ruc.length !== 11) {
+            setRucError('RUC is 11 digits')
+            return
+        }
+
+        const rucType = ruc.slice(0, 2)
+
+        if (!['20', '10'].includes(rucType) ) {
+            setRucError('Invalid RUC')
+            return
+        }
+
         axios.post('https://back.apisunat.com/personas/v1/sendBill', invoice, {
             headers: {
               "Content-Type": "application/json",
             },
           })
-        .then(response => console.log(response.data))
+        .then(response => {
+            console.log(response)
+            setRuc('')
+            setAddress('')
+        })
         .catch(err => console.log(err))
     }
 
@@ -56,7 +74,9 @@ const Invoice = ({ orderItems, setDoctype, correlative }: Props) => {
                     value={ruc}
                     onChange={e => {
                         setRuc(e.target.value)
+                        setRucError('')
                     }}
+                    error={rucError}
                 />
                 <Input 
                     placeholder="Address ..."
