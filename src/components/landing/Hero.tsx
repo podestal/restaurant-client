@@ -41,7 +41,7 @@ const Hero = () => {
           <h2 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl max-lg:text-center max-lg:leading-[4rem] font-montserrat font-bold text-center">
             Lorem ipsum dolor
           </h2>
-          <p className="font-poppins mt-6 leading-8 dark:text-slate-300 max-lg:text-center max-lg:text-sm max-lg:leading-8 text-center">
+          <p className="w-[60%] font-poppins mt-6 leading-8 dark:text-slate-300 max-lg:text-center max-lg:text-sm max-lg:leading-8 text-center">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat fugiat ab fuga delectus officia eveniet natus accusantium.
           </p>
         </motion.div>
