@@ -25,7 +25,6 @@ const MainPage = () => {
         <div className="w-full flex justify-center bg-slate-900 z-50 lg:pb-[100px]">
             <Navigator />
         </div>
-        <>{console.log('loading, ', isLoading)}</>
         {isLoading && <Loader />}
         <div className="w-full max-w-[95%] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1024px] xl:max-w-[1200px] 2xl:max-w-[1280px] mx-auto">
           <Outlet />

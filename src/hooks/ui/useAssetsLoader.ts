@@ -5,17 +5,17 @@ const useAssetLoader = () => {
 
     const setIsLoading = useLoadingStore(s => s.setIsLoading)
 
-    useEffect(() => {
-        const handleLoad = () => {
-            setIsLoading(false)
-        }
+    // useEffect(() => {
+    //     const handleLoad = () => {
+    //         setIsLoading(false)
+    //     }
 
-        setIsLoading(true)
+    //     setIsLoading(true)
 
-        window.addEventListener('load', handleLoad)
+    //     window.addEventListener('load', handleLoad)
 
-        return () => window.addEventListener('load', handleLoad)
-    }, [setIsLoading])
+    //     return () => window.addEventListener('load', handleLoad)
+    // }, [setIsLoading])
 
 }
 
