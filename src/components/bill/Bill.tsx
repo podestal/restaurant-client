@@ -21,6 +21,7 @@ interface Props {
 
 const Bill = ({ table, enable }: Props) => {
 
+    const [show, setShow] = useState(false)
     const [enableCreateOrder, setEnableCreateOrder] = useState(true)
     const [allowRemoveBill, setAllowRemoveBill] = useState(false)
     const tableId = table.id || 0
@@ -30,8 +31,6 @@ const Bill = ({ table, enable }: Props) => {
     const [doctype, setDoctype] = useState<'T' | 'I'>('T')
 
     useEffect(() => {
-        console.log('doctype', doctype);
-        
         getCorrelative({ setCorrelative, documentType: doctype })
     }, [doctype])
 
@@ -89,18 +88,20 @@ const Bill = ({ table, enable }: Props) => {
                             />
                         </div>
                         <div className="my-6 w-full flex justify-between items-center">
-                            {/* <Ticket 
+                            {!show && <Ticket 
                                 orderItems={bill[0]?.order_items}
                                 correlative={correlative}
-                            /> */}
+                            />}
                             <Invoice 
                                 orderItems={bill[0]?.order_items}
                                 setDoctype={setDoctype}
                                 correlative={correlative}
+                                show={show}
+                                setShow={setShow}
                             />
-                            {/* <Button 
+                            {!show && <Button 
                                 label='Just Print'
-                            /> */}
+                            />}
                         </div>
                         <div className="w-full flex flex-col justify-start items-center gap-4 my-6">
                             {bill[0]?.order_items.map( orderItem => (

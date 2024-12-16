@@ -25,7 +25,6 @@ export const getCorrelative = ({ setCorrelative, documentType }: CorrelativeProp
         }
     })
     .then(response => {
-        console.log(response.data)
         setCorrelative(response.data.suggestedNumber)})
     .catch(err => console.log(err))
     

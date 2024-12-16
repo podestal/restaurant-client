@@ -9,11 +9,12 @@ interface Props {
     orderItems: SimpleOrderItem[]
     setDoctype: React.Dispatch<React.SetStateAction<"T" | "I">>
     correlative: string
+    show: boolean
+    setShow: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Invoice = ({ orderItems, setDoctype, correlative }: Props) => {
+const Invoice = ({ orderItems, setDoctype, correlative, show, setShow }: Props) => {
 
-    const [show, setShow] = useState(false)
     const [ruc, setRuc] = useState('')
     const [address, setAddress] = useState('')
 
@@ -26,7 +27,6 @@ const Invoice = ({ orderItems, setDoctype, correlative }: Props) => {
     const handleSunat = (e:  React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault()
-        const invoice = generateInvoiceData({ correlative, orderItems, ruc, address })
 
         if (ruc.length !== 11) {
             setRucError('RUC is 11 digits')
@@ -39,6 +39,8 @@ const Invoice = ({ orderItems, setDoctype, correlative }: Props) => {
             setRucError('Invalid RUC')
             return
         }
+
+        const invoice = generateInvoiceData({ correlative, orderItems, ruc, address })
 
         axios.post('https://back.apisunat.com/personas/v1/sendBill', invoice, {
             headers: {
@@ -68,7 +70,7 @@ const Invoice = ({ orderItems, setDoctype, correlative }: Props) => {
             className="w-full flex flex-col items-center gap-6"
         >
             <h2 className="text-2xl">Invoice Info</h2>
-            <div className="w-full flex justify-center items-center gap-6">
+            <div className="w-full flex justify-center items-start gap-6">
                 <Input 
                     placeholder="RUC ..."
                     value={ruc}
@@ -92,10 +94,12 @@ const Invoice = ({ orderItems, setDoctype, correlative }: Props) => {
                     type="button"
                     onClick={() => {
                         setDoctype('T')
-                        setShow(false)}}
+                        setShow(false)
+                        setRucError('')
+                    }}
                 />
                 <Button 
-                    label="Create Invoce"
+                    label="Create Invoice"
                     type="submit"
                 />
             </div>
