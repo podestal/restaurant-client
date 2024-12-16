@@ -34,8 +34,8 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter
     const [filterByCategory, setFilterByCategory] = useState('')
     const filteredOrderItems = orderItems
         .filter( orderItem => timeFilter === 2 ? (orderItem.created_at).toString() === moment(selectedDate).format('YYYY-MM-DD') : orderItem)
-        .filter( orderItem => orderItem.category_name.toLowerCase().includes(filterByCategory.toLowerCase()) )
-        .filter( orderItem => orderItem.name.toLowerCase().includes(filterByName.toLowerCase()))
+        // .filter( orderItem => orderItem?.category_name.toLowerCase().includes(filterByCategory?.toLowerCase()) )
+        // .filter( orderItem => orderItem?.name.toLowerCase().includes(filterByName.toLowerCase()))
 
     const sortOrderItems = filteredOrderItems.sort((a, b) => {
 

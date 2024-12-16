@@ -31,11 +31,11 @@ const SteakComponent = () => {
         camera={{ position: [0, 1, 2], fov: 50 }} // Adjust camera position and field of view
     >
         <Suspense
-        fallback={
-            <Html>
-            <div className="text-center text-white">Loading...</div>
-            </Html>
-        }
+        // fallback={
+        //     <Html>
+        //     <div className="text-center text-white">Loading...</div>
+        //     </Html>
+        // }
         >
         <Stage
             adjustCamera={false} // Prevent Stage from overriding the camera position

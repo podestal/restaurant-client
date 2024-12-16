@@ -19,6 +19,9 @@ const DishCardAdmin = ({ dish }: Props) => {
       <motion.div 
         onClick={() => setOpen(true)}
         layout
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
         className="w-full flex flex-col lg:grid lg:grid-cols-7 place-items-center gap-8 text-sm px-4 py-4 hover:bg-slate-200 dark:hover:bg-slate-900 cursor-pointer">
           <img src={dish.picture_url} alt={dish.picture_url} className="w-[200px] h-[100px] object-cover shadow-xl shadow-slate-500" />
           <p className="col-span-2 font-poppins font-bold">{dish.name}</p>

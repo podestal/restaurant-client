@@ -24,8 +24,8 @@ const CategoryCardAdmin = ({ category }: Props) => {
       layout
       className="flex">
       <div 
-          className={`w-full flex justify-center items-center gap-10 h-32 ${backgroundColor} rounded-2xl shadow-xl shadow-slate-500`}>
-          <p className="text-xl  text-slate-50 font-bold font-palanquin">{category.name}</p>
+          className={`w-full flex justify-center items-center gap-10 h-32 rounded-2xl shadow-xl shadow-slate-500`}>
+          <p className="text-2xl  text-blue-600 font-bold font-palanquin">{category.name}</p>
       </div>
       <RemoveCategory 
           category={category}
