@@ -1,16 +1,15 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF, Stage } from '@react-three/drei';
 import { Suspense, useRef } from 'react';
-import * as THREE from 'three'; // Import THREE for types
+import * as THREE from 'three'; 
 import steak from '../../assets/models/steak.glb';
 
 const RotatingModel = () => {
   const modelRef = useRef<THREE.Group>(null);
 
-  // Rotate the model inside the Canvas context
   useFrame(() => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += 0.01; // Adjust the speed of rotation
+      modelRef.current.rotation.y += 0.01; 
     }
   });
 
@@ -19,7 +18,7 @@ const RotatingModel = () => {
       ref={modelRef} 
       object={useGLTF(steak).scene} 
       scale={0.4} 
-      position={[0, -0.5, 0]} // Slightly lower the model to center it
+      position={[0, -0.5, 0]}
     />
   );
 };
@@ -28,7 +27,7 @@ const SteakComponent = () => {
   return (
     <Canvas
         className="w-full h-screen"
-        camera={{ position: [0, 1, 2], fov: 50 }} // Adjust camera position and field of view
+        camera={{ position: [0, 1, 2], fov: 50 }}
     >
         <Suspense
         // fallback={
@@ -38,10 +37,9 @@ const SteakComponent = () => {
         // }
         >
         <Stage
-            adjustCamera={false} // Prevent Stage from overriding the camera position
+            adjustCamera={false} 
     
         >
-            {/* Render the RotatingModel component inside the Canvas */}
             <RotatingModel />
         </Stage>
         </Suspense>

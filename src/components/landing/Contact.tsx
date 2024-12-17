@@ -3,6 +3,7 @@ import Button from "../ui/Button"
 import Input from "../ui/Input"
 import TextArea from "../ui/TextArea"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
+import LaptopComponent from "./LaptopComponent"
 
 const Contact = () => {
 
@@ -43,7 +44,7 @@ const Contact = () => {
     <div className="w-full grid grid-cols-3 my-10">
         <form 
             onSubmit={handleSubmit}
-            className="w-full flex flex-col justify-start items-start gap-12">
+            className="w-[80%] flex flex-col justify-start items-start gap-12 col-span-2">
             <h2 className="text-4xl font-palanquin font-bold">Request a Demo</h2>
             <Input 
                 placeholder="Name ..."
@@ -73,8 +74,8 @@ const Contact = () => {
                 disable={disable}
             />
         </form>
-        <div className="col-span-2 flex w-full justify-center items-center">
-            <p>3d model</p>
+        <div className="flex w-full justify-center items-center">
+            <LaptopComponent />
         </div>
     </div>
   )
