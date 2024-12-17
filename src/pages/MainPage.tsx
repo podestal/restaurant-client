@@ -1,3 +1,4 @@
+import { Footer } from "react-day-picker"
 import Loader from "../components/ui/Loader"
 import NotificationCard from "../components/ui/NotificationCard"
 import useLoadingStore from "../hooks/store/useLoadingStore"
@@ -15,7 +16,6 @@ const MainPage = () => {
 
   return (
     <div className="min-h-screen dark:bg-slate-950 dark:text-slate-50 mx-auto relative">
-        <>{console.log('type', type)}</>
         {show && 
         <NotificationCard 
             type={type}
@@ -26,12 +26,12 @@ const MainPage = () => {
             <Navigator />
         </div>
         {isLoading && <Loader />}
+        <>
         <div className="w-full max-w-[95%] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1024px] xl:max-w-[1200px] 2xl:max-w-[1280px] mx-auto">
           <Outlet />
         </div>
-        <div className="w-full h-[400px] bg-neutral-950 text-slate-50">
-          
-        </div>
+        <Footer />
+        </>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, Stage, Html } from '@react-three/drei';
+import { useGLTF, Stage } from '@react-three/drei';
 import { Suspense, useRef } from 'react';
 import * as THREE from 'three'; // Import THREE for types
 import steak from '../../assets/models/steak.glb';

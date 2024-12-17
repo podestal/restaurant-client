@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, Stage, Html } from '@react-three/drei';
+import { useGLTF, Stage } from '@react-three/drei';
 import { Suspense, useRef } from 'react';
 import * as THREE from 'three'; // Import THREE for types
 import cheese from '../../assets/models/cheese.glb';
@@ -30,13 +30,7 @@ const My3DModel = () => {
       className="w-full h-screen"
       camera={{ position: [0, 1, 2], fov: 50 }} // Adjust camera position and field of view
     >
-      <Suspense
-        // fallback={
-        //   <Html>
-        //     <div className="text-center text-white">Loading...</div>
-        //   </Html>
-        // }
-      >
+      <Suspense>
         <Stage
           adjustCamera={false} // Prevent Stage from overriding the camera position
 
