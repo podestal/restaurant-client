@@ -16,31 +16,31 @@ const featuresContent: Feature[] = [
     {
         id: 1,
         title: 'Customize Your Menu',
-        description: 'orem ipsum dolor sit amet consectetur adipisicing elit. Assumenda nesciunt reiciendis rerum explicabo temporibus totam, aut eaque est voluptate minima error amet exercitationem commodi doloribus eius cum voluptas maxime nemo.',
+        description: 'Easily update and manage your restaurant’s menu in real time. Add new dishes, adjust prices, and highlight special promotions effortlessly. With the app, your menu stays dynamic and up-to-date, ensuring your customers always see the latest offerings.',
         img: customize,
     },
     {
         id: 2,
         title: 'Forget Paper',
-        description: 'orem ipsum dolor sit amet consectetur adipisicing elit. Assumenda nesciunt reiciendis rerum explicabo temporibus totam, aut eaque est voluptate minima error amet exercitationem commodi doloribus eius cum voluptas maxime nemo.',
+        description: 'Say goodbye to paper notes! Empower your waitstaff to take orders directly through the app, which are instantly sent to the kitchen. Streamline communication, reduce errors, and improve service speed, ensuring a smoother dining experience for both customers and staff.',
         img: forgetPaper,
     },
     {
         id: 3,
         title: 'Keep Track',
-        description: 'orem ipsum dolor sit amet consectetur adipisicing elit. Assumenda nesciunt reiciendis rerum explicabo temporibus totam, aut eaque est voluptate minima error amet exercitationem commodi doloribus eius cum voluptas maxime nemo.',
+        description: 'Gain valuable insights into your business with detailed analytics. Track daily, monthly, and yearly sales, see which dishes are selling the most, and monitor order trends. Use this data to make informed decisions and optimize your menu and operations.',
         img: keepTrack,
     },
     {
         id: 4,
         title: 'Online Safe Order',
-        description: 'orem ipsum dolor sit amet consectetur adipisicing elit. Assumenda nesciunt reiciendis rerum explicabo temporibus totam, aut eaque est voluptate minima error amet exercitationem commodi doloribus eius cum voluptas maxime nemo.',
+        description: 'Allow customers to place orders safely and securely online, powered by Stripe’s reliable payment processing. Whether for dine-in, pickup, or delivery, your customers can enjoy a seamless ordering experience with confidence.',
         img: OrderOnline,
     },
     {
         id: 5,
         title: 'Electronic Billing',
-        description: 'orem ipsum dolor sit amet consectetur adipisicing elit. Assumenda nesciunt reiciendis rerum explicabo temporibus totam, aut eaque est voluptate minima error amet exercitationem commodi doloribus eius cum voluptas maxime nemo.',
+        description: 'Simplify your billing process with automated generation of boletas and facturas. Comply with regulations effortlessly and provide professional receipts to your customers while saving time for your staff.',
         img: electronicSunat,
     },
 ]
