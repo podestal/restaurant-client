@@ -24,7 +24,7 @@ const Ticket = ({ orderItems, correlative }: Props) => {
 
   return (
     <Button 
-        label='Ticket'
+        label='Get Ticket'
         onClick={handleSunat}
     />
   )

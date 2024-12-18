@@ -4,8 +4,14 @@ import Input from "../ui/Input"
 import TextArea from "../ui/TextArea"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import LaptopComponent from "./LaptopComponent"
+import { motion } from "framer-motion"
 
 const Contact = () => {
+
+    const variants = {
+        hidden: { opacity: 0, y: 50 }, 
+        visible: { opacity: 1, y: 0 }, 
+    };
 
     const { setShow, setType, setMessage } = useNotificationsStore()
 
@@ -41,7 +47,13 @@ const Contact = () => {
     }
 
   return (
-    <div className="w-full grid grid-cols-3 my-10">
+    <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        variants={variants}
+        className="w-full grid grid-cols-3 my-10">
         <form 
             onSubmit={handleSubmit}
             className="w-[80%] flex flex-col justify-start items-start gap-12 col-span-2">
@@ -77,7 +89,7 @@ const Contact = () => {
         <div className="flex w-full justify-center items-center">
             <LaptopComponent />
         </div>
-    </div>
+    </motion.div>
   )
 }
 

@@ -29,6 +29,7 @@ const Bill = ({ table, enable }: Props) => {
     const {data: bill, isLoading, isError, error, isSuccess} = useGetBill({ access, tableId: table.id, enable })
     const [correlative, setCorrelative] = useState('')
     const [doctype, setDoctype] = useState<'T' | 'I'>('T')
+    const [print, setPrint] = useState(false)
 
     useEffect(() => {
         getCorrelative({ setCorrelative, documentType: doctype })

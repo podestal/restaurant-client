@@ -59,7 +59,7 @@ const Invoice = ({ orderItems, setDoctype, correlative, show, setShow }: Props) 
     <>
         {!show ?
         <Button 
-            label='Invoice'
+            label='Get Invoice'
             onClick={() => {
                 setDoctype('I')
                 setShow(true)}}

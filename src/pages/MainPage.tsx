@@ -1,9 +1,9 @@
-import { Footer } from "react-day-picker"
 import Loader from "../components/ui/Loader"
 import NotificationCard from "../components/ui/NotificationCard"
 import useLoadingStore from "../hooks/store/useLoadingStore"
 import useNotificationsStore from "../hooks/store/useNotificationsStore"
 import useAssetLoader from "../hooks/ui/useAssetsLoader"
+import Footer from "../router/Footer"
 import Navigator from "../router/Navigator"
 import { Outlet } from "react-router-dom"
 
@@ -27,7 +27,7 @@ const MainPage = () => {
         </div>
         {isLoading && <Loader />}
         <>
-        <div className="w-full max-w-[95%] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1024px] xl:max-w-[1200px] 2xl:max-w-[1280px] mx-auto">
+        <div className="w-full min-h-screen max-w-[95%] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1024px] xl:max-w-[1200px] 2xl:max-w-[1280px] mx-auto">
           <Outlet />
         </div>
         <Footer />

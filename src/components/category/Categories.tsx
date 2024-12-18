@@ -46,7 +46,6 @@ const Categories = ({ cart }: Props) => {
                 cart={cart}
             />
         </div>
-
     </div>
   )
 }

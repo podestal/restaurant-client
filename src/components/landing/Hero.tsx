@@ -38,11 +38,11 @@ const Hero = () => {
           transition={{ duration: 0.5 }}
           className="w-full flex flex-col justify-center max-lg:items-center items-center gap-6 lg:col-span-2"
         >
-          <h2 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl max-lg:text-center max-lg:leading-[4rem] font-montserrat font-bold text-center">
-            Lorem ipsum dolor
+          <h2 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl max-lg:text-center leading-[18rem] max-lg:leading-[4rem] font-montserrat font-bold text-center">
+            Your Restaurant Smarter
           </h2>
           <p className="w-[60%] font-poppins mt-6 leading-8 dark:text-slate-300 max-lg:text-center max-lg:text-sm max-lg:leading-8 text-center">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat fugiat ab fuga delectus officia eveniet natus accusantium.
+          From managing tables and menus to tracking orders, simplify every aspect of your operations and focus on what truly matters—delivering exceptional dining experiences.
           </p>
         </motion.div>
 
