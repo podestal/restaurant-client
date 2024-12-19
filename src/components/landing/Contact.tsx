@@ -53,7 +53,7 @@ const Contact = () => {
         viewport={{ amount: 0.3 }}
         transition={{ duration: 0.8 }}
         variants={variants}
-        className="w-full grid grid-cols-3 my-10">
+        className="w-full grid grid-cols-3 mt-10 mb-[180px]">
         <form 
             onSubmit={handleSubmit}
             className="w-[80%] flex flex-col justify-start items-start gap-12 col-span-2">
