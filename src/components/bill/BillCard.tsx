@@ -47,10 +47,10 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
                 orderItems={bill.order_items}
                 setDoctype={setDoctype}
                 correlative={correlative}
-                show={show}
                 setShow={setShow}
-                disable={disable}
                 setDisable={setDisable}
+                setSuccessMsg={setSuccessMsg}
+                updateBill={updateBill}
             /> 
             : 
             <>
@@ -62,14 +62,13 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
                     setDisable={setDisable}
                     setSuccessMsg={setSuccessMsg}
                 />
-                <Invoice 
-                    orderItems={bill.order_items}
-                    setDoctype={setDoctype}
-                    correlative={correlative}
-                    show={show}
-                    setShow={setShow}
+                <Button 
+                    label='Invoice'
                     disable={disable}
-                    setDisable={setDisable}
+                    onClick={() => {
+                        setDoctype('I')
+                        setShow(true)}
+                    }
                 />
                 <Button 
                     label='Just Print'
