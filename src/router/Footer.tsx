@@ -1,4 +1,5 @@
 import { RiMailFill, RiPhoneFill } from "@remixicon/react"
+import logo from '../assets/imgs/logo.png'
 
 interface FooterLink {
     id: number
@@ -26,8 +27,8 @@ const Footer = () => {
     <div className="w-full h-full bg-slate-950 text-slate-300 py-12 flex flex-col justify-start">
         <div className="w-full max-w-[95%] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1024px] xl:max-w-[1200px] 2xl:max-w-[1280px] mx-auto flex flex-col justify-center items-center">
             <div className="grid grid-cols-4 gap-6 text-md w-full">
-                <div className="flex flex-col justify-start items-start gap-2">
-                    <h2 className="text-left text-5xl text-white">LoGO</h2>
+                <div className="flex flex-col justify-start items-start gap-6">
+                    <img src={logo} alt="LOGO" width={150} />
                     <p className="text-left">Your Restaurant Smarter</p>
                 </div>
                 <div className="flex flex-col justify-start items-start gap-2 mx-auto">
@@ -59,7 +60,7 @@ const Footer = () => {
                 </div>
             </div>            
             <div className="w-full flex justify-center items-center pt-20 ">
-                <p className="">&copy; Resto all rights reserved.</p>
+                <p className="">&copy; Quenteh all rights reserved.</p>
             </div>
         </div>
     </div>
