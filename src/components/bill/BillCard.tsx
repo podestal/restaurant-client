@@ -60,7 +60,7 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
                     updateBill={updateBill}
                     disable={disable}
                     setDisable={setDisable}
-                    // setSuccessMsg={setSuccessMsg}
+                    setSuccessMsg={setSuccessMsg}
                 />
                 <Invoice 
                     orderItems={bill.order_items}
@@ -77,7 +77,9 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
             </>
             }
         </div>
-        <div>Printing ...</div>
+        <div className='w-full flex justify-center items-center'>
+            {successMsg && <p className='text-slate-300 animate-pulse'>{successMsg} ...</p>}
+        </div>
         <div className="w-full flex flex-col justify-start items-center gap-4 my-6">
             {bill.order_items.map( orderItem => (
                 <BillItemCard 
