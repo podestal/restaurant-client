@@ -7,12 +7,7 @@ import Orders from "../orders/Orders"
 import CreateOrder from "../orders/CreateOrder"
 import RemoveBill from "./RemoveBill"
 import Tabs from "../ui/Tabs"
-import BillTotal from "./BillTotal"
-import BillItemCard from "./BillItemCard"
-import Button from "../ui/Button"
-import Ticket from "./Ticket"
-import Invoice from "./Invoice"
-import { getCorrelative } from "../../utils/billing"
+import BillCard from "./BillCard"
 
 interface Props {
     table: TableType
@@ -21,18 +16,12 @@ interface Props {
 
 const Bill = ({ table, enable }: Props) => {
 
-    const [show, setShow] = useState(false)
     const [enableCreateOrder, setEnableCreateOrder] = useState(true)
     const [allowRemoveBill, setAllowRemoveBill] = useState(false)
     const tableId = table.id || 0
     const access = useAuthStore(s => s.access) || ''
     const {data: bill, isLoading, isError, error, isSuccess} = useGetBill({ access, tableId: table.id, enable })
-    const [correlative, setCorrelative] = useState('')
-    const [doctype, setDoctype] = useState<'T' | 'I'>('T')
 
-    useEffect(() => {
-        getCorrelative({ setCorrelative, documentType: doctype })
-    }, [doctype])
 
     useEffect(() => {
         console.log(bill)
@@ -81,60 +70,12 @@ const Bill = ({ table, enable }: Props) => {
             },
             {
                 label: 'Bill',
-                content:
-                    <div>
-                        <div className="w-full flex justify-between items-start mb-2">
-                            <h2 className="text-2xl font-poppins font-semibold">Table #{table.number}</h2>
-                            <RemoveBill 
-                                tableId={tableId}
-                                billId={bill[0]?.id}
-                                allowRemoveBill={allowRemoveBill}
-                            />
-                        </div>
-                        
-                        <div className="my-6 w-full flex justify-between items-center">
-                            {show 
-                            ? 
-                            <Invoice 
-                                orderItems={bill[0]?.order_items}
-                                setDoctype={setDoctype}
-                                correlative={correlative}
-                                show={show}
-                                setShow={setShow}
-                            /> 
-                            : 
-                            <>
-                                
-                                {bill[0].document === 'V' && <Ticket 
-                                    orderItems={bill[0]?.order_items}
-                                    correlative={correlative}
-                                />}
-                                {bill[0].document === 'V' && <Invoice 
-                                    orderItems={bill[0]?.order_items}
-                                    setDoctype={setDoctype}
-                                    correlative={correlative}
-                                    show={show}
-                                    setShow={setShow}
-                                />}
-                                <Button 
-                                    label='Just Print'
-                                />
-                                
-                            </>
-                            }
-                        </div>
-                        <div className="w-full flex flex-col justify-start items-center gap-4 my-6">
-                            {bill[0]?.order_items.map( orderItem => (
-                                <BillItemCard 
-                                    key={orderItem.id}
-                                    orderItem={orderItem}
-                                />
-                            ))}
-                            <BillTotal 
-                                orderItems={bill[0]?.order_items}
-                            />
-                        </div>
-                </div>,
+                content: 
+                <BillCard 
+                    table={table}
+                    bill={bill[0]}
+                    allowRemoveBill={allowRemoveBill}
+                />,
             },
             ]}
         />
