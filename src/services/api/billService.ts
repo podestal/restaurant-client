@@ -4,10 +4,11 @@ import { SimpleOrderItem } from "./orderService"
 export interface Bill {
     id: number
     table: number
+    document: string
     order_items: SimpleOrderItem[]
 }
 
-export type BillCreateDelete  = Omit<Bill, 'id' | 'order_items' | 'table'>
+export type BillCreateDelete  = Omit<Bill, 'id' | 'order_items' | 'table' | 'document'>
 
 interface Props {
     tableId: number
