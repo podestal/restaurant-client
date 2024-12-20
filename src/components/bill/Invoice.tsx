@@ -51,6 +51,7 @@ const Invoice = ({ orderItems, setDoctype, correlative, show, setShow }: Props) 
             console.log(response)
             setRuc('')
             setAddress('')
+            setShow(false)
         })
         .catch(err => console.log(err))
     }

@@ -8,7 +8,9 @@ export interface Bill {
     order_items: SimpleOrderItem[]
 }
 
-export type BillCreateDelete  = Omit<Bill, 'id' | 'order_items' | 'table' | 'document'>
+export type BillCreateDelete  = Omit<Bill, 'id' | 'order_items' | 'table' | 'document'> & {
+    document?: string
+}
 
 interface Props {
     tableId: number

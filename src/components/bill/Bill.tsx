@@ -29,11 +29,14 @@ const Bill = ({ table, enable }: Props) => {
     const {data: bill, isLoading, isError, error, isSuccess} = useGetBill({ access, tableId: table.id, enable })
     const [correlative, setCorrelative] = useState('')
     const [doctype, setDoctype] = useState<'T' | 'I'>('T')
-    const [print, setPrint] = useState(false)
 
     useEffect(() => {
         getCorrelative({ setCorrelative, documentType: doctype })
     }, [doctype])
+
+    useEffect(() => {
+        console.log(bill)
+    }, [bill]) 
 
     if (isLoading) return <p className="w-full flex justify-center items-center animate-pulse">Loading ...</p>
 
@@ -88,21 +91,37 @@ const Bill = ({ table, enable }: Props) => {
                                 allowRemoveBill={allowRemoveBill}
                             />
                         </div>
+                        
                         <div className="my-6 w-full flex justify-between items-center">
-                            {!show && <Ticket 
-                                orderItems={bill[0]?.order_items}
-                                correlative={correlative}
-                            />}
+                            {show 
+                            ? 
                             <Invoice 
                                 orderItems={bill[0]?.order_items}
                                 setDoctype={setDoctype}
                                 correlative={correlative}
                                 show={show}
                                 setShow={setShow}
-                            />
-                            {!show && <Button 
-                                label='Just Print'
-                            />}
+                            /> 
+                            : 
+                            <>
+                                
+                                {bill[0].document === 'V' && <Ticket 
+                                    orderItems={bill[0]?.order_items}
+                                    correlative={correlative}
+                                />}
+                                {bill[0].document === 'V' && <Invoice 
+                                    orderItems={bill[0]?.order_items}
+                                    setDoctype={setDoctype}
+                                    correlative={correlative}
+                                    show={show}
+                                    setShow={setShow}
+                                />}
+                                <Button 
+                                    label='Just Print'
+                                />
+                                
+                            </>
+                            }
                         </div>
                         <div className="w-full flex flex-col justify-start items-center gap-4 my-6">
                             {bill[0]?.order_items.map( orderItem => (
