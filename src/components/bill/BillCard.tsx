@@ -23,6 +23,7 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
     const [correlative, setCorrelative] = useState('')
     const [doctype, setDoctype] = useState<'T' | 'I'>('T')
     const updateBill = useUpdateBill({ tableId: table.id, billId: bill.id })
+    const [successMsg, setSuccessMsg] = useState('')
 
     useEffect(() => {
         getCorrelative({ setCorrelative, documentType: doctype })
@@ -48,6 +49,8 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
                 correlative={correlative}
                 show={show}
                 setShow={setShow}
+                disable={disable}
+                setDisable={setDisable}
             /> 
             : 
             <>
@@ -56,6 +59,8 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
                     correlative={correlative}
                     updateBill={updateBill}
                     disable={disable}
+                    setDisable={setDisable}
+                    // setSuccessMsg={setSuccessMsg}
                 />
                 <Invoice 
                     orderItems={bill.order_items}
@@ -63,6 +68,8 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
                     correlative={correlative}
                     show={show}
                     setShow={setShow}
+                    disable={disable}
+                    setDisable={setDisable}
                 />
                 <Button 
                     label='Just Print'
@@ -70,6 +77,7 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
             </>
             }
         </div>
+        <div>Printing ...</div>
         <div className="w-full flex flex-col justify-start items-center gap-4 my-6">
             {bill.order_items.map( orderItem => (
                 <BillItemCard 

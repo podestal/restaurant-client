@@ -13,7 +13,7 @@ interface Props {
     table: TableType
     enable: boolean
 }
-
+    
 const Bill = ({ table, enable }: Props) => {
 
     const [enableCreateOrder, setEnableCreateOrder] = useState(true)

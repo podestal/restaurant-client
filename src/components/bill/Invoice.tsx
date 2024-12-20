@@ -11,9 +11,11 @@ interface Props {
     correlative: string
     show: boolean
     setShow: React.Dispatch<React.SetStateAction<boolean>>
+    disable: boolean
+    setDisable: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Invoice = ({ orderItems, setDoctype, correlative, show, setShow }: Props) => {
+const Invoice = ({ orderItems, setDoctype, correlative, show, setShow, disable, setDisable }: Props) => {
 
     const [ruc, setRuc] = useState('')
     const [address, setAddress] = useState('')
@@ -52,6 +54,7 @@ const Invoice = ({ orderItems, setDoctype, correlative, show, setShow }: Props) 
             setRuc('')
             setAddress('')
             setShow(false)
+            setDisable(true)
         })
         .catch(err => console.log(err))
     }
@@ -61,6 +64,7 @@ const Invoice = ({ orderItems, setDoctype, correlative, show, setShow }: Props) 
         {!show ?
         <Button 
             label='Get Invoice'
+            disable={disable}
             onClick={() => {
                 setDoctype('I')
                 setShow(true)}}

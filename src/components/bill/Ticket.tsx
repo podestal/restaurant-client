@@ -12,9 +12,10 @@ interface Props {
     correlative: string
     updateBill: UseMutationResult<Bill, Error, UpdateBillData>
     disable: boolean
+    setDisable: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Ticket = ({ orderItems, correlative, updateBill, disable }: Props) => {
+const Ticket = ({ orderItems, correlative, updateBill, disable, setDisable }: Props) => {
 
     const ticket = generateTicketData({ correlative, orderItems })
     const access = useAuthStore(s => s.access) || ''
@@ -26,7 +27,7 @@ const Ticket = ({ orderItems, correlative, updateBill, disable }: Props) => {
             },
           })
         .then(() => {
-            updateBill.mutate({ updates: { document: 'T' }, access })
+            updateBill.mutate({ updates: { document: 'T' }, access }, {onSuccess: () => setDisable(true)})
         })
         .catch(err => console.log(err))
     }
