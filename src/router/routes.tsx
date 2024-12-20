@@ -5,7 +5,6 @@ import MenuPage from "../pages/MenuPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import LoginPage from "../pages/LoginPage";
 import About from "../pages/About";
-import CateringPage from "../pages/CateringPage";
 import TablesPage from "../pages/TablesPage";
 import KitchenPage from "../pages/KitchenPage";
 import DashboardPage from "../pages/DashboardPage";
@@ -15,6 +14,8 @@ import OrderSuccesspage from "../pages/OrderSuccesspage";
 import PrivateRoutes from "../components/auth/PrivateRoutes";
 import LandingPage from "../pages/LandingPage";
 import OrderPage from "../pages/OrderPage";
+import CareersPage from "../pages/CareersPage";
+import LegalPage from "../pages/LegalPage";
 
 const routes = createBrowserRouter([
     {
@@ -39,8 +40,12 @@ const routes = createBrowserRouter([
                 element: <About /> 
             },
             { 
-                path: 'catering', 
-                element: <CateringPage /> 
+                path: 'careers', 
+                element: <CareersPage /> 
+            },
+            {
+                path: 'legal',
+                element: <LegalPage />
             },
             { 
                 path: 'login', 

@@ -24,7 +24,7 @@ const links: FooterLink[] = [
 
 const Footer = () => {
   return (
-    <div className="w-full h-full bg-slate-950 text-slate-300 py-12 flex flex-col justify-start">
+    <div className="w-full h-full dark:bg-black bg-slate-950 text-slate-300 py-12 flex flex-col justify-start z-50 relative">
         <div className="w-full max-w-[95%] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1024px] xl:max-w-[1200px] 2xl:max-w-[1280px] mx-auto flex flex-col justify-center items-center">
             <div className="grid grid-cols-4 gap-6 text-md w-full">
                 <div className="flex flex-col justify-start items-start gap-6">

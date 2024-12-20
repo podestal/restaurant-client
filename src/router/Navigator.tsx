@@ -26,9 +26,9 @@ const Navigator = () => {
     if (!user) {
       return (
         <>
-          <NavLink to="menu" label="Menu" />
           <NavLink to="about" label="About Us" />
-          <NavLink to="catering" label="Catering" />
+          <NavLink to="careers" label="Careers" />
+          <NavLink to="legal" label="Legal" />
         </>
       );
     }
@@ -59,7 +59,6 @@ const Navigator = () => {
         <div className="w-full dark:bg-slate-950 bg-white fixed z-40 shadow-lg shadow-slate-400 dark:shadow-slate-700 max-lg:hidden">
           <div className="w-full flex justify-between items-center h-[100px] 2xl:max-w-[1280px] mx-auto">
             <Link to="/">
-              {/* <h2 className="text-5xl font-bold">loGO</h2> */}
               <img src={logo} alt="LOGO" width={150} />
             </Link>
 
@@ -70,7 +69,8 @@ const Navigator = () => {
             <div className="flex justify-center items-center gap-12">
               <ThemeSelector />
               {access ? <Logout /> : <Button label="Login" onClick={() => navigate("/login")} />}
-              {(user?.groups.length === 0 || !user) && <Cart />}
+              {/* {(user?.groups.length === 0 || !user) && <Cart />} */}
+              {access && <Cart />}
             </div>
           </div>
         </div>
