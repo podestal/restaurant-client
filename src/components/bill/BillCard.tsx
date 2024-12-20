@@ -8,6 +8,7 @@ import Button from '../ui/Button'
 import BillItemCard from './BillItemCard'
 import BillTotal from './BillTotal'
 import { getCorrelative } from '../../utils/billing'
+import useUpdateBill from '../../hooks/api/bill/useUpdateBill'
 
 interface Props {
     bill: Bill
@@ -18,8 +19,10 @@ interface Props {
 const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
 
     const [show, setShow] = useState(false)
+    const [disable, setDisable] = useState(bill.document === 'V' ? false : true)
     const [correlative, setCorrelative] = useState('')
     const [doctype, setDoctype] = useState<'T' | 'I'>('T')
+    const updateBill = useUpdateBill({ tableId: table.id, billId: bill.id })
 
     useEffect(() => {
         getCorrelative({ setCorrelative, documentType: doctype })
@@ -48,17 +51,19 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
             /> 
             : 
             <>
-                {bill.document === 'V' && <Ticket 
+                <Ticket 
                     orderItems={bill.order_items}
                     correlative={correlative}
-                />}
-                {bill.document === 'V' && <Invoice 
+                    updateBill={updateBill}
+                    disable={disable}
+                />
+                <Invoice 
                     orderItems={bill.order_items}
                     setDoctype={setDoctype}
                     correlative={correlative}
                     show={show}
                     setShow={setShow}
-                />}
+                />
                 <Button 
                     label='Just Print'
                 />  
