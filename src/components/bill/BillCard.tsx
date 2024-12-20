@@ -9,6 +9,7 @@ import BillItemCard from './BillItemCard'
 import BillTotal from './BillTotal'
 import { getCorrelative } from '../../utils/billing'
 import useUpdateBill from '../../hooks/api/bill/useUpdateBill'
+import PrintBill from './PrintBill'
 
 interface Props {
     bill: Bill
@@ -70,14 +71,14 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
                         setShow(true)}
                     }
                 />
-                <Button 
-                    label='Just Print'
-                />  
+                <PrintBill 
+                    setSuccessMsg={setSuccessMsg}
+                />
             </>
             }
         </div>
         <div className='w-full flex justify-center items-center'>
-            {successMsg && <p className='text-slate-300 animate-pulse'>{successMsg} ...</p>}
+            {successMsg && <p className=' animate-pulse'>{successMsg} ...</p>}
         </div>
         <div className="w-full flex flex-col justify-start items-center gap-4 my-6">
             {bill.order_items.map( orderItem => (
