@@ -1,9 +1,8 @@
-import { useEffect } from "react"
-import useLoadingStore from "../store/useLoadingStore"
+// import useLoadingStore from "../store/useLoadingStore"
 
 const useAssetLoader = () => {
 
-    const setIsLoading = useLoadingStore(s => s.setIsLoading)
+    // const setIsLoading = useLoadingStore(s => s.setIsLoading)
 
     // useEffect(() => {
     //     const handleLoad = () => {

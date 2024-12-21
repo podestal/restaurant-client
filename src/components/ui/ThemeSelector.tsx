@@ -20,14 +20,6 @@ const ThemeSelector = () => {
     }
 
   return (
-    // <div>
-    //     <button
-    //     onClick={handleChangeTheme}
-    //     className="p-2 rounded-md text-lg transition duration-300 bg-slate-300 dark:bg-blue-700"
-    //     >
-    //     {theme === 'dark' ? '🌞 Light Mode' : '🌜 Dark Mode'}
-    //     </button>
-    // </div>
     <div className="flex max-lg:flex-col justify-center items-center gap-6 lg:gap-2">
         {/* <p>{theme === 'dark' ? '🌜' : '🌞'}</p> */}
         {theme === 'dark' ? <RiMoonFill className='text-blue-600'/> : <RiSunFill className='text-blue-600' />}
@@ -51,7 +43,6 @@ const ThemeSelector = () => {
             ></div>
             
         </div>
-        {/* {theme && <p className="text-lg lg:text-xl dark:text-slate-50 text-center">{theme}</p>} */}
     </div>
   )
 }

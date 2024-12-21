@@ -14,10 +14,10 @@ const Hero = () => {
           className="w-[50%] h-[500px] absolute top-0 left-0">
           <My3DModel />
         </div>
-        <div className="w-[50%] h-[500px] absolute top-10 right-0">
+        <div className="w-[50%] h-[400px] absolute top-8 right-0">
           <TomatoComponent />
         </div>
-        <div className="w-[50%] h-[500px] absolute bottom-0 right-1/2">
+        <div className="w-[50%] h-[400px] absolute bottom-0 right-1/2">
           <SteakComponent />
         </div>
         <motion.div

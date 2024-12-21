@@ -2,7 +2,7 @@ import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-
 import getBillService, { Bill, BillCreateDelete } from "../../../services/api/billService"
 import { getBillCacheKey } from "../../../utils/keys"
 
-interface UpdateBillData {
+export interface UpdateBillData {
     access: string
     updates: BillCreateDelete
 }

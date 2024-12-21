@@ -9,7 +9,7 @@ import TablesPage from "../pages/TablesPage";
 import KitchenPage from "../pages/KitchenPage";
 import DashboardPage from "../pages/DashboardPage";
 import DishesPage from "../pages/DishesPage";
-import SignupPage from "../pages/SignupPage";
+// import SignupPage from "../pages/SignupPage";
 import OrderSuccesspage from "../pages/OrderSuccesspage";
 import PrivateRoutes from "../components/auth/PrivateRoutes";
 import LandingPage from "../pages/LandingPage";
@@ -51,10 +51,10 @@ const routes = createBrowserRouter([
                 path: 'login', 
                 element: <LoginPage /> 
             },
-            {
-                path: 'signup', 
-                element: <SignupPage /> 
-            },
+            // {
+            //     path: 'signup', 
+            //     element: <SignupPage /> 
+            // },
             {
                 path: 'dishes',
                 element: <PrivateRoutes><DishesPage /></PrivateRoutes>
