@@ -66,7 +66,7 @@ const Features = () => {
         </motion.div>
         {featuresContent.map( feature => (
             <motion.div
-                className={`w-full grid grid-cols-3 gap-12 my-10`}
+                className={`w-full lg:grid lg:grid-cols-3 flex flex-col gap-12 my-10`}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ amount: 0.3 }}
@@ -74,11 +74,11 @@ const Features = () => {
                 variants={variants}
                 key={feature.id}
             >
-                <div className="flex flex-col justify-start items-start gap-12">
-                    <h2 className="text-4xl font-bold font-palanquin">{feature.title}</h2>
+                <div className="flex flex-col justify-start items-start gap-12 max-lg:text-center">
+                    <h2 className="text-4xl font-bold font-palanquin max-lg:mx-auto ">{feature.title}</h2>
                     <p>{feature.description}</p>
                 </div>
-                <img className={`col-span-2 ${feature.id % 2 === 0 && 'order-first'}`} src={feature.img} alt={feature.title} />
+                <img className={`col-span-2 lg:${feature.id % 2 === 0 && 'order-first'}`} src={feature.img} alt={feature.title} />
             </motion.div>
         ))}
       {/* <motion.div
