@@ -28,7 +28,7 @@ const ThemeSelector = () => {
     //     {theme === 'dark' ? '🌞 Light Mode' : '🌜 Dark Mode'}
     //     </button>
     // </div>
-    <div className="flex justify-center items-center gap-2">
+    <div className="flex max-lg:flex-col justify-center items-center gap-6 lg:gap-2">
         {/* <p>{theme === 'dark' ? '🌜' : '🌞'}</p> */}
         {theme === 'dark' ? <RiMoonFill className='text-blue-600'/> : <RiSunFill className='text-blue-600' />}
         <div 

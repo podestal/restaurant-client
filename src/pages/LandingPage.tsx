@@ -5,12 +5,12 @@ import Hero from "../components/landing/Hero"
 
 const LandingPage = () => {
   return (
-    <>
+    <div className="overflow-hidden">
       <Hero />
       <Features />
       <FrequentQuestions />
       <Contact />
-    </>
+    </div>
 
   )
 }

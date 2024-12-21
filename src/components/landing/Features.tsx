@@ -59,10 +59,10 @@ const Features = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ amount: 0.3 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             variants={variants}
         >
-        <h2 className='text-6xl font-palanquin font-bold'>Features</h2>
+        <h2 className='text-6xl font-palanquin font-bold max-lg:text-center'>Features</h2>
         </motion.div>
         {featuresContent.map( feature => (
             <motion.div
@@ -78,7 +78,7 @@ const Features = () => {
                     <h2 className="text-4xl font-bold font-palanquin max-lg:mx-auto ">{feature.title}</h2>
                     <p>{feature.description}</p>
                 </div>
-                <img className={`col-span-2 lg:${feature.id % 2 === 0 && 'order-first'}`} src={feature.img} alt={feature.title} />
+                <img className={`col-span-2 rounded-3xl ${feature.id % 2 === 0 && 'lg:order-first'}`} src={feature.img} alt={feature.title} />
             </motion.div>
         ))}
       {/* <motion.div

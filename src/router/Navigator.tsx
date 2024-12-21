@@ -87,14 +87,15 @@ const Navigator = () => {
                 whileInView={{opacity: 1, translateY: 0}}
                 exit={{opacity: 0, translateY: 200}}
                 transition={{duration: 0.8}}
-                className="text-xl fixed h-screen z-50 w-full flex flex-col justify-center items-center gap-12 bg-transparent backdrop-blur-xl overflow-scroll">
+                className="text-xl fixed h-screen z-50 w-full flex flex-col justify-center items-center gap-20 bg-transparent backdrop-blur-xl overflow-scroll">
                   {/* <Icon onClick={() => setShow(false)}  className="cursor-pointer hover:text-red-700" icon={RiCloseCircleLine} size="xl" color='red'/> */}
                   <RiCloseCircleLine 
-                    className="cursor-pointer hover:text-red-700"
+                    className="cursor-pointer text-red-700"
+                    size={40}
                     onClick={() => setShow(false)}
                   />
-                  {/* <Link onClick={() => setShow(false)} to='/'><p className="hover:text-slate-400">Home</p></Link> */}
-                  <div className="flex flex-col justify-center gap-20 h-full" onClick={() => setShow(false)}>
+                  <ThemeSelector />
+                  <div className="flex flex-col justify-center gap-20" onClick={() => setShow(false)}>
                     {renderLinks()}
                   </div>
                   {/* <Logout setShow={setShow}/> */}

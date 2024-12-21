@@ -54,11 +54,11 @@ const Contact = () => {
         viewport={{ amount: 0.3 }}
         transition={{ duration: 0.8 }}
         variants={variants}
-        className="w-full grid grid-cols-3 mt-10 mb-[180px]">
+        className="w-full lg:grid lg:grid-cols-3 flex flex-col items-center mt-10 mb-[180px]">
         <form 
             onSubmit={handleSubmit}
             className="w-[80%] flex flex-col justify-start items-start gap-12 col-span-2">
-            <h2 className="text-4xl font-palanquin font-bold">Request a Demo</h2>
+            <h2 className="text-4xl font-palanquin font-bold max-lg:text-center max-lg:mx-auto">Request a Demo</h2>
             <Input 
                 placeholder="Name ..."
                 value={name}
@@ -87,7 +87,7 @@ const Contact = () => {
                 disable={disable}
             />
         </form>
-        <div className="flex w-full justify-center items-center">
+        <div className="flex w-[400px] h-[300px] lg:w-full justify-center items-center">
             <LaptopComponent />
         </div>
     </motion.section>

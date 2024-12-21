@@ -17,7 +17,7 @@ const RotatingModel = () => {
       <primitive 
         ref={modelRef} 
         object={useGLTF(laptop).scene} 
-        scale={0.6} 
+        scale={0.7} 
         position={[0, -0.5, 0]}
       />
     );
