@@ -73,7 +73,9 @@ const FrequentQuestions = () => {
       }
 
   return (
-    <div className="w-full flex flex-col justify-start items-start gap-20 my-20">
+    <section 
+        id='faqs'
+        className="w-full flex flex-col justify-start items-start gap-20 my-20">
         <motion.div
             initial="hidden"
             whileInView="visible"
@@ -91,7 +93,7 @@ const FrequentQuestions = () => {
                 />
             ))}
         </div>
-    </div>
+    </section>
   )
 }
 

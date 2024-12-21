@@ -47,7 +47,8 @@ const Contact = () => {
     }
 
   return (
-    <motion.div 
+    <motion.section 
+        id="demo"
         initial="hidden"
         whileInView="visible"
         viewport={{ amount: 0.3 }}
@@ -89,7 +90,7 @@ const Contact = () => {
         <div className="flex w-full justify-center items-center">
             <LaptopComponent />
         </div>
-    </motion.div>
+    </motion.section>
   )
 }
 

@@ -52,7 +52,9 @@ const Features = () => {
   };
 
   return (
-    <section className="h-full mt-10 flex flex-col gap-20">
+    <section 
+        id='features'
+        className="h-full mt-10 flex flex-col gap-20">
         <motion.div
             initial="hidden"
             whileInView="visible"

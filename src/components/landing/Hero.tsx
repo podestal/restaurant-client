@@ -6,7 +6,9 @@ import SteakComponent from './SteakComponent';
 
 const Hero = () => {
   return (
-    <div className="w-full h-screen overflow-hidden lg:mt-[-100px]">
+    <section 
+      id='hero'
+      className="w-full h-screen overflow-hidden lg:mt-[-100px]">
       {/* Lumiflex Background */}
       {/* <Lumiflex
         style={{
@@ -29,7 +31,7 @@ const Hero = () => {
         <div className="w-[20%] h-[500px] absolute top-10 right-0">
           <TomatoComponent />
         </div>
-        <div className="w-[20%] h-[500px] absolute bottom-0 right-1/2">
+        <div className="w-[30%] h-[500px] absolute bottom-0 right-1/2">
           <SteakComponent />
         </div>
         <motion.div
@@ -60,7 +62,7 @@ const Hero = () => {
           />
         </motion.div> */}
       </div>
-    </div>
+    </section>
   );
 };
 
