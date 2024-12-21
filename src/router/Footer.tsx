@@ -38,8 +38,8 @@ const Footer = () => {
   return (
     <div className="w-full h-full dark:bg-black bg-slate-950 text-slate-300 py-12 flex flex-col justify-start z-50 relative">
         <div className="w-full max-w-[95%] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1024px] xl:max-w-[1200px] 2xl:max-w-[1280px] mx-auto flex flex-col justify-center items-center">
-            <div className="grid grid-cols-4 gap-6 text-md w-full">
-                <div className="flex flex-col justify-start items-start gap-6">
+            <div className="lg:grid lg:grid-cols-4 flex flex-col gap-6 text-md w-full">
+                <div className="flex flex-col justify-start lg:items-start items-center gap-6">
                     <div 
                         onClick={() => {
                             const element = document.getElementById('hero')
@@ -57,7 +57,7 @@ const Footer = () => {
                     </div>
                     <p className="text-left">Your Restaurant Smarter</p>
                 </div>
-                <div className="flex flex-col justify-start items-start gap-2 mx-auto">
+                <div className="flex flex-col justify-start items-center lg:items-start gap-2 lg:mx-auto">
                     <h2 className="text-2xl font-palanquin font-bold mb-4">Company</h2>
                     {links.map( link => (
                         <p 
@@ -79,7 +79,7 @@ const Footer = () => {
                         </p>
                     ))}
                 </div>
-                <div className="flex flex-col justify-start items-start gap-2 mx-auto">
+                <div className="flex flex-col justify-start items-center lg:items-start gap-2 mx-auto">
                     <h2 className="text-2xl font-palanquin font-bold mb-4 text-white">Contact</h2>
                     <div className="flex justify-end items-center gap-4">
                         <p>(908) 5255111</p>
@@ -90,7 +90,7 @@ const Footer = () => {
                         <RiMailFill />
                     </div>
                 </div>
-                <div className="flex flex-col justify-start items-start gap-2 mx-auto">
+                <div className="flex flex-col justify-start items-center lg:items-start gap-2 mx-auto">
                     <h2 className="text-2xl font-palanquin font-bold mb-4 text-white">Legal</h2>
                     <p 
                         onClick={() => setShowTerms(true)}
