@@ -11,8 +11,6 @@ interface Props {
 const DishCardAdmin = ({ dish }: Props) => {
 
   const [open, setOpen] = useState(false)
-  console.log('dish', dish);
-  
 
   return (
     <div className="flex justify-start items-start gap-6">

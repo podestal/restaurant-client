@@ -47,6 +47,8 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const [categoryError, setCategoryError] = useState('')
     const [discountError, setDiscountError] = useState('')
 
+    console.log('discount', discount);
+
     const handleCloseModal = () => {
         if (!dish) {
             
@@ -59,7 +61,6 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
         setOpen(false)
         setPreview(dish?.picture_url ? dish.picture_url : '')
     }
-    
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
@@ -87,8 +88,6 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
             setCostError('Cost is required')
             return
         }
-
-        console.log('discount', discount);
         
 
         if (discount >= 100) {
@@ -115,7 +114,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
         formData.append('name', name)
         formData.append('description', description)
         formData.append('cost', cost)
-        discount && formData.append('discount', finalDiscount.toFixed(2))
+        formData.append('discount', finalDiscount.toFixed(2))
         picture && formData.append("picture", picture)
         formData.append('category', category.toString())
 
@@ -148,6 +147,8 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 }
             })
         }
+
+        
 
         if (dish) {
             updateDish && updateDish.mutate({

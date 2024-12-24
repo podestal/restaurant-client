@@ -18,12 +18,12 @@ const links: FooterLink[] = [
         route: 'features'
     },
     {
-        id: 1,
+        id: 2,
         name: 'FAQs',
         route: 'faqs'
     },
     {
-        id: 1,
+        id: 3,
         name: 'Demo',
         route: 'demo'
     },
