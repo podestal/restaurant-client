@@ -58,7 +58,7 @@ const Navigator = () => {
     <>
         <div className="w-full dark:bg-slate-950 bg-white fixed z-40 shadow-lg shadow-slate-400 dark:shadow-slate-700 max-lg:hidden">
           <div className="w-full flex justify-between items-center h-[100px] 2xl:max-w-[1280px] mx-auto">
-            <Link to="/">
+            <Link to={access ? '/menu' : '/'}>
               <img src={logo} alt="LOGO" width={150} className="hover:opacity-80" />
             </Link>
 
@@ -69,7 +69,6 @@ const Navigator = () => {
             <div className="flex justify-center items-center gap-12">
               <ThemeSelector />
               {access ? <Logout /> : <Button label="Login" onClick={() => navigate("/login")} />}
-              {/* {(user?.groups.length === 0 || !user) && <Cart />} */}
               {access && <Cart />}
             </div>
           </div>
