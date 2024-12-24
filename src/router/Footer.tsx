@@ -4,10 +4,12 @@ import { useState } from "react"
 import Modal from "../components/ui/Modal"
 import TermsAndConditions from "../components/landing/TermsAndConditions"
 import PrivacyPolicy from "../components/landing/PrivacyPolicy"
+import useLanguageStore from "../hooks/store/useLanguageStore"
 
 interface FooterLink {
     id: number
     name: string
+    esName: string
     route: string
 }
 
@@ -15,16 +17,19 @@ const links: FooterLink[] = [
     {
         id: 1,
         name: 'Features',
+        esName: 'Características',
         route: 'features'
     },
     {
         id: 2,
         name: 'FAQs',
+        esName: 'Preguntas Frecuentes',
         route: 'faqs'
     },
     {
         id: 3,
         name: 'Demo',
+        esName: 'Demo',
         route: 'demo'
     },
 ]
@@ -34,6 +39,7 @@ const Footer = () => {
 
     const [showTerms, setShowTerms] = useState(false)
     const [showPrivacy, setShowPrivacy] = useState(false)
+    const lan = useLanguageStore(s => s.lan)
 
   return (
     <div className="w-full h-full dark:bg-black bg-slate-950 text-slate-300 py-12 flex flex-col justify-start z-50 relative">
@@ -55,10 +61,10 @@ const Footer = () => {
                         className="cursor-pointer hover:opacity-90">
                         <img src={logo} alt="LOGO" width={150} />
                     </div>
-                    <p className="text-left">Your Restaurant Smarter</p>
+                    <p className="text-left">{lan === 'EN' ? 'Your Restaurant Smarter' : 'Tu Restaurante Más Inteligente'}</p>
                 </div>
                 <div className="flex flex-col justify-start items-center lg:items-start gap-2 lg:mx-auto">
-                    <h2 className="text-2xl font-palanquin font-bold mb-4">Company</h2>
+                    <h2 className="text-2xl font-palanquin font-bold mb-4">{lan === 'EN' ? 'Company' : 'Empresa'}</h2>
                     {links.map( link => (
                         <p 
                             key={link.id}
@@ -75,12 +81,12 @@ const Footer = () => {
                                 }
                             }}
                         >
-                            {link.name}
+                            {lan === 'EN' ? link.name : link.esName}
                         </p>
                     ))}
                 </div>
                 <div className="flex flex-col justify-start items-center lg:items-start gap-2 mx-auto">
-                    <h2 className="text-2xl font-palanquin font-bold mb-4 text-white">Contact</h2>
+                    <h2 className="text-2xl font-palanquin font-bold mb-4 text-white">{lan === 'EN' ? 'Contact' : 'Contáctanos'}</h2>
                     <div className="flex justify-end items-center gap-4">
                         <p>(908) 5255111</p>
                         <RiPhoneFill />
@@ -94,14 +100,14 @@ const Footer = () => {
                     <h2 className="text-2xl font-palanquin font-bold mb-4 text-white">Legal</h2>
                     <p 
                         onClick={() => setShowTerms(true)}
-                        className="text-left hover:text-slate-50 cursor-pointer">Terms and Conditions</p>
+                        className="text-left hover:text-slate-50 cursor-pointer">{lan === 'EN' ? 'Terms and Conditions' : 'Términos y condiciones'}</p>
                     <p 
                         onClick={() => setShowPrivacy(true)}
-                        className="text-left hover:text-slate-50 cursor-pointer">Privacy Policy</p>
+                        className="text-left hover:text-slate-50 cursor-pointer">{lan === 'EN' ?'Privacy Policy' : 'Política de Privacidad'}</p>
                 </div>
             </div>            
             <div className="w-full flex justify-center items-center pt-20 ">
-                <p className="">Quenteh &copy; all rights reserved.</p>
+                <p className="">&copy; {lan === 'EN' ? 'Quenteh all rights reserved.' : `Quenteh todos los derenchos reservados.`}</p>
             </div>
             <Modal 
                 isOpen={showTerms}

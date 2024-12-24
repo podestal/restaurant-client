@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import FaqCard from "./FaqCard"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 export interface FAQ {
     id: number
@@ -94,7 +95,9 @@ const FrequentQuestions = () => {
     const variants = {
         hidden: { opacity: 0, y: 50 }, 
         visible: { opacity: 1, y: 0 }, 
-      }
+    };  
+    
+    const lan = useLanguageStore(s => s.lan)
 
   return (
     <section 
@@ -107,7 +110,7 @@ const FrequentQuestions = () => {
             transition={{ duration: 0.8 }}
             variants={variants}
         >
-            <h2 className='text-6xl font-palanquin font-bold'>FAQ's</h2>
+            <h2 className='text-6xl font-palanquin font-bold'>{lan === 'EN' ? 'FAQ' : 'Preguntas Frequentes'}</h2>
         </motion.div>
         <div className="w-full flex flex-col justify-start items-start gap-12">
             {questions.map( item => (

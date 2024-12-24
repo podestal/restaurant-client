@@ -12,6 +12,7 @@ import { RiCloseCircleLine, RiMenu2Fill } from "@remixicon/react";
 import { isTokenExpired } from "../utils/utilities";
 import logo from '../assets/imgs/logo.png'
 import LanguageSelector from "../components/ui/LanguageSelector";
+import useLanguageStore from "../hooks/store/useLanguageStore";
 
 const Navigator = () => {
   const navigate = useNavigate();
@@ -21,14 +22,16 @@ const Navigator = () => {
   const { data: user, isLoading } = useGetUser({ access });
   const [show, setShow] = useState(false)
 
+  const lan = useLanguageStore(s => s.lan)
+
   if (isLoading) return <p>Loading...</p>;
 
   const renderLinks = () => {
     if (!user) {
       return (
         <>
-          <NavLink to="about" label="About Us" />
-          <NavLink to="careers" label="Careers" />
+          <NavLink to="about" label={lan === 'EN' ? "About Us" : "Nosotros" }/>
+          <NavLink to="careers" label={lan === 'EN' ? "Careers" : "Carreras"} />
           <NavLink to="legal" label="Legal" />
         </>
       );
