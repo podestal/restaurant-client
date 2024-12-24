@@ -4,14 +4,12 @@ interface Props {
     setShowPromos: React.Dispatch<React.SetStateAction<boolean>>
     setPromoLookup: React.Dispatch<React.SetStateAction<string>>
     setPromotion: React.Dispatch<React.SetStateAction<number>>
-    setCost: React.Dispatch<React.SetStateAction<number>>
 }
 
 const PromoLookup = ({
     setPromoLookup,
     setShowPromos,
     setPromotion,
-    setCost,
 }: Props) => {
 
     const {data: promotions, isLoading, isError, error, isSuccess} = useGetPromotion()
@@ -29,14 +27,11 @@ const PromoLookup = ({
             .map( promotion => (
             <p 
             onClick={() => {
-                console.log('promotion in lookup', promotion);
-                
                 setPromoLookup(promotion.name)
                 setShowPromos(false)
                 setPromotion(promotion.id)
-                setCost(parseFloat(promotion.amount))
             }}
-            className="py-2 px-4 bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 cursor-pointer rounded-3xl"
+            className="py-2 px-4 bg-slate-800 hover:bg-slate-700 cursor-pointer rounded-3xl"
             key={promotion.id}>
                 {promotion.name}
             </p>
