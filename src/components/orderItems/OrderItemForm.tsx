@@ -72,6 +72,9 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
             }
         })
 
+        console.log('cost', cost);
+        
+
         promotion && createOrderItem.mutate({ 
             orderItem: { promotion, quantity: counter, order: orderId, cost, observations, bill: billId }, 
             access 
@@ -132,6 +135,7 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
                         setShowPromos={setShowPromos}
                         setPromoLookup={setPromoLookup}
                         setPromotion={setPromotion}
+                        setCost={setCost}
                     /> 
                     : 
                     <form
