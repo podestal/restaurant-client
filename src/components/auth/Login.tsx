@@ -4,7 +4,7 @@ import Button from "../ui/Button"
 import Input from "../ui/Input"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import { useNavigate } from "react-router-dom"
-// import { Link } from "react-router-dom"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 const Login = () => {
 
@@ -16,6 +16,8 @@ const Login = () => {
     const { setShow, setType, setMessage } = useNotificationsStore()
     const [usernameError, setUsernameError] = useState('')
     const [passwordError, setPasswordError] = useState('')
+
+    const lan = useLanguageStore(s => s.lan)
 
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -53,26 +55,26 @@ const Login = () => {
 
   return (
     <div className="w-[20%] mx-auto">
-        <h2 className="text-4xl font-bold font-palanquin text-center mb-12 mt-36">Login</h2>
+        <h2 className="text-4xl font-bold font-palanquin text-center mb-12 mt-36">{lan === 'EN' ? 'Login' : 'Accede'}</h2>
         <form 
             onSubmit={handleLogin}
             className="w-full h-[60%] flex flex-col justify-start items-center gap-6">
             <Input 
-                placeholder="Email"
+                placeholder={lan === 'EN' ? "Email" : 'Correo Electrónico'}
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 error={usernameError}
                 
             />
             <Input 
-                placeholder="Password"
+                placeholder={lan === 'EN' ? "Password" : 'Contraseña'}
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 error={passwordError}
             />
             <Button 
-                label="Login"
+                label={lan === 'EN' ? 'Login' : 'Accede'}
                 loading={loading}
             />
         </form>

@@ -73,7 +73,7 @@ const Navigator = () => {
             <div className="flex justify-center items-center gap-12">
               <LanguageSelector />
               <ThemeSelector />
-              {access ? <Logout /> : <Button label="Login" onClick={() => navigate("/login")} />}
+              {access ? <Logout /> : <Button label={lan === 'EN' ? 'Login' : 'Accede'} onClick={() => navigate("/login")} />}
               {access && <Cart />}
             </div>
           </div>
