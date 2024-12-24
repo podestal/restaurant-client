@@ -2,8 +2,12 @@ import { motion } from 'framer-motion';
 import My3DModel from './My3dModel';
 import TomatoComponent from './TomatoComponent';
 import SteakComponent from './SteakComponent';
+import useLanguageStore from '../../hooks/store/useLanguageStore';
 
 const Hero = () => {
+
+  const lan = useLanguageStore(s => s.lan)
+
   return (
     <section 
       id='hero'
@@ -27,10 +31,10 @@ const Hero = () => {
           className="w-full flex flex-col justify-center max-lg:items-center items-center gap-6 lg:col-span-2"
         >
           <h2 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl max-lg:text-center leading-[18rem] max-lg:leading-[4rem] font-montserrat font-bold text-center">
-            Your Restaurant Smarter
+            {lan === 'EN' ? 'Your Restaurant Smarter' : 'Tu Restaurante Más Inteligente'}
           </h2>
           <p className="w-[60%] font-poppins mt-6 leading-8 dark:text-slate-300 max-lg:text-center max-lg:text-xs max-lg:leading-8 text-center">
-          From managing tables and menus to tracking orders, simplify every aspect of your operations and focus on what truly matters—delivering exceptional dining experiences.
+          {lan === 'EN' ? 'From managing tables and menus to tracking orders, simplify every aspect of your operations and focus on what truly matters—delivering exceptional dining experiences.' : 'Desde la gestión de mesas y menús hasta el seguimiento de pedidos, simplifica cada aspecto de tus operaciones y concéntrate en lo que realmente importa: ofrecer experiencias gastronómicas excepcionales.'}
           </p>
         </motion.div>
       </div>

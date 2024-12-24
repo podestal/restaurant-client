@@ -5,8 +5,11 @@ import TextArea from "../ui/TextArea"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import LaptopComponent from "./LaptopComponent"
 import { motion } from "framer-motion"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 const Contact = () => {
+
+    const lan = useLanguageStore(s => s.lan)
 
     const variants = {
         hidden: { opacity: 0, y: 50 }, 
@@ -58,9 +61,9 @@ const Contact = () => {
         <form 
             onSubmit={handleSubmit}
             className="w-[80%] flex flex-col justify-start items-start gap-12 col-span-2">
-            <h2 className="text-4xl font-palanquin font-bold max-lg:text-center max-lg:mx-auto">Request a Demo</h2>
+            <h2 className="text-4xl font-palanquin font-bold max-lg:text-center max-lg:mx-auto">{lan === 'EN' ? 'Request a Demo' : 'Solicíta una Demo'}</h2>
             <Input 
-                placeholder="Name ..."
+                placeholder={lan === 'EN' ? "Name ..." : "Nombre ..."}
                 value={name}
                 onChange={e => {
                     name && setNameError('')
@@ -69,7 +72,7 @@ const Contact = () => {
                 error={nameError}
             />
             <Input 
-                placeholder="Email ..."
+                placeholder={lan === 'EN' ? "Email ..." : "Correo ..."}
                 value={email}
                 onChange={e => {
                     email && setEmailError('')
@@ -78,12 +81,12 @@ const Contact = () => {
                 error={emailError}
             />
             <TextArea 
-                placeholder="Comments"
+                placeholder={lan === 'EN' ? "Comments ..." : "Comentarios ..."}
                 value={comments}
                 onChange={e => setComments(e.target.value)}
             />
             <Button 
-                label="Send"
+                label={lan === 'EN' ? "Send" : "Enviar"}
                 disable={disable}
             />
         </form>

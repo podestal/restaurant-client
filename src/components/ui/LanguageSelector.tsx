@@ -1,17 +1,17 @@
-import { useState } from "react"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 const LanguageSelector = () => {
 
-    const [language, setLanguage] = useState('EN')
+    const { lan, setLan } = useLanguageStore()
 
   return (
     <div className="flex gap-2 font-montserrat">
         <p 
-            onClick={() => setLanguage('EN')}
-            className={`cursor-pointer  ${language === 'EN' && 'text-blue-600 font-semibold'}`}>EN</p>
+            onClick={() => setLan('EN')}
+            className={`cursor-pointer  ${lan === 'EN' && 'text-blue-600 font-semibold'}`}>EN</p>
         <p  
-            onClick={() => setLanguage('ES')}
-            className={`cursor-pointer  ${language === 'ES' && 'text-blue-600 font-semibold'}`}>ES</p>
+            onClick={() => setLan('ES')}
+            className={`cursor-pointer  ${lan === 'ES' && 'text-blue-600 font-semibold'}`}>ES</p>
     </div>
   )
 }

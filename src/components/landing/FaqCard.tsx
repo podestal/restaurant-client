@@ -2,15 +2,18 @@ import { useState } from "react";
 import { FAQ } from "./FrequentQuestions";
 import { motion } from "framer-motion";
 import { RiArrowUpDoubleFill } from "@remixicon/react";
+import useLanguageStore from "../../hooks/store/useLanguageStore";
 
 interface Props {
   item: FAQ;
 }
 
 const FaqCard = ({ item }: Props) => {
-  const [show, setShow] = useState(false);
 
-  const toggleFAQ = () => setShow((prev) => !prev);
+  const [show, setShow] = useState(false)
+  const lan = useLanguageStore(s => s.lan)
+  const toggleFAQ = () => setShow((prev) => !prev)
+
 
   return (
     <motion.div
@@ -26,7 +29,7 @@ const FaqCard = ({ item }: Props) => {
     >
       {/* Question and Arrow */}
       <div className="w-full flex justify-between items-center">
-        <h2 className="text-2xl font-bold">{item.question}</h2>
+        <h2 className="text-2xl font-bold">{lan === 'EN' ? item.question : item.esQuestion}</h2>
         <motion.div
           className="cursor-pointer hover:text-neutral-700"
           onClick={toggleFAQ}
@@ -47,7 +50,7 @@ const FaqCard = ({ item }: Props) => {
         }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
       >
-        <p className="mt-2">{item.answer}</p>
+        <p className="mt-2">{lan === 'EN' ? item.answer : item.esAnswer}</p>
       </motion.div>
     </motion.div>
   );
