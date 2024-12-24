@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { RiCloseCircleLine, RiMenu2Fill } from "@remixicon/react";
 import { isTokenExpired } from "../utils/utilities";
 import logo from '../assets/imgs/logo.png'
+import LanguageSelector from "../components/ui/LanguageSelector";
 
 const Navigator = () => {
   const navigate = useNavigate();
@@ -67,6 +68,7 @@ const Navigator = () => {
             </div>
 
             <div className="flex justify-center items-center gap-12">
+              <LanguageSelector />
               <ThemeSelector />
               {access ? <Logout /> : <Button label="Login" onClick={() => navigate("/login")} />}
               {access && <Cart />}
