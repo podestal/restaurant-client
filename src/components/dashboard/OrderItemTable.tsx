@@ -8,11 +8,6 @@ import Calendar from "../ui/Calendar"
 import { motion } from "framer-motion"
 import { RiArrowDownSFill } from "@remixicon/react"
 
-const timeFilters = [
-    { id: 1, name:'Filter by Month' }, 
-    {id: 2, name: 'Filter by Day'}
-]
-
 interface Props {
     orderItems: OrderItem[]
     month: number
@@ -23,12 +18,17 @@ interface Props {
     setTimeFilter: React.Dispatch<React.SetStateAction<number>>
     selectedDate: Date | undefined
     setSelectedDate:  React.Dispatch<React.SetStateAction<Date | undefined>>
+    lan: string
 }
 
-const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter, setTimeFilter, selectedDate, setSelectedDate }: Props) => {
+const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter, setTimeFilter, selectedDate, setSelectedDate, lan }: Props) => {
 
     const [sortKey, setSortKey] = useState<keyof OrderItem | null>(null)
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+    const timeFilters = [
+        { id: 1, name: lan === 'EN' ? 'Filter by Month' : 'Filtrar por Mes'}, 
+        {id: 2, name: lan === 'EN' ? 'Filter by Day' : 'Filtrar por Día'}
+    ]
 
     const [filterByName, setFilterByName] = useState('')
     const [filterByCategory, setFilterByCategory] = useState('')
@@ -99,12 +99,12 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter
     <div className="mt-16">
         <div className=" flex justify-start items-center gap-12">
             <Input 
-                placeholder="Look by dish ..."
+                placeholder={lan === 'EN' ? "Look by dish ..." : 'Buscar por plato ...'}
                 value={filterByName}
                 onChange={e => setFilterByName(e.target.value)}
             />
             <Input 
-                placeholder="Look by category ..."
+                placeholder={lan === 'EN' ? "Look by category ..." : 'Buscar por categoría ...'}
                 value={filterByCategory}
                 onChange={e => setFilterByCategory(e.target.value)}
             />
@@ -113,6 +113,7 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter
                 defaultValue={1}
                 label=""
                 setter={setTimeFilter}
+                lan={lan}
             />
 
             {timeFilter === 2 ? 
@@ -136,31 +137,31 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter
         </div>
         <div className="w-full grid grid-cols-7 dark:bg-slate-900 bg-gray-200 font-bold p-2 mt-6">
             <div onClick={() => handleSort("name")} className="flex py-1 col-span-2 text-left hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer">
-                <p>Name</p> 
+                <p>{lan === 'EN' ? 'Name' : 'Nombre'}</p> 
                 <RiArrowDownSFill 
                     className={`${sortKey === 'name' && sortOrder === 'desc' ? 'rotate-180' : ''}`}
                 />
             </div>
             <div onClick={() => handleSort("category_name")} className="flex py-1 text-left hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer">
-                <p>Category</p>
+                <p>{lan === 'EN' ? 'Category' : 'Categoría'}</p>
                 <RiArrowDownSFill 
                     className={`${sortKey === 'category_name' && sortOrder === 'desc' ? 'rotate-180' : ''}`}
                 />
             </div>
             <div onClick={() => handleSort("created_at")} className="flex py-1 text-left hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer">
-                <p>Created At</p>
+                <p>{lan === 'EN' ? 'Created At' : 'Creado en'}</p>
                 <RiArrowDownSFill 
                     className={`${sortKey === 'created_at' && sortOrder === 'desc' ? 'rotate-180' : ''}`}
                 />
             </div>
             <div onClick={() => handleSort("quantity")} className="flex py-1 text-left hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer">
-                <p>Quantity</p>
+                <p>{lan === 'EN' ? 'Quantity' : 'Cantidad'}</p>
                 <RiArrowDownSFill 
                     className={`${sortKey === 'quantity' && sortOrder === 'desc' ? 'rotate-180' : ''}`}
                 />
             </div>
             <div onClick={() => handleSort("cost")} className="flex py-1 text-left hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer">
-                <p>Cost</p>
+                <p>{lan === 'EN' ? 'Cost' : 'Costo'}</p>
                 <RiArrowDownSFill 
                     className={`${sortKey === 'cost' && sortOrder === 'desc' ? 'rotate-180' : ''}`}
                 />
@@ -177,7 +178,6 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter
                 layout
                 key={orderItem.id} 
                 className="w-full grid grid-cols-7 px-2 py-4 font-palanquin text-left hover:bg-slate-100 dark:hover:bg-slate-900">
-                <>{console.log('cost type', typeof(orderItem.cost))}</>
                 <p className="col-span-2">{orderItem.name}</p>
                 <p>{orderItem.category_name}</p>
                 <p>{moment(orderItem.created_at).format('DD MMM YYYY')}</p>
