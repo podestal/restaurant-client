@@ -6,11 +6,13 @@ import useAuthStore from "../hooks/store/useAuthStore";
 import { getOrderCacheKey } from "../utils/keys";
 import useLoader from "../hooks/ui/useLoader";
 import { motion } from 'framer-motion'
+import useLanguageStore from "../hooks/store/useLanguageStore";
 
 const KitchenPage = () => {
   const access = useAuthStore((s) => s.access) || "";
   const queryClient = useQueryClient();
   const ORDER_CACHE_KEY = getOrderCacheKey({status: 'S'})
+  const lan = useLanguageStore(s => s.lan)
 
   const { data: orders, isLoading, isError, error } = useGetOrders({
     access,
@@ -42,7 +44,9 @@ const KitchenPage = () => {
           style={{ minHeight: "calc(100vh - 100px)" }}
           className="w-full flex justify-center items-center"
         >
-          <h2 className="text-5xl font-bold font-poppins">No Orders Yet ...</h2>
+          <h2 className="text-5xl font-bold font-poppins">
+            {lan === 'EN' ? 'No orders yet ...' : 'Sin órdenes aún ...'}
+          </h2>
         </div>
       ) : (
         <div className="grid grid-cols-3 gap-12">
