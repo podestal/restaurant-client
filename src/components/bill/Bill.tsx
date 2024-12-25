@@ -8,6 +8,7 @@ import CreateOrder from "../orders/CreateOrder"
 import RemoveBill from "./RemoveBill"
 import Tabs from "../ui/Tabs"
 import BillCard from "./BillCard"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     table: TableType
@@ -21,6 +22,7 @@ const Bill = ({ table, enable }: Props) => {
     const tableId = table.id || 0
     const access = useAuthStore(s => s.access) || ''
     const {data: bill, isLoading, isError, error, isSuccess} = useGetBill({ access, tableId: table.id, enable })
+    const lan = useLanguageStore(s => s.lan)
 
 
     useEffect(() => {
@@ -45,11 +47,11 @@ const Bill = ({ table, enable }: Props) => {
         <Tabs
             tabs={[
             {
-                label: 'Orders',
+                label: lan === 'EN' ? 'Orders' : 'Ordenes',
                 content: 
                     <div className="flex flex-col justify-start items-center gap-6">
                         <div className="w-full flex justify-between items-start mb-2">
-                            <h2 className="text-2xl font-poppins font-semibold">Table #{table.number}</h2>
+                            <h2 className="text-2xl font-poppins font-semibold">{lan === 'EN' ? 'Table' : 'Mesa'} #{table.number}</h2>
                             <RemoveBill 
                                 tableId={tableId}
                                 billId={bill[0]?.id}
@@ -69,7 +71,7 @@ const Bill = ({ table, enable }: Props) => {
                 </div>,
             },
             {
-                label: 'Bill',
+                label: lan === 'EN' ? 'Bill' : 'Cuenta',
                 content: 
                 <BillCard 
                     table={table}

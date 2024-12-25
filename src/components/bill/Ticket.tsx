@@ -14,9 +14,10 @@ interface Props {
     disable: boolean
     setDisable: React.Dispatch<React.SetStateAction<boolean>>
     setSuccessMsg: React.Dispatch<React.SetStateAction<string>>
+    lan: string
 }
 
-const Ticket = ({ orderItems, correlative, updateBill, disable, setDisable, setSuccessMsg }: Props) => {
+const Ticket = ({ orderItems, correlative, updateBill, disable, setDisable, setSuccessMsg, lan }: Props) => {
 
     const ticket = generateTicketData({ correlative, orderItems })
     const access = useAuthStore(s => s.access) || ''
@@ -28,9 +29,9 @@ const Ticket = ({ orderItems, correlative, updateBill, disable, setDisable, setS
             },
           })
         .then(() => {
-            setSuccessMsg('Connecting to SUNAT')
+            setSuccessMsg(lan === 'EN' ? 'Connecting to SUNAT' : 'Conectando con SUNAT')
             setTimeout(() => {
-              setSuccessMsg('Ticket created')
+              setSuccessMsg(lan === 'EN' ? 'Ticket created' : 'Boleta creado')
             }, 2000)
             updateBill.mutate(
               { updates: { document: 'T' }, access }, 
@@ -38,7 +39,7 @@ const Ticket = ({ orderItems, correlative, updateBill, disable, setDisable, setS
                 
                 setDisable(true)
                 setTimeout(() => {
-                  setSuccessMsg('Printing Ticket')
+                  setSuccessMsg(lan === 'EN' ? 'Printing Ticket' : 'Imprimiendo Boleta')
                 }, 4000)
                 setTimeout(() => {
                   setSuccessMsg('')
@@ -50,7 +51,7 @@ const Ticket = ({ orderItems, correlative, updateBill, disable, setDisable, setS
 
   return (
     <Button 
-        label='Get Ticket'
+        label={lan === 'EN' ? 'Get Ticket' :  'Boleta'}
         onClick={handleSunat}
         disable={disable}
     />

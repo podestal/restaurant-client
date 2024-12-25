@@ -7,9 +7,10 @@ interface Props {
     orderId: number
     tableId: number
     setEnableCreateOrder: React.Dispatch<React.SetStateAction<boolean>>
+    lan: string
 }
 
-const RemoveOrder = ({ canRemoveOrder, orderId, tableId, setEnableCreateOrder }: Props) => {
+const RemoveOrder = ({ canRemoveOrder, orderId, tableId, setEnableCreateOrder, lan }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
     const removeOrder = useRemoveOrder({orderId, tableId})
@@ -22,7 +23,7 @@ const RemoveOrder = ({ canRemoveOrder, orderId, tableId, setEnableCreateOrder }:
 
   return (
     <Button 
-        label="Remove"
+        label={lan === 'EN' ? "Remove" : 'Eliminar'}
         color="red"
         disable={canRemoveOrder}
         onClick={handleRemove}

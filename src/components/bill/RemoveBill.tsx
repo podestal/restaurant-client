@@ -1,5 +1,6 @@
 import useRemoveBill from "../../hooks/api/bill/useRemoveBill"
 import useAuthStore from "../../hooks/store/useAuthStore"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import Button from "../ui/Button"
 
@@ -15,6 +16,7 @@ const RemoveBill = ({ tableId, billId, allowRemoveBill }: Props) => {
     const access = useAuthStore(s => s.access) || ''
     const removeBill = useRemoveBill({ tableId, billId })
     const { setShow, setType, setMessage } = useNotificationsStore()
+    const lan = useLanguageStore(s => s.lan)
     
     const handleRemove = () => {
         console.log('removing bill');
@@ -31,7 +33,7 @@ const RemoveBill = ({ tableId, billId, allowRemoveBill }: Props) => {
   return (
     <div>
         <Button 
-            label='Close table'
+            label={lan === 'EN' ? 'Close table' : 'Cerrar mesa'}
             color="red"
             onDoubleClick={handleRemove}
         />

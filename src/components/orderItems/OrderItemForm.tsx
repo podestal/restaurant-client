@@ -9,6 +9,7 @@ import DishLookup from "../dish/DishLookup"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import PromoLookup from "../promotion/PromoLookup"
 import Tabs from "../ui/Tabs"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     createOrderItem:  UseMutationResult<OrderItem, Error, CreateOrderItemData>
@@ -23,6 +24,7 @@ export interface DishInfo {
 
 const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
 
+    const lan = useLanguageStore(s => s.lan)
     const access = useAuthStore(s => s.access) || ''
     const [counter, setCounter] = useState(0)
     const [dish, setDish] = useState(0)
@@ -44,19 +46,19 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
 
         if (showPromos === false) {
             if (promoLookup.length === 0) {
-                console.log('This field is required');
+                console.log(lan === 'EN' ? 'This field is required' : 'Este campo es requerido');
                 
                 return
             }
         } else {
             if (dishLookup.length === 0) {
-                setDishError('This field is required')
+                setDishError(lan === 'EN' ? 'This field is required' : 'Este campo es requerido')
                 return
             }
         }
 
         if (counter === 0) {
-            setCounterError('You forgot the quantity')
+            setCounterError(lan === 'EN' ? 'You forgot the quantity' : 'Olvidaste la cantidad')
             return
         }
 
@@ -91,7 +93,7 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
     <Tabs
         tabs={[
         {
-            label: 'Dishes',
+            label: lan === 'EN' ? 'Dishes' : 'Platos',
             content: 
             <form 
                 onSubmit={handleCreateOrderItem}
@@ -113,12 +115,12 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
                     />
                 </div>
                 <TextArea 
-                    placeholder="Observations ..."
+                    placeholder={lan === 'EN' ? "Observations ..." : 'Observaciones ...'}
                     value={observations}
                     onChange={e => setObservations(e.target.value)}
                 />
                 <Button 
-                    label="Add Dish"
+                    label={lan === 'EN' ? "Add Dish" : 'Agregar Plato'}
                 />
             </form>,
         },
@@ -147,16 +149,16 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
                         />
                         </div>
                         <TextArea 
-                            placeholder="Observations ..."
+                            placeholder={lan === 'EN' ? "Observations ..." : 'Observaciones ...'}
                             value={observations}
                             onChange={e => setObservations(e.target.value)}
                         />
                         <div className="w-full flex justify-between">
                             <Button 
-                                label="Add Promo"
+                                label={lan === 'EN' ? "Add Promo" : 'Agregar Promo'}
                             />
                             <Button 
-                                label="Go Back"
+                                label={lan === 'EN' ? "Go Back" : 'Volver'}
                                 onClick={() => {
                                     setPromoLookup('')
                                     setShowPromos(true)

@@ -63,7 +63,6 @@ const OrderAdminCard = ({ order }: Props) => {
         >
             <div className="w-full flex flex-col items-center justify-start">
                 <h2 className="font-bold text-2xl">Order {order.id}</h2>
-                <>{console.log('order.order_items', order.order_items)}</>
                 <div className="w-full mt-6">
                     {order.order_items.map( orderItem => (
                         <OrderItemsCard 

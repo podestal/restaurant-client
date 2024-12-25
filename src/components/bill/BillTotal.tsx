@@ -1,3 +1,4 @@
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 import { SimpleOrderItem } from "../../services/api/orderService"
 
 interface Props {
@@ -6,7 +7,7 @@ interface Props {
 
 const BillTotal = ({ orderItems }: Props) => {
 
-
+    const lan = useLanguageStore(s => s.lan)
     const subTotal =  orderItems.reduce((accumulator, orderItem) => {
         return accumulator += orderItem.cost * orderItem.quantity
     }, 0)
@@ -21,7 +22,7 @@ const BillTotal = ({ orderItems }: Props) => {
                 {subTotal && <p>{subTotal.toFixed(2)}</p>}
             </div>
             <div className="w-full flex justify-between">
-                <p className="font-bold font-poppins text-lg">Taxes:</p>
+                <p className="font-bold font-poppins text-lg">{lan === 'EN' ? 'Taxes:' : 'Impuestos:'}</p>
                 {taxes && <p>{taxes}</p>}
             </div>
             <div className="w-full flex justify-between"> 

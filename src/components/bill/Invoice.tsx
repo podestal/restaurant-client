@@ -17,9 +17,10 @@ interface Props {
     setDisable: React.Dispatch<React.SetStateAction<boolean>>
     setSuccessMsg: React.Dispatch<React.SetStateAction<string>>
     updateBill: UseMutationResult<Bill, Error, UpdateBillData>
+    lan: string
 }
 
-const Invoice = ({ orderItems, setDoctype, correlative, setShow, setDisable, setSuccessMsg, updateBill }: Props) => {
+const Invoice = ({ orderItems, setDoctype, correlative, setShow, setDisable, setSuccessMsg, updateBill, lan }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
     const [ruc, setRuc] = useState('')
@@ -36,14 +37,14 @@ const Invoice = ({ orderItems, setDoctype, correlative, setShow, setDisable, set
         e.preventDefault()
 
         if (ruc.length !== 11) {
-            setRucError('RUC is 11 digits')
+            setRucError(lan === 'EN' ? 'RUC is 11 digits' : 'El RUC debe tener 11 dígitos')
             return
         }
 
         const rucType = ruc.slice(0, 2)
 
         if (!['20', '10'].includes(rucType) ) {
-            setRucError('Invalid RUC')
+            setRucError(lan === 'EN' ? 'Invalid RUC' : 'RUC inválido')
             return
         }
 
@@ -58,16 +59,16 @@ const Invoice = ({ orderItems, setDoctype, correlative, setShow, setDisable, set
             setRuc('')
             setAddress('')
             setShow(false)
-            setSuccessMsg('Connecting to SUNAT')
+            setSuccessMsg(lan === 'EN' ? 'Connecting to SUNAT' : 'Conectando a SUNAT')
             setTimeout(() => {
-              setSuccessMsg('Invoice created')
+              setSuccessMsg(lan === 'EN' ? 'Invoice created' : 'Factura creada')
             }, 2000)
             updateBill.mutate(
                 { updates: {document: 'I'}, access },
                 { onSuccess: () => {
                     setDisable(true)
                     setTimeout(() => {
-                      setSuccessMsg('Printing Invoice')
+                      setSuccessMsg(lan === 'EN' ? 'Printing Invoice' : 'Imprimiendo Factura')
                     }, 4000)
                     setTimeout(() => {
                       setSuccessMsg('')
@@ -134,7 +135,7 @@ const Invoice = ({ orderItems, setDoctype, correlative, setShow, setDisable, set
         onSubmit={handleSunat}
         className="w-full flex flex-col items-center gap-6"
     >
-        <h2 className="text-2xl">Invoice Info</h2>
+        <h2 className="text-2xl">{lan === 'EN' ? 'Invoice Info' : 'Información de Factura'}</h2>
         <div className="w-full flex justify-center items-start gap-6">
             <Input 
                 placeholder="RUC ..."
@@ -146,7 +147,7 @@ const Invoice = ({ orderItems, setDoctype, correlative, setShow, setDisable, set
                 error={rucError}
             />
             <Input 
-                placeholder="Address ..."
+                placeholder={lan === 'EN' ? "Address ..." : 'Dirección ...'}
                 value={address}
                 onChange={e => {
                     setAddress(e.target.value)
@@ -155,7 +156,7 @@ const Invoice = ({ orderItems, setDoctype, correlative, setShow, setDisable, set
         </div>
         <div className="flex justify-center items-center gap-6">
             <Button 
-                label="Go Back"
+                label={lan === 'EN' ? "Go Back" : 'Volver'}
                 type="button"
                 onClick={() => {
                     setDoctype('T')
@@ -164,7 +165,7 @@ const Invoice = ({ orderItems, setDoctype, correlative, setShow, setDisable, set
                 }}
             />
             <Button 
-                label="Create Invoice"
+                label={lan === 'EN' ? "Create Invoice" : 'Crear Factura'}
                 type="submit"
             />
         </div>

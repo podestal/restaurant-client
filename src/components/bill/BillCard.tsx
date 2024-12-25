@@ -10,6 +10,7 @@ import BillTotal from './BillTotal'
 import { getCorrelative } from '../../utils/billing'
 import useUpdateBill from '../../hooks/api/bill/useUpdateBill'
 import PrintBill from './PrintBill'
+import useLanguageStore from '../../hooks/store/useLanguageStore'
 
 interface Props {
     bill: Bill
@@ -25,6 +26,7 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
     const [doctype, setDoctype] = useState<'T' | 'I'>('T')
     const updateBill = useUpdateBill({ tableId: table.id, billId: bill.id })
     const [successMsg, setSuccessMsg] = useState('')
+    const lan = useLanguageStore(s => s.lan)
 
     useEffect(() => {
         getCorrelative({ setCorrelative, documentType: doctype })
@@ -33,7 +35,7 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
   return (
     <div>
         <div className="w-full flex justify-between items-start mb-2">
-            <h2 className="text-2xl font-poppins font-semibold">Table #{table.number}</h2>
+            <h2 className="text-2xl font-poppins font-semibold">{lan === 'EN' ? 'Table' : 'Mesa'} #{table.number}</h2>
             <RemoveBill 
                 tableId={table.id}
                 billId={bill.id}
@@ -52,6 +54,7 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
                 setDisable={setDisable}
                 setSuccessMsg={setSuccessMsg}
                 updateBill={updateBill}
+                lan={lan}
             /> 
             : 
             <>
@@ -62,9 +65,10 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
                     disable={disable}
                     setDisable={setDisable}
                     setSuccessMsg={setSuccessMsg}
+                    lan={lan}
                 />
                 <Button 
-                    label='Invoice'
+                    label={lan === 'EN' ? 'Invoice' : 'Factura'}
                     disable={disable}
                     onClick={() => {
                         setDoctype('I')
@@ -73,6 +77,7 @@ const BillCard = ({ bill, table, allowRemoveBill }: Props) => {
                 />
                 <PrintBill 
                     setSuccessMsg={setSuccessMsg}
+                    lan={lan}
                 />
             </>
             }

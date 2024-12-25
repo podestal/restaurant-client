@@ -8,9 +8,10 @@ interface Props {
     tableId: number
     order: Order
     setEnableCreateOrder: React.Dispatch<React.SetStateAction<boolean>>
+    lan: string
 }
 
-const UpdateOrder = ({ tableId, order, setEnableCreateOrder }: Props) => {
+const UpdateOrder = ({ tableId, order, setEnableCreateOrder, lan }: Props) => {
 
     const updateOrder = useUpdateOrder({ tableId, orderId: order.id })
     const { setShow, setType, setMessage } = useNotificationsStore()
@@ -22,7 +23,7 @@ const UpdateOrder = ({ tableId, order, setEnableCreateOrder }: Props) => {
         if (order.order_items?.length === 0) {
             setShow(true)
             setType('error')
-            setMessage('You need to add some dishes first')
+            setMessage(lan === 'EN' ? 'You need to add some dishes first' : 'Primero debes agregar platillos')
             return
         }
         
@@ -36,7 +37,7 @@ const UpdateOrder = ({ tableId, order, setEnableCreateOrder }: Props) => {
   return (
     <div>
         <Button 
-            label="Send to kitchen"
+            label={lan === 'EN' ? "Send to kitchen" : 'Enviar a cocina'}
             onClick={handleUpdate}
         />
     </div>
