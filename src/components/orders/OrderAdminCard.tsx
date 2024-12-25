@@ -6,27 +6,42 @@ import Modal from "../ui/Modal"
 import { useState } from "react"
 import RemoveOrderAdmin from "./RemoveOrderAdmin"
 import OrderItemsCard from "../orderItems/OrderItemsCard"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     order: Order
 }
 
-const orderStatus: Record<'P' | 'S' | 'C', string > = {
+const orderStatusEn: Record<'P' | 'S' | 'C', string > = {
     'P': 'In process',
     'S': 'Serving',
     'C': 'Completed'
 }
 
-const orderType: Record<'I' | 'D' | 'T', string> = {
+const orderStatusEs: Record<'P' | 'S' | 'C', string > = {
+    'P': 'En Proceso',
+    'S': 'Sirviendo',
+    'C': 'Completado'
+}
+
+const orderTypeEn: Record<'I' | 'D' | 'T', string> = {
     'I': 'Dine in',
     'D': 'Deliver',
     'T': 'Take out'
 }
 
+const orderTypeEs: Record<'I' | 'D' | 'T', string> = {
+    'I': 'Comer aquí',
+    'D': 'Delivery',
+    'T': 'Para llevar'
+}
+
 const OrderAdminCard = ({ order }: Props) => {
 
     const [open, setOpen] = useState(false)
-    const status = orderStatus[order.status]
+    const lan = useLanguageStore(s => s.lan)
+    const status = lan === 'EN' ? orderStatusEn[order.status] : orderStatusEs[order.status] 
+    const type = lan === 'EN' ? orderTypeEn[order.order_type] : orderTypeEs[order.order_type]
     const dishes = order.order_items.reduce((incrementer, orderItem) => {
         return incrementer += orderItem.quantity
     }, 0)
@@ -43,7 +58,7 @@ const OrderAdminCard = ({ order }: Props) => {
                     size={18}
                     color="blue-600"
                 />
-                <p>{orderType[order.order_type]}</p>
+                <p>{type}</p>
             </div>
             <p className={`shadow-xl 
                 ${order.status === 'C' && 'text-green-700 bg-green-300 border-green-400 shadow-green-700'} 

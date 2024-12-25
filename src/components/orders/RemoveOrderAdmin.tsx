@@ -4,6 +4,7 @@ import { useState } from "react"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import useRemoveOrder from "../../hooks/api/order/useRemoveOrder"
 import Button from "../ui/Button"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     orderId: number
@@ -13,6 +14,7 @@ const RemoveOrderAdmin = ({ orderId }: Props) => {
 
     const [open, setOpen] = useState(false)
     const access = useAuthStore(s => s.access) || ''
+    const lan = useLanguageStore(s => s.lan)
 
     const removeOrder = useRemoveOrder({ orderId })
 
@@ -32,9 +34,12 @@ const RemoveOrderAdmin = ({ orderId }: Props) => {
             onClose={() => setOpen(false)}
         >
             <div className="w-full flex flex-col items-center justify-start gap-12">
-                <h2 className="font-bold text-xl">Are you sure you want to remove order {orderId}</h2>
+                <h2 className="font-bold text-xl">
+                    {lan === 'EN' ? 'Are you sure you want to remove order' : 'Estas seguro que quieres remover la orden'} 
+                    {orderId}
+                </h2>
                 <div className="w-full flex justify-center gap-20">
-                    <Button label="Yes" color="red" onClick={handleRemove}/>
+                    <Button label={lan === 'EN' ? "Yes" : 'Si'} color="red" onClick={handleRemove}/>
                     <Button label="No" color="blue" onClick={() => setOpen(false)}/>
                 </div>
             </div>
