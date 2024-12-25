@@ -4,6 +4,7 @@ import ItemCounter from "../cart/ItemCounter"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import useCreatePromotionItem from "../../hooks/api/promotionItem/useCreatePromotionItem"
 import Button from "../ui/Button"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     promotionId: number 
@@ -11,6 +12,7 @@ interface Props {
 
 const PromotionItemsForm = ({ promotionId }: Props) => {
 
+    const lan = useLanguageStore(s => s.lan)
     const [dish, setDish] = useState(0)
     const [dishLookup, setDishLookup] = useState('')
     const [quantity, setQuantity] = useState(0)
@@ -28,12 +30,12 @@ const PromotionItemsForm = ({ promotionId }: Props) => {
         setDishError('')
 
         if (dish === 0) {
-            setDishError('Dish is necessary')
+            setDishError(lan == 'EN' ? 'Dish is necessary' : 'Plato es necesario')
             return
         }
 
         if (quantity === 0) {
-            setQuantityError('Quantity must be greater that 0')
+            setQuantityError(lan == 'EN' ? 'Quantity must be greater that 0' : 'La cantidad debe ser mayor que 0')
             return
         }
 
@@ -66,7 +68,7 @@ const PromotionItemsForm = ({ promotionId }: Props) => {
             setCounterError={setQuantityError}
         />
         <Button 
-            label="add"
+            label={lan == 'EN' ? "add" : 'Añadir'}
         />
     </form>
   )

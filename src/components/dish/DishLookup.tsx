@@ -2,6 +2,7 @@ import { useState } from "react"
 import Input from "../ui/Input"
 import useGetDishes from "../../hooks/api/dish/useGetDishes"
 import { motion } from "framer-motion"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     setDish: React.Dispatch<React.SetStateAction<number>>
@@ -16,7 +17,7 @@ const DishLookup = ({ setDish, setCost, setDishLookup, dishLookup, dishError, se
 
     const [showDishes, setShowDishes] = useState(false)
     const { data: dishes, isLoading, isError, error, isSuccess } = useGetDishes()
-    
+    const lan = useLanguageStore(s => s.lan)
 
     if (isLoading) return <p className="animate-pulse">Loading ...</p>
 
@@ -27,7 +28,7 @@ const DishLookup = ({ setDish, setCost, setDishLookup, dishLookup, dishError, se
   return (
     <div className="col-span-3">
         <Input 
-            placeholder="Dish ..."
+            placeholder={lan === 'EN' ? "Dish ..." : 'Plato ...'}
             value={dishLookup}
             onChange={e => {
                 if (dishLookup.length > 0) {

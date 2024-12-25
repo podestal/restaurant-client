@@ -8,11 +8,13 @@ import Tabs from "../ui/Tabs"
 import { motion } from "framer-motion"
 import useLoader from "../../hooks/ui/useLoader"
 import Promotions from "../promotion/Promotions"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 const DishesAdmin = () => {
 
     const [dishFilter, setDishFilter] = useState('')
     const {data: dishes, isLoading, isError, error, isSuccess } = useGetDishes()
+    const lan = useLanguageStore(S => S.lan)
 
     useLoader(isLoading)
 
@@ -25,7 +27,7 @@ const DishesAdmin = () => {
         <Tabs
             tabs={[
                 {
-                    label: 'Dishes',
+                    label: lan === 'EN' ? 'Dishes' : 'Platos',
                     content:         
                     <>
                         <motion.div 
@@ -35,7 +37,7 @@ const DishesAdmin = () => {
                             className="w-full flex max-lg:flex-col max-lg:mt-12 justify-evenly items-center gap-12 mb-6 pl-4">
                             <CreateDish />
                             <Input 
-                                placeholder="Filter by name ..."
+                                placeholder={lan === 'EN' ? "Filter by name ..." : 'Filtrar por nombre ...'}
                                 value={dishFilter}
                                 onChange={e => setDishFilter(e.target.value)}
                             />
@@ -57,14 +59,14 @@ const DishesAdmin = () => {
                     </>
                 },
                 {
-                    label: 'Categories',
+                    label: lan === 'EN' ? 'Categories' : 'Categorias',
                     content:         
                     <>
                         <CategoreisAdmin />
                     </>
                 },
                 {
-                    label: 'Promotions',
+                    label: lan === 'EN' ? 'Promotions' : 'Promociones',
                     content:         
                     <>
                        <Promotions />

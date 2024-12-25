@@ -13,6 +13,7 @@ import { UpdateDishData } from "../../hooks/api/dish/useUpdateDish"
 import Switch from "../ui/Switch"
 import ImageUploader from "../ui/ImageUploader"
 import DiscountSetter from "../ui/DiscountSetter"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     open: boolean
@@ -24,6 +25,7 @@ interface Props {
 
 const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
 
+    const lan = useLanguageStore(s => s.lan)
     const access = useAuthStore(s => s.access) || ''
     const { setShow, setType, setMessage } = useNotificationsStore()
 
@@ -46,8 +48,6 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const [pictureError, setPictureError] = useState('')
     const [categoryError, setCategoryError] = useState('')
     const [discountError, setDiscountError] = useState('')
-
-    console.log('discount', discount);
 
     const handleCloseModal = () => {
         if (!dish) {
@@ -75,23 +75,23 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
         let finalDiscount = 0
 
         if (!name) {
-            setNameError('Name is required')
+            setNameError(lan === 'EN' ? 'Name is required' : 'Nombre es requerido')
             return
         }
 
         if (!description) {
-            setDescriptionError('Description is required')
+            setDescriptionError(lan === 'EN' ? 'Description is required' : 'Descripción es requerida')
             return
         }
 
         if (!cost) {
-            setCostError('Cost is required')
+            setCostError(lan === 'EN' ? 'Cost is required' : 'Costo es requerido')
             return
         }
         
 
         if (discount >= 100) {
-            setDiscountError('Discount cannot be greater than 100')
+            setDiscountError(lan === 'EN' ? 'Discount cannot be greater than 100' : 'El descuento no puede ser mayor a 100')
             return
         }
 
@@ -105,12 +105,9 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
         }
 
         if (!category) {
-            setCategoryError('Category is required')
+            setCategoryError(lan === 'EN' ? 'Category is required' : 'Categoría es requerida')
             return
         }
-
-        console.log('finalDiscount',finalDiscount);
-        
 
         const formData = new FormData
         formData.append('available', available.toString())
@@ -136,7 +133,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 onSuccess: () => {
                     setShow(true)
                     setType('success')
-                    setMessage('Dish created')
+                    setMessage(lan === 'EN' ? 'Dish created' : 'Plato creado')
                     setName('')
                     setDescription('')
                     setCost('')
@@ -161,7 +158,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 onSuccess: () => {
                     setShow(true)
                     setType('success')
-                    setMessage('Dish updated')
+                    setMessage( lan === 'EN' ? 'Dish updated' : 'Plato actualizado')
                     setDisabled(true)
                 },
                 onError: err => {
@@ -186,10 +183,10 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
             <Switch 
                 value={available}
                 setter={setAvailable}
-                label="Available"
+                label={lan === 'EN' ? "Available" : 'Disponible'}
             />
             <Input 
-                placeholder="Name"
+                placeholder={lan === 'EN' ? "Name" : 'Nombre'}
                 value={name}
                 onChange={e => {
                     name && setNameError('')
@@ -197,7 +194,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 error={nameError}
             />
             <TextArea 
-                placeholder="Description"
+                placeholder={lan === 'EN' ? "Description" : 'Descripción'}
                 value={description}
                 onChange={e => {
                     description && setDescriptionError('')
@@ -206,7 +203,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 error={descriptionError}
             />
             <Input 
-                placeholder="Cost"
+                placeholder={lan === 'EN' ? "Cost" : 'Costo'}
                 value={cost}
                 onChange={e => {
                     cost && setCostError('')
@@ -234,7 +231,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 error={categoryError}
             />
             <Button 
-                label={dish ? 'Update' : 'Create'}
+                label={dish ? `${lan === 'EN' ? 'Update' : 'Actualizer'}` : `${lan === 'EN' ? 'Create' : 'Crear'}`}
                 disable={disabled}
             />
         </form>

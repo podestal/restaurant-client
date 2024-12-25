@@ -1,4 +1,3 @@
-// Interface representing a base structure for items with id and name
 interface Item {
     id: number
     name: string
@@ -13,6 +12,7 @@ interface Props<T extends Item> {
     label: string // Text that indicate the type of the selector
     all?: boolean // Boolean that conditionally renders all values
     error?: string
+    lan?: string
 }
 
 const styles = {
@@ -47,7 +47,7 @@ const styles = {
 }
 
 // Selector component that uses a generic type T, extending the Item interface
-const Selector = <T extends Item>({ values, defaultValue, setter, label, all, error }: Props<T>) => {
+const Selector = <T extends Item>({ values, defaultValue, setter, label, all, error, lan='EN' }: Props<T>) => {
   
     return (
         <div className="lg:w-full w-[60%] flex flex-col mx-auto justify-center items-center gap-4">
@@ -65,13 +65,10 @@ const Selector = <T extends Item>({ values, defaultValue, setter, label, all, er
                 <option value={0}>All</option>
                 :
                 <>
-                {/* If no default value, render a placeholder option */}
-                { !defaultValue && <option value={0}>Select</option>} 
+                { !defaultValue && <option value={0}>{lan === 'EN' ? 'Select' : 'Selecciona'}</option>} 
                 </>
                 }
 
-                
-                {/* Map over the values array to render each item as an option */}
                 {values.map((value) => (
                     <option key={value.id} value={value.id}>
                         {value.name} {/* Display the name of the item */}

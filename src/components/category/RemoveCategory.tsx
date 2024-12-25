@@ -6,6 +6,7 @@ import Button from "../ui/Button"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import useRemoveCategory from "../../hooks/api/category/useRemoveCategory"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     category: Category
@@ -17,18 +18,20 @@ const RemoveCategory = ({ category }: Props) => {
     const access = useAuthStore(s => s.access) || ''
     const removeCategory = useRemoveCategory({ categoryId: category.id })
     const { setShow, setType, setMessage } = useNotificationsStore()
+    const lan = useLanguageStore(s => s.lan)
+    const linkedCategoryErrorMssg = lan === 'EN' ? 'This Category have some dishes linked to it' : 'Esta categoría tiene platos vinculados a ella'
 
     const handleRemove = () => {
         removeCategory.mutate({ access }, {
             onSuccess: () => {
                 setShow(true)
                 setType('success')
-                setMessage('Category removed')
+                setMessage(lan === 'EN' ? 'Category removed' : 'Categoría eliminada')
             },
             onError: (err) => {
                 setShow(true)
                 setType('error')
-                const errorMsg = err.response?.status === 500 ? 'This Category have some dishes linked to it' : `Error: ${err.message}`
+                const errorMsg = err.response?.status === 500 ? linkedCategoryErrorMssg : `Error: ${err.message}`
                 setMessage(errorMsg)
             }
         })
@@ -45,10 +48,10 @@ const RemoveCategory = ({ category }: Props) => {
             onClose={() => setOpen(false)}
         >
             <div className="w-full flex flex-col justify-start items-center gap-10">
-                <h2 className="text-3xl font-bold font-poppins">Are you sure?</h2>
+                <h2 className="text-3xl font-bold font-poppins">{lan === 'EN' ? 'Are you sure?' : 'Estás seguro?'}</h2>
                 <div className="w-full flex justify-evenly items-center">
                     <Button 
-                        label="Yes"
+                        label={lan === 'EN' ? "Yes" : 'Si'}
                         color="red"
                         onClick={handleRemove}
                     />

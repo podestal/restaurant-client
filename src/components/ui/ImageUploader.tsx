@@ -1,3 +1,5 @@
+import useLanguageStore from "../../hooks/store/useLanguageStore";
+
 interface Props {
     image: File | null
     setImage: React.Dispatch<React.SetStateAction<File | null>>
@@ -6,6 +8,7 @@ interface Props {
 
 const ImageUploader = ({ image, setImage, setPreview }: Props) => {
 
+  const lan = useLanguageStore(s => s.lan)
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
@@ -35,7 +38,7 @@ const ImageUploader = ({ image, setImage, setPreview }: Props) => {
             d="M12 16v-4m0 0V8m0 4h4m-4 0H8m12-3.429A9.956 9.956 0 0012 2a9.956 9.956 0 00-8 4.571M12 22a9.956 9.956 0 008-4.571M3.6 8.571H3.2c-.993 0-1.876.592-2.24 1.495L12 21l10.04-10.933c-.364-.903-1.247-1.495-2.24-1.495h-.4"
           />
         </svg>
-        Upload Image
+        {lan === 'EN' ? 'Upload Image' : 'Subir Imagen'}
       </label>
 
       {/* Hidden Input */}

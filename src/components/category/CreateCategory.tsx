@@ -4,6 +4,7 @@ import Button from "../ui/Button"
 import useAuthStore from "../../hooks/store/useAuthStore"
 import useCreateCategory from "../../hooks/api/category/useCreateCategory"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 const CreateCategory = () => {
 
@@ -14,13 +15,14 @@ const CreateCategory = () => {
 
     const access = useAuthStore(s => s.access) || ''
     const createCategory = useCreateCategory()
+    const lan = useLanguageStore(s => s.lan)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setNameError('')
 
         if (!name) {
-            setNameError('You forgot the new category name')
+            setNameError(lan === 'EN' ? 'You forgot the new category name' : 'Olvidaste el nombre de la nueva categoría')
             return
         }
 
@@ -30,7 +32,7 @@ const CreateCategory = () => {
                 setName('')
                 setShow(true)
                 setType('success')
-                setMessage('Category created')
+                setMessage(lan === 'EN' ? 'Category created' : 'Categoría creada')
             }, 
                 onError: err => {
                     setShow(true)
@@ -47,7 +49,7 @@ const CreateCategory = () => {
         className="w-full flex justify-center items-start gap-12 mt-10">
         <div className="w-[30%]">
             <Input 
-                placeholder="New Category ..."
+                placeholder={lan === 'EN' ? "New Category ..." : 'Nueva Categoría ...'}
                 value={name}
                 onChange={e => {
                     name && setNameError('')
@@ -56,7 +58,7 @@ const CreateCategory = () => {
             />
         </div>
         <Button 
-            label="Add"
+            label={lan === 'EN' ? "Add" : 'Añadir'}
         />
     </form>
   )

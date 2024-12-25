@@ -9,6 +9,7 @@ import useAuthStore from "../../hooks/store/useAuthStore"
 import Button from "../ui/Button"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import { UpdatePromotionData } from "../../hooks/api/promotion/useUpdatePromotion"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     createPromotion?: UseMutationResult<Promotion, Error, CreatePromotionData>
@@ -20,6 +21,7 @@ interface Props {
 
 const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromotion }: Props) => {
 
+    const lan = useLanguageStore(s => s.lan)
     const access = useAuthStore(s => s.access) || ''
     const { setShow, setType, setMessage } = useNotificationsStore()
 
@@ -31,18 +33,18 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
     const [nameError, setNameError] = useState('')
     const [amountError, setAmountError] = useState('')
 
-    const buttonLabel = promotion ? 'Update' : 'Add Dishes' 
+    const buttonLabel = promotion ? `${lan === 'EN' ? 'Update' : 'Actualizar'}` : `${lan === 'EN' ? 'Add Dishes' : 'Agregar Platos'}`
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         if (!name) {
-            setNameError('Name field is required')
+            setNameError(lan === 'EN' ? 'Name field is required' : 'El campo nombre es requerido')
             return
         }
 
         if (!amount) {
-            setAmountError('Amount is required')
+            setAmountError(lan === 'EN' ? 'Amount is required' : 'El campo cantidad es requerido')
             return
         }
 
@@ -61,12 +63,6 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
             }
         })
 
-
-        if (updatePromotion) {
-            console.log('updating form');
-        }
-        
-
         updatePromotion && updatePromotion.mutate({
             updates: { name, description, amount, is_active: active },
             access
@@ -74,7 +70,7 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
             onSuccess: () => {
                 setShow(true)
                 setType('success')
-                setMessage('Promotion updated')
+                setMessage(lan === 'EN' ? 'Promotion updated' : 'Promoción actualizada')
             },
             onError: err => {
                 setShow(true)
@@ -88,9 +84,9 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
     <form 
         onSubmit={handleSubmit}
         className="flex flex-col justify-center items-center mx-auto gap-6 w-[60%] my-6">
-        <h2 className="text-2xl font-poppins font-bold">New Promotion</h2>
+        <h2 className="text-2xl font-poppins font-bold">{lan === 'EN' ? 'New Promotion' : 'Nueva Promoción'}</h2>
         <Input 
-            placeholder="Name ..."
+            placeholder={lan === 'EN' ? "Name ..." : 'Nombre ...'}
             value={name}
             onChange={e => {
                 name && setNameError('')
@@ -98,12 +94,12 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
             error={nameError}
         />
         <TextArea 
-            placeholder="Description ..."
+            placeholder={lan === 'EN' ? "Description ..." : 'Descripción ...'}
             value={description}
             onChange={e => setDescription(e.target.value)}
         />
         <Input 
-            placeholder="Amount ..."
+            placeholder={lan === 'EN' ? "Amount ..." : 'Costo ...'}
             value={amount}
             onChange={e => {
                 amount && setAmountError('')
@@ -113,7 +109,7 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
         <Switch 
             value={active}
             setter={setActive}
-            label="Is Active"
+            label={lan === 'EN' ? "Is Active" : 'Activo'}
         />
         <Button 
             label={buttonLabel}

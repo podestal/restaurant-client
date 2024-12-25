@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import Input from "./Input"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     discountType: "fixed" | "percentage"
@@ -20,6 +21,8 @@ const DiscountSetter = ({
  }: Props) => {
 
 
+    const lan = useLanguageStore(s => s.lan)
+
     useEffect(() => {
         if (isNaN(discount)) {
             setDiscount(0)
@@ -31,7 +34,7 @@ const DiscountSetter = ({
       className="w-full max-w-sm p-6 mx-auto"
     >
 
-        <p className="text-lg lg:text-xl dark:text-slate-50 text-center mb-4">Discount</p>
+        <p className="text-lg lg:text-xl dark:text-slate-50 text-center mb-4">{lan === 'EN' ? 'Discount' : 'Descuento'}</p>
         <div className="flex justify-around mb-4">
             <label className="flex items-center gap-2">
             <input
@@ -41,7 +44,7 @@ const DiscountSetter = ({
                 onChange={() => setDiscountType("fixed")}
                 className="form-radio text-green-500"
             />
-            <span className="text-gray-800 dark:text-gray-200">Fixed Amount</span>
+            <span className="text-gray-800 dark:text-gray-200">{lan === 'EN' ? 'Fixed Amount' : 'Monto Fijo'}</span>
             </label>
             <label className="flex items-center gap-2">
             <input
@@ -51,7 +54,7 @@ const DiscountSetter = ({
                 onChange={() => setDiscountType("percentage")}
                 className="form-radio text-green-500"
             />
-            <span className="text-gray-800 dark:text-gray-200">Percentage</span>
+            <span className="text-gray-800 dark:text-gray-200">{lan === 'EN' ? 'Percentage' : 'Porcentaje'}</span>
             </label>
         </div>
         <Input

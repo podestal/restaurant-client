@@ -7,6 +7,7 @@ import PromotionForm from "./PromotionForm"
 import PromotionItems from "../promotionItem/PromotionItems"
 import Button from "../ui/Button"
 import { UpdatePromotionData } from "../../hooks/api/promotion/useUpdatePromotion"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     open: boolean
@@ -20,6 +21,7 @@ const PromotionModal = ({ open, setOpen, promotion, createPromotion, updatePromo
 
     const [prom, setProm] = useState<Promotion | null>(promotion ? promotion :  null)
     const showForm = true
+    const lan = useLanguageStore(s => s.lan)
 
     const handleClose = () => {
         if (!updatePromotion) {
@@ -54,7 +56,7 @@ const PromotionModal = ({ open, setOpen, promotion, createPromotion, updatePromo
         />
         <div className="flex justify-center items-start mt-6">
             <Button 
-                label="Save"
+                label={lan === 'EN' ? "Save" : 'Guardar'}
                 onClick={handleClose}
             />
         </div>
