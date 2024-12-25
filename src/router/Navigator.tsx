@@ -46,12 +46,12 @@ const Navigator = () => {
         <NavLink key="kitchen" to="kitchen" label="Kitchen" />,
       ],
       podestal: [
-        <NavLink to="menu" label="Menu" />,
-        <NavLink key="dishes" to="dishes" label="Dishes" />,
-        <NavLink key="kitchen" to="kitchen" label="Kitchen" />,
-        <NavLink key="tables" to="tables" label="Tables" />,
-        <NavLink key="sales" to="sales" label="Sales" />,
-        <NavLink key="orders" to="orders" label="Orders" />,
+        <NavLink to="menu" label={lan === 'EN' ? "Menu" : 'Carta'}/>,
+        <NavLink key="dishes" to="dishes" label={lan === 'EN' ? "Dishes" : 'Platos'} />,
+        <NavLink key="kitchen" to="kitchen" label={lan === 'EN' ? "Kitchen" : 'Cocina'} />,
+        <NavLink key="tables" to="tables" label={lan === 'EN' ? "Tables" : 'Mesas'} />,
+        <NavLink key="sales" to="sales" label={lan === 'EN' ? "Sales" : 'Ventas'} />,
+        <NavLink key="orders" to="orders" label={lan === 'EN' ? "Orders" : 'Ordenes'} />,
       ],
     };
 
@@ -62,9 +62,9 @@ const Navigator = () => {
     <>
         <div className="w-full dark:bg-slate-950 bg-white fixed z-40 shadow-lg shadow-slate-400 dark:shadow-slate-700 max-lg:hidden">
           <div className="w-full flex justify-between items-center h-[100px] 2xl:max-w-[1280px] mx-auto">
-            <Link to={access ? '/menu' : '/'}>
+            {!access && <Link to='/'>
               <img src={logo} alt="LOGO" width={150} className="hover:opacity-80" />
-            </Link>
+            </Link>}
 
             <div className="flex justify-center items-center gap-24 font-montserrat">
               {renderLinks()}

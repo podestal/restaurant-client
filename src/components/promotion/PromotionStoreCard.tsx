@@ -3,6 +3,7 @@ import { Promotion } from '../../services/api/promotionService'
 import { useState } from 'react'
 import ItemCounter from '../cart/ItemCounter'
 import Button from '../ui/Button'
+import useLanguageStore from '../../hooks/store/useLanguageStore'
 
 interface Props {
     promotion: Promotion
@@ -11,6 +12,7 @@ interface Props {
 const PromotionStoreCard = ({ promotion }: Props) => {
 
     const [count, setCount] = useState(0)
+    const lan = useLanguageStore(s => s.lan)
 
   return (
     <motion.div 
@@ -26,13 +28,9 @@ const PromotionStoreCard = ({ promotion }: Props) => {
             </div>
         </div>
         <p className="text-xs dark:text-slate-400 text-slate-700">{promotion.description}</p>
-        {/* <div className="w-full flex justify-between items-center mx-auto max-lg:my-10 lg:py-6">
-
-
-        </div> */}
         <div className="w-full flex justify-between items-center mx-auto max-lg:my-10 lg:py-6">
-        <Button 
-                label='Add'
+            <Button 
+                label={lan === 'EN' ? 'Add' : 'Anadir'}
             />
             <ItemCounter 
                 counter={count}

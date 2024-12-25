@@ -8,13 +8,7 @@ import { CreateCartItemData } from "../../hooks/api/cartItem/useCreateCartItem"
 import { Dish } from "../../services/api/dishService"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import ItemCounter from "../cart/ItemCounter"
-
-    // id: number
-    // quantity: number
-    // dish: number
-    // price: number
-    // cart: number
-    // observations: string
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     dish?: Dish
@@ -32,6 +26,7 @@ const CartItemForm = ({ dish, open, cartId, setOpen, createCartItem, count, setC
     const [observations, setObservations] = useState('')
     const { setShow, setType, setMessage } = useNotificationsStore()
     const [counter, setCounter] = useState(0)
+    const lan = useLanguageStore(S => S.lan)
 
     const handleCreateOrderItem = () => {
 
@@ -75,15 +70,15 @@ const CartItemForm = ({ dish, open, cartId, setOpen, createCartItem, count, setC
                 setCounter={setCounter}
             />
             }
-            <h2 className="text-2xl font-palanquin">Any obervation to add ...</h2>
+            <h2 className="text-2xl font-palanquin">{lan === 'EN' ? 'Any obervation to add ...' : 'Alguna observación ...'}</h2>
             <TextArea 
-                placeholder="Observations ..."
+                placeholder={lan === 'EN' ? "Observations ..." : 'Observaciones ...'}
                 value={observations}
                 onChange={ e => setObservations(e.target.value)}
             />
             <Button 
                 onClick={handleCreateOrderItem}
-                label="Add to cart"
+                label={lan === 'EN' ? "Add to cart" : 'Añadir al carrito'}
             />
         </div>
     </Modal>

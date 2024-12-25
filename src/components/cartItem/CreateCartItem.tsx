@@ -5,6 +5,7 @@ import { Cart } from "../../services/api/cartService"
 import { Dish } from "../../services/api/dishService"
 import Button from "../ui/Button"
 import CartItemForm from "./CartItemForm"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     cart: Cart
@@ -18,6 +19,7 @@ const CreateCartItem = ({ cart, dish, count, setCount }: Props) => {
     const createCartItem = useCreateCartItem(cart.id)
     const { setShow, setType, setMessage } = useNotificationsStore()
     const [ open, setOpen ] = useState(false)
+    const lan = useLanguageStore(s => s.lan)
 
   return (
     <div>
@@ -31,7 +33,7 @@ const CreateCartItem = ({ cart, dish, count, setCount }: Props) => {
                 }
                 setOpen(true)}
             }
-            label="Add"
+            label={lan === 'EN' ? "Add" : 'Añadir'}
         />
         <CartItemForm 
             dish={dish}
