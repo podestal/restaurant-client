@@ -30,12 +30,15 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter
         {id: 2, name: lan === 'EN' ? 'Filter by Day' : 'Filtrar por Día'}
     ]
 
+    console.log('orderItems', orderItems);
+    
+
     const [filterByName, setFilterByName] = useState('')
     const [filterByCategory, setFilterByCategory] = useState('')
     const filteredOrderItems = orderItems
         .filter( orderItem => timeFilter === 2 ? (orderItem.created_at).toString() === moment(selectedDate).format('YYYY-MM-DD') : orderItem)
-        // .filter( orderItem => orderItem?.category_name.toLowerCase().includes(filterByCategory?.toLowerCase()) )
-        // .filter( orderItem => orderItem?.name.toLowerCase().includes(filterByName.toLowerCase()))
+        .filter( orderItem => orderItem.category_name ? orderItem.category_name.toLowerCase().includes(filterByCategory?.toLowerCase()) : orderItem)
+        .filter( orderItem => orderItem.name ? orderItem.name.toLowerCase().includes(filterByName.toLowerCase()) : orderItem)
 
     const sortOrderItems = filteredOrderItems.sort((a, b) => {
 
@@ -179,7 +182,7 @@ const OrderItemTable = ({ orderItems, month, setMonth, year, setYear, timeFilter
                 key={orderItem.id} 
                 className="w-full grid grid-cols-7 px-2 py-4 font-palanquin text-left hover:bg-slate-100 dark:hover:bg-slate-900">
                 <p className="col-span-2">{orderItem.name}</p>
-                <p>{orderItem.category_name}</p>
+                <p>{orderItem.category_name ? orderItem.category_name : 'Promo'}</p>
                 <p>{moment(orderItem.created_at).format('DD MMM YYYY')}</p>
                 <p>{orderItem.quantity}</p>
                 <p>{(orderItem.cost / orderItem.quantity).toFixed(2)}</p>

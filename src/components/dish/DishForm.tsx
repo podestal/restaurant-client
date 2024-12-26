@@ -95,13 +95,12 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
             return
         }
 
-        if (discount !== 0) {
+        if (discount !== null) {
             if (discountType === 'fixed' ) {
-                finalDiscount = discount === null ? 0 : discount
+                finalDiscount = discount
             } else {
                 finalDiscount = discount > 0 ? parseFloat(cost) * (discount / 100) : parseFloat(cost) * discount
             }
-
         }
 
         if (!category) {
@@ -109,12 +108,15 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
             return
         }
 
+        console.log('finalDiscount', finalDiscount);
+        
+
         const formData = new FormData
         formData.append('available', available.toString())
         formData.append('name', name)
         formData.append('description', description)
         formData.append('cost', cost)
-        formData.append('discount', finalDiscount?.toFixed(2))
+        formData.append('discount', finalDiscount.toFixed(2))
         picture && formData.append("picture", picture)
         formData.append('category', category.toString())
 

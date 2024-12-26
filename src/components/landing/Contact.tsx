@@ -31,18 +31,18 @@ const Contact = () => {
         e.preventDefault()
         
         if (!name) {
-            setNameError('Name is required')
+            setNameError(lan === 'EN' ? 'Name is required' : 'Nombre es requerido')
             return
         }
 
         if (!email) {
-            setEmailError('Email is required')
+            setEmailError(lan === 'EN' ? 'Email is required' : 'Correo es requerido')
             return
         }
 
         setShow(true)
         setType('success')
-        setMessage('Email sent')
+        setMessage(lan === 'EN' ? 'Email sent' : 'Correo enviado')
         setDisable(true)
         setName('')
         setEmail('')

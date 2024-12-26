@@ -15,7 +15,7 @@ const Hero = () => {
       <div className="h-full z-10 flex flex-col place-content-center gap-12 relative">
         {/* Left Text Section */}
         <div 
-          className="w-[50%] h-[500px] absolute top-0 left-0">
+          className="w-[60%] h-[400px] absolute top-0 left-10">
           <My3DModel />
         </div>
         <div className="w-[50%] h-[400px] absolute top-8 right-0">

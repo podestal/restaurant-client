@@ -1,11 +1,16 @@
 import useLanguageStore from "../hooks/store/useLanguageStore"
+import { motion } from "framer-motion"
 
 const About = () => {
 
   const lan = useLanguageStore(s => s.lan)
 
   return (
-    <div className="my-20 flex flex-col gap-6 font-montserrat">
+    <motion.div 
+      initial={{ opacity: 0, x: -100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5 }}
+      className="my-20 flex flex-col gap-6 font-montserrat">
         <h2 className="text-4xl font-bold font-palanquin">
           {lan === 'EN' ? 'About' : 'Nosotros'}
         </h2>
@@ -50,7 +55,7 @@ const About = () => {
         <p>
           {lan === 'EN' ? 'At Quenteh, our goal is to simplify your processes while maximizing your efficiency. Whether you are a small café or a large restaurant chain, our tools are designed to grow with your business.' : 'En Quenteh, nuestro objetivo es simplificar tus procesos al tiempo que maximizamos tu eficiencia. Ya sea un pequeño café o una gran cadena de restaurantes, nuestras herramientas están diseñadas para crecer con tu negocio.'}
         </p>
-    </div>
+    </motion.div>
   )
 }
 

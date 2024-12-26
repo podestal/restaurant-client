@@ -99,6 +99,7 @@ const Navigator = () => {
                     onClick={() => setShow(false)}
                   />
                   <ThemeSelector />
+                  <LanguageSelector />
                   <div className="flex flex-col justify-center gap-20" onClick={() => setShow(false)}>
                     {renderLinks()}
                   </div>

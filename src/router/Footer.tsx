@@ -88,11 +88,11 @@ const Footer = () => {
                 <div className="flex flex-col justify-start items-center lg:items-start gap-2 mx-auto">
                     <h2 className="text-2xl font-palanquin font-bold mb-4 text-white">{lan === 'EN' ? 'Contact' : 'Contáctanos'}</h2>
                     <div className="flex justify-end items-center gap-4">
-                        <p>(908) 5255111</p>
+                        <p>+51 (973)-000006</p>
                         <RiPhoneFill />
                     </div>
                     <div className="flex justify-end items-center gap-4">
-                        <p>sales@resto.com</p>
+                        <p>quenteh@resto.com</p>
                         <RiMailFill />
                     </div>
                 </div>

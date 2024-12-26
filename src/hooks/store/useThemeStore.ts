@@ -6,8 +6,8 @@ interface ThemeState {
 }
 
 const useThemeStore = create<ThemeState>(set => ({
-    theme: window.matchMedia("(prefers-color-scheme: dark)") ? 'dark' : 'ligth',
-    // theme: 'light',
+    // theme: window.matchMedia("(prefers-color-scheme: dark)") ? 'dark' : 'ligth',
+    theme: 'light',
     switchTheme: (theme) => {
         if (theme === 'light') {
             set({ theme: 'dark' })

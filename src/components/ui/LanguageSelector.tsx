@@ -5,7 +5,7 @@ const LanguageSelector = () => {
     const { lan, setLan } = useLanguageStore()
 
   return (
-    <div className="flex gap-2 font-montserrat">
+    <div className="flex gap-2 font-montserrat max-lg:text-sm">
         <p 
             onClick={() => setLan('EN')}
             className={`cursor-pointer  ${lan === 'EN' && 'text-blue-600 font-semibold'}`}>EN</p>

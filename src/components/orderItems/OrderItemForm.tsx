@@ -134,6 +134,7 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
                         setShowPromos={setShowPromos}
                         setPromoLookup={setPromoLookup}
                         setPromotion={setPromotion}
+                        setCost={setCost}
                     /> 
                     : 
                     <form

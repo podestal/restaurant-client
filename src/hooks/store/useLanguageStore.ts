@@ -7,7 +7,7 @@ interface LanguageState {
 
 const useLanguageStore = create<LanguageState>(set => ({
 
-    lan: 'EN',
+    lan: 'ES',
     setLan: (lan) => {
         set({ lan })
     }
