@@ -22,6 +22,7 @@ const PromotionItemsForm = ({ promotionId }: Props) => {
 
     const access = useAuthStore(s => s.access) || ''
     const createPromotionItem = useCreatePromotionItem({ promotionId })
+    const [loading, setLoading] = useState(false)
 
     const handleCreate = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -39,6 +40,8 @@ const PromotionItemsForm = ({ promotionId }: Props) => {
             return
         }
 
+        setLoading(true)
+
         createPromotionItem.mutate({ 
             promotion: { dish, quantity, promotion: promotionId }, access 
         }, {
@@ -46,6 +49,9 @@ const PromotionItemsForm = ({ promotionId }: Props) => {
                 setDish(0)
                 setQuantity(0)
                 setDishLookup('')
+            },
+            onSettled: () => {
+                setLoading(false)
             }
         })
     }
@@ -67,9 +73,17 @@ const PromotionItemsForm = ({ promotionId }: Props) => {
             counterError={quantityError}
             setCounterError={setQuantityError}
         />
+        {loading 
+        ? 
+        <Button 
+            label={lan == 'EN' ? "adding" : 'Añadiendo'}
+            disable={true}
+        />
+        : 
         <Button 
             label={lan == 'EN' ? "add" : 'Añadir'}
         />
+        }
     </form>
   )
 }
