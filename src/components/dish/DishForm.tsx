@@ -14,7 +14,7 @@ import Switch from "../ui/Switch"
 import ImageUploader from "../ui/ImageUploader"
 import DiscountSetter from "../ui/DiscountSetter"
 import useLanguageStore from "../../hooks/store/useLanguageStore"
-import { set } from "react-datepicker/dist/date_utils"
+// import { set } from "react-datepicker/dist/date_utils"
 
 interface Props {
     open: boolean
@@ -31,6 +31,8 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const { setShow, setType, setMessage } = useNotificationsStore()
 
     const [disabled, setDisabled] = useState(false)
+
+    const positiveNumberRegex = /^[0-9]*\.?[0-9]+$/
 
     const [available, setAvailable] = useState(dish ? dish.available : true)
     const [name, setName] = useState(dish ? dish.name : '')
@@ -213,8 +215,18 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 placeholder={lan === 'EN' ? "Cost" : 'Costo'}
                 value={cost}
                 onChange={e => {
-                    cost && setCostError('')
-                    setCost(e.target.value)
+                    const value = e.target.value
+                    if (value === '') {
+                        setCost(e.target.value)
+                        setCostError('')
+                    }
+                    else if (positiveNumberRegex.test(value)) {
+                        cost && setCostError('')
+                        setCost(e.target.value)
+                    } else {
+                        setCostError(lan === 'EN' ? 'Please enter a valid positive number' : 'Por favor ingrese un número positivo válido')
+                    }
+
                 }}
                 error={costError}
             />
