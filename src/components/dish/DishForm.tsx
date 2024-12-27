@@ -52,7 +52,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const [categoryError, setCategoryError] = useState('')
     const [discountError, setDiscountError] = useState('')
 
-    const [creating, setCreating] = useState(false)
+    const [mutating, setMutating] = useState(false)
 
     const handleCloseModal = () => {
         if (!dish) {
@@ -77,7 +77,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
         setCostError('')
         setPictureError('')
 
-        let finalDiscount = 0
+        let finalDiscount = discount ? Number(discount) : 0
 
         if (!name) {
             setNameError(lan === 'EN' ? 'Name is required' : 'Nombre es requerido')
@@ -100,21 +100,18 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
             return
         }
 
-        if (discount !== null) {
-            if (discountType === 'fixed' ) {
-                finalDiscount = discount
-            } else {
-                finalDiscount = discount > 0 ? parseFloat(cost) * (discount / 100) : parseFloat(cost) * discount
-            }
+        if (discount !== null && discountType === 'percentage') {
+            finalDiscount = discount > 0 
+                ? parseFloat(cost) * (discount / 100) 
+                : parseFloat(cost) * discount
         }
+
+        finalDiscount = isNaN(finalDiscount) ? 0 : finalDiscount
 
         if (!category) {
             setCategoryError(lan === 'EN' ? 'Category is required' : 'Categoría es requerida')
             return
         }
-
-        console.log('finalDiscount', finalDiscount);
-        
 
         const formData = new FormData
         formData.append('available', available.toString())
@@ -127,7 +124,7 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
 
         if (createDish) {
             
-            setCreating(true)
+            setMutating(true)
             if (picture === null) {
                 setPictureError('Picture is required')
                 console.log('pictureError', pictureError);
@@ -153,13 +150,14 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                     setMessage(`Error: ${err}`)
                     setDisabled(true)
                 },
-                onSettled: () => setCreating(false)
+                onSettled: () => setMutating(false)
             })
         }
 
         
 
         if (dish) {
+            setMutating(true)
             updateDish && updateDish.mutate({
                 dish:formData,
                 access
@@ -175,6 +173,9 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                     setType('error')
                     setMessage(`Error: ${err}`)
                     setDisabled(true)
+                },
+                onSettled: () => {
+                    setMutating(false)
                 }
             })
         }
@@ -249,14 +250,14 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 categoryId={dish?.category}
                 error={categoryError}
             />
-            {!creating ? 
+            {!mutating ? 
             <Button 
-                label={dish ? `${lan === 'EN' ? 'Update' : 'Actualizer'}` : `${lan === 'EN' ? 'Create' : 'Crear'}`}
+                label={dish ? `${lan === 'EN' ? 'Update' : 'Actualizar'}` : `${lan === 'EN' ? 'Create' : 'Crear'}`}
                 disable={disabled}
             />
             :
             <Button 
-                label={lan === 'EN' ? 'Creating' : 'Creando'}
+                label={dish ? `${lan === 'EN' ? 'Updating' : 'Actualizando'}` : `${lan === 'EN' ? 'Creating' : 'Creando'}`}
                 disable={true}
             />
             }
