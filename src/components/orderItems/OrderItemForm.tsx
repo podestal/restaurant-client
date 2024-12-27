@@ -10,6 +10,7 @@ import useAuthStore from "../../hooks/store/useAuthStore"
 import PromoLookup from "../promotion/PromoLookup"
 import Tabs from "../ui/Tabs"
 import useLanguageStore from "../../hooks/store/useLanguageStore"
+import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 
 interface Props {
     createOrderItem:  UseMutationResult<OrderItem, Error, CreateOrderItemData>
@@ -24,6 +25,7 @@ export interface DishInfo {
 
 const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
 
+    const { setShow, setType, setMessage } = useNotificationsStore()
     const lan = useLanguageStore(s => s.lan)
     const access = useAuthStore(s => s.access) || ''
     const [counter, setCounter] = useState(0)
@@ -34,6 +36,7 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
     const [dishLookup, setDishLookup] = useState('')
     const [showPromos, setShowPromos] = useState(true)
     const [promoLookup, setPromoLookup] = useState('')
+    const [loading, setLoading] = useState(false)
 
     // Error Hsndler
     const [dishError, setDishError] = useState('')
@@ -62,6 +65,8 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
             return
         }
 
+        setLoading(true)
+
         dish && createOrderItem.mutate({ 
             orderItem: { dish, quantity: counter, order: orderId, cost, observations, bill: billId }, 
             access 
@@ -71,7 +76,8 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
                 setCost(0)
                 setObservations('')
                 setCounter(0)
-            }
+            },
+            onSettled: () => setLoading(false)
         })
 
         promotion && createOrderItem.mutate({ 
@@ -85,7 +91,13 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
                 setCounter(0)
                 setShowPromos(true)
                 setPromoLookup('')
-            }
+            },
+            onError: err => {
+                setShow(true)
+                setType('error')
+                setMessage(`Error: ${err}`)
+            },
+            onSettled: () => setLoading(false)
         })
     }
 
@@ -119,9 +131,17 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
                     value={observations}
                     onChange={e => setObservations(e.target.value)}
                 />
+                {loading 
+                ? 
+                <Button 
+                    label={lan === 'EN' ? "Adding" : 'Agregando'}
+                    disable={true}
+                /> 
+                :
                 <Button 
                     label={lan === 'EN' ? "Add Dish" : 'Agregar Plato'}
                 />
+                }
             </form>,
         },
         {
@@ -155,15 +175,24 @@ const OrderItemForm = ({ createOrderItem, orderId, billId }: Props) => {
                             onChange={e => setObservations(e.target.value)}
                         />
                         <div className="w-full flex justify-between">
+                            {loading 
+                            ? 
+                            <Button 
+                                label={lan === 'EN' ? "Adding" : 'Agregando'}
+                                disable={true}
+                            /> 
+                            : 
                             <Button 
                                 label={lan === 'EN' ? "Add Promo" : 'Agregar Promo'}
                             />
+                            }
                             <Button 
                                 label={lan === 'EN' ? "Go Back" : 'Volver'}
                                 onClick={() => {
                                     setPromoLookup('')
                                     setShowPromos(true)
                                 }}
+                                disable={loading}
                             />
                         </div>
                     </form>
