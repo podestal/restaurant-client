@@ -44,7 +44,7 @@ const CartItemForm = ({ dish, open, cartId, setOpen, createCartItem, count, setC
                 onSuccess: () => {
                     setShow(true)
                     setType('success')
-                    setMessage('Item added to cart')
+                    setMessage(lan === 'EN' ? 'Item added to cart' : 'Producto añadido al carrito')
                     setCount && setCount(0)
                     setCounter(0)
                     setOpen(false)

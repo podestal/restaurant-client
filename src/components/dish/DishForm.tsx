@@ -14,6 +14,7 @@ import Switch from "../ui/Switch"
 import ImageUploader from "../ui/ImageUploader"
 import DiscountSetter from "../ui/DiscountSetter"
 import useLanguageStore from "../../hooks/store/useLanguageStore"
+import { set } from "react-datepicker/dist/date_utils"
 
 interface Props {
     open: boolean
@@ -48,6 +49,8 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
     const [pictureError, setPictureError] = useState('')
     const [categoryError, setCategoryError] = useState('')
     const [discountError, setDiscountError] = useState('')
+
+    const [creating, setCreating] = useState(false)
 
     const handleCloseModal = () => {
         if (!dish) {
@@ -121,7 +124,8 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
         formData.append('category', category.toString())
 
         if (createDish) {
-
+            
+            setCreating(true)
             if (picture === null) {
                 setPictureError('Picture is required')
                 console.log('pictureError', pictureError);
@@ -146,7 +150,8 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                     setType('error')
                     setMessage(`Error: ${err}`)
                     setDisabled(true)
-                }
+                },
+                onSettled: () => setCreating(false)
             })
         }
 
@@ -232,10 +237,17 @@ const DishForm = ({ open, setOpen, dish, createDish, updateDish }: Props) => {
                 categoryId={dish?.category}
                 error={categoryError}
             />
+            {!creating ? 
             <Button 
                 label={dish ? `${lan === 'EN' ? 'Update' : 'Actualizer'}` : `${lan === 'EN' ? 'Create' : 'Crear'}`}
                 disable={disabled}
             />
+            :
+            <Button 
+                label={lan === 'EN' ? 'Creating' : 'Creando'}
+                disable={true}
+            />
+            }
         </form>
     </Modal>
   )
