@@ -39,6 +39,7 @@ const orderTypeEs: Record<'I' | 'D' | 'T', string> = {
 const OrderAdminCard = ({ order }: Props) => {
 
     const [open, setOpen] = useState(false)
+    const [loading, setLoading] = useState(false)
     const lan = useLanguageStore(s => s.lan)
     const status = lan === 'EN' ? orderStatusEn[order.status] : orderStatusEs[order.status] 
     const type = lan === 'EN' ? orderTypeEn[order.order_type] : orderTypeEs[order.order_type]
@@ -51,6 +52,13 @@ const OrderAdminCard = ({ order }: Props) => {
         <motion.div 
             onClick={() => setOpen(true)}
             className="w-full grid grid-cols-6 gap-6 px-2 py-4 font-poppins text-left hover:bg-slate-100 dark:hover:bg-slate-900 cursor-pointer">
+            {loading 
+            ? 
+            <div className="w-full flex justify-center items-center col-span-6">
+                <h2 className="text-xl animate-pulse">{lan === 'EN' ? "Removing Order ..." : 'Eliminando Orden'}</h2>
+            </div> 
+            : 
+            <>
             <p className="flex items-center">{order.id}</p>
             <div className="w-full flex justify-start items-center gap-6">
                 <OrderType 
@@ -70,8 +78,13 @@ const OrderAdminCard = ({ order }: Props) => {
                 <p>{order.waiter ? `${order.waiter }` : `${order.customer_name}`}</p>
             </div>
             <p className="flex items-center">{dishes}</p>
+            </>
+            }
         </motion.div>
-        <RemoveOrderAdmin orderId={order.id} />
+        <RemoveOrderAdmin 
+            orderId={order.id} 
+            setLoading={setLoading}
+        />
         <Modal 
             isOpen={open}
             onClose={() => setOpen(false)}

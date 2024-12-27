@@ -5,21 +5,38 @@ import useAuthStore from "../../hooks/store/useAuthStore"
 import useRemoveOrder from "../../hooks/api/order/useRemoveOrder"
 import Button from "../ui/Button"
 import useLanguageStore from "../../hooks/store/useLanguageStore"
+import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 
 interface Props {
     orderId: number
+    setLoading:  React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const RemoveOrderAdmin = ({ orderId }: Props) => {
+const RemoveOrderAdmin = ({ orderId, setLoading }: Props) => {
 
     const [open, setOpen] = useState(false)
     const access = useAuthStore(s => s.access) || ''
     const lan = useLanguageStore(s => s.lan)
+    const { setShow, setType, setMessage} = useNotificationsStore()
 
     const removeOrder = useRemoveOrder({ orderId })
 
     const handleRemove = () => {
-        removeOrder.mutate({ access })
+
+        setLoading(true)
+        removeOrder.mutate({ access }, {
+            onSuccess: () => {
+                setShow(true)
+                setType('success')
+                setMessage( lan === 'EN' ? 'Order removed' : 'Orden eliminada')
+            },
+            onError: err => {
+                setShow(true)
+                setType('error')
+                setMessage(`Error: ${err}`)
+            },
+            onSettled: () => setLoading(false)
+        })
     }
 
   return (
