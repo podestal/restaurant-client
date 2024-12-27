@@ -10,6 +10,7 @@ import useUpdateOrder from "../../hooks/api/order/useUpdateOrder"
 import OrderType from "./OrderType"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import { joinDishesAndPromotions } from "../../utils/utilities"
+import useLanguageStore from "../../hooks/store/useLanguageStore"
 
 interface Props {
     order: Order
@@ -23,6 +24,7 @@ const SimpleOrderCard = ({ order }: Props) => {
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
     const updateOrder = useUpdateOrder({ orderId: order.id, status: 'S', email: order.customer_email })
+    const lan = useLanguageStore(s=>s.lan)
 
     const sanitizedOrderItems = joinDishesAndPromotions(order.order_items)
 
@@ -71,14 +73,14 @@ const SimpleOrderCard = ({ order }: Props) => {
             {loading 
             ? 
             <div className="w-full flex justify-center items-center p-6">
-                <h2 className="text-3xl font-bold animate-pulse">Completing Order ...</h2>
+                <h2 className="text-3xl font-bold animate-pulse">{lan === 'EN' ? "Completing Order ..." : 'Completando Orden'}</h2>
             </div> 
             : 
             <div className="w-full flex flex-col justify-start items-center gap-10">
-                <h2 className="text-3xl font-bold font-poppins">Are you sure?</h2>
+                <h2 className="text-3xl font-bold font-poppins">{lan === 'EN' ? 'Are you sure?' : 'Está seguro?'}</h2>
                 <div className="w-full flex justify-evenly items-center">
                     <Button 
-                        label="Yes"
+                        label={lan === 'EN' ? "Yes" : 'Si'}
                         color="red"
                         onClick={handleRemove}
                     />

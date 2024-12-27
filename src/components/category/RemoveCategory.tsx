@@ -20,8 +20,11 @@ const RemoveCategory = ({ category }: Props) => {
     const { setShow, setType, setMessage } = useNotificationsStore()
     const lan = useLanguageStore(s => s.lan)
     const linkedCategoryErrorMssg = lan === 'EN' ? 'This Category have some dishes linked to it' : 'Esta categoría tiene platos vinculados a ella'
+    const [loading, setLoading] = useState(false)
+
 
     const handleRemove = () => {
+        setLoading(true)
         removeCategory.mutate({ access }, {
             onSuccess: () => {
                 setShow(true)
@@ -33,6 +36,9 @@ const RemoveCategory = ({ category }: Props) => {
                 setType('error')
                 const errorMsg = err.response?.status === 500 ? linkedCategoryErrorMssg : `Error: ${err.message}`
                 setMessage(errorMsg)
+            },
+            onSettled: () => {
+                setLoading(false)
             }
         })
     }
@@ -48,6 +54,11 @@ const RemoveCategory = ({ category }: Props) => {
             onClose={() => setOpen(false)}
         >
             <div className="w-full flex flex-col justify-start items-center gap-10">
+                {loading 
+                ? 
+                <h2 className="text-3xl font-bold animate-pulse">{lan === 'EN' ? "Removing Category ..." : 'Eliminando Categoría'}</h2>
+                : 
+                <>
                 <h2 className="text-3xl font-bold font-poppins">{lan === 'EN' ? 'Are you sure?' : 'Estás seguro?'}</h2>
                 <div className="w-full flex justify-evenly items-center">
                     <Button 
@@ -60,6 +71,8 @@ const RemoveCategory = ({ category }: Props) => {
                         onClick={() => setOpen(false)}
                     />
                 </div>
+                </>
+                }
             </div>
         </Modal>
     </>

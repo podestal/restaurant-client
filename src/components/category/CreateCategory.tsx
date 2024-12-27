@@ -10,6 +10,7 @@ const CreateCategory = () => {
 
     const [name, setName] = useState('')
     const [nameError, setNameError] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const { setShow, setType, setMessage } = useNotificationsStore()
 
@@ -26,18 +27,24 @@ const CreateCategory = () => {
             return
         }
 
+        setLoading(true)
+
         createCategory.mutate(
             { category: { name, description: '' }, access }, 
-            { onSuccess: () => {
-                setName('')
-                setShow(true)
-                setType('success')
-                setMessage(lan === 'EN' ? 'Category created' : 'Categoría creada')
-            }, 
+            { 
+                onSuccess: () => {
+                    setName('')
+                    setShow(true)
+                    setType('success')
+                    setMessage(lan === 'EN' ? 'Category created' : 'Categoría creada')
+                }, 
                 onError: err => {
                     setShow(true)
                     setType('error')
                     setMessage(`Error: ${err.message}`)
+                },
+                onSettled: () => {
+                    setLoading(false)
                 }
             }
         )
@@ -55,10 +62,11 @@ const CreateCategory = () => {
                     name && setNameError('')
                     setName(e.target.value)}}
                 error={nameError}
+                disabled={loading}
             />
         </div>
         <Button 
-            label={lan === 'EN' ? "Add" : 'Añadir'}
+            label={`${loading ? `${lan === 'EN' ? "Adding" : 'Añadiendo'}` : `${lan === 'EN' ? "Add" : 'Añadir'}`}`}
         />
     </form>
   )
