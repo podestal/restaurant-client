@@ -53,7 +53,7 @@ const RemovePromotion = ({ promotionId }: Props) => {
             <div className="w-full flex flex-col justify-start items-center gap-10">
                 {loading 
                 ? 
-                <h2 className="text-3xl font-bold animate-pulse">{lan === 'EN' ? "Removing Category ..." : 'Eliminando Categoría'}</h2>
+                <h2 className="text-3xl font-bold animate-pulse">{lan === 'EN' ? "Removing Promotion ..." : 'Eliminando Promoción'}</h2>
                 : 
                 <>
                 <h2 className="text-3xl font-bold font-poppins">{lan === 'EN' ? 'Are you sure?' : 'Está seguro?'}</h2>

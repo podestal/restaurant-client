@@ -31,7 +31,7 @@ const Ticket = ({ orderItems, correlative, updateBill, disable, setDisable, setS
         .then(() => {
             setSuccessMsg(lan === 'EN' ? 'Connecting to SUNAT' : 'Conectando con SUNAT')
             setTimeout(() => {
-              setSuccessMsg(lan === 'EN' ? 'Ticket created' : 'Boleta creado')
+              setSuccessMsg(lan === 'EN' ? 'Ticket created' : 'Boleta creada')
             }, 2000)
             updateBill.mutate(
               { updates: { document: 'T' }, access }, 
