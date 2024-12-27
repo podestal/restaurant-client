@@ -24,6 +24,7 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
     const lan = useLanguageStore(s => s.lan)
     const access = useAuthStore(s => s.access) || ''
     const { setShow, setType, setMessage } = useNotificationsStore()
+    const positiveNumberRegex = /^[0-9]*\.?[0-9]+$/
 
     const [name, setName] = useState(promotion ? promotion.name : '')
     const [description, setDescription] = useState(promotion ? promotion.description : '')
@@ -33,7 +34,10 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
     const [nameError, setNameError] = useState('')
     const [amountError, setAmountError] = useState('')
 
+    const [loading, setLoading] = useState(false)
+
     const buttonLabel = promotion ? `${lan === 'EN' ? 'Update' : 'Actualizar'}` : `${lan === 'EN' ? 'Add Dishes' : 'Agregar Platos'}`
+    const loaderButtonLabel = promotion ? `${lan === 'EN' ? 'Updating' : 'Actualizando'}` : `${lan === 'EN' ? 'Creating' : 'Creando'}`
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -48,8 +52,9 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
             return
         }
 
-        createPromotion && createPromotion.mutate({ 
+        setLoading(true)
 
+        createPromotion && createPromotion.mutate({ 
             promotion: {name, description, amount, is_active: active }, 
             access 
         }, {
@@ -60,6 +65,9 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
                 setShow(true)
                 setType('error')
                 setMessage(`Error: ${err.message}`)
+            },
+            onSettled: () => {
+                setLoading(false)
             }
         })
 
@@ -76,6 +84,9 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
                 setShow(true)
                 setType('error')
                 setMessage(`Error: ${err.message}`)
+            },
+            onSettled: () => {
+                setLoading(false)
             }
         })
     }
@@ -102,8 +113,19 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
             placeholder={lan === 'EN' ? "Amount ..." : 'Costo ...'}
             value={amount}
             onChange={e => {
-                amount && setAmountError('')
-                setAmount(e.target.value)}}
+                const value = e.target.value
+
+                if (value === '') {
+                    setAmountError('')
+                    setAmount(value)
+                }
+                else if (positiveNumberRegex.test(value)) {
+                    amount && setAmountError('')
+                    setAmount(value)
+                } else {
+                    setAmountError(lan === 'EN' ? 'Please enter a valid positive number' : 'Por favor ingrese un número positivo válido')
+                }
+            }}
             error={amountError}
         />
         <Switch 
@@ -111,9 +133,16 @@ const PromotionForm = ({ createPromotion, updatePromotion, promotion, setPromoti
             setter={setActive}
             label={lan === 'EN' ? "Is Active" : 'Activo'}
         />
+        {!loading ? 
         <Button 
             label={buttonLabel}
         />
+        :
+        <Button 
+            label={loaderButtonLabel}
+            disable={true}
+        />
+        }
     </form>
   )
 }
