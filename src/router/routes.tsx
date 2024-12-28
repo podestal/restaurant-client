@@ -16,6 +16,7 @@ import LandingPage from "../pages/LandingPage";
 import OrderPage from "../pages/OrderPage";
 import CareersPage from "../pages/CareersPage";
 import LegalPage from "../pages/LegalPage";
+import DocumentsPage from "../pages/DocumentsPage";
 
 const routes = createBrowserRouter([
     {
@@ -78,6 +79,10 @@ const routes = createBrowserRouter([
             {
                 path: 'success',
                 element: <OrderSuccesspage />
+            },
+            {
+                path: 'documents',
+                element: <DocumentsPage />
             }
 
             // {

@@ -52,6 +52,7 @@ const Navigator = () => {
         <NavLink key="tables" to="tables" label={lan === 'EN' ? "Tables" : 'Mesas'} />,
         <NavLink key="sales" to="sales" label={lan === 'EN' ? "Sales" : 'Ventas'} />,
         <NavLink key="orders" to="orders" label={lan === 'EN' ? "Orders" : 'Ordenes'} />,
+        <NavLink key="documents" to="documents" label={lan === 'EN' ? "Documents" : 'Documentos'} />,
       ],
     };
 
@@ -66,7 +67,7 @@ const Navigator = () => {
               <img src={logo} alt="LOGO" width={150} className="hover:opacity-80" />
             </Link>}
 
-            <div className="flex justify-center items-center gap-24 font-montserrat">
+            <div className="flex justify-center items-center gap-20 font-montserrat">
               {renderLinks()}
             </div>
 
