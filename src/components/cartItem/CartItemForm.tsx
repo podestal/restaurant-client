@@ -9,9 +9,11 @@ import { Dish } from "../../services/api/dishService"
 import useNotificationsStore from "../../hooks/store/useNotificationsStore"
 import ItemCounter from "../cart/ItemCounter"
 import useLanguageStore from "../../hooks/store/useLanguageStore"
+import { Promotion } from "../../services/api/promotionService"
 
 interface Props {
     dish?: Dish
+    promotion?: Promotion
     open: boolean
     cartId: number
     setOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -21,7 +23,7 @@ interface Props {
     cartItem?: CartItem
 }
 
-const CartItemForm = ({ dish, open, cartId, setOpen, createCartItem, count, setCount, cartItem }: Props) => {
+const CartItemForm = ({ dish, open, cartId, setOpen, createCartItem, count, setCount, cartItem, promotion }: Props) => {
 
     const [observations, setObservations] = useState('')
     const { setShow, setType, setMessage } = useNotificationsStore()
@@ -30,8 +32,10 @@ const CartItemForm = ({ dish, open, cartId, setOpen, createCartItem, count, setC
 
     const handleCreateOrderItem = () => {
 
+        console.log('promotion', promotion)
+
+        const quantity = count ? count : 0
         if (dish) {
-            const quantity = count ? count : 0
             const price = dish.cost * quantity
     
             createCartItem && createCartItem.mutate({ cartItem: {
@@ -56,6 +60,33 @@ const CartItemForm = ({ dish, open, cartId, setOpen, createCartItem, count, setC
                 }
             })
         }
+
+        if (promotion) {
+            const price = parseFloat(promotion.amount) * quantity
+            createCartItem && createCartItem.mutate({ cartItem: {
+                quantity,
+                promotion: promotion.id,
+                price,
+                cart: cartId,
+                observations,
+            }}, {
+                onSuccess: () => {
+                    setShow(true)
+                    setType('success')
+                    setMessage(lan === 'EN' ? 'Item added to cart' : 'Producto añadido al carrito')
+                    setCount && setCount(0)
+                    setCounter(0)
+                    setOpen(false)
+                },
+                onError: (error) => {
+                    setShow(true)
+                    setType('error')
+                    setMessage(`Error: ${error.message}`)
+                }
+            })
+        }
+
+
     }
 
   return (

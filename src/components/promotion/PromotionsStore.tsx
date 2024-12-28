@@ -1,10 +1,15 @@
 import useGetPromotion from "../../hooks/api/promotion/useGetPromotions"
 import useLanguageStore from "../../hooks/store/useLanguageStore"
 import useLoader from "../../hooks/ui/useLoader"
+import { Cart } from "../../services/api/cartService"
 import PromotionStoreCard from "./PromotionStoreCard"
 import { motion } from "framer-motion"
 
-const PromotionsStore = () => {
+interface Props {
+    cart: Cart
+}
+
+const PromotionsStore = ({ cart }: Props) => {
 
     const {data: promotions, isLoading, isError, error, isSuccess} = useGetPromotion()
     const lan = useLanguageStore(s => s.lan)
@@ -33,6 +38,7 @@ const PromotionsStore = () => {
                 <PromotionStoreCard 
                     key={promotion.id}
                     promotion={promotion}
+                    cart={cart}
                 />
             ))}
         </div>

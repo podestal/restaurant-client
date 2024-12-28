@@ -9,7 +9,10 @@ export interface CartItem {
     observations: string
 }
 
-export type CartItemCreate = Omit<CartItem, 'id'>
+export type CartItemCreate = Omit<CartItem, 'id' | 'dish'> & {
+    promotion?: number
+    dish?: number
+}
 
 const getCartItemService = (cartId: number, cartItemId?: number) => {
     const URL = cartItemId ? `/carts/${cartId}/cart-items/${cartItemId}/` : `carts/${cartId}/cart-items/`

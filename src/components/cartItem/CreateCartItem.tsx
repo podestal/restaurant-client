@@ -6,15 +6,17 @@ import { Dish } from "../../services/api/dishService"
 import Button from "../ui/Button"
 import CartItemForm from "./CartItemForm"
 import useLanguageStore from "../../hooks/store/useLanguageStore"
+import { Promotion } from "../../services/api/promotionService"
 
 interface Props {
     cart: Cart
-    dish: Dish
+    dish?: Dish
+    promotion?: Promotion
     count: number
     setCount: React.Dispatch<React.SetStateAction<number>>
 }
 
-const CreateCartItem = ({ cart, dish, count, setCount }: Props) => {
+const CreateCartItem = ({ cart, dish, promotion, count, setCount }: Props) => {
 
     const createCartItem = useCreateCartItem(cart.id)
     const { setShow, setType, setMessage } = useNotificationsStore()
@@ -37,6 +39,7 @@ const CreateCartItem = ({ cart, dish, count, setCount }: Props) => {
         />
         <CartItemForm 
             dish={dish}
+            promotion={promotion}
             open={open}
             setOpen={setOpen}
             count={count}

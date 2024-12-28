@@ -40,7 +40,9 @@ const Categories = ({ cart }: Props) => {
             
         </div>
         <div className="col-span-5 max-lg:mt-[120px]">
-            <PromotionsStore />
+            <PromotionsStore 
+                cart={cart}
+            />
             <Dishes 
                 categories={categories}
                 cart={cart}
