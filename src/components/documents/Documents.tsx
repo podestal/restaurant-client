@@ -1,23 +1,24 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
+import useGetDocuments from "../../hooks/sunat/useGetDocuments"
 
 const Documents = () => {
 
-    const [documents, setDocuments] = useState([])
-    const personaId = import.meta.env.VITE_PERSONAL_ID
-    const personaToken = import.meta.env.VITE_PERSONAL_TOKEN
+    const { data: documents, isLoading, isError, error, isSuccess } = useGetDocuments()
 
-    useEffect(() => {
-        axios.get(`https://back.apisunat.com/documents/getAll?personaId=${personaId}&personaToken=${personaToken}&limit=100`)
-            .then(res => {
-                console.log(res.data)
-                // setDocuments(res.data)
-            })
-            .catch(err => console.log(err))
-    }, [])
+    if (isLoading) return <p>Loading...</p>
+
+    if (isError) return <p>{error?.message}</p>
+
+    if (isSuccess)
 
   return (
-    <div>Documents</div>
+    <div>
+        {documents.map( document => (
+            <div key={document.id}>
+                <p>{document.id}</p>
+                <p>{document.type}</p>
+            </div>
+        ))}
+    </div>
   )
 }
 
