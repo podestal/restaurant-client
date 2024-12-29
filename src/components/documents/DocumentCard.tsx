@@ -32,7 +32,7 @@ interface Props {
 const DocumentCard = ({ document }: Props) => {
     
   return (
-    <div className="w-full grid grid-cols-4 gap-4 place-items-center font-montserrat hover:bg-slate-200 dark:hover:bg-slate-900 py-2 rounded-3xl">
+    <div className="w-full grid grid-cols-4 gap-4 place-items-center font-montserrat hover:bg-slate-200 dark:hover:bg-slate-900 py-2 mt-4 rounded-3xl">
         <p>{document.fileName}</p>
         <p>{moment.unix(document.issueTime).format('DD-MM-YYYY')}</p>
         <p 

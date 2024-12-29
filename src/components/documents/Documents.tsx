@@ -1,13 +1,14 @@
 import useLanguageStore from "../../hooks/store/useLanguageStore"
 import useGetDocuments from "../../hooks/sunat/useGetDocuments"
 import DocumentCard from "./DocumentCard"
+import useLoader from "../../hooks/ui/useLoader"
 
 const Documents = () => {
 
     const lan = useLanguageStore(s => s.lan)
     const { data: documents, isLoading, isError, error, isSuccess } = useGetDocuments()
 
-    if (isLoading) return <p>Loading...</p>
+    useLoader(isLoading)
 
     if (isError) return <p>{error?.message}</p>
 
@@ -21,7 +22,9 @@ const Documents = () => {
             <p>Status</p>
             <p>{lan === 'EN' ? 'Type' : 'Tipo'}</p>
         </div>
-        {documents.map( document => (
+        {documents
+            .sort((a, b) => b.issueTime - a.issueTime)
+            .map( document => (
             <DocumentCard 
                 key={document.id}
                 document={document}
