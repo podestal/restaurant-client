@@ -78,7 +78,7 @@ const Features = () => {
             transition={{ duration: 0.6 }}
             variants={variants}
         >
-        <h2 className='text-6xl font-palanquin font-bold max-lg:text-center'>{lan === 'EN' ? 'Features' : 'Características'}</h2>
+        <h2 className='text-4xl lg:text-6xl font-palanquin font-bold max-lg:text-center'>{lan === 'EN' ? 'Features' : 'Características'}</h2>
         </motion.div>
         {featuresContent.map( feature => (
             <motion.div
@@ -91,7 +91,7 @@ const Features = () => {
                 key={feature.id}
             >
                 <div className="flex flex-col justify-start items-start gap-12 max-lg:text-center">
-                    <h2 className="text-4xl font-bold font-palanquin max-lg:mx-auto ">{lan === 'EN' ? feature.title : feature.esTitle}</h2>
+                    <h2 className="text-2xl lg:text-4xl font-bold font-palanquin max-lg:mx-auto ">{lan === 'EN' ? feature.title : feature.esTitle}</h2>
                     <p>{lan === 'EN' ? feature.description : feature.esDescription}</p>
                 </div>
                 <img className={`col-span-2 rounded-3xl ${feature.id % 2 === 0 && 'lg:order-first'}`} src={feature.img} alt={feature.title} />

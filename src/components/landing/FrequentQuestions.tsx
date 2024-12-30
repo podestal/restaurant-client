@@ -110,7 +110,7 @@ const FrequentQuestions = () => {
             transition={{ duration: 0.8 }}
             variants={variants}
         >
-            <h2 className='text-6xl font-palanquin font-bold'>{lan === 'EN' ? 'FAQ' : 'Preguntas Frequentes'}</h2>
+            <h2 className='text-4xl lg:text-6xl font-palanquin font-bold'>{lan === 'EN' ? 'FAQ' : 'Preguntas Frequentes'}</h2>
         </motion.div>
         <div className="w-full flex flex-col justify-start items-start gap-12">
             {questions.map( item => (

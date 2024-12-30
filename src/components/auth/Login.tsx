@@ -54,11 +54,11 @@ const Login = () => {
     }
 
   return (
-    <div className="w-[20%] mx-auto">
-        <h2 className="text-4xl font-bold font-palanquin text-center mb-12 mt-36">{lan === 'EN' ? 'Login' : 'Accede'}</h2>
+    <div className="w-[45%] lg:w-[20%] mx-auto">
+        <h2 className="text-4xl font-bold font-palanquin text-center mb-12">{lan === 'EN' ? 'Login' : 'Accede'}</h2>
         <form 
             onSubmit={handleLogin}
-            className="w-full h-[60%] flex flex-col justify-start items-center gap-6">
+            className="w-full h-[60%] flex flex-col justify-start items-center gap-10">
             <Input 
                 placeholder={lan === 'EN' ? "Email" : 'Correo Electrónico'}
                 value={email}

@@ -61,7 +61,7 @@ const Contact = () => {
         <form 
             onSubmit={handleSubmit}
             className="w-[80%] flex flex-col justify-start items-start gap-12 col-span-2">
-            <h2 className="text-4xl font-palanquin font-bold max-lg:text-center max-lg:mx-auto">{lan === 'EN' ? 'Request a Demo' : 'Solicíta una Demo'}</h2>
+            <h2 className="text-4xl lg:text-6xl font-palanquin font-bold max-lg:text-center max-lg:mx-auto">{lan === 'EN' ? 'Request a Demo' : 'Solicíta una Demo'}</h2>
             <Input 
                 placeholder={lan === 'EN' ? "Name ..." : "Nombre ..."}
                 value={name}

@@ -3,7 +3,7 @@ import Login from "../components/auth/Login"
 const LoginPage = () => {
 
   return (
-    <div className="text-center h-screen mb-[-200px]">
+    <div className="flex flex-col items-center justify-center h-screen">
         <Login />
     </div>
   )

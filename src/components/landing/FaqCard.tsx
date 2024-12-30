@@ -29,7 +29,7 @@ const FaqCard = ({ item }: Props) => {
     >
       {/* Question and Arrow */}
       <div className="w-full flex justify-between items-center">
-        <h2 className="text-2xl font-bold">{lan === 'EN' ? item.question : item.esQuestion}</h2>
+        <h2 className="text-xl lg:text-2xl font-bold">{lan === 'EN' ? item.question : item.esQuestion}</h2>
         <motion.div
           className="cursor-pointer hover:text-neutral-700"
           onClick={toggleFAQ}
